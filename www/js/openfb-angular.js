@@ -74,6 +74,7 @@ angular.module('openfb', [])
                     oauthRedirectURL = 'https://www.facebook.com/connect/login_success.html';
                 } else {
                     // Trying to calculate oauthRedirectURL based on the current URL.
+                    //ADICIONAR  O NO-IP e enviar o http://noip.com pro redirect_id
                     var index = document.location.href.indexOf('index.html');
                     if (index > 0) {
                         oauthRedirectURL = document.location.href.substring(0, index) + 'oauthcallback.html';
@@ -186,6 +187,17 @@ angular.module('openfb', [])
             return api({method: 'POST', path: path, params: params});
         }
 
+        
+        function isAuth() {
+            //console.log(tokenStore['fbtoken'] +"@@"+(tokenStore['fbtoken'] == undefined)+"@@@"+(tokenStore['fbtoken'] == undefined ? false : true));
+           
+            return (tokenStore['fbtoken'] == 'undefined' ? false : true);
+        }
+
+        function getSess() {
+            return (isAuth() ? tokenStore['fbtoken'] : null);
+        }
+
         /**
          * Helper function for a GET call into the Graph API
          * @param path
@@ -207,6 +219,7 @@ angular.module('openfb', [])
             return obj;
         }
 
+
         return {
             init: init,
             login: login,
@@ -215,7 +228,9 @@ angular.module('openfb', [])
             api: api,
             post: post,
             get: get,
-            oauthCallback: oauthCallback
+            oauthCallback: oauthCallback,
+            isAuth : isAuth,
+            getSess : getSess
         }
 
     });

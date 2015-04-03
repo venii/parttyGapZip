@@ -4,9 +4,14 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.controllers','sociogram.controllers','openfb'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,OpenFB) {
+
+//  OpenFB.init('574073299368611','http://parttyionic.ddns.net:8100/',window.localStorage);
+   OpenFB.init('574073299368611','https://www.facebook.com/connect/login_success.html',window.localStorage);
+
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)

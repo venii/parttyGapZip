@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['sociogram.controllers'])
+angular.module('starter.controllers', ['sociogram.controllers','openfb'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   // Form data for the login modal
@@ -33,7 +33,7 @@ angular.module('starter.controllers', ['sociogram.controllers'])
   };
 })
 //CONTROLLER PADRAO SETADO POR OTHERWISE
-.controller('PlaylistsCtrl', function($scope) {
+.controller('PlaylistsCtrl', function($scope,$location,OpenFB) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
     { title: 'Chill', id: 2 },
@@ -42,8 +42,17 @@ angular.module('starter.controllers', ['sociogram.controllers'])
     { title: 'Rap', id: 5 },
     { title: 'Cowbell', id: 6 }
   ];
-  console.log("fb api");
-  console.log(OpenFB);
+  //console.log(OpenFB);
+  //  OpenFB.init('574073299368611','https://www.facebook.com/connect/login_success.html',window.localStorage).them(function(response){console.log(response)});
+  if(!OpenFB.isAuth()){
+      OpenFB.login('email');
+  }
+  
+  //OpenFB.login('email');
+
+  //console.log("tk: "+ OpenFB.isAuth()+ "sess: "+ OpenFB.getSess());
+  //alert("@");
+
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
