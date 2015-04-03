@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['sociogram.controllers'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   // Form data for the login modal
@@ -32,7 +32,7 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 })
-
+//CONTROLLER PADRAO SETADO POR OTHERWISE
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
@@ -42,6 +42,8 @@ angular.module('starter.controllers', [])
     { title: 'Rap', id: 5 },
     { title: 'Cowbell', id: 6 }
   ];
+  console.log("fb api");
+  console.log(OpenFB);
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
