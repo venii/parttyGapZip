@@ -44,20 +44,32 @@ angular.module('starter', ['ionic', 'starter.controllers','sociogram.controllers
     }
   })
 
-  .state('app.browse', {
-    url: "/browse",
+  .state('app.loggedout', {
+    url: "/loggedout",
     views: {
       'menuContent': {
-        templateUrl: "templates/browse.html"
+        templateUrl: "templates/loggedout.html"
       }
     }
   })
-    .state('app.playlists', {
-      url: "/playlists",
+
+  .state('app.main', {
+    url: "/main",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/main.html",
+        controller: 'MainCtrl'
+      }
+    },
+    
+  })
+
+    .state('app.login', {
+      url: "/login",
       views: {
         'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
+          templateUrl: "templates/loginfb.html",
+          controller: 'LoginFBCtrl'
         }
       }
     })
@@ -72,5 +84,5 @@ angular.module('starter', ['ionic', 'starter.controllers','sociogram.controllers
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/login');
 });

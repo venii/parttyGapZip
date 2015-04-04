@@ -240,9 +240,17 @@ function oauthCallback(url) {
 
     var injector = angular.element(document.body).injector();
 
-    injector.invoke(function (OpenFB) {
+    injector.invoke(function (OpenFB,$rootScope,$state) {
 
         OpenFB.oauthCallback(url);
-        console.log("@@@"+OpenFB.getSess());
+        
+       // console.log($rootScope);
+        //console.log(this);
+       // scope = $rootScope.$new();
+        
+        $rootScope.tokenfbview = OpenFB.getSess();
+        //ENVIA PRO APP.browse -> verificar routers
+        $state.go('app.main',{tokenfbview : $rootScope.tokenfbview});
+        //console.log("@@@"+OpenFB.getSess());
     });
 }

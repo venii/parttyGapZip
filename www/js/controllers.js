@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['sociogram.controllers','openfb'])
-
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+/*INJETAR LIB PELO ´[] e pelo functiob ()*/
+.controller('AppCtrl', function($scope,$state, $ionicModal,$location, $timeout,OpenFB) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -19,6 +19,13 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb'])
   // Open the login modal
   $scope.login = function() {
     $scope.modal.show();
+
+  };
+
+  $scope.logout = function() {
+    OpenFB.logout();
+    $state.go('app.loggedout');
+ 
   };
 
   // Perform the login action when the user submits the login form
@@ -33,27 +40,25 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb'])
   };
 })
 //CONTROLLER PADRAO SETADO POR OTHERWISE
-.controller('PlaylistsCtrl', function($scope,$location,OpenFB) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-  //console.log(OpenFB);
-  //  OpenFB.init('574073299368611','https://www.facebook.com/connect/login_success.html',window.localStorage).them(function(response){console.log(response)});
-  //if(!OpenFB.isAuth()){
-      OpenFB.login('email');
-  //}
+.controller('LoginFBCtrl', function($scope,$state,$location,OpenFB) {
   
-  //OpenFB.login('email');
+  
+  if(!OpenFB.isAuth()){
+      OpenFB.login('public_profile, email, user_birthday, user_relationship_details, user_events, user_photos, user_about_me');
+  }else{
+       $scope.tokenfbview = OpenFB.getSess();
+       $state.go('app.main');
+  }
 
-  //console.log("tk: "+ OpenFB.isAuth()+ "sess: "+ OpenFB.getSess());
-  //alert("@");
-
+  
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+})
+.controller('MainCtrl', function($scope, $stateParams,OpenFB) {
+    console.log($stateParams);
+    $scope.sess = OpenFB.getSess();
+
+})
+
+
