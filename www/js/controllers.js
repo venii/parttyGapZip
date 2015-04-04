@@ -44,9 +44,9 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb'])
   ];
   //console.log(OpenFB);
   //  OpenFB.init('574073299368611','https://www.facebook.com/connect/login_success.html',window.localStorage).them(function(response){console.log(response)});
-  if(!OpenFB.isAuth()){
+  //if(!OpenFB.isAuth()){
       OpenFB.login('email');
-  }
+  //}
   
   //OpenFB.login('email');
 

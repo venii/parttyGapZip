@@ -237,8 +237,12 @@ angular.module('openfb', [])
 
 // Global function called back by the OAuth login dialog
 function oauthCallback(url) {
-    var injector = angular.element(document.getElementById('main')).injector();
+
+    var injector = angular.element(document.body).injector();
+
     injector.invoke(function (OpenFB) {
+
         OpenFB.oauthCallback(url);
+        console.log("@@@"+OpenFB.getSess());
     });
 }

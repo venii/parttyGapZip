@@ -27,3 +27,8 @@ ionic serve
         $rootScope.$on('OAuthException', function() {
             $state.go('app.login');
         });
+
+
+
+
+        download -> winphone  sdk

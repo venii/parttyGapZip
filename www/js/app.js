@@ -9,7 +9,7 @@ angular.module('starter', ['ionic', 'starter.controllers','sociogram.controllers
 .run(function($ionicPlatform,OpenFB) {
 
 //  OpenFB.init('574073299368611','http://parttyionic.ddns.net:8100/',window.localStorage);
-   OpenFB.init('574073299368611','https://www.facebook.com/connect/login_success.html',window.localStorage);
+   OpenFB.init('574073299368611','http://parttyionic.ddns.net:8100/oauthcallback.html',window.localStorage);
 
 
   $ionicPlatform.ready(function() {
