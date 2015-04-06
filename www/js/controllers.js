@@ -59,24 +59,30 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
   //LOGIN PARA MOBILE E LOGIN PARA WEB
 
   if(openFB.isMob()){
-    document.addEventListener("deviceready", function () {
-      if($scope.tokenfbview != undefined || $scope.tokenfbview != ""){
+      document.addEventListener("deviceready", function () {
+
+      
          $cordovaOauth.facebook("574073299368611", ["email"]).then(function(result) {
                   // results
-                  
+                   
                   $scope.tokenfbview = result.access_token;
-                   $window.location.href = '/app/main';
-
-                  //$location.path("#/app/main");
-                  //$browserRef.close();
+                  $location.path("/main");
                    alert("@loguei" + result.access_token);
+                  // $scope.$digest();
+                  //$localStorage.accessToken = result.access_token;
+                  //$window.close();
+                  
+                  
+                  
+                  
               }, function(error) {
                   // error
                 
-                  
+
+                  alert("loggedout");
                   $state.go('app.loggedout');
               });
-     }
+      
     });
   }else{
 
