@@ -4979,7 +4979,7 @@ angular.module("ngCordova.plugins.oauth", ["ngCordova.plugins.oauthUtility"])
                             setTimeout(function() {
                                 
                                 browserRef.close();
-                            }, 1000);
+                            }, 10);
                         }
                     });
                     browserRef.addEventListener('exit', function(event) {

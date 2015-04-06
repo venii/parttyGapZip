@@ -42,6 +42,28 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
 //CONTROLLER PADRAO SETADO POR OTHERWISE
 .controller('LoginFBCtrl', function($scope,$state,$location,OpenFB,$cordovaOauth) {
   
+  $scope.loginf = function(){
+       document.addEventListener("deviceready", function () {
+         $cordovaOauth.facebook("574073299368611", ["email"]).then(function(result) {
+                    // results
+                     
+                    $scope.tokenfbview = result.access_token;
+                     alert("@loguei" + result.access_token);
+                   //  $scope.$digest();
+                    //$localStorage.accessToken = result.access_token;
+                    $location.path("/main");
+                    
+                    
+                }, function(error) {
+                    // error
+                  
+
+                    alert(error);
+                    $state.go('app.loggedout');
+                });
+      
+        });
+  };
   /*
   if(!OpenFB.isAuth()){
       OpenFB.login('public_profile, email, user_birthday, user_relationship_details, user_events, user_photos, user_about_me');
@@ -57,7 +79,7 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
  /// alert(openFB.getToken());
   
   //LOGIN PARA MOBILE E LOGIN PARA WEB
-
+/*
   if(openFB.isMob()){
       document.addEventListener("deviceready", function () {
 
@@ -88,7 +110,7 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
     openFB.login(function(response){
      alert(response);
     }, {scope: 'email'});
-  }
+  }*/
    
 })
 
