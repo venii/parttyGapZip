@@ -4,8 +4,10 @@
 	
 	//carregamento no onload
 	function callback(){
-		
-		window.opener.oauthCallback(window.location.href);
+		//alert('@');
+		//window.opener.oauthCallback(window.location.href);
+		window.opener.openFB.oauthCallback(window.location.href);
+		 
 		window.close();
 	}
  

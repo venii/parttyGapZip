@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['sociogram.controllers','openfb'])
+angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordova'])
 /*INJETAR LIB PELO ´[] e pelo functiob ()*/
 .controller('AppCtrl', function($scope,$state, $ionicModal,$location, $timeout,OpenFB) {
   // Form data for the login modal
@@ -40,23 +40,59 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb'])
   };
 })
 //CONTROLLER PADRAO SETADO POR OTHERWISE
-.controller('LoginFBCtrl', function($scope,$state,$location,OpenFB) {
+.controller('LoginFBCtrl', function($scope,$state,$location,$window,OpenFB,$cordovaOauth) {
   
-  
+  /*
   if(!OpenFB.isAuth()){
       OpenFB.login('public_profile, email, user_birthday, user_relationship_details, user_events, user_photos, user_about_me');
   }else{
        $scope.tokenfbview = OpenFB.getSess();
        $state.go('app.main');
-  }
-
+  }*/
+  //USE OPENFB TO WEB AND OAUTH FOR DEVICES
+  //openFB.init({ appId  : '574073299368611' });
+  //openFB.login(function(response){
+ //   alert(response);
+ // }, {scope: 'email'});
+ /// alert(openFB.getToken());
   
+  //LOGIN PARA MOBILE E LOGIN PARA WEB
+
+  if(openFB.isMob()){
+    document.addEventListener("deviceready", function () {
+      if($scope.tokenfbview != undefined || $scope.tokenfbview != ""){
+         $cordovaOauth.facebook("574073299368611", ["email"]).then(function(result) {
+                  // results
+                  
+                  $scope.tokenfbview = result.access_token;
+                   $window.location.href = '/app/main';
+
+                  //$location.path("#/app/main");
+                  //$browserRef.close();
+                   alert("@loguei" + result.access_token);
+              }, function(error) {
+                  // error
+                
+                  
+                  $state.go('app.loggedout');
+              });
+     }
+    });
+  }else{
+
+    openFB.init({ appId  : '574073299368611' });
+
+    openFB.login(function(response){
+     alert(response);
+    }, {scope: 'email'});
+  }
+   
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 .controller('MainCtrl', function($scope, $stateParams,OpenFB) {
-    console.log($stateParams);
+    
     $scope.sess = OpenFB.getSess();
 
 })

@@ -19885,6 +19885,7 @@ function $LogProvider() {
         return function() {
           var args = [];
           forEach(arguments, function(arg) {
+            //console.log("arg "+arg);
             args.push(formatError(arg));
           });
           return logFn.apply(console, args);
