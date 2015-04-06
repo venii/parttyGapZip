@@ -40,7 +40,7 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
   };
 })
 //CONTROLLER PADRAO SETADO POR OTHERWISE
-.controller('LoginFBCtrl', function($scope,$state,$location,$window,OpenFB,$cordovaOauth) {
+.controller('LoginFBCtrl', function($scope,$state,$location,OpenFB,$cordovaOauth) {
   
   /*
   if(!OpenFB.isAuth()){
@@ -66,13 +66,10 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
                   // results
                    
                   $scope.tokenfbview = result.access_token;
-                  $location.path("/main");
                    alert("@loguei" + result.access_token);
-                  // $scope.$digest();
+                 //  $scope.$digest();
                   //$localStorage.accessToken = result.access_token;
-                  //$window.close();
-                  
-                  
+                  $location.path("/main");
                   
                   
               }, function(error) {
