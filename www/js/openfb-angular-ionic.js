@@ -21,10 +21,8 @@ var openFB = (function () {
 
         baseURL = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + context,
         
-        oauthRedirectURL = (isMob() ? 
-             'http://parttyionic.ddns.net/' + '/oauthcallback.html'
-            :
-             baseURL + '/oauthcallback.html'),
+        oauthRedirectURL = 
+             baseURL + '/oauthcallback.html',
 
         logoutRedirectURL = baseURL + '/logoutcallback.html',
 
@@ -127,6 +125,7 @@ var openFB = (function () {
         // Inappbrowser load start handler: Used when running in Cordova only
         function loginWindow_loadStartHandler(event) {
             var url = event.url;
+
             if (url.indexOf("access_token=") > 0 || url.indexOf("error=") > 0) {
                 // When we get the access token fast, the login window (inappbrowser) is still opening with animation
                 // in the Cordova app, and trying to close it while it's animating generates an exception. Wait a little...
@@ -163,13 +162,13 @@ var openFB = (function () {
         }
 
         startTime = new Date().getTime();
-        console.log(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL +
-            '&response_type=token&scope=' + scope);
+        console.log("runningInCordova "+runningInCordova);
         loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL +
             '&response_type=token&scope=' + scope, '_blank', 'location=no');
 
         // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
         if (runningInCordova) {
+
             loginWindow.addEventListener('loadstart', loginWindow_loadStartHandler);
             loginWindow.addEventListener('exit', loginWindow_exitHandler);
         }
