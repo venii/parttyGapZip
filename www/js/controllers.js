@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordova'])
+angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordova','ngStorage'])
 /*INJETAR LIB PELO ´[] e pelo functiob ()*/
 .controller('AppCtrl', function($scope,$state, $ionicModal,$location, $timeout,OpenFB) {
   // Form data for the login modal
@@ -40,34 +40,41 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
   };
 })
 //CONTROLLER PADRAO SETADO POR OTHERWISE
-.controller('LoginFBCtrl', function($scope,$state,$location,$cordovaOauth) {
-  
+.controller('LoginFBCtrl', function($scope,$state,$location,$cordovaOauth,$localStorage) {
+   
   $scope.loginf = function(){
 
        if(openFB.isMob()){
            document.addEventListener("deviceready", function () {
-             $cordovaOauth.facebook("574073299368611", ["email"]).then(function(result) {
-                        // results
-                         
-                        $scope.tokenfbview = result.access_token;
-                        // alert("@loguei" + result.access_token);
-                       //  $scope.$digest();
-                        //$localStorage.accessToken = result.access_token;
-                        $location.path("/main");
-                        
-                        
-                    }, function(error) {
-                        $state.go('app.loggedout');
-                    });
+             if($localStorage.token == undefined){
+                   $cordovaOauth.facebook("574073299368611", ["email"]).then(function(result) {
+                              // results
+                               
+                              $scope.tokenfbview = result.access_token;
+                              $localStorage.token = result.access_token;
+                              //console.log(result);
+                             
+
+                              $location.path("/main");
+                              
+                              
+                          }, function(error) {
+                              $state.go('app.loggedout');
+                          });
+              }else{
+                  $location.path("/main");
+              }
           
             });
          }else{
               
-             if(openFB.getToken() == 'undefined'){
+             if($localStorage.token == undefined){
 
                   openFB.init({ appId  : '574073299368611' });
                   openFB.login(function(response){
+                    
                     $scope.tokenfbview = response.authResponse.token;
+                    $localStorage.token = response.authResponse.token;
                     $state.go('app.main');
 
                   }, {scope: 'email'});
