@@ -3,14 +3,14 @@
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button>
       </ion-nav-back-button>
-
+      <!-- menu-toggle="left"  menu-toggle="right" -->
       <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeftSideMenu()">
         </button>
       </ion-nav-buttons>
 
         <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+        <button class="button button-icon button-clear ion-navicon" ng-click="toggleRightSideMenu()">
         </button>
       </ion-nav-buttons>
     </ion-nav-bar>

@@ -1,10 +1,32 @@
 angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordova','ngStorage'])
 /*INJETAR LIB PELO ´[] e pelo functiob ()*/
-.controller('AppCtrl', function($scope,$state, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage) {
+.controller('AppCtrl', function($scope,$state,$ionicSideMenuDelegate, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage) {
+
+  // bind do menu $ionicSideMenuDelegat
 
   $ionicViewService.nextViewOptions({
     disableBack: true
   });
+  
+
+  $scope.toggleLeftSideMenu = function() {
+    if($localStorage.token != undefined)
+      $ionicSideMenuDelegate.toggleLeft();
+    else
+      alert("É necessario autenticar antes de utilizar");
+  };
+
+  $scope.toggleRightSideMenu = function() {
+    if($localStorage.token != undefined)
+      /*CARREGAR CONTATOS NESSA LINHA 1*/
+
+      $ionicSideMenuDelegate.toggleRight();
+
+    else
+      alert("É necessario autenticar antes de utilizar");
+  };
+
+
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -84,7 +106,7 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
                               $state.go('app.loggedout');
                           });
               }else{
-                  alert("@3 "+$localStorage.token);
+                  //alert("@3 "+$localStorage.token);
                   $location.path("/main");
                   $state.go('app.main');
               }
@@ -111,6 +133,8 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
          }
   };
 
+
+  //alert($localStorage.token);
   //REDIR PARA MAIN SE TIVER SESSION
   if($localStorage.token != undefined){
      $state.go('app.main');
@@ -122,7 +146,7 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 .controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage) {
-    
+  
     $scope.sess = $localStorage.token;
 
 })
