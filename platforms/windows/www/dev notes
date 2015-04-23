@@ -1,0 +1,34 @@
+dev notes
+ionic address -> dont use localhost or virtualconex use your network
+ionic serve
+
+
+-> adicionar o openfb no injetores de dependencia do angular
+	-> angular.module('starter', ['ionic', 'starter.controllers','sociogram.controllers','openfb'])
+
+
+	e no run() do app 
+
+	angular.module('starter', ['ionic', 'starter.controllers','sociogram.controllers','openfb'])
+
+	.run(function($ionicPlatform,OpenFB) {
+
+  	OpenFB.init('574073299368611','https://www.facebook.com/connect/login_success.html',window.localStorage)
+
+
+
+  	$rootScope.$on('$stateChangeStart', function(event, toState) {
+            if (toState.name !== "app.login" && toState.name !== "app.logout" && !$window.sessionStorage['fbtoken']) {
+                $state.go('app.login');
+                event.preventDefault();
+            }
+        });
+
+        $rootScope.$on('OAuthException', function() {
+            $state.go('app.login');
+        });
+
+
+
+
+        download -> winphone  sdk
