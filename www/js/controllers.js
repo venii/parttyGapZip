@@ -146,7 +146,16 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 .controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage) {
-  
+    //console.log(device.platform);
+    if(openFB.isMob()){
+        alert("token");
+       document.addEventListener("deviceready", function () {
+            window.plugins.pushNotification.register(showResultPush,showResultPush);
+       });
+    }else{
+      alert("sem token");
+    }
+    
     $scope.sess = $localStorage.token;
 
 })

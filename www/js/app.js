@@ -23,6 +23,8 @@ angular.module('starter', ['ionic', 'starter.controllers','sociogram.controllers
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    console.log(window.plugins.pushNotification);
   });
 })
 
