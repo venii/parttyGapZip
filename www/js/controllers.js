@@ -150,7 +150,10 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
     if(openFB.isMob()){
         alert("token");
        document.addEventListener("deviceready", function () {
-            window.plugins.pushNotification.register(showResultPush,showResultPush);
+            window.plugins.pushNotification.register(successHandler,errorHandler,
+                  {
+                    "senderID":"244606470402",
+                      "ecb":"onNotificationGCM"});
        });
     }else{
       alert("sem token");
