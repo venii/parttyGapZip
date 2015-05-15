@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers','sociogram.controllers','openfb'])
+angular.module('starter', ['ionic', 'starter.controllers','sociogram.controllers','openfb', 'ionic.service.core','ionic.service.push','ng'])
 
 .run(function($ionicPlatform,OpenFB) {
 
@@ -55,6 +55,15 @@ angular.module('starter', ['ionic', 'starter.controllers','sociogram.controllers
       }
     }
   })
+  .state('app.chat', {
+    url: "/chat",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/chat.html",
+         controller: 'ChatCtrl'
+      }
+    }
+  })
 
   .state('app.main', {
     url: "/main",
@@ -88,4 +97,12 @@ angular.module('starter', ['ionic', 'starter.controllers','sociogram.controllers
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
-});
+}).config(['$ionicAppProvider', function($ionicAppProvider) {
+  // Identify app
+  $ionicAppProvider.identify({
+    // The App ID (from apps.ionic.io) for the server
+    app_id: '93517726',
+    // The public API key all services will use for this app
+    api_key: '55d0b73b57dbec9303196edb48750c9ffd85236e5ed35f12'
+  });
+}]);
