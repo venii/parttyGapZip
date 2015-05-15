@@ -11,12 +11,6 @@
             "id": "org.apache.cordova.console"
         }
     },
-    "com.ionic.keyboard": {
-        "source": {
-            "type": "registry",
-            "id": "com.ionic.keyboard"
-        }
-    },
     "org.apache.cordova.inappbrowser": {
         "source": {
             "type": "registry",

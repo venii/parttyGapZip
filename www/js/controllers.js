@@ -156,14 +156,14 @@ angular.module('starter.controllers', ['sociogram.controllers','openfb','ngCordo
                       "ecb":"onNotificationGCM"});
        });
     }else{
-       var pubnub = PUBNUB.init({
+       /*var pubnub = PUBNUB.init({
          publish_key: 'demo',
          subscribe_key: 'demo',
          uuid: 'littlerobertanthony48'
         });
         
         alert("sem token");
-
+      */
     }
     
     $scope.sess = $localStorage.token;
