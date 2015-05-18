@@ -75,6 +75,16 @@ angular.module('starter', ['ionic', 'starter.controllers','sociogram.controllers
     },
     
   })
+  .state('app.registration', {
+    url: "/registration",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/registration.html",
+        controller: 'RegistrationCtrl'
+      }
+    },
+    
+  })
 
     .state('app.login', {
       url: "/login",

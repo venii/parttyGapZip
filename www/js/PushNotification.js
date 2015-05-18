@@ -86,13 +86,27 @@ function successHandler(result) { console.log('Success: '+ result); alert('Succe
 function errorHandler(error) { console.log('Error: '+ error); }
 
 function onNotificationGCM(e) { 
-   
+    console.log("onNotificationGCM");
+   console.log(e);
+   console.log(e.event);
     switch(e.event){ 
+
         case 'registered':
 
             if (e.regid.length > 0){ 
-                    alert(e.regid);
-                    deviceRegistered(e.regid); 
+                    //alert(e.regid);
+                    //deviceRegistered(e.regid);
+                    alert("@");
+                    window.localStorage.devicetoken = e.regid;
+
+                    var e = document.getElementById('starter');
+                    var $injector = angular.element(e).injector();
+
+                    alert("@");
+                    $injector.get('$location').path("/registration");
+                    alert("@");
+                    $injector.scope().$apply();
+                    alert("@");
                 } 
         break;   
         case 'message': 

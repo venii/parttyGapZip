@@ -145,6 +145,9 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
+.controller('RegistrationCtrl', function($scope, $stateParams,$localStorage) {
+  $.scope.devicetoken = $localStorage.devicetoken;
+})
 .controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage) {
     //console.log(device.platform);
     if(openFB.isMob()){
@@ -154,6 +157,7 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
                   {
                     "senderID":"244606470402",
                       "ecb":"onNotificationGCM"});
+
        });
     }else{
        /*var pubnub = PUBNUB.init({
