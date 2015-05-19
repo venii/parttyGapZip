@@ -145,13 +145,19 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
-.controller('RegistrationCtrl', function($scope, $stateParams,$localStorage) {
+.controller('RegistrationCtrl', function($scope, $stateParams,$localStorage,$cordovaProgress, $ionicLoading) {
+      $ionicLoading.hide();
       $scope.devicetoken = $localStorage.devicetoken;
 })
-.controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage) {
+.controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage,$cordovaToast,$ionicLoading) {
     //console.log(device.platform);
+
+    $ionicLoading.show({
+      template: 'Carregando dados do Usuario...'
+    });
+    alert("@");
     if(openFB.isMob()){
-       
+        //$cordovaProgress.showSimpleWithLabel(true, "Loading data ...");
        document.addEventListener("deviceready", function () {
             window.plugins.pushNotification.register(successHandler,errorHandler,
                   {

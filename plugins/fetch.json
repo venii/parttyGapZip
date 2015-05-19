@@ -55,7 +55,9 @@
             "type": "git",
             "url": "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git",
             "subdir": "."
-        }
+        },
+        "is_top_level": true,
+        "variables": {}
     },
     "cordova-plugin-file": {
         "source": {
@@ -70,6 +72,14 @@
         "source": {
             "type": "registry",
             "id": "org.apache.cordova.camera"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "org.pbernasconi.progressindicator": {
+        "source": {
+            "type": "registry",
+            "id": "org.pbernasconi.progressindicator"
         },
         "is_top_level": true,
         "variables": {}
