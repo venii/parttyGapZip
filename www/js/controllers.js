@@ -146,12 +146,12 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 .controller('RegistrationCtrl', function($scope, $stateParams,$localStorage) {
-  $.scope.devicetoken = $localStorage.devicetoken;
+      $scope.devicetoken = $localStorage.devicetoken;
 })
 .controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage) {
     //console.log(device.platform);
     if(openFB.isMob()){
-        alert("token");
+       
        document.addEventListener("deviceready", function () {
             window.plugins.pushNotification.register(successHandler,errorHandler,
                   {

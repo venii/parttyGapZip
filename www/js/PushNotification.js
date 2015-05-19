@@ -87,8 +87,7 @@ function errorHandler(error) { console.log('Error: '+ error); }
 
 function onNotificationGCM(e) { 
     console.log("onNotificationGCM");
-   console.log(e);
-   console.log(e.event);
+   
     switch(e.event){ 
 
         case 'registered':
@@ -96,17 +95,33 @@ function onNotificationGCM(e) {
             if (e.regid.length > 0){ 
                     //alert(e.regid);
                     //deviceRegistered(e.regid);
-                    alert("@");
+                    //INJETA O DEVICE VIA LEGACY CODE (FORA DO ANGULAR)
+                    //REDIRECIONA PARA O NOVO CONTROLADOR
+
+                 //   alert("@init");
                     window.localStorage.devicetoken = e.regid;
 
-                    var e = document.getElementById('starter');
-                    var $injector = angular.element(e).injector();
+                    scopeExternal =  angular.element(document.body).scope();
+                    
+                    injectorExternal = angular.element(document.body).injector();
+                    injectorExternalGET = injectorExternal.get("$location");
+                    
+                    localStorageLegacy = injectorExternal.get("$localStorage");
+                    localStorageLegacy.devicetoken = e.regid;
 
-                    alert("@");
-                    $injector.get('$location').path("/registration");
-                    alert("@");
-                    $injector.scope().$apply();
-                    alert("@");
+                    console.log("IOredirec");
+                    console.log(injectorExternalGET);
+
+
+                    console.log("current: "+injectorExternalGET.path());
+                   // alert("@last");
+                    injectorExternalGET.path("/app/registration");
+                    scopeExternal.$apply();
+
+                    console.log("current: "+injectorExternalGET.path());
+                   // alert("@end");
+                    
+                  //  alert("@final");
                 } 
         break;   
         case 'message': 
