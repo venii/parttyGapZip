@@ -109,6 +109,12 @@ function onNotificationGCM(e) {
                     localStorageLegacy = injectorExternal.get("$localStorage");
                     localStorageLegacy.devicetoken = e.regid;
 
+
+                    ionicViewLegacy = injectorExternal.get("$ionicViewService");
+                    ionicViewLegacy.nextViewOptions({
+                        disableBack: true
+                      });
+
                     console.log("IOredirec");
                     console.log(injectorExternalGET);
 
