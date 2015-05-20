@@ -79,14 +79,16 @@ if (typeof module != 'undefined' && module.exports) {
 
 function showResultPush(result){
     console.log(result);
-    alert(result);
+   // alert(result);
 }
 
 function successHandler(result) { console.log('Success: '+ result); alert('Success: '+ result); }
-function errorHandler(error) { console.log('Error: '+ error); }
+function errorHandler(error) { console.log('Error: '+ error); alert('Error: '+ result); }
 
 function onNotificationGCM(e) { 
     console.log("onNotificationGCM");
+    alert("onNotificationGCM");
+    alert('Event: '+ e.event);
    
     switch(e.event){ 
 
@@ -98,7 +100,7 @@ function onNotificationGCM(e) {
                     //INJETA O DEVICE VIA LEGACY CODE (FORA DO ANGULAR)
                     //REDIRECIONA PARA O NOVO CONTROLADOR
 
-                 //   alert("@init");
+                   alert("@init legacy code");
                     window.localStorage.devicetoken = e.regid;
 
                     scopeExternal =  angular.element(document.body).scope();

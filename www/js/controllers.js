@@ -145,26 +145,33 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
-.controller('RegistrationCtrl', function($scope, $stateParams,$localStorage,$cordovaProgress, $ionicLoading) {
+.controller('RegistrationCtrl', function($scope, $stateParams,$localStorage,$ionicLoading) {
       $ionicLoading.hide();
       $scope.devicetoken = $localStorage.devicetoken;
 })
 .controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage,$cordovaToast,$ionicLoading) {
     //console.log(device.platform);
-
-    $ionicLoading.show({
-      template: 'Carregando dados do Usuario...'
-    });
-    alert("@");
+    
+   
+   // console.log(ProgressIndicator);
+    //alert("@");
     if(openFB.isMob()){
+      /*
+        $ionicLoading.show({
+          template: 'Carregando dados do Usuario...'
+        });*/
+       alert("loading pushNotification.register ");
         //$cordovaProgress.showSimpleWithLabel(true, "Loading data ...");
        document.addEventListener("deviceready", function () {
+            alert("ready pushNotification.register ");
+            
             window.plugins.pushNotification.register(successHandler,errorHandler,
-                  {
-                    "senderID":"244606470402",
-                      "ecb":"onNotificationGCM"});
+                  {"senderID":"244606470402", "ecb":"onNotificationGCM"});
+
+            alert("ready end pushNotification.register ");
 
        });
+      
     }else{
        /*var pubnub = PUBNUB.init({
          publish_key: 'demo',
