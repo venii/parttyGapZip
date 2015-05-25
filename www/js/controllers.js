@@ -3,6 +3,12 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 .controller('AppCtrl', function($scope,$state,$ionicSideMenuDelegate, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage) {
 
   // bind do menu $ionicSideMenuDelegat
+  
+  $localStorage.httpserver = 'http://parttyappnoip.ddns.net';
+  $localStorage.restaddress = $localStorage.httpserver+'/partty/servercode/ws/process.php/';
+
+  //var constants
+  $localStorage.signup = $localStorage.restaddress + 'login';
 
   $ionicViewService.nextViewOptions({
     disableBack: true
@@ -145,9 +151,32 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
-.controller('RegistrationCtrl', function($scope, $stateParams,$localStorage,$ionicLoading) {
+.controller('RegistrationCtrl', function($scope, $stateParams,$localStorage,$ionicLoading,$http) {
       $ionicLoading.hide();
       $scope.devicetoken = $localStorage.devicetoken;
+
+      $ionicLoading.show({
+          template: 'Procurando por usuario...'
+      });
+      
+      $http.get($localStorage.restaddress+'login',{
+          params: {
+              ent_first_name : 'testeIONIC',
+              ent_sex : 1,
+              ent_device_type : 1,
+              ent_push_token : $localStorage.devicetoken
+          }
+      }).then(function(resp) {
+
+        console.log('Success', resp);
+        $ionicLoading.hide();
+      }, function(err) {
+        console.error('ERR', err);
+        // err.status will contain the status code
+        $ionicLoading.hide();
+      });
+
+
 })
 .controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage,$cordovaToast,$ionicLoading) {
     //console.log(device.platform);
@@ -156,19 +185,19 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
    // console.log(ProgressIndicator);
     //alert("@");
     if(openFB.isMob()){
-      /*
+      
         $ionicLoading.show({
-          template: 'Carregando dados do Usuario...'
-        });*/
-       alert("loading pushNotification.register ");
+          template: 'Carregando servidor de mensagem ...'
+        });
+      //alert("loading pushNotification.register ");
         //$cordovaProgress.showSimpleWithLabel(true, "Loading data ...");
        document.addEventListener("deviceready", function () {
-            alert("ready pushNotification.register ");
+            //alert("ready pushNotification.register ");
             
             window.plugins.pushNotification.register(successHandler,errorHandler,
                   {"senderID":"244606470402", "ecb":"onNotificationGCM"});
 
-            alert("ready end pushNotification.register ");
+           // alert("ready end pushNotification.register ");
 
        });
       

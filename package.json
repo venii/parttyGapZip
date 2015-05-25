@@ -23,7 +23,11 @@
     "org.apache.cordova.file",
     "org.apache.cordova.media",
     "org.apache.cordova.camera",
-    "org.pbernasconi.progressindicator"
+    "org.pbernasconi.progressindicator",
+    {
+      "locator": "https://github.com/apache/cordova-plugin-whitelist.git",
+      "id": "cordova-plugin-whitelist"
+    }
   ],
   "cordovaPlatforms": [
     "android"
