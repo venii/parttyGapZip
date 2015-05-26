@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb','ngCordova','ngStorage'])
+angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb','ngCordova','ngStorage','parttyutils'])
 /*INJETAR LIB PELO ´[] e pelo functiob ()*/
 .controller('AppCtrl', function($scope,$state,$ionicSideMenuDelegate, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage) {
 
@@ -151,7 +151,7 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
-.controller('RegistrationCtrl', function($scope, $stateParams,$localStorage,$ionicLoading,$http) {
+.controller('RegistrationCtrl', function($scope, $stateParams,$localStorage,$ionicLoading,$http,parttyUtils) {
       $ionicLoading.hide();
       $scope.devicetoken = $localStorage.devicetoken;
 
@@ -159,16 +159,20 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
           template: 'Procurando por usuario...'
       });
       
-      $http.get($localStorage.restaddress+'login',{
+      $http.post($localStorage.restaddress+'login',{
           params: {
               ent_first_name : 'testeIONIC',
               ent_sex : 1,
               ent_device_type : 1,
-              ent_push_token : $localStorage.devicetoken
+              ent_push_token : $localStorage.devicetoken,
+              ent_auth_type : 1,
+              ent_fbid: $localStorage.token
           }
       }).then(function(resp) {
 
         console.log('Success', resp);
+        parttyUtils.logPartty(resp);
+
         $ionicLoading.hide();
       }, function(err) {
         console.error('ERR', err);
@@ -178,7 +182,7 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 
 
 })
-.controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage,$cordovaToast,$ionicLoading) {
+.controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage,$cordovaToast,$ionicLoading,$ionicViewService,$state) {
     //console.log(device.platform);
     
    
@@ -202,6 +206,17 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
        });
       
     }else{
+
+        $ionicLoading.show({
+          template: 'Carregando servidor de mensagem (web) ...'
+        });
+
+        $ionicViewService.nextViewOptions({
+          disableBack: true
+        });
+
+        $localStorage.devicetoken = 'web browser';
+        $state.go('app.registration');
        /*var pubnub = PUBNUB.init({
          publish_key: 'demo',
          subscribe_key: 'demo',
