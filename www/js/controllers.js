@@ -158,17 +158,18 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
       $ionicLoading.show({
           template: 'Procurando por usuario...'
       });
-      
-      $http.post($localStorage.restaddress+'login',{
-          params: {
-              ent_first_name : 'testeIONIC',
-              ent_sex : 1,
-              ent_device_type : 1,
-              ent_push_token : $localStorage.devicetoken,
-              ent_auth_type : 1,
-              ent_fbid: $localStorage.token
-          }
-      }).then(function(resp) {
+
+      var postData = {
+              "ent_first_name" : 'testeIONIC',
+              "ent_sex" : 1,
+              "ent_device_type" : 1,
+              "ent_push_token" : $localStorage.devicetoken,
+              "ent_auth_type" : 1,
+              "ent_fbid": $localStorage.token
+          };
+      //$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
+      $http.get($localStorage.restaddress+'login',{params: postData}).then(function(resp) {
 
         console.log('Success', resp);
         parttyUtils.logPartty(resp);
