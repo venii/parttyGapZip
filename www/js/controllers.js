@@ -7,8 +7,12 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
   $localStorage.httpserver = 'http://parttyappnoip.ddns.net';
   $localStorage.restaddress = $localStorage.httpserver+'/partty/servercode/ws/process.php/';
 
+
   //var constants
   $localStorage.signup = $localStorage.restaddress + 'login';
+  $localStorage.getfbidbysess = $localStorage.restaddress + 'getfbidbysess';
+
+
 
   $ionicViewService.nextViewOptions({
     disableBack: true
@@ -123,6 +127,8 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
              if($localStorage.token == undefined){
 
                   openFB.init({ appId  : '574073299368611' });
+                  
+
                   openFB.login(function(response){
                     
                     $scope.tokenfbview = response.authResponse.token;
@@ -151,7 +157,7 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
-.controller('RegistrationCtrl', function($scope, $stateParams,$localStorage,$ionicLoading,$http,parttyUtils) {
+.controller('RegistrationCtrl', function($scope, $stateParams,$localStorage,$ionicLoading,$http,parttyUtils,$ionicViewService,$state) {
       $ionicLoading.hide();
       $scope.devicetoken = $localStorage.devicetoken;
 
@@ -159,55 +165,128 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
           template: 'Procurando por usuario...'
       });
 
+      //VALIDA SESSAO PARA PODER USAR
+    
+
+
+
+
       var postData = {
-              "ent_first_name" : 'testeIONIC',
-              "ent_sex" : 1,
-              "ent_device_type" : 1,
-              "ent_push_token" : $localStorage.devicetoken,
-              "ent_auth_type" : 1,
-              "ent_fbid": $localStorage.token
-          };
+                
+                "sess_fb": $localStorage.token
+              };
+
+        //PEGA INFORMAÇOES NO WS DE USUARIO FACEBOOK
+        $http.get($localStorage.getfbidbysess,{params: postData}).then(function(resp) {
+            //console.log(resp);
+                if(resp.data.error){
+                  alert(resp.data.error);
+                  $ionicLoading.hide();
+
+                  openFB.logout();
+                  $ionicViewService.nextViewOptions({
+                      disableBack: true
+                    });
+                  $state.go('app.loggedout');
+
+                  return ;
+                }
+                //parttyUtils.logPartty(resp);
+                /*
+                
+                  var postData = {
+                        "ent_first_name" : 'testeIONIC',
+                        "ent_sex" : 1,
+                        "ent_device_type" : 1,
+                        "ent_push_token" : $localStorage.devicetoken,
+                        "ent_auth_type" : 1,
+                        "ent_fbid": $localStorage.token};
+                */
+
+                var postData = {
+                        "ent_first_name" : resp.data.usuario.id,
+                        "ent_sex" : (resp.data.usuario.gender == "male" ? 1 : 2),
+                        "ent_device_type" : 1,
+                        "ent_push_token" : $localStorage.devicetoken,
+                        "ent_auth_type" : 1,
+                        "ent_fbid": resp.data.usuario.id
+                      };
+                //SE EXISTIR LOGIN AUTHENTICA
+                //SE NAO CRIA NOVO USUARIO
+                $scope.idfbview = resp.data.usuario.id;
+                $scope.namefb = resp.data.usuario.name;
+                
+                $http.get($localStorage.restaddress+'login',{params: postData}).then(function(resp) {
+
+                    console.log('Success', resp);
+                    parttyUtils.logPartty(resp);
+
+                     
+                
+
+                    $ionicLoading.hide();
+                  }, function(err) {
+                    console.error('ERR', err);
+                    // err.status will contain the status code
+                    $ionicLoading.hide();
+                });
+
+
+          }, function(err) {
+            console.error('ERR', err);
+            // err.status will contain the status code
+            $ionicLoading.hide();
+          });
+       
+
+
+      
       //$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
-      $http.get($localStorage.restaddress+'login',{params: postData}).then(function(resp) {
-
-        console.log('Success', resp);
-        parttyUtils.logPartty(resp);
-
-        $ionicLoading.hide();
-      }, function(err) {
-        console.error('ERR', err);
-        // err.status will contain the status code
-        $ionicLoading.hide();
-      });
+      
 
 
 })
-.controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage,$cordovaToast,$ionicLoading,$ionicViewService,$state) {
+.controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage,$cordovaToast,$ionicLoading,$ionicViewService,$state,parttyUtils) {
     //console.log(device.platform);
     
-   
+    //parttyUtils.logPartty(window.plugins.pushNotification);
    // console.log(ProgressIndicator);
     //alert("@");
+    //alert(openFB.isMob());
     if(openFB.isMob()){
-      
+        
         $ionicLoading.show({
           template: 'Carregando servidor de mensagem ...'
         });
-      //alert("loading pushNotification.register ");
+        
+        alert("loading pushNotification.register "+$scope.isLoadedMain);
         //$cordovaProgress.showSimpleWithLabel(true, "Loading data ...");
-       document.addEventListener("deviceready", function () {
-            //alert("ready pushNotification.register ");
-            
-            window.plugins.pushNotification.register(successHandler,errorHandler,
-                  {"senderID":"244606470402", "ecb":"onNotificationGCM"});
+        //alert($scope.isLoadedMain == undefined);
+       // window.plugins.pushNotification
+       if($scope.isLoadedMain == undefined){
+          alert("isLoadedMain true");
+          $scope.isLoadedMain = true;
+         document.addEventListener("deviceready", function () {
+              alert("ready pushNotification.register ");
+              //$scope.isLoadedMain = true;
+              window.plugins.pushNotification.register(successHandler,errorHandler,
+                    {"senderID":"244606470402", "ecb":"onNotificationGCM"});
 
-           // alert("ready end pushNotification.register ");
+             // alert("ready end pushNotification.register ");
 
-       });
+         });
+       }else{
+
+          alert("isLoadedMain false");
+          $ionicViewService.nextViewOptions({
+            disableBack: true
+          });
+          $state.go('app.registration');
+       }
       
     }else{
-
+        //alert("@@@");
         $ionicLoading.show({
           template: 'Carregando servidor de mensagem (web) ...'
         });
@@ -216,7 +295,11 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
           disableBack: true
         });
 
-        $localStorage.devicetoken = 'web browser';
+
+
+
+
+        $localStorage.devicetoken = '';
         $state.go('app.registration');
        /*var pubnub = PUBNUB.init({
          publish_key: 'demo',
