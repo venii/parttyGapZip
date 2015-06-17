@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb','ngCordova','ngStorage','parttyutils'])
+angular.module('starter.controllers', ['ionic','ui.bootstrap','modal.controllers','sociogram.controllers','openfb','ngCordova','ngStorage','parttyutils'])
 /*INJETAR LIB PELO ´[] e pelo functiob ()*/
 .controller('AppCtrl', function($scope,$state,$ionicSideMenuDelegate, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage) {
 
@@ -11,7 +11,7 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
   //var constants
   $localStorage.signup = $localStorage.restaddress + 'login';
   $localStorage.getfbidbysess = $localStorage.restaddress + 'getfbidbysess';
-
+  $localStorage.updatedob = $localStorage.restaddress + 'updatedob';
 
 
   $ionicViewService.nextViewOptions({
@@ -157,7 +157,7 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
-.controller('RegistrationCtrl', function($scope, $stateParams,$localStorage,$ionicLoading,$http,parttyUtils,$ionicViewService,$state) {
+.controller('RegistrationCtrl', function($scope, $stateParams,$modal,$localStorage,$ionicLoading,$http,parttyUtils,$ionicViewService,$state,$cordovaDatePicker) {
       $ionicLoading.hide();
       $scope.devicetoken = $localStorage.devicetoken;
 
@@ -178,16 +178,21 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 
         //PEGA INFORMAÇOES NO WS DE USUARIO FACEBOOK
         $http.get($localStorage.getfbidbysess,{params: postData}).then(function(resp) {
-            //console.log(resp);
-                if(resp.data.error){
-                  alert(resp.data.error);
+            console.log("GET: "+$localStorage.getfbidbysess);
+            console.log(resp);
+                //alert(resp.data.error);
+                if(resp.data.error || !resp.data.usuario){
+                  alert("RETORNO no session getfbidbysess ");
                   $ionicLoading.hide();
 
-                  openFB.logout();
+                  
                   $ionicViewService.nextViewOptions({
                       disableBack: true
                     });
-                  $state.go('app.loggedout');
+
+                  openFB.logout();
+                  $localStorage.token = undefined;
+                  $state.go('app.login');
 
                   return ;
                 }
@@ -203,6 +208,8 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
                         "ent_fbid": $localStorage.token};
                 */
 
+                
+
                 var postData = {
                         "ent_first_name" : resp.data.usuario.id,
                         "ent_sex" : (resp.data.usuario.gender == "male" ? 1 : 2),
@@ -211,6 +218,8 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
                         "ent_auth_type" : 1,
                         "ent_fbid": resp.data.usuario.id
                       };
+
+                $localStorage.usuarioData = postData;
                 //SE EXISTIR LOGIN AUTHENTICA
                 //SE NAO CRIA NOVO USUARIO
                 $scope.idfbview = resp.data.usuario.id;
@@ -221,7 +230,64 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
                     console.log('Success', resp);
                     parttyUtils.logPartty(resp);
 
-                     
+
+                    $localStorage.usuarioData.age = resp.data.age;
+                    //newuser true = setbirthday
+                    //override modal classcss
+                     if(!resp.data.newuser){
+                          var modalInstance = $modal.open({
+                                  animation: $scope.animationsEnabled,
+                                   templateUrl: 'templates/modal/main.html',
+                                    controller: 'ModalDobCtrl',
+                                   size: '100%',
+                                   windowClass: "large-Modal",
+                                   backdrop : 'static',
+                                   resolve: {
+                                     items: function () {
+                                            return $scope.items;
+                                              }
+                                           }
+                           });
+
+                           
+                        /*
+                        var options = {
+                          date: new Date(),
+                          mode: 'date', // or 'time'
+                          minDate: new Date() - 10000,
+                          allowOldDates: true,
+                          allowFutureDates: false,
+                          doneButtonLabel: 'DONE',
+                          doneButtonColor: '#F2F3F4',
+                          cancelButtonLabel: 'CANCEL',
+                          cancelButtonColor: '#000000'
+                        };
+
+                        document.addEventListener("deviceready", function () {
+
+                          $cordovaDatePicker.show(options).then(function(date){
+                              var dd = date.getDate();
+                              var mm = date.getMonth()+1; //January is 0!
+
+                              var yyyy = date.getFullYear();
+                              
+                              var postData = {
+                                
+                                "ent_fbid": resp.data.usuario.id,
+                                "dob" : yyyy+"-"+mm+"-"+dd
+                              };
+                              
+                              $http.get($localStorage.updatedob,{params: postData}).then(function(resp) {
+                                parttyUtils.logPartty(resp);
+
+                                alert(resp);
+
+                              });
+
+                          });
+
+                        }, false);*/
+                     }
                 
 
                     $ionicLoading.hide();
@@ -234,6 +300,7 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 
           }, function(err) {
             console.error('ERR', err);
+            alert(err);
             // err.status will contain the status code
             $ionicLoading.hide();
           });
@@ -264,25 +331,26 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
         //$cordovaProgress.showSimpleWithLabel(true, "Loading data ...");
         //alert($scope.isLoadedMain == undefined);
        // window.plugins.pushNotification
-       if($scope.isLoadedMain == undefined){
+       
           alert("isLoadedMain true");
-          $scope.isLoadedMain = true;
-         document.addEventListener("deviceready", function () {
-              alert("ready pushNotification.register ");
-              //$scope.isLoadedMain = true;
-              window.plugins.pushNotification.register(successHandler,errorHandler,
-                    {"senderID":"244606470402", "ecb":"onNotificationGCM"});
+          
+       document.addEventListener("deviceready", function () {
+            alert("ready pushNotification.register ");
+            //$scope.isLoadedMain = true;
+            $scope.isLoadedMain = true;
+            window.plugins.pushNotification.register(successHandler,errorHandler,
+                  {"senderID":"244606470402", "ecb":"onNotificationGCM"});
 
-             // alert("ready end pushNotification.register ");
+           // alert("ready end pushNotification.register ");
 
-         });
-       }else{
-
-          alert("isLoadedMain false");
-          $ionicViewService.nextViewOptions({
-            disableBack: true
-          });
-          $state.go('app.registration');
+       });
+       // alert("$scope.isLoadedMain: "+$scope.isLoadedMain);
+       if($scope.isLoadedMain == undefined){
+        //alert("::");
+        $ionicViewService.nextViewOptions({
+          disableBack: true
+        });
+        $state.go('app.registration');
        }
       
     }else{
@@ -299,7 +367,7 @@ angular.module('starter.controllers', ['ionic','sociogram.controllers','openfb',
 
 
 
-        $localStorage.devicetoken = '';
+        $localStorage.devicetoken = 'web';
         $state.go('app.registration');
        /*var pubnub = PUBNUB.init({
          publish_key: 'demo',
