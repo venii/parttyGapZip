@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['ionic','ui.bootstrap','modal.controllers','sociogram.controllers','openfb','ngCordova','ngStorage','parttyutils'])
+angular.module('starter.controllers', ['ionic','ui.bootstrap','configurations.controllers','modal.controllers','sociogram.controllers','openfb','ngCordova','ngStorage','parttyutils'])
 /*INJETAR LIB PELO ´[] e pelo functiob ()*/
 .controller('AppCtrl', function($scope,$state,$ionicSideMenuDelegate, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage) {
 
@@ -211,7 +211,7 @@ angular.module('starter.controllers', ['ionic','ui.bootstrap','modal.controllers
                 
 
                 var postData = {
-                        "ent_first_name" : resp.data.usuario.id,
+                        "ent_first_name" : resp.data.usuario.name,
                         "ent_sex" : (resp.data.usuario.gender == "male" ? 1 : 2),
                         "ent_device_type" : 1,
                         "ent_push_token" : $localStorage.devicetoken,
@@ -234,59 +234,24 @@ angular.module('starter.controllers', ['ionic','ui.bootstrap','modal.controllers
                     $localStorage.usuarioData.age = resp.data.age;
                     //newuser true = setbirthday
                     //override modal classcss
-                     if(!resp.data.newuser){
+                     if(resp.data.newuser){
                           var modalInstance = $modal.open({
                                   animation: $scope.animationsEnabled,
                                    templateUrl: 'templates/modal/main.html',
-                                    controller: 'ModalDobCtrl',
-                                   size: '100%',
-                                   windowClass: "large-Modal",
-                                   backdrop : 'static',
-                                   resolve: {
-                                     items: function () {
-                                            return $scope.items;
-                                              }
-                                           }
+                                   controller: 'ModalDobCtrl',
+                                   scope: $scope,
+                                   windowClass: "app-modal-window",
+                                   backdrop : 'static'
                            });
 
                            
-                        /*
-                        var options = {
-                          date: new Date(),
-                          mode: 'date', // or 'time'
-                          minDate: new Date() - 10000,
-                          allowOldDates: true,
-                          allowFutureDates: false,
-                          doneButtonLabel: 'DONE',
-                          doneButtonColor: '#F2F3F4',
-                          cancelButtonLabel: 'CANCEL',
-                          cancelButtonColor: '#000000'
-                        };
-
-                        document.addEventListener("deviceready", function () {
-
-                          $cordovaDatePicker.show(options).then(function(date){
-                              var dd = date.getDate();
-                              var mm = date.getMonth()+1; //January is 0!
-
-                              var yyyy = date.getFullYear();
-                              
-                              var postData = {
-                                
-                                "ent_fbid": resp.data.usuario.id,
-                                "dob" : yyyy+"-"+mm+"-"+dd
-                              };
-                              
-                              $http.get($localStorage.updatedob,{params: postData}).then(function(resp) {
-                                parttyUtils.logPartty(resp);
-
-                                alert(resp);
-
-                              });
-
-                          });
-
-                        }, false);*/
+                        
+                     }else{
+                        $ionicViewService.nextViewOptions({
+                          disableBack: true
+                        });
+                        
+                        $state.go('app.configurations');
                      }
                 
 

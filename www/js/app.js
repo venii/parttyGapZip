@@ -4,7 +4,8 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic','ui.bootstrap', 'starter.controllers','sociogram.controllers','openfb', 'ionic.service.core','ionic.service.push','ng'])
+angular.module('starter', ['ionic','ui.bootstrap', 'starter.controllers','sociogram.controllers','openfb', 'ionic.service.core','ionic.service.push','ng'
+    ,'configurations.controllers'])
 
 .run(function($ionicPlatform,OpenFB) {
 
@@ -75,6 +76,7 @@ angular.module('starter', ['ionic','ui.bootstrap', 'starter.controllers','sociog
     },
     
   })
+  
   .state('app.registration', {
     url: "/registration",
     views: {
@@ -104,6 +106,15 @@ angular.module('starter', ['ionic','ui.bootstrap', 'starter.controllers','sociog
         controller: 'PlaylistCtrl'
       }
     }
+  }).state('app.configurations', {
+    url: "/configurations",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/configurations.html",
+        controller: 'ConfigurationsCtrl'
+      }
+    },
+    
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
