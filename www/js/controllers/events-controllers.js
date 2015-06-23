@@ -9,8 +9,12 @@ angular.module('events.controllers', ['starter'])
   	}
   };
 
+   
 
    $scope.checkScroll = function () {
+   		
+   		if($scope.nextpag == null)
+   			return ;
 
         var currentTop = $ionicScrollDelegate.$getByHandle('scroller').getScrollPosition().top;
         var maxTop = $ionicScrollDelegate.$getByHandle('scroller').getScrollView().__maxScrollTop;
@@ -19,28 +23,36 @@ angular.module('events.controllers', ['starter'])
         {
 
 
-        		console.log("$scope.tamanho_eventos "+$scope.tamanho_eventos);
-        	   if($scope.tamanho_eventos == 0)
-        	   	return ;
+        	   
+	           
 	           var postData = {
                 
                 "sessfb": $localStorage.token,
                 "next": $scope.nextpag
               };
 
+
+             if($scope.loadingscrollevents == undefined){
+               $scope.loadingscrollevents = true;
 			   $http.get($localStorage.geteventsfb,{params: postData}).then(function(resp) {
-			   		if(resp.data.data.next == $scope.nextpag)
+			   		
+			   		if(resp.data == null)
 			   			return ;
+			   		
 
 			   		for ( dado in resp.data.data) {
 
 				      $scope.items.push(resp.data.data[dado]);
 				    }
-			   		$scope.tamanho_eventos = resp.data.data.length;
+			   		
+
 			   		$scope.nextpag = resp.data.next;
 			   		$scope.prevpag = resp.data.previous;
-			   			
+			   		$scope.loadingscrollevents = false;	
+			   		$scope.loadingscrollevents = undefined;
 			   });
+			}
+            console.log("var $scope.loadingscrollevents "+$scope.loadingscrollevents);
         }
     };
 
@@ -48,6 +60,8 @@ angular.module('events.controllers', ['starter'])
 	                
 	                "sessfb": $localStorage.token
 	              };
+
+
 	   $http.get($localStorage.geteventsfb,{params: postData}).then(function(resp) {
 	   		//console.log(resp);
 	   		$scope.items = resp.data.data;
