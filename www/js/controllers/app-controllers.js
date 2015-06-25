@@ -4,7 +4,9 @@ angular.module('app.controllers', ['starter'])
 
   // bind do menu $ionicSideMenuDelegat
   
+  //$localStorage.httpserver = 'http://parttyappnoip.ddns.net';
   $localStorage.httpserver = 'http://parttyappnoip.ddns.net';
+  
   $localStorage.restaddress = $localStorage.httpserver+'/partty/servercode/ws/process.php/';
 
 
@@ -13,6 +15,8 @@ angular.module('app.controllers', ['starter'])
   $localStorage.getfbidbysess = $localStorage.restaddress + 'getfbidbysess';
   $localStorage.updatedob = $localStorage.restaddress + 'updatedob';
   $localStorage.geteventsfb = $localStorage.restaddress + 'geteventsfb';
+  $localStorage.getpreferences = $localStorage.restaddress + 'getPreferences';
+  $localStorage.updatepreferences = $localStorage.restaddress + 'updatePreferences';
 
 
   $ionicViewService.nextViewOptions({

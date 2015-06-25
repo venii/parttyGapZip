@@ -10,13 +10,6 @@ angular.module('starter.controllers', ['ionic','ui.bootstrap','modal.controllers
 
                                           
                                           ])
-/*INJETAR LIB PELO ´[] e pelo functiob ()*/
-
-//CONTROLLER PADRAO SETADO POR OTHERWISE
-
-
-.controller('PlaylistCtrl', function($scope, $stateParams) {
-})
 
 .controller('ChatCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) {
   /*

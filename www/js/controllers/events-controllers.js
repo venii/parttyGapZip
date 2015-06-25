@@ -1,6 +1,9 @@
 angular.module('events.controllers', ['starter'])
 
 .controller('EventsCtrl', function ($scope,$localStorage,$http,$ionicScrollDelegate) {
+  
+  
+
   $scope.clickGridEvents = function(item,index){
   	console.log(item);
   	
@@ -36,7 +39,7 @@ angular.module('events.controllers', ['starter'])
                $scope.loadingscrollevents = true;
 			   $http.get($localStorage.geteventsfb,{params: postData}).then(function(resp) {
 			   		
-			   		if(resp.data == null)
+			   		if(resp.data == null || resp.data.error)
 			   			return ;
 			   		
 

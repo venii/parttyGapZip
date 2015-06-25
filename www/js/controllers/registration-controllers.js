@@ -25,7 +25,7 @@ angular.module('registration.controllers', ['starter'])
             console.log(resp);
                 //alert(resp.data.error);
                 if(resp.data.error || !resp.data.usuario){
-                  alert("RETORNO no session getfbidbysess ");
+                  alert("Autentique com o Facebook novamente.");
                   $ionicLoading.hide();
 
                   
@@ -71,7 +71,7 @@ angular.module('registration.controllers', ['starter'])
                 $http.get($localStorage.restaddress+'login',{params: postData}).then(function(resp) {
 
                     console.log('Success', resp);
-                    parttyUtils.logPartty(resp);
+                    //parttyUtils.logPartty(resp);
 
 
                     $localStorage.usuarioData.age = resp.data.age;

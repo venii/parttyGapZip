@@ -41,24 +41,16 @@ angular.module('starter', ['ionic','ui.bootstrap',
   .state('app', {
     url: "/app",
     abstract: true,
-    templateUrl: "templates/menu.html",
+    templateUrl: "templates/core/menu.html",
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
-    url: "/search",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/search.html"
-      }
-    }
-  })
 
   .state('app.loggedout', {
     url: "/loggedout",
     views: {
       'menuContent': {
-        templateUrl: "templates/loggedout.html"
+        templateUrl: "templates/login/loggedout.html"
       }
     }
   })
@@ -66,7 +58,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
     url: "/chat",
     views: {
       'menuContent': {
-        templateUrl: "templates/chat.html",
+        templateUrl: "templates/chat/chat.html",
          controller: 'ChatCtrl'
       }
     }
@@ -76,7 +68,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
     url: "/main",
     views: {
       'menuContent': {
-        templateUrl: "templates/main.html",
+        templateUrl: "templates/core/main.html",
         controller: 'MainCtrl'
       }
     },
@@ -87,7 +79,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
     url: "/registration",
     views: {
       'menuContent': {
-        templateUrl: "templates/registration.html",
+        templateUrl: "templates/core/registration.html",
         controller: 'RegistrationCtrl'
       }
     },
@@ -98,25 +90,17 @@ angular.module('starter', ['ionic','ui.bootstrap',
       url: "/login",
       views: {
         'menuContent': {
-          templateUrl: "templates/loginfb.html",
+          templateUrl: "templates/login/loginfb.html",
           controller: 'LoginFBCtrl'
         }
       }
     })
 
-  .state('app.single', {
-    url: "/playlists/:playlistId",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
-      }
-    }
-  }).state('app.configurations', {
+  .state('app.configurations', {
     url: "/configurations",
     views: {
       'menuContent': {
-        templateUrl: "templates/configurations.html",
+        templateUrl: "templates/configurations/configurations.html",
         controller: 'ConfigurationsCtrl'
       }
     },
@@ -125,7 +109,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
     url: "/events",
     views: {
       'menuContent': {
-        templateUrl: "templates/events.html",
+        templateUrl: "templates/events/events.html",
         controller: 'EventsCtrl'
       }
     },
