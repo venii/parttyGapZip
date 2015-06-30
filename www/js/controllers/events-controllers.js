@@ -1,16 +1,18 @@
 angular.module('events.controllers', ['starter'])
 
-.controller('EventsCtrl', function ($scope,$localStorage,$http,$ionicScrollDelegate,$ionicLoading,$state,$ionicViewService) {
+.controller('EventsCtrl', function ($scope,$rootScope,$stateParams,$localStorage,$http,$ionicScrollDelegate,$ionicLoading,$state,$ionicViewService) {
   
   //angular.element(document.querySelector('#menuAPP')).removeClass('hidden');
-
+  console.log($stateParams);
   $scope.clickGridEvents = function(item,index){
-  	console.log(item);
+  	//console.log(item);
   	
   	if(item.name != undefined){
   		$ionicViewService.nextViewOptions({
-          disableBack: true
+          disableBack: false
         });
+        
+        $rootScope.eventData = item;
   		$state.go('app.matches',{"idevent" : item.id});
 
   		//alert("abrindo: "+item.name);
@@ -47,8 +49,11 @@ angular.module('events.controllers', ['starter'])
                $scope.loadingscrollevents = true;
 			   $http.get($localStorage.geteventsfb,{params: postData}).then(function(resp) {
 			   		$ionicLoading.hide();
-			   		if(resp.data == null || resp.data.error)
+
+			   		if(resp.data == null || resp.data.error){
+			   			
 			   			return ;
+			   		}
 			   		
 
 			   		for ( dado in resp.data.data) {
@@ -75,6 +80,13 @@ angular.module('events.controllers', ['starter'])
 
 	   $http.get($localStorage.geteventsfb,{params: postData}).then(function(resp) {
 	   		//console.log(resp);
+	   		if(resp.data == null || resp.data.error){
+			   	alert("Autentique com o Facebook novamente.");
+			   	$localStorage.token = "";
+			   	$state.go("app.login");		
+	   			return ;
+	   		}
+	   			
 	   		$scope.items = resp.data.data;
 	   		$scope.nextpag = resp.data.next;
 	   		$scope.prevpag = resp.data.previous;

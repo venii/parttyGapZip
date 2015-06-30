@@ -115,7 +115,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
         controller: 'EventsCtrl'
       }
     },
-    
+    //remover de app para nao carregar o side menu =)
   }).state('app.matches', {
     url: "/matches/:idevent",
     views: {
@@ -123,7 +123,20 @@ angular.module('starter', ['ionic','ui.bootstrap',
         templateUrl: "templates/matches/matches.html",
         controller: 'MatchesCtrl'
       }
-    },
+    },onExit: function(){
+          angular.element(document.querySelector('#menuAPP')).removeClass('hidden');
+        
+    },onEnter: function(){
+
+          angular.element(document.querySelector('#menuAPP')).addClass('hidden');
+          //angular.element(document.querySelector('#matchesView')).addClass('menuUptoTop');
+
+
+          angular.element(document.querySelector('#matchesView')).css("margin-top", "-40px");
+          
+          //angular.element(document.querySelector('#matchesView')).css("margin-top", "-40px");
+          //alert("@#");
+    }
     
   });
   // if none of the above states are matched, use this as the fallback

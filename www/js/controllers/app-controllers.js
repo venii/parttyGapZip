@@ -23,7 +23,7 @@ angular.module('app.controllers', ['starter'])
 
 
   $ionicViewService.nextViewOptions({
-    disableBack: true
+    disableBack: false
   });
   
 
