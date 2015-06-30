@@ -3,7 +3,10 @@ angular.module('app.controllers', ['starter'])
 .controller('AppCtrl', function($scope,$state,$ionicSideMenuDelegate, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage) {
 
   // bind do menu $ionicSideMenuDelegat
-  
+
+  //NAO CARREGA O MENU EM CERTAS PAGINAS
+ 
+ 
   //$localStorage.httpserver = 'http://parttyappnoip.ddns.net';
   $localStorage.httpserver = 'http://parttyappnoip.ddns.net';
   
@@ -46,7 +49,7 @@ angular.module('app.controllers', ['starter'])
   $scope.loginData = {};
 
   // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
+  $ionicModal.fromTemplateUrl('templates/login/login.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;

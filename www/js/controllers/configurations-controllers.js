@@ -2,7 +2,7 @@ angular.module('configurations.controllers', ['ionic'])
 
 .controller('ConfigurationsCtrl', function ($scope,$localStorage,$http,$ionicLoading) {
 	
-
+  
 	//init padrao das var (sexo, usar usuarios do partty)
 	$scope.userregistered = 0;
 	$scope.gender = 1;

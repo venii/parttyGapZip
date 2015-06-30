@@ -1,14 +1,19 @@
 angular.module('events.controllers', ['starter'])
 
-.controller('EventsCtrl', function ($scope,$localStorage,$http,$ionicScrollDelegate) {
+.controller('EventsCtrl', function ($scope,$localStorage,$http,$ionicScrollDelegate,$ionicLoading,$state,$ionicViewService) {
   
-  
+  //angular.element(document.querySelector('#menuAPP')).removeClass('hidden');
 
   $scope.clickGridEvents = function(item,index){
   	console.log(item);
   	
   	if(item.name != undefined){
-  		alert("abrindo: "+item.name);
+  		$ionicViewService.nextViewOptions({
+          disableBack: true
+        });
+  		$state.go('app.matches',{"idevent" : item.id});
+
+  		//alert("abrindo: "+item.name);
   	}
   };
 
@@ -34,11 +39,14 @@ angular.module('events.controllers', ['starter'])
                 "next": $scope.nextpag
               };
 
+              $ionicLoading.show({
+		          template: 'Carregando mais Eventos...'
+		      });
 
              if($scope.loadingscrollevents == undefined){
                $scope.loadingscrollevents = true;
 			   $http.get($localStorage.geteventsfb,{params: postData}).then(function(resp) {
-			   		
+			   		$ionicLoading.hide();
 			   		if(resp.data == null || resp.data.error)
 			   			return ;
 			   		

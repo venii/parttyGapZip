@@ -6,7 +6,8 @@ angular.module('starter.controllers', ['ionic','ui.bootstrap','modal.controllers
                                           ,'main.controllers',
                                            ,'registration.controllers',
                                           ,'configurations.controllers',
-                                          'events.controllers'
+                                          'events.controllers',
+                                           'matches.controllers'
 
                                           
                                           ])

@@ -11,7 +11,9 @@ angular.module('starter', ['ionic','ui.bootstrap',
                                       ,'login.controllers',
                                       ,'main.controllers',
                                       ,'registration.controllers',
-                                      ,'configurations.controllers','events.controllers'])
+                                      ,'configurations.controllers'
+                                      ,'events.controllers'
+                                      ,'matches.controllers'])
 
 .run(function($ionicPlatform,OpenFB) {
 
@@ -111,6 +113,15 @@ angular.module('starter', ['ionic','ui.bootstrap',
       'menuContent': {
         templateUrl: "templates/events/events.html",
         controller: 'EventsCtrl'
+      }
+    },
+    
+  }).state('app.matches', {
+    url: "/matches/:idevent",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/matches/matches.html",
+        controller: 'MatchesCtrl'
       }
     },
     
