@@ -7,6 +7,7 @@ angular.module('main.controllers', ['starter'])
    // console.log(ProgressIndicator);
     //alert("@");
     //alert(openFB.isMob());
+    console.log(openFB.isMob());
     if(openFB.isMob()){
         
         $ionicLoading.show({

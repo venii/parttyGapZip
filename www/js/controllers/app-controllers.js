@@ -20,6 +20,8 @@ angular.module('app.controllers', ['starter'])
   $localStorage.geteventsfb = $localStorage.restaddress + 'geteventsfb';
   $localStorage.getpreferences = $localStorage.restaddress + 'getPreferences';
   $localStorage.updatepreferences = $localStorage.restaddress + 'updatePreferences';
+  $localStorage.findmatchespartty = $localStorage.restaddress + 'findMatchespartty';
+
 
 
   $ionicViewService.nextViewOptions({
