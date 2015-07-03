@@ -1,0 +1,15 @@
+<div id="viewport" ng-controller="card-stack-playground" >
+	<ul class="stack" swing-stack>
+	    <li
+	        swing-card
+	        swing-on-throwout="throwout(eventName, eventObject)"
+	        swing-on-throwoutleft="throwoutleft(eventName, eventObject)"
+	        swing-on-throwoutright="throwoutright(eventName, eventObject)"
+	        swing-on-throwin="throwin(eventName, eventObject)"
+	        swing-on-dragstart="dragstart(eventName, eventObject)"
+	        swing-on-dragmove="dragmove(eventName, eventObject)"
+	        swing-on-dragend="dragend(eventName, eventObject)"
+	        ng-repeat="card in cards" ng-class="card.name"><img onerror="this.src='img/noimg.png'" style="margin-top:-38px;width:180px;height:282px" src="{{card.url}}" /></li>
+	</ul>
+</div>
+ 

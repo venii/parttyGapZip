@@ -1,6 +1,6 @@
 angular.module('matches.controllers', ['starter'])
 
-.controller('MatchesCtrl', function ($ionicViewService,$rootScope,$scope,$localStorage,$http,$ionicScrollDelegate,$ionicLoading,$state,$stateParams,$ionicSideMenuDelegate) {
+.controller('MatchesCtrl', function ($ionicViewService,$templateRequest, $sce, $compile,$rootScope,$scope,$localStorage,$http,$ionicScrollDelegate,$ionicLoading,$state,$stateParams,$ionicSideMenuDelegate) {
   		$ionicViewService.nextViewOptions({
           disableBack: true
         });
@@ -41,9 +41,41 @@ angular.module('matches.controllers', ['starter'])
 			    };
 
     			$http.get($localStorage.findmatchespartty,{params: postData}).then(function(resp) {
-						console.log(resp);
-						$ionicLoading.hide();
-				  });
+						//console.log(resp);
+                        $rootScope.matchesData = resp.data;
+						var element = angular.element(document.querySelector('#includeCards'));
+                        
+
+
+                        var templateUrl = $sce.getTrustedResourceUrl('templates/matches/matches_cards.html');
+                        
+                        console.log(templateUrl);
+
+                        $templateRequest(templateUrl).then(function(template) {
+                            // template is the HTML template as a string
+                            console.log(template);
+                            // Let's put it into an HTML element and parse any directives and expressions
+                            // in the code. (Note: This is just an example, modifying the DOM from within
+                            // a controller is considered bad style.)
+                            $compile(element.html(template).contents())($scope);
+                        }, function(err) {
+                            console.log(err);
+                            // An error has occurred
+                        });
+
+
+
+
+
+
+
+
+
+
+                        $ionicLoading.hide();
+
+
+				});
 
     			
     		},100);
