@@ -13,7 +13,8 @@ angular.module('starter', ['ionic','ui.bootstrap',
                                       ,'registration.controllers',
                                       ,'configurations.controllers'
                                       ,'events.controllers'
-                                      ,'matches.controllers'])
+                                      ,'matches.controllers',
+                                     'cards-animation-matches.controllers'])
 
 .run(function($ionicPlatform,OpenFB) {
 

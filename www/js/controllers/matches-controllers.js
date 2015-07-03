@@ -10,7 +10,7 @@ angular.module('matches.controllers', ['starter'])
         console.log($rootScope.eventData);
         $scope.eventinfoJSON = $rootScope.eventData;
 
-
+        
     	$scope.backtoevents = function(){
 
     		$state.go("app.events");
@@ -28,7 +28,8 @@ angular.module('matches.controllers', ['starter'])
     		$ionicLoading.show({
 		          template: 'Procurando matches...'
 		      });
-    		setTimeout(function(){
+    		
+            setTimeout(function(){
 
     			var postData = {
                 "sessfb" : $localStorage.token,
@@ -53,8 +54,5 @@ angular.module('matches.controllers', ['starter'])
     	
 
     
-    	$scope.statistics = function(){
-    		
-    	}
-  		
+    	
   });
