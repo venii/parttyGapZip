@@ -33,9 +33,9 @@ angular.module('registration.controllers', ['starter'])
                       disableBack: true
                     });
 
-                  openFB.logout();
-                  $localStorage.token = undefined;
-                  $state.go('app.login');
+
+
+                  $state.go('app.loggedout');
 
                   return ;
                 }
@@ -109,8 +109,14 @@ angular.module('registration.controllers', ['starter'])
           }, function(err) {
             console.error('ERR', err);
             alert(err);
+
             // err.status will contain the status code
             $ionicLoading.hide();
+            $ionicViewService.nextViewOptions({
+                disableBack: true
+              });
+              
+            $state.go('app.login');
           });
        
 

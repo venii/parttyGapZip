@@ -22,7 +22,8 @@ input {
 #viewport {
   width: 100%;
   height: 100%;
-  background: #C7433E;
+  min-height: 500px;
+  /*background: #C7433E;*/
   
   position: relative; }
   #viewport .stack {
@@ -30,7 +31,7 @@ input {
     height: 300px;
     /*background: #ED5D52;*/
     position: absolute;
-    top: 100px;
+    top: 20px;
     left: 50%;
     margin-left: -100px;
     border-radius: 10px; }
@@ -90,3 +91,50 @@ input {
   margin: 20px auto; }
   #source a {
     color: #C7433E; }
+
+
+
+.moveleft {
+  -webkit-animation: moveleft_animation 0.5s 1;
+  -moz-animation: moveleft_animation 0.5s 1;
+  -o-animation: moveleft_animation 0.5s 1;
+  animation: moveleft_animation 0.5s  1 ;
+   animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  
+}
+
+@-webkit-keyframes moveleft_animation {
+  
+ from {
+  -webkit-transform: translateX(0px) rotate(0deg);
+  }
+
+  to {
+  -webkit-transform: translateX(500px) rotate(7deg);
+  }
+}
+
+.moveright {
+  -webkit-animation: moveright_animation 0.5s 1;
+  -moz-animation: moveright_animation 0.5s 1;
+  -o-animation: moveright_animation 0.5s 1;
+  animation: moveright_animation 0.5s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  
+}
+
+@-webkit-keyframes moveright_animation {
+  
+ from {
+    -webkit-transform: translateX(0px) rotate(0deg);
+    opacity: 1
+  }
+
+  to {
+    -webkit-transform: translateX(-500px) rotate(-7deg);
+    opacity: 0
+
+  }
+}

@@ -53,7 +53,8 @@ angular.module('starter', ['ionic','ui.bootstrap',
     url: "/loggedout",
     views: {
       'menuContent': {
-        templateUrl: "templates/login/loggedout.html"
+        templateUrl: "templates/login/loggedout.html",
+        controller: 'LoggedOutCtrl'
       }
     }
   })

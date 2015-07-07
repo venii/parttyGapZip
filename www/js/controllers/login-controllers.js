@@ -1,5 +1,15 @@
 angular.module('login.controllers', ['starter'])
+.controller('LoggedOutCtrl', function($scope,$state,$location,$cordovaOauth,$localStorage,$ionicViewService,OpenFB) {
+    delete $localStorage.token;
+    delete $localStorage;
 
+    OpenFB.logout();
+    $ionicViewService.nextViewOptions({
+      disableBack: true
+    });
+    $state.go("app.login");
+
+})
 .controller('LoginFBCtrl', function($scope,$state,$location,$cordovaOauth,$localStorage,$ionicViewService) {
   //remove o history back quando usa GO() !
   $ionicViewService.nextViewOptions({
@@ -30,12 +40,17 @@ angular.module('login.controllers', ['starter'])
                               
                           }, function(error) {
                              // alert("#");
-                              $location.path("/main");
+                               $ionicViewService.nextViewOptions({
+                                  disableBack: true
+                                });
                               $state.go('app.loggedout');
                           });
               }else{
                   //alert("@3 "+$localStorage.token);
-                  $location.path("/main");
+                  //$location.path("/main");
+                  $ionicViewService.nextViewOptions({
+                    disableBack: true
+                  });
                   $state.go('app.main');
               }
           
@@ -51,12 +66,19 @@ angular.module('login.controllers', ['starter'])
                     
                     $scope.tokenfbview = response.authResponse.token;
                     $localStorage.token = response.authResponse.token;
+                    $ionicViewService.nextViewOptions({
+                      disableBack: true
+                    });
+                    
                     $state.go('app.main');
 
                   }, {scope: 'email'});
                 
               }else{
                    $scope.tokenfbview = openFB.getToken();
+                   $ionicViewService.nextViewOptions({
+                    disableBack: true
+                  });
                    $state.go('app.main');
               }
 

@@ -1,6 +1,6 @@
 angular.module('app.controllers', ['starter'])
 
-.controller('AppCtrl', function($scope,$state,$ionicSideMenuDelegate, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage) {
+.controller('AppCtrl', function($scope,$state,$ionicSideMenuDelegate,$ionicViewService, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage) {
 
   // bind do menu $ionicSideMenuDelegat
 
@@ -73,9 +73,9 @@ angular.module('app.controllers', ['starter'])
     $ionicViewService.nextViewOptions({
       disableBack: true
     });
-    delete $localStorage.token;
-    OpenFB.logout();
-    $location.path("/loggedout");
+    
+    
+    $state.go("app.loggedout");
     
  
   };
