@@ -1,20 +1,22 @@
 angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing','ngAnimate', 'toastr'])
 
 
-.controller('card-stack-playground', function ($scope,$rootScope,$ionicSideMenuDelegate,$localStorage,toastr) {
+.controller('card-stack-playground', function ($scope,parttyUtils,$rootScope,$ionicSideMenuDelegate,$localStorage,toastr) {
          
          heightClient = angular.element(document.querySelector('.menu-content.pane'))[0].offsetHeight;
          
          angular.element(document.querySelector('#viewport')).css("min-height", heightClient+"px");
-
+         //angular.element(document.querySelector('#cardscontainer')).css("min-height", (heightClient-200)+"px");
+         
         $ionicSideMenuDelegate.canDragContent(false);
-        console.log($rootScope.matchesData);
+        //console.log($rootScope.matchesData);
         
 
 
 
         $scope.cards = [];
-        
+        $scope.cardrest = 0;
+
         if($rootScope.matchesData.data.length > 0){
             //alert("@");
             angular.forEach($rootScope.matchesData.data, function(value, key) {
@@ -30,16 +32,48 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
             $state.go("app.events");
         }
         
+        $scope.cardrest = $rootScope.matchesData.data.length-1;
+        
         $scope.clickLeft = function(){
-            element = document.querySelector('.cardnoanimate');
-            //console.log(rpp);
-            angular.element(element).removeClass('cardnoanimate').addClass('moveleft');
+           
+                    //console.log("initleftclick");
+                    //delete $scope.cards[$scope.cards.length-1];
+                    //element = document.querySelectorAll('.stack > li.cardnoanimate');
+                    //element2 = element[element.length-1];
+                   
+                    index = ($scope.cardrest);
+                    console.log(index);
+                    $scope.cards[index].animateclass = 'moveleft';
+                    $scope.cards.splice(index, 1);
+                    console.log($scope.cards);
+                    $scope.cardrest--;
+                   // parttyUtils.logPartty(element);
+                    //angular.element(element2).removeClass('cardnoanimate').addClass('moveleft');
+                    //console.log("initleftclick");
+
+               
         }
 
         $scope.clickRight = function(){
-            element = document.querySelector('.cardnoanimate');
-            //console.log(rpp);
-            angular.element(element).removeClass('cardnoanimate').addClass('moveright');
+           
+                     
+                     //var index = $scope.cards.indexOf(($scope.cards.length-1));
+                    
+                    // console.log($scope.cards[index]);
+                    //console.log( $scope.cards[($scope.cards.length-1)]);
+                     index = ($scope.cardrest);
+                     console.log(index);
+                     $scope.cards[index].animateclass = 'moveright';
+                     $scope.cards.splice(index, 1);  
+                     $scope.cardrest--;
+                     console.log($scope.cards);
+                       // element = document.querySelectorAll('.stack > li.cardnoanimate');
+                       // element2 = element[element.length-1];
+                        
+                        
+                        //angular.element(element2).removeClass('cardnoanimate').addClass('moveright');
+                        
+               
         }
         /*
         $scope.moveup = function(){
@@ -49,7 +83,7 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
 
             
         }*/
-        
+
         $scope.throwout = function (eventName, eventObject) {
             //console.log('throwout', eventObject);
         };
