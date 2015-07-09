@@ -21,6 +21,8 @@ angular.module('app.controllers', ['starter'])
   $localStorage.getpreferences = $localStorage.restaddress + 'getPreferences';
   $localStorage.updatepreferences = $localStorage.restaddress + 'updatePreferences';
   $localStorage.findmatchespartty = $localStorage.restaddress + 'findMatchespartty';
+  $localStorage.inviteaction = $localStorage.restaddress + 'inviteAction';
+  $localStorage.registermatchespartty = $localStorage.restaddress + 'registerMatchespartty';
 
 
 
