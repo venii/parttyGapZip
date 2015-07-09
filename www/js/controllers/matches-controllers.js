@@ -1,6 +1,6 @@
-angular.module('matches.controllers', ['starter'])
+angular.module('matches.controllers', ['starter','cards-animation-matches.controllers'])
 
-.controller('MatchesCtrl', function ($ionicViewService,$templateRequest, $sce, $compile,$rootScope,$scope,$localStorage,$http,$ionicScrollDelegate,$ionicLoading,$state,$stateParams,$ionicSideMenuDelegate) {
+.controller('MatchesCtrl', function (SendMatchesToWS,$ionicViewService,$templateRequest, $sce, $compile,$rootScope,$scope,$localStorage,$http,$ionicScrollDelegate,$ionicLoading,$state,$stateParams,$ionicSideMenuDelegate,SendMatchesToWS) {
   		$ionicViewService.nextViewOptions({
           disableBack: true
         });
@@ -32,6 +32,9 @@ angular.module('matches.controllers', ['starter'])
     	
     	
     	$scope.matches = function(){
+
+            SendMatchesToWS.loadMatches($scope);
+            /*
     		$ionicLoading.show({
 		          template: 'Procurando matches...'
 		      });
@@ -91,9 +94,9 @@ angular.module('matches.controllers', ['starter'])
 
     			
     		},100);
-    		
+    		*/
     	}
-
+        
 
     	
 

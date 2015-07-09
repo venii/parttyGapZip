@@ -47,7 +47,7 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                      });
                     $scope.cardrest--;
             if($scope.cardrest < 0){
-                SendMatchesToWS.sendMatches($scope.cards,function(resp){console.log(resp);});
+                SendMatchesToWS.sendMatches($scope.cards,$scope);
             }
                
         }
@@ -67,7 +67,7 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
 
                      
              if($scope.cardrest < 0){
-                    SendMatchesToWS.sendMatches($scope.cards,function(resp){console.log(resp);});
+                    SendMatchesToWS.sendMatches($scope.cards,$scope);
                
              }         
         }
@@ -75,7 +75,7 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
         
         
 
-    }).service('SendMatchesToWS', function($localStorage,$http,$rootScope) {
+    }).service('SendMatchesToWS',function($sce,$compile,$localStorage,$http,$rootScope,$state,$ionicLoading,$templateRequest) {
             
            
 
@@ -101,7 +101,7 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                     
             };
 
-            this.sendMatches = function(arrayMatches,callback) { 
+            this.sendMatches = function(arrayMatches,$scope) { 
 
                     paramsToSend = {
                         "idevent" : $rootScope.eventData.id,
@@ -126,16 +126,88 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                     
                     //console.log($rootScope.invitedActionData);
                     //console.log($registerMatches);
-
+                    angularService = this;
                     $http.get($localStorage.registermatchespartty,{params: paramsToSend}).success(function(resp) {
-                            callback(resp);
+                        if($rootScope.invitedActionData != undefined){
+                            angular.forEach($rootScope.invitedActionData, function(value, key) {
+                                if(value.id != $localStorage.usuarioData.ent_fbid){
+                                    if(value.errNum == 55){
+                                        $rootScope.newMatchFoundData = value;
+                                        $state.go("app.newmatchfound");
+                                    }
+                                }
+                            });
+                            console.log($rootScope);
+
+                            angularService.loadMatches($scope);
+                        }
                     });
 
             };
 
 
             
+            this.loadMatches = function($scope){
 
-             
+              $ionicLoading.show({
+                  template: 'Procurando matches...'
+              });
             
+                setTimeout(function(){
+
+                    var postData = {
+                    "sessfb" : $localStorage.token,
+                    "sess_fb": $localStorage.token,
+                    "ent_user_fbid": $localStorage.usuarioData.ent_fbid ,
+                    
+                    "idevent" : $rootScope.eventData.id
+
+                    };
+
+                    $http.get($localStorage.findmatchespartty,{params: postData}).then(function(resp) {
+                            //console.log(resp);
+                            $rootScope.matchesData = resp.data;
+                            var element = angular.element(document.querySelector('#includeCards'));
+                            
+
+
+                            var templateUrl = $sce.getTrustedResourceUrl('templates/matches/matches_cards.html');
+                            
+                            console.log(templateUrl);
+
+                            $templateRequest(templateUrl).then(function(template) {
+                                // template is the HTML template as a string
+                               // console.log(template);
+                                // Let's put it into an HTML element and parse any directives and expressions
+                                // in the code. (Note: This is just an example, modifying the DOM from within
+                                // a controller is considered bad style.)
+                                $compile(element.html(template).contents())($scope);
+                            }, function(err) {
+                                $ionicViewService.nextViewOptions({
+                                  disableBack: true
+                                });
+                                //alert("Não há matches.")
+                                $state.go("app.events");
+                                
+                                // An error has occurred
+                            });
+
+
+
+
+
+
+
+
+
+
+                            $ionicLoading.hide();
+
+
+                    });
+
+                    
+                },100);
+             
+            };
     });
