@@ -7,6 +7,7 @@ angular.module('main.controllers', ['starter'])
    // console.log(ProgressIndicator);
     //alert("@");
     //alert(openFB.isMob());
+    alert(device.platform);
     console.log("ismob?"+openFB.isMob());
     if(openFB.isMob()){
         
@@ -17,9 +18,21 @@ angular.module('main.controllers', ['starter'])
        document.addEventListener("deviceready", function () {
             
             $scope.isLoadedMain = true;
-            window.plugins.pushNotification.register(successHandler,errorHandler,
-                  {"senderID":"244606470402", "ecb":"onNotificationGCM"});
-
+            if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
+              window.plugins.pushNotification.register(successHandler,errorHandler,
+                    {"senderID":"244606470402", "ecb":"onNotificationGCM"});
+            }else{
+               alert("IOS");
+               window.plugins.pushNotification.register(
+                      tokenHandler,
+                      errorHandler,
+                      {
+                          "badge":"true",
+                          "sound":"true",
+                          "alert":"true",
+                          "ecb":"onNotificationAPN"
+                      });
+            }
        });
        
        alert("$scope.isLoadedMain: "+$scope.isLoadedMain);
@@ -34,9 +47,9 @@ angular.module('main.controllers', ['starter'])
       
     }else{
         //alert("@@@");
-        //$ionicLoading.show({
-        //  template: 'Carregando servidor de mensagem (web) ...'
-        //});
+        $ionicLoading.show({
+          template: 'Carregando servidor de mensagem (web) ...'
+        });
 
         //$ionicViewService.nextViewOptions({
         //  disableBack: true
