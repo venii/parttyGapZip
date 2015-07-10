@@ -1,6 +1,6 @@
 angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing','ngAnimate', 'toastr'])
 
-.controller('card-stack-playground', function (SendMatchesToWS,$scope,parttyUtils,$rootScope,$ionicSideMenuDelegate,$localStorage,toastr) {
+.controller('card-stack-playground', function ($state,SendMatchesToWS,$scope,parttyUtils,$rootScope,$ionicSideMenuDelegate,$localStorage,toastr,$ionicViewService) {
          
          heightClient = angular.element(document.querySelector('.menu-content.pane'))[0].offsetHeight;
          
@@ -24,12 +24,6 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                     $scope.cards.push(value);
             });
 
-        }else{
-            $ionicViewService.nextViewOptions({
-              disableBack: true
-            });
-            alert("Não há matches.")
-            $state.go("app.events");
         }
         
         $scope.cardrest = $rootScope.matchesData.data.length-1;
@@ -75,7 +69,7 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
         
         
 
-    }).service('SendMatchesToWS',function($sce,$compile,$localStorage,$http,$rootScope,$state,$ionicLoading,$templateRequest) {
+    }).service('SendMatchesToWS',function($sce,$compile,$localStorage,$ionicViewService,$http,$rootScope,$state,$ionicLoading,$templateRequest) {
             
            
 
@@ -166,6 +160,18 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
 
                     $http.get($localStorage.findmatchespartty,{params: postData}).then(function(resp) {
                             //console.log(resp);
+                            //console.log(resp.data.data.length);
+                            if(resp.data.data.length == 0){
+                                $ionicViewService.nextViewOptions({
+                                  disableBack: true
+                                });
+                                
+                                
+                                alert("Não há matches.");
+                                $state.go("app.events");
+                               
+                            }
+
                             $rootScope.matchesData = resp.data;
                             var element = angular.element(document.querySelector('#includeCards'));
                             

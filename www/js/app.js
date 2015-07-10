@@ -14,7 +14,8 @@ angular.module('starter', ['ionic','ui.bootstrap',
                                       ,'configurations.controllers'
                                       ,'events.controllers'
                                       ,'matches.controllers',
-                                     'cards-animation-matches.controllers'])
+                                     'cards-animation-matches.controllers',
+                                     'newmatchesfound.controllers'])
 
 .run(function($ionicPlatform,OpenFB) {
 
@@ -38,7 +39,9 @@ angular.module('starter', ['ionic','ui.bootstrap',
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
+
+
   $stateProvider
 
   .state('app', {
@@ -140,6 +143,28 @@ angular.module('starter', ['ionic','ui.bootstrap',
           //alert("@#");
     }
     
+  }).state('app.newmatchesfound', {
+    url: "/newmatchesfound",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/newmatchesfound/newmatchesfound.html",
+        controller: 'NewMatchesFoundCtrl'
+      }
+    },onExit: function(){
+          angular.element(document.querySelector('#menuAPP')).removeClass('hidden');
+        
+    },onEnter: function(){
+
+          angular.element(document.querySelector('#menuAPP')).addClass('hidden');
+          //angular.element(document.querySelector('#matchesView')).addClass('menuUptoTop');
+
+
+          angular.element(document.querySelector('#matchesView')).css("margin-top", "-40px");
+          
+          //angular.element(document.querySelector('#matchesView')).css("margin-top", "-40px");
+          //alert("@#");
+    }
+    
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
@@ -151,4 +176,8 @@ angular.module('starter', ['ionic','ui.bootstrap',
     // The public API key all services will use for this app
     api_key: '55d0b73b57dbec9303196edb48750c9ffd85236e5ed35f12'
   });
+}]).config(['$httpProvider', function($httpProvider) {
+  // Identify app
+  $httpProvider.defaults.useXDomain = true;
+   delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);

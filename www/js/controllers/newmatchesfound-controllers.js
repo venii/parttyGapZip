@@ -1,6 +1,6 @@
-angular.module('matches.controllers', ['starter','cards-animation-matches.controllers'])
+angular.module('newmatchesfound.controllers', ['starter','cards-animation-matches.controllers'])
 
-.controller('MatchesCtrl', function (SendMatchesToWS,$ionicViewService,$templateRequest, $sce, $compile,$rootScope,$scope,$localStorage,$http,$ionicScrollDelegate,$ionicLoading,$state,$stateParams,$ionicSideMenuDelegate,SendMatchesToWS) {
+.controller('NewMatchesFoundCtrl', function (SendMatchesToWS,$ionicViewService,$templateRequest, $sce, $compile,$rootScope,$scope,$localStorage,$http,$ionicScrollDelegate,$ionicLoading,$state,$stateParams,$ionicSideMenuDelegate,SendMatchesToWS) {
   		$ionicViewService.nextViewOptions({
           disableBack: true
         });
@@ -18,26 +18,6 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
         $scope.eventinfoJSON = $rootScope.eventData;
 
         
-    	$scope.backtoevents = function(){
-
-    		$state.go("app.events");
-    	};
-
-    	
-    	
-    	$scope.info = function(){
-    		
-    	}
-
-    	
-    	
-    	$scope.matches = function(){
-
-            SendMatchesToWS.loadMatches($scope);
-            
-    	}
-        
-
     	
 
     

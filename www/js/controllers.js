@@ -8,7 +8,8 @@ angular.module('starter.controllers', ['ionic','ui.bootstrap','modal.controllers
                                           ,'configurations.controllers',
                                           'events.controllers',
                                            'matches.controllers',
-                                'cards-animation-matches.controllers'
+                                'cards-animation-matches.controllers',
+                                'newmatchesfound.controllers'
                                           
                                           ])
 

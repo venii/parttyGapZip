@@ -34,13 +34,13 @@ angular.module('main.controllers', ['starter'])
       
     }else{
         //alert("@@@");
-        $ionicLoading.show({
-          template: 'Carregando servidor de mensagem (web) ...'
-        });
+        //$ionicLoading.show({
+        //  template: 'Carregando servidor de mensagem (web) ...'
+        //});
 
-        $ionicViewService.nextViewOptions({
-          disableBack: true
-        });
+        //$ionicViewService.nextViewOptions({
+        //  disableBack: true
+        //});
 
 
 

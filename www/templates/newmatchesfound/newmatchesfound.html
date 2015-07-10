@@ -12,26 +12,20 @@
 				    </tab-heading>
 				    	<div style="width:100%; height:100%">
 				    		<div style="width:100%;height:100px;margin-top:10px;border: 1px solid">
-				    			
+				    	<img style='display:none;' ng-src="{{eventinfoJSON.url}}" onerror="this.parentNode.parentNode.style.background = 'url(img/noimg.png) no-repeat';" onload="this.parentNode.parentNode.style.background = 'url({eventinfoJSON.url}) no-repeat'; " />
+				    			<br/>
+				    			<br/>
+				    			<br/>
+				    			<br/>
+				    			<br/>
+				    			{{eventinfoJSON.name}}
 
-				    			<img style="width:100%;height:100%" ng-src="{{eventinfoJSON.cover}}" onerror="this.src ='/img/noimg.png';"/>
 				    		</div>
-				    			
-				    			
-				    			<h1>{{eventinfoJSON.name}}</h1>
-
-				    			
-				    			<div style="width:100%;height:100px;margin-top:10px;">
-				    			{{eventinfoJSON.description != null ? eventinfoJSON.description : 'Sem descrição'  }}
-
-				    			</div>
-
 				    	</div>
 				    	
-
 		   			
 		    </tab>
-		    <tab select="matches()" id="matches" >
+		    <tab   select="matches()" id="matches" >
 		    		<tab-heading>
 				        <center><i class="glyphicon glyphicon-glass"> </i></center>
 				    </tab-heading>
