@@ -61,5 +61,27 @@ angular.module('app.controllers', ['starter'])
  
   };
 
+  $scope.configurations = function() {
+    
+    $ionicViewService.nextViewOptions({
+      disableBack: true
+    });
+    
+    
+    $state.go("app.configurations");
+    
+  };
+
+  $scope.events = function() {
+    
+    $ionicViewService.nextViewOptions({
+      disableBack: true
+    });
+    
+    
+    $state.go("app.events");
+    
+  };
+
   
 });

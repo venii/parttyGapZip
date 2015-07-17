@@ -25,16 +25,14 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close ng-href="#/login">
-          Login
+        <ion-item nav-clear menu-close >
+          Profile
         </ion-item>
-         <ion-item nav-clear menu-close ng-href="#/app/chat">
-          Chat
-        </ion-item>
-        <ion-item nav-clear menu-close ng-href="#/app/events">
+        
+        <ion-item nav-clear menu-close ng-click="configurations()">
           Eventos
         </ion-item>
-        <ion-item nav-clear menu-close ng-href="#/app/configurations">
+        <ion-item nav-clear menu-close ng-click="events()">
           Configuracoes
         </ion-item>
         <ion-item nav-clear menu-close ng-click="logout()">
@@ -50,6 +48,7 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
+        <!--
         <ion-item nav-clear menu-close ng-click="#/login">
           Login
         </ion-item>
@@ -62,6 +61,7 @@
         <ion-item nav-clear menu-close ng-click="logout()">
           Logout
         </ion-item>
+        -->
       </ion-list>
     </ion-content>
   </ion-side-menu>

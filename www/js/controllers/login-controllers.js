@@ -10,7 +10,7 @@ angular.module('login.controllers', ['starter'])
     $state.go("app.login");
 
 })
-.controller('LoginFBCtrl', function($scope,$state,$location,$cordovaOauth,$localStorage,$ionicViewService) {
+.controller('LoginFBCtrl', function($scope,$state,$location,$cordovaOauth,$localStorage,$ionicViewService,$ionicSideMenuDelegate) {
   //remove o history back quando usa GO() !
   alert('LoginFBCtrl ');
   $ionicViewService.nextViewOptions({
@@ -90,6 +90,7 @@ angular.module('login.controllers', ['starter'])
   //alert($localStorage.token);
   //REDIR PARA MAIN SE TIVER SESSION
   if($localStorage.token != undefined){
+     $ionicSideMenuDelegate.canDragContent(true);
      $state.go('app.main');
   }
  
