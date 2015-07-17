@@ -87,7 +87,7 @@ angular.module('login.controllers', ['starter'])
   };
 
 
-  //alert($localStorage.token);
+  alert($localStorage.token);
   //REDIR PARA MAIN SE TIVER SESSION
   if($localStorage.token != undefined){
      $ionicSideMenuDelegate.canDragContent(true);
