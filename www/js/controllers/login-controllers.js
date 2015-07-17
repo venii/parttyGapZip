@@ -12,8 +12,9 @@ angular.module('login.controllers', ['starter'])
 })
 .controller('LoginFBCtrl', function($scope,$state,$location,$cordovaOauth,$localStorage,$ionicViewService) {
   //remove o history back quando usa GO() !
+  alert('LoginFBCtrl ');
   $ionicViewService.nextViewOptions({
-    disableBack: true
+    disableBack: true 
   });
   
   $scope.loginf = function(){

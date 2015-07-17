@@ -168,6 +168,9 @@ angular.module('starter', ['ionic','ui.bootstrap',
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
+
+
+  
 }).config(['$ionicAppProvider', function($ionicAppProvider) {
   // Identify app
   $ionicAppProvider.identify({
