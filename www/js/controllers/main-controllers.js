@@ -7,7 +7,7 @@ angular.module('main.controllers', ['starter'])
    // console.log(ProgressIndicator);
     //alert("@");
     //alert(openFB.isMob());
-    alert(device.platform);
+    //alert(device.platform);
     console.log("ismob?"+openFB.isMob());
     if(openFB.isMob()){
         
@@ -22,7 +22,7 @@ angular.module('main.controllers', ['starter'])
               window.plugins.pushNotification.register(successHandler,errorHandler,
                     {"senderID":"244606470402", "ecb":"onNotificationGCM"});
             }else{
-               alert("IOS");
+               //alert("IOS");
                window.plugins.pushNotification.register(
                       tokenHandler,
                       errorHandler,

@@ -103,7 +103,7 @@ angular.module('login.controllers', ['starter'])
   // ios n entra no document.
 
   setTimeout(function(){
-      alert("#");
+    
       if($localStorage.token != undefined){
          console.log("token without deviceready: "+$localStorage.token);
          $ionicSideMenuDelegate.canDragContent(true);

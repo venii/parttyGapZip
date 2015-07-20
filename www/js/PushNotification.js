@@ -173,4 +173,27 @@ function tokenHandler (result) {
     // Your iOS push server needs to know the token before it can push to this device
     // here is where you might want to send it the token for later use.
     alert('device token = ' + result);
+    window.localStorage.devicetoken = e.regid;
+    scopeExternal =  angular.element(document.body).scope();
+    
+    injectorExternal = angular.element(document.body).injector();
+    injectorExternalGET = injectorExternal.get("$location");
+    
+    localStorageLegacy = injectorExternal.get("$localStorage");
+    localStorageLegacy.devicetoken = e.regid;
+
+
+    ionicViewLegacy = injectorExternal.get("$ionicViewService");
+    ionicViewLegacy.nextViewOptions({
+        disableBack: true
+      });
+
+    console.log("IOredirec");
+    console.log(injectorExternalGET);
+
+
+    console.log("current: "+injectorExternalGET.path());
+   // alert("@last");
+    injectorExternalGET.path("/app/registration");
+    scopeExternal.$apply();
 }
