@@ -87,18 +87,20 @@ angular.module('login.controllers', ['starter'])
   };
 
 
-  alert($localStorage.token);
-  alert(openFB.isMob());
+
+
   //aply timeout
   //REDIR PARA MAIN SE TIVER SESSION
   //verificar o motivo
   // ios n entra no document.
   if($localStorage.token != undefined){
+     alert($localStorage.token);
      $ionicSideMenuDelegate.canDragContent(true);
 
      if(openFB.isMob()){
+          alert("deviceready");
            document.addEventListener("deviceready", function () {
-               alert("deviceready");
+               
 
                $state.go('app.main');
            });
@@ -107,7 +109,7 @@ angular.module('login.controllers', ['starter'])
 
          $state.go('app.main');
      }
-     
+
   }
  
    
