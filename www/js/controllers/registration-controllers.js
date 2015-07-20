@@ -51,18 +51,31 @@ angular.module('registration.controllers', ['starter'])
                         "ent_fbid": $localStorage.token};
                 */
 
-                
+                devicetypeapp = 0;
+                if( ionic.Platform.isIOS() || ionic.Platform.isIPad())
+                    devicetypeapp = 1;
+                if(ionic.Platform.isAndroid() )
+                    devicetypeapp = 2;
+                if(ionic.Platform.isWebView())
+                    devicetypeapp = 3;
 
                 var postData = {
                         "ent_first_name" : resp.data.usuario.name,
                         "ent_sex" : (resp.data.usuario.gender == "male" ? 1 : 2),
-                        "ent_device_type" : 1,
+                        "ent_device_type" : devicetypeapp,
                         "ent_push_token" : $localStorage.devicetoken,
                         "ent_auth_type" : 1,
                         "ent_fbid": resp.data.usuario.id
                       };
 
                 $localStorage.usuarioData = postData;
+
+                try{
+
+                    angular.element(document.querySelector('#profilecontentmenu')).append("<img src='"+resp.data.usuario.picture.data.url+"' width=32 heigth=32 />");
+                }catch(err){
+                  console.log("IMG "+err);
+                }
                 //SE EXISTIR LOGIN AUTHENTICA
                 //SE NAO CRIA NOVO USUARIO
                 $scope.idfbview = resp.data.usuario.id;

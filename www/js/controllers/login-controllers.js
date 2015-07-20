@@ -1,5 +1,8 @@
 angular.module('login.controllers', ['starter'])
-.controller('LoggedOutCtrl', function($scope,$state,$location,$cordovaOauth,$localStorage,$ionicViewService,OpenFB) {
+.controller('LoggedOutCtrl', function($scope,$state,$location,$cordovaOauth,$localStorage,$ionicViewService,OpenFB,$ionicSideMenuDelegate) {
+    
+    $ionicSideMenuDelegate.canDragContent(false);
+
     delete $localStorage.token;
     delete $localStorage;
 
@@ -7,6 +10,7 @@ angular.module('login.controllers', ['starter'])
     $ionicViewService.nextViewOptions({
       disableBack: true
     });
+    
     $state.go("app.login");
 
 })
