@@ -103,25 +103,27 @@ angular.module('login.controllers', ['starter'])
   // ios n entra no document.
 
   setTimeout(function(){
-    if($localStorage.token != undefined){
-       console.log("token without deviceready: "+$localStorage.token);
-       $ionicSideMenuDelegate.canDragContent(true);
+      alert("#");
+      if($localStorage.token != undefined){
+         console.log("token without deviceready: "+$localStorage.token);
+         $ionicSideMenuDelegate.canDragContent(true);
 
-       if(openFB.isMob()){
-             console.log("IS MOB without deviceready ");
-             ionic.Platform.ready(function(){
-               //  alert("ionic ready");
-                 console.log("ionic ready");
+         if(openFB.isMob()){
+               console.log("IS MOB without deviceready ");
+               ionic.Platform.ready(function(){
+                 //  alert("ionic ready");
+                   console.log("ionic ready");
 
-                 $state.go('app.main');
-             });
-       }else{
-           //alert("webready");
-            console.log("not is mob ionic ready");
-           $state.go('app.main');
-       }
+                   $state.go('app.main');
+               });
+         }else{
+             //alert("webready");
+              console.log("not is mob ionic ready");
+             $state.go('app.main');
+         }
 
-  },100);
+     }
+  },1000);
  
    
 });
