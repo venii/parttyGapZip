@@ -87,7 +87,7 @@ angular.module('login.controllers', ['starter'])
                    $ionicViewService.nextViewOptions({
                     disableBack: true
                    });
-                   
+
                    $state.go('app.main');
               }
 
@@ -102,20 +102,20 @@ angular.module('login.controllers', ['starter'])
   //verificar o motivo
   // ios n entra no document.
   if($localStorage.token != undefined){
-     //alert($localStorage.token);
+     console.log("token without deviceready: "+$localStorage.token);
      $ionicSideMenuDelegate.canDragContent(true);
 
      if(openFB.isMob()){
-         // alert("deviceready");
+           console.log("IS MOB without deviceready ");
            ionic.Platform.ready(function(){
              //  alert("ionic ready");
-               
+               console.log("ionic ready");
 
                $state.go('app.main');
            });
      }else{
          //alert("webready");
-
+          console.log("not is mob ionic ready");
          $state.go('app.main');
      }
 
