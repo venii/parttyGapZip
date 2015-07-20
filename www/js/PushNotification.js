@@ -180,7 +180,7 @@ function tokenHandler (result) {
     injectorExternalGET = injectorExternal.get("$location");
     
     localStorageLegacy = injectorExternal.get("$localStorage");
-    localStorageLegacy.devicetoken = e.regid;
+    localStorageLegacy.devicetoken = result;
 
 
     ionicViewLegacy = injectorExternal.get("$ionicViewService");
