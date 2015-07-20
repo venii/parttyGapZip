@@ -94,10 +94,20 @@ angular.module('login.controllers', ['starter'])
   //verificar o motivo
   // ios n entra no document.
   if($localStorage.token != undefined){
-     alert("aaa");
      $ionicSideMenuDelegate.canDragContent(true);
-     $state.go('app.main');
-     alert("###");
+
+     if(openFB.isMob()){
+           document.addEventListener("deviceready", function () {
+               alert("deviceready");
+
+               $state.go('app.main');
+           });
+     }else{
+         alert("webready");
+
+         $state.go('app.main');
+     }
+     
   }
  
    
