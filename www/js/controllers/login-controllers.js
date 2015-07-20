@@ -100,7 +100,7 @@ angular.module('login.controllers', ['starter'])
      if(openFB.isMob()){
           alert("deviceready");
            ionic.Platform.ready(function(){
-
+               alert("ionic ready");
                
 
                $state.go('app.main');
