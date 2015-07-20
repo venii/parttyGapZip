@@ -88,7 +88,11 @@ angular.module('login.controllers', ['starter'])
 
 
   alert($localStorage.token);
+  alert(openFB.isMob());
+  //aply timeout
   //REDIR PARA MAIN SE TIVER SESSION
+  //verificar o motivo
+  // ios n entra no document.
   if($localStorage.token != undefined){
      $ionicSideMenuDelegate.canDragContent(true);
      $state.go('app.main');
