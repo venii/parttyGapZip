@@ -24,33 +24,33 @@ angular.module('login.controllers', ['starter'])
       });
       //alert("@0");
        if(openFB.isMob()){
-        //alert("@1");
+        alert("@1");
            document.addEventListener("deviceready", function () {
              if($localStorage.token == undefined){
-                  //alert("@2");
+                  alert("@2");
                    $cordovaOauth.facebook("574073299368611", ["email"]).then(function(result) {
                               // results
-                               //alert("@");
+                               alert("@");
                               $scope.tokenfbview = result.access_token;
                               $localStorage.token = result.access_token;
-                              //console.log(result);
+                              console.log(result);
                              
                                $state.go('app.main');
                               //$location.path("/main");
                               
                               
                           }, function(error) {
-                             // alert("#");
+                              alert("#");
                                $ionicViewService.nextViewOptions({
                                   disableBack: true
                                 });
                               $state.go('app.loggedout');
                           });
               }else{
-                  //alert("@3 "+$localStorage.token);
+                  alert("@3 "+$localStorage.token);
                   //$location.path("/main");
                   $ionicViewService.nextViewOptions({
-                    disableBack: true
+                  disableBack: true
                   });
                   $state.go('app.main');
               }
@@ -94,8 +94,10 @@ angular.module('login.controllers', ['starter'])
   //verificar o motivo
   // ios n entra no document.
   if($localStorage.token != undefined){
+     alert("aaa");
      $ionicSideMenuDelegate.canDragContent(true);
      $state.go('app.main');
+     alert("###");
   }
  
    
