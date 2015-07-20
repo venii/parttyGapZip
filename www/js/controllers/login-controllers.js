@@ -12,7 +12,7 @@ angular.module('login.controllers', ['starter'])
 })
 .controller('LoginFBCtrl', function($scope,$state,$location,$cordovaOauth,$localStorage,$ionicViewService,$ionicSideMenuDelegate) {
   //remove o history back quando usa GO() !
-  alert('LoginFBCtrl ');
+  console.log('Controller: LoginFBCtrl ');
   $ionicViewService.nextViewOptions({
     disableBack: true 
   });
@@ -101,25 +101,27 @@ angular.module('login.controllers', ['starter'])
   //REDIR PARA MAIN SE TIVER SESSION
   //verificar o motivo
   // ios n entra no document.
-  if($localStorage.token != undefined){
-     console.log("token without deviceready: "+$localStorage.token);
-     $ionicSideMenuDelegate.canDragContent(true);
 
-     if(openFB.isMob()){
-           console.log("IS MOB without deviceready ");
-           ionic.Platform.ready(function(){
-             //  alert("ionic ready");
-               console.log("ionic ready");
+  setTimeout(function(){
+    if($localStorage.token != undefined){
+       console.log("token without deviceready: "+$localStorage.token);
+       $ionicSideMenuDelegate.canDragContent(true);
 
-               $state.go('app.main');
-           });
-     }else{
-         //alert("webready");
-          console.log("not is mob ionic ready");
-         $state.go('app.main');
-     }
+       if(openFB.isMob()){
+             console.log("IS MOB without deviceready ");
+             ionic.Platform.ready(function(){
+               //  alert("ionic ready");
+                 console.log("ionic ready");
 
-  }
+                 $state.go('app.main');
+             });
+       }else{
+           //alert("webready");
+            console.log("not is mob ionic ready");
+           $state.go('app.main');
+       }
+
+  },100);
  
    
 });
