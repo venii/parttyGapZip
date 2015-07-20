@@ -99,7 +99,8 @@ angular.module('login.controllers', ['starter'])
 
      if(openFB.isMob()){
           alert("deviceready");
-           document.addEventListener("deviceready", function () {
+           ionic.Platform.ready(function(){
+
                
 
                $state.go('app.main');
