@@ -22,15 +22,17 @@ angular.module('login.controllers', ['starter'])
       $ionicViewService.nextViewOptions({
         disableBack: true
       });
-      //alert("@0");
+
        if(openFB.isMob()){
-        alert("@1");
+           console.log("openFB.isMob() : "+openFB.isMob());
+           
            document.addEventListener("deviceready", function () {
              if($localStorage.token == undefined){
-                  alert("@2");
+                   console.log("$localStorage.token : undefined");
+                   
                    $cordovaOauth.facebook("574073299368611", ["email"]).then(function(result) {
                               // results
-                               alert("@");
+                              console.log("@AUTH FACEBOOK");
                               $scope.tokenfbview = result.access_token;
                               $localStorage.token = result.access_token;
                               console.log(result);
@@ -47,11 +49,13 @@ angular.module('login.controllers', ['starter'])
                               $state.go('app.loggedout');
                           });
               }else{
-                  alert("@3 "+$localStorage.token);
+                  console.log("@app.main "+$localStorage.token);
                   //$location.path("/main");
+                  
                   $ionicViewService.nextViewOptions({
-                  disableBack: true
+                    disableBack: true
                   });
+
                   $state.go('app.main');
               }
           
@@ -67,6 +71,7 @@ angular.module('login.controllers', ['starter'])
                     
                     $scope.tokenfbview = response.authResponse.token;
                     $localStorage.token = response.authResponse.token;
+
                     $ionicViewService.nextViewOptions({
                       disableBack: true
                     });
@@ -76,10 +81,13 @@ angular.module('login.controllers', ['starter'])
                   }, {scope: 'email'});
                 
               }else{
+                   
                    $scope.tokenfbview = openFB.getToken();
+
                    $ionicViewService.nextViewOptions({
                     disableBack: true
-                  });
+                   });
+                   
                    $state.go('app.main');
               }
 
@@ -94,19 +102,19 @@ angular.module('login.controllers', ['starter'])
   //verificar o motivo
   // ios n entra no document.
   if($localStorage.token != undefined){
-     alert($localStorage.token);
+     //alert($localStorage.token);
      $ionicSideMenuDelegate.canDragContent(true);
 
      if(openFB.isMob()){
-          alert("deviceready");
+         // alert("deviceready");
            ionic.Platform.ready(function(){
-               alert("ionic ready");
+             //  alert("ionic ready");
                
 
                $state.go('app.main');
            });
      }else{
-         alert("webready");
+         //alert("webready");
 
          $state.go('app.main');
      }
