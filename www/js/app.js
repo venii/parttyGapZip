@@ -159,7 +159,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
           //angular.element(document.querySelector('#matchesView')).addClass('menuUptoTop');
 
 
-          angular.element(document.querySelector('#matchesView')).css("margin-top", "-40px");
+          angular.element(document.querySelector('#newmatchesfoundView')).css("margin-top", "-40px");
           
           //angular.element(document.querySelector('#matchesView')).css("margin-top", "-40px");
           //alert("@#");

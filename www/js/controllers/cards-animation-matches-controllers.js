@@ -81,8 +81,8 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                     paramsToSend = {
                         "ent_invitee_fbid" : jsonOBJ.id,
                         "ent_user_action" : jsonOBJ.actionclick,
-                        "ent_user_fbid" : $localStorage.usuarioData.ent_fbid
-
+                        "ent_user_fbid" : $localStorage.usuarioData.ent_fbid,
+                        "ent_id_event" : $rootScope.eventData.id
                     };
                     
                     $http.get($localStorage.inviteaction,{params: paramsToSend}).success(function(resp) {
@@ -120,6 +120,7 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                     
                     //console.log($rootScope.invitedActionData);
                     //console.log($registerMatches);
+                    $rootScope.newMatchFoundData = null;
                     angularService = this;
                     $http.get($localStorage.registermatchespartty,{params: paramsToSend}).success(function(resp) {
                         if($rootScope.invitedActionData != undefined){
@@ -136,6 +137,18 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                             angularService.loadMatches($scope);
                         }
                     });
+
+                    if($rootScope.newMatchFoundData != null){
+                        setTimeout(function(){
+                            
+                            $ionicViewService.nextViewOptions({
+                              disableBack: true
+                            });
+
+                            $state.go("app.newmatchesfound");
+
+                        },1000);
+                    }
 
             };
 

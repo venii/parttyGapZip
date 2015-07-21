@@ -37,13 +37,15 @@ angular.module('main.controllers', ['starter'])
        
        alert("$scope.isLoadedMain: "+$scope.isLoadedMain);
        
-       if($scope.isLoadedMain == undefined){
-          $ionicViewService.nextViewOptions({
-            disableBack: true
-          });
+       setTimeout(function(){
+         if($scope.isLoadedMain == undefined){
+            $ionicViewService.nextViewOptions({
+              disableBack: true
+            });
 
-          $state.go('app.registration');
-       }
+            $state.go('app.registration');
+         }
+      },1000);
       
     }else{
         //alert("@@@");
@@ -51,16 +53,18 @@ angular.module('main.controllers', ['starter'])
           template: 'Carregando servidor de mensagem (web) ...'
         });
 
-        //$ionicViewService.nextViewOptions({
-        //  disableBack: true
-        //});
+        $ionicViewService.nextViewOptions({
+            disableBack: true
+          });
 
 
 
+        setTimeout(function(){
+          
+          $localStorage.devicetoken = 'web';
+          $state.go('app.registration');
 
-
-        $localStorage.devicetoken = 'web';
-        $state.go('app.registration');
+        },1000);
     }
     
     $scope.sess = $localStorage.token;

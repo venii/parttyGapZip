@@ -72,7 +72,7 @@ angular.module('registration.controllers', ['starter'])
 
                 try{
 
-                    angular.element(document.querySelector('#profilecontentmenu')).append("<img src='"+resp.data.usuario.picture.data.url+"' width=32 heigth=32 />");
+                    angular.element(document.querySelector('#profilecontentmenu')).append("<img src='"+resp.data.usuario.picture.data.url+"' style='border-radius: 150px;' width=64 heigth=64 />");
                 }catch(err){
                   console.log("IMG "+err);
                 }
