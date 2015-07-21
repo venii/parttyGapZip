@@ -38,11 +38,12 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                     //$scope.cards.splice(index, 1);
                     SendMatchesToWS.sendInvite($scope.cards[index],function(resp){
                         console.log('Chegou',resp);
+                        if($scope.cardrest < 0){
+                            SendMatchesToWS.sendMatches($scope.cards,$scope);
+                        }
                      });
                     $scope.cardrest--;
-            if($scope.cardrest < 0){
-                SendMatchesToWS.sendMatches($scope.cards,$scope);
-            }
+            
                
         }
 
@@ -57,13 +58,13 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
 
                      SendMatchesToWS.sendInvite($scope.cards[index],function(resp){
                         console.log('Chegou',resp);
+                        if($scope.cardrest < 0){
+                            SendMatchesToWS.sendMatches($scope.cards,$scope);
+                         }    
                      });
 
                      
-             if($scope.cardrest < 0){
-                    SendMatchesToWS.sendMatches($scope.cards,$scope);
-               
-             }         
+                  
         }
 
         
@@ -134,21 +135,25 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                             });
                             console.log($rootScope);
 
-                            angularService.loadMatches($scope);
+
+                            if($rootScope.newMatchFoundData != null){
+                                
+                                    
+                                    $ionicViewService.nextViewOptions({
+                                      disableBack: true
+                                    });
+
+                                    $state.go("app.newmatchesfound");
+
+                                
+                            }else{
+                                angularService.loadMatches($scope);
+                            }
+                            
                         }
                     });
 
-                    if($rootScope.newMatchFoundData != null){
-                        setTimeout(function(){
-                            
-                            $ionicViewService.nextViewOptions({
-                              disableBack: true
-                            });
-
-                            $state.go("app.newmatchesfound");
-
-                        },1000);
-                    }
+                    
 
             };
 
