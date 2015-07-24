@@ -86,9 +86,9 @@ function successHandler(result) { console.log('Success: '+ result); alert('Succe
 function errorHandler(error) { console.log('Error: '+ error); alert('Error: '+ result); }
 
 function onNotificationGCM(e) { 
-    console.log("onNotificationGCM");
+    //console.log("onNotificationGCM");
     alert("onNotificationGCM");
-    alert('Event: '+ e.event);
+    //alert('Event: '+ e.event);
    
     switch(e.event){ 
 
@@ -135,7 +135,7 @@ function onNotificationGCM(e) {
         case 'message': 
             if (e.foreground){ 
                 // When the app is running foreground. 
-                alert('The room temperature is set too high') 
+                alert(e.payload.title); 
             } 
         break;   
 
