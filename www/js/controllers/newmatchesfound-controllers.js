@@ -18,8 +18,13 @@ angular.module('newmatchesfound.controllers', ['starter','cards-animation-matche
         console.log($rootScope.newMatchFoundData);
         $scope.eventinfoJSON = $rootScope.eventData;
 
-        
-    	
+        $scope.msgmatch = $rootScope.newMatchFoundData.errMsg;
+        $scope.nameMe = $localStorage.usuarioData.ent_first_name;
+        $scope.nameInvited = $rootScope.newMatchFoundData.uName;
+    	 
+
+        $scope.urlInvited = $rootScope.newMatchFoundData.pPic;
+        $scope.urlMe = $localStorage.usuarioData.urlProfilepic;
 
     
     	

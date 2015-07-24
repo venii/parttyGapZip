@@ -65,7 +65,8 @@ angular.module('registration.controllers', ['starter'])
                         "ent_device_type" : devicetypeapp,
                         "ent_push_token" : $localStorage.devicetoken,
                         "ent_auth_type" : 1,
-                        "ent_fbid": resp.data.usuario.id
+                        "ent_fbid": resp.data.usuario.id,
+                        "urlProfilepic" : resp.data.usuario.picture.data.url
                       };
 
                 $localStorage.usuarioData = postData;
