@@ -135,7 +135,8 @@ function onNotificationGCM(e) {
         case 'message': 
             if (e.foreground){ 
                 // When the app is running foreground. 
-                alert(e.payload.title); 
+                console.log(e.payload);
+                alert(e.payload.payload); 
             } 
         break;   
 
