@@ -27,5 +27,10 @@ angular.module('newmatchesfound.controllers', ['starter','cards-animation-matche
         $scope.urlMe = $localStorage.usuarioData.urlProfilepic;
 
     
-    	
+    	  $scope.returnToEvents = function(){
+            $ionicViewService.nextViewOptions({
+              disableBack: true
+            });
+            $state.go('app.events');
+        }
   });
