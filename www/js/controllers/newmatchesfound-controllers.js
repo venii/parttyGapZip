@@ -33,4 +33,6 @@ angular.module('newmatchesfound.controllers', ['starter','cards-animation-matche
             });
             $state.go('app.events');
         }
+
+        $rootScope.newMatchFoundData = null;
   });
