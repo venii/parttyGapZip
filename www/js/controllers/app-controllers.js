@@ -23,7 +23,7 @@ angular.module('app.controllers', ['starter'])
   $localStorage.findmatchespartty = $localStorage.restaddress + 'findMatchespartty';
   $localStorage.inviteaction = $localStorage.restaddress + 'inviteAction';
   $localStorage.registermatchespartty = $localStorage.restaddress + 'registerMatchespartty';
-
+  $localStorage.updatedevicedetails = $localStorage.restaddress + '_updateDeviceDetails';
 
 
   $ionicViewService.nextViewOptions({

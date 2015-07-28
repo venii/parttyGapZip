@@ -11,11 +11,18 @@ angular.module('registration.controllers', ['starter'])
       //VALIDA SESSAO PARA PODER USAR
     
 
+       devicetypeapp = 0;
+        if( ionic.Platform.isIOS() || ionic.Platform.isIPad())
+            devicetypeapp = 1;
+        if(ionic.Platform.isAndroid() )
+            devicetypeapp = 2;
+        if(ionic.Platform.isWebView())
+            devicetypeapp = 3;
 
 
 
       var postData = {
-                
+                "devicetypeapp" : devicetypeapp,
                 "sess_fb": $localStorage.token
               };
 
@@ -58,6 +65,13 @@ angular.module('registration.controllers', ['starter'])
                     devicetypeapp = 2;
                 if(ionic.Platform.isWebView())
                     devicetypeapp = 3;
+
+                var postData = {
+                    
+                        "ent_fbid": resp.data.usuario.id,
+                        "ent_device_type" : devicetypeapp
+                };
+                $http.get($localStorage.updatedevicedetails ,{params: postData});
 
                 var postData = {
                         "ent_first_name" : resp.data.usuario.name,
