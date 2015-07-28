@@ -128,8 +128,8 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                         
 
                         if($rootScope.invitedActionData != undefined){
-                            var matchFound = null;
-
+                            
+                            var matchFound = false;
                             angular.forEach($rootScope.invitedActionData, function(value, key) {
                                 if(value.id != $localStorage.usuarioData.ent_fbid){
                                     //alert("##"+value.errNum);
@@ -142,14 +142,13 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                                     }
                                 }
                             });
-                            console.log($rootScope);
+                            delete $rootScope.invitedActionData;
+                            
+                            console.log('matchFound ',matchFound);
 
-                            alert("matchFound "+matchFound);
-                            if(matchFound != null){
-                                    
-                                    $rootScope.newMatchFoundData = matchFound;
+                            if(matchFound){
                                     delete matchFound;
-
+                                    $rootScope.newMatchFoundData = matchFound;
                                     $ionicViewService.nextViewOptions({
                                       disableBack: true
                                     });
