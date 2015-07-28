@@ -122,14 +122,22 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                     
                     //console.log($rootScope.invitedActionData);
                     //console.log($registerMatches);
-                    $rootScope.newMatchFoundData = null;
+                    
                     angularService = this;
                     $http.get($localStorage.registermatchespartty,{params: paramsToSend}).success(function(resp) {
+                        
+
                         if($rootScope.invitedActionData != undefined){
+                            $rootScope.newMatchFoundData = null;
+
                             angular.forEach($rootScope.invitedActionData, function(value, key) {
                                 if(value.id != $localStorage.usuarioData.ent_fbid){
+                                    //alert("##"+value.errNum);
                                     if(value.errNum == 55){
                                         $rootScope.newMatchFoundData = value;
+                                        $ionicViewService.nextViewOptions({
+                                          disableBack: true
+                                        });
                                         //$state.go("app.newmatchesfound");
                                     }
                                 }
