@@ -144,10 +144,12 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                             });
                             console.log($rootScope);
 
-
+                            alert("matchFound "+matchFound);
                             if(matchFound != null){
-                                
+                                    
                                     $rootScope.newMatchFoundData = matchFound;
+                                    delete matchFound;
+
                                     $ionicViewService.nextViewOptions({
                                       disableBack: true
                                     });
