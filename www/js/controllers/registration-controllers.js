@@ -11,13 +11,12 @@ angular.module('registration.controllers', ['starter'])
       //VALIDA SESSAO PARA PODER USAR
     
 
-       devicetypeapp = 0;
-        if( ionic.Platform.isIOS() || ionic.Platform.isIPad())
-            devicetypeapp = 1;
-        if(ionic.Platform.isAndroid() )
+         devicetypeapp = 3;
+        if( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos")
             devicetypeapp = 2;
-        if(ionic.Platform.isWebView())
-            devicetypeapp = 3;
+       
+        else if(device.platform == 'iOS')
+            devicetypeapp = 1;
 
 
 
@@ -58,13 +57,12 @@ angular.module('registration.controllers', ['starter'])
                         "ent_fbid": $localStorage.token};
                 */
 
-                devicetypeapp = 0;
-                if( ionic.Platform.isIOS() || ionic.Platform.isIPad())
-                    devicetypeapp = 1;
-                if(ionic.Platform.isAndroid() )
+                devicetypeapp = 3;
+                if( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos")
                     devicetypeapp = 2;
-                if(ionic.Platform.isWebView())
-                    devicetypeapp = 3;
+               
+                else if(device.platform == 'iOS')
+                    devicetypeapp = 1;
 
                 var postData = {
                     
