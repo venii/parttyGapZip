@@ -152,7 +152,7 @@ function onNotificationGCM(e) {
 
 function onNotificationAPN (event) {
     //alert("@apns");
-    console.log('received',event);
+    console.log(event);
     //if ( event.alert )
     //{
        
