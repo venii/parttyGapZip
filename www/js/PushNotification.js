@@ -161,12 +161,18 @@ function onNotificationAPN (event) {
             try{
                 console.log("###");
                 navigator.notification.alert(event.alert);
+
+
+                navigator.notification.alert("teste");
+
                 scopeExternal =  angular.element(document.body).scope();
                 injectorExternal = angular.element(document.body).injector();
                 console.log("###");
                 injectorExternalGET = injectorExternal.get("$location");
                 console.log("###");
 
+                navigator.notification.alert("teste2");
+                /*
                 injectorROOTSCOPE = injectorExternal.get("$rootscope");
                 console.log("###");
                 dataReceive = {};
@@ -181,7 +187,7 @@ function onNotificationAPN (event) {
         
                 injectorROOTSCOPE.newMatchFoundData = dataReceive;
                 injectorExternalGET.path("/app/newmatchesfound");
-                scopeExternal.$apply();
+                scopeExternal.$apply();*/
             }catch(err){
                  navigator.notification.alert(err);
             }
