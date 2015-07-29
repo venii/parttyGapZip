@@ -155,29 +155,34 @@ function onNotificationAPN (event) {
     console.log(event);
     if ( event.alert )
     {
-        if(event.nt == 3){
-            navigator.notification.alert(event.alert);
-            scopeExternal =  angular.element(document.body).scope();
-            injectorExternal = angular.element(document.body).injector();
+        navigator.notification.alert(event.nt);
+        if(event.nt == '3'){
+            try{
+                navigator.notification.alert(event.alert);
+                scopeExternal =  angular.element(document.body).scope();
+                injectorExternal = angular.element(document.body).injector();
 
-            injectorExternalGET = injectorExternal.get("$location");
+                injectorExternalGET = injectorExternal.get("$location");
 
 
-            injectorROOTSCOPE = injectorExternal.get("$rootscope");
+                injectorROOTSCOPE = injectorExternal.get("$rootscope");
 
-            dataReceive = {};
+                dataReceive = {};
 
-            dataReceive.sFid = event.sFid;
-            dataReceive.uName = event.sname;
-            dataReceive.ent_first_name = $location.usuarioData.ent_first_name;
-            dataReceive.errMsg = event.alert;
-            dataReceive.pPic = null;
-            dataReceive.urlProfilepic = null;
+                dataReceive.sFid = event.sFid;
+                dataReceive.uName = event.sname;
+                dataReceive.ent_first_name = $location.usuarioData.ent_first_name;
+                dataReceive.errMsg = event.alert;
+                dataReceive.pPic = null;
+                dataReceive.urlProfilepic = null;
 
-    
-            injectorROOTSCOPE.newMatchFoundData = dataReceive;
-            injectorExternalGET.path("/app/newmatchesfound");
-            scopeExternal.$apply();
+        
+                injectorROOTSCOPE.newMatchFoundData = dataReceive;
+                injectorExternalGET.path("/app/newmatchesfound");
+                scopeExternal.$apply();
+            }catch(err){
+                 navigator.notification.alert(err);
+            }
         }
     }
 
