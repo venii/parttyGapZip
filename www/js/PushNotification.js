@@ -172,7 +172,7 @@ function onNotificationAPN (event) {
                 injectorLocalStorage = injectorExternal.get("$localStorage");
                 
 
-               
+               injectorState = injectorExternal.get("$state");
                 
                 //injectorROOTSCOPE = injectorExternal.get("$rootScope");
                 
@@ -190,13 +190,13 @@ function onNotificationAPN (event) {
                 dataReceive.pPic = null;
                 dataReceive.urlProfilepic = null;
                 
-                setTimeout(function(){
+               
                 //injectorROOTSCOPE.newMatchFoundData = dataReceive;
                     navigator.notification.alert(event.alert);
-                    injectorExternalGET.path("/app/newmatchesfound");
+                    //injectorExternalGET.path("/app/newmatchesfound");
+                    injectorState.go("app.newmatchesfound");
                     scopeExternal.$apply();
-                },1000);
-                navigator.notification.alert("/app/newmatchesfound");
+                
             
         }
     }
