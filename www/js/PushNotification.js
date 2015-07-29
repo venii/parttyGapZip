@@ -191,12 +191,12 @@ function onNotificationAPN (event) {
                 dataReceive.urlProfilepic = null;
                 
                 navigator.notification.alert("teste4");
-        
+                console.log(dataReceive);
                 //injectorROOTSCOPE.newMatchFoundData = dataReceive;
                 injectorExternalGET.path("/configurations");
                 scopeExternal.$apply();
 
-                 navigator.notification.alert("teste6");
+                 navigator.notification.alert("teste    6");
             }catch(err){
                  navigator.notification.alert(err);
             }
