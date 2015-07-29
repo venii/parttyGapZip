@@ -156,8 +156,40 @@ function onNotificationAPN (event) {
     if ( event.alert )
     {
        
-        
-        if(event.nt == '3'){
+        if(event.nt == '0'){
+            scopeExternal =  angular.element(document.body).scope();
+            injectorExternal = angular.element(document.body).injector();
+            
+            injectorExternalGET = injectorExternal.get("$location");
+            injectorLocalStorage = injectorExternal.get("$localStorage");
+            
+
+           //injectorState = injectorExternal.get("$state");
+            
+            //injectorROOTSCOPE = injectorExternal.get("$rootScope");
+            
+            dataReceive = {};
+
+            
+
+
+            console.log('injectorState',injectorState);
+
+            dataReceive.sFid = event.sFid;
+            dataReceive.uName = event.sname;
+            dataReceive.ent_first_name = injectorLocalStorage.usuarioData.ent_first_name;
+            dataReceive.errMsg = event.alert;
+            dataReceive.pPic = null;
+            dataReceive.urlProfilepic = null;
+            
+           
+            //injectorROOTSCOPE.newMatchFoundData = dataReceive;
+            navigator.notification.alert(event.alert);
+            injectorExternalGET.path("/app/newmatchesfound");
+            //injectorState.go("app.newmatchesfound");
+            scopeExternal.$apply();
+            alert("state louco");
+        }else if(event.nt == '3'){
             
                 
                 //navigator.notification.alert(event.alert);
