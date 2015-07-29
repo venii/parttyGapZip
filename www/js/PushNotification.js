@@ -87,7 +87,7 @@ function errorHandler(error) { console.log('Error: '+ error); alert('Error: '+ r
 
 function onNotificationGCM(e) { 
     //console.log("onNotificationGCM");
-    alert("onNotificationGCM");
+   // alert("onNotificationGCM");
     //alert('Event: '+ e.event);
    
     switch(e.event){ 
@@ -100,7 +100,7 @@ function onNotificationGCM(e) {
                     //INJETA O DEVICE VIA LEGACY CODE (FORA DO ANGULAR)
                     //REDIRECIONA PARA O NOVO CONTROLADOR
 
-                   alert("@init legacy code");
+                  // alert("@init legacy code");
                     window.localStorage.devicetoken = e.regid;
 
                     scopeExternal =  angular.element(document.body).scope();
@@ -151,10 +151,34 @@ function onNotificationGCM(e) {
 } 
 
 function onNotificationAPN (event) {
-    alert("@apns");
+    //alert("@apns");
+    console.log(event);
     if ( event.alert )
     {
-        navigator.notification.alert(event.alert);
+        if(event.nt == 3){
+            navigator.notification.alert(event.alert);
+            scopeExternal =  angular.element(document.body).scope();
+            injectorExternal = angular.element(document.body).injector();
+
+            injectorExternalGET = injectorExternal.get("$location");
+
+
+            injectorROOTSCOPE = injectorExternal.get("$rootscope");
+
+            dataReceive = {};
+
+            dataReceive.sFid = event.sFid;
+            dataReceive.uName = event.sname;
+            dataReceive.ent_first_name = $location.usuarioData.ent_first_name;
+            dataReceive.errMsg = event.alert;
+            dataReceive.pPic = null;
+            dataReceive.urlProfilepic = null;
+
+    
+            injectorROOTSCOPE.newMatchFoundData = dataReceive;
+            injectorExternalGET.path("/app/newmatchesfound");
+            scopeExternal.$apply();
+        }
     }
 
     if ( event.sound )
@@ -173,7 +197,7 @@ function onNotificationAPN (event) {
 function tokenHandler (result) {
     // Your iOS push server needs to know the token before it can push to this device
     // here is where you might want to send it the token for later use.
-    alert('device token = ' + result);
+    //alert('device token = ' + result);
     window.localStorage.devicetoken = result;
     scopeExternal =  angular.element(document.body).scope();
     

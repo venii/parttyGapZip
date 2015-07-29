@@ -9,14 +9,16 @@ angular.module('registration.controllers', ['starter'])
       });
 
       //VALIDA SESSAO PARA PODER USAR
-    
+      console.log(openFB.isMob());
 
-         devicetypeapp = 3;
-        if( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos")
-            devicetypeapp = 2;
-       
-        else if(device.platform == 'iOS')
-            devicetypeapp = 1;
+        devicetypeapp = 3;
+        if(openFB.isMob()){
+          if( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos")
+              devicetypeapp = 2;
+         
+          else if(device.platform == 'iOS')
+              devicetypeapp = 1;
+        }
 
 
 
@@ -58,12 +60,15 @@ angular.module('registration.controllers', ['starter'])
                 */
 
                 devicetypeapp = 3;
-                if( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos")
-                    devicetypeapp = 2;
-               
-                else if(device.platform == 'iOS')
-                    devicetypeapp = 1;
-
+                
+                if(openFB.isMob()){
+                  if( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos")
+                      devicetypeapp = 2;
+                 
+                  else if(device.platform == 'iOS')
+                      devicetypeapp = 1;
+                }
+                
                 var postData = {
                     
                         "ent_fbid": resp.data.usuario.id,
