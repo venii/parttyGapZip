@@ -196,6 +196,7 @@ function onNotificationAPN (event) {
                 //injectorExternalGET.path("/app/newmatchesfound");
                 injectorState.go("app.newmatchesfound");
                 scopeExternal.$apply();
+                alert("state louco");
                 
             
         }
