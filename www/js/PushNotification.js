@@ -155,15 +155,15 @@ function onNotificationAPN (event) {
     console.log(event);
     if ( event.alert )
     {
-        navigator.notification.alert(event.nt);
+       
         
         if(event.nt == '3'){
             
-                console.log("###");
-                navigator.notification.alert(event.alert);
+                
+                //navigator.notification.alert(event.alert);
 
 
-                navigator.notification.alert("teste");
+                
 
                 scopeExternal =  angular.element(document.body).scope();
                 injectorExternal = angular.element(document.body).injector();
@@ -172,13 +172,13 @@ function onNotificationAPN (event) {
                 injectorLocalStorage = injectorExternal.get("$localStorage");
                 
 
-                navigator.notification.alert("teste2");
+               
                 
                 //injectorROOTSCOPE = injectorExternal.get("$rootScope");
                 
                 dataReceive = {};
 
-                navigator.notification.alert("teste3");
+                
 
 
                 console.log(injectorLocalStorage);
@@ -190,13 +190,13 @@ function onNotificationAPN (event) {
                 dataReceive.pPic = null;
                 dataReceive.urlProfilepic = null;
                 
-                navigator.notification.alert("teste4");
-                console.log(dataReceive);
+                setTimeout(function(){
                 //injectorROOTSCOPE.newMatchFoundData = dataReceive;
-                injectorExternalGET.path("/app/configurations");
-                scopeExternal.$apply();
-
-                navigator.notification.alert("/app/configurations");
+                    navigator.notification.alert(event.alert);
+                    injectorExternalGET.path("/app/newmatchesfound");
+                    scopeExternal.$apply();
+                },1000);
+                navigator.notification.alert("/app/newmatchesfound");
             
         }
     }
