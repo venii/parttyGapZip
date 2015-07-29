@@ -157,17 +157,18 @@ function onNotificationAPN (event) {
     {
         navigator.notification.alert(event.nt);
         
-        /*if(event.nt == '3'){
+        if(event.nt == '3'){
             try{
+                console.log("###");
                 navigator.notification.alert(event.alert);
                 scopeExternal =  angular.element(document.body).scope();
                 injectorExternal = angular.element(document.body).injector();
-
+                console.log("###");
                 injectorExternalGET = injectorExternal.get("$location");
-
+                console.log("###");
 
                 injectorROOTSCOPE = injectorExternal.get("$rootscope");
-
+                console.log("###");
                 dataReceive = {};
 
                 dataReceive.sFid = event.sFid;
@@ -176,7 +177,7 @@ function onNotificationAPN (event) {
                 dataReceive.errMsg = event.alert;
                 dataReceive.pPic = null;
                 dataReceive.urlProfilepic = null;
-
+                console.log("###");
         
                 injectorROOTSCOPE.newMatchFoundData = dataReceive;
                 injectorExternalGET.path("/app/newmatchesfound");
@@ -184,7 +185,7 @@ function onNotificationAPN (event) {
             }catch(err){
                  navigator.notification.alert(err);
             }
-        }*/
+        }
     }
 
     if ( event.sound )
