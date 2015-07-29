@@ -158,7 +158,7 @@ function onNotificationAPN (event) {
         navigator.notification.alert(event.nt);
         
         if(event.nt == '3'){
-            try{
+            
                 console.log("###");
                 navigator.notification.alert(event.alert);
 
@@ -193,13 +193,11 @@ function onNotificationAPN (event) {
                 navigator.notification.alert("teste4");
                 console.log(dataReceive);
                 //injectorROOTSCOPE.newMatchFoundData = dataReceive;
-                injectorExternalGET.path("/configurations");
+                injectorExternalGET.path("/app/configurations");
                 scopeExternal.$apply();
 
-                 navigator.notification.alert("teste    6");
-            }catch(err){
-                 navigator.notification.alert(err);
-            }
+                navigator.notification.alert("/app/configurations");
+            
         }
     }
 
