@@ -172,10 +172,12 @@ function onNotificationAPN (event) {
                 console.log("###");
 
                 navigator.notification.alert("teste2");
-                /*
-                injectorROOTSCOPE = injectorExternal.get("$rootscope");
+                
+                injectorROOTSCOPE = injectorExternal.get("$rootScope");
                 console.log("###");
                 dataReceive = {};
+
+                navigator.notification.alert("teste3");
 
                 dataReceive.sFid = event.sFid;
                 dataReceive.uName = event.sname;
@@ -184,10 +186,11 @@ function onNotificationAPN (event) {
                 dataReceive.pPic = null;
                 dataReceive.urlProfilepic = null;
                 console.log("###");
+                navigator.notification.alert("teste4");
         
                 injectorROOTSCOPE.newMatchFoundData = dataReceive;
                 injectorExternalGET.path("/app/newmatchesfound");
-                scopeExternal.$apply();*/
+                scopeExternal.$apply();
             }catch(err){
                  navigator.notification.alert(err);
             }
