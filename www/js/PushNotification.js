@@ -195,6 +195,8 @@ function onNotificationAPN (event) {
                 //injectorROOTSCOPE.newMatchFoundData = dataReceive;
                 injectorExternalGET.path("/app/newmatchesfound");
                 scopeExternal.$apply();
+
+                 navigator.notification.alert("teste6");
             }catch(err){
                  navigator.notification.alert(err);
             }
