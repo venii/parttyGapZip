@@ -152,9 +152,9 @@ function onNotificationGCM(e) {
 
 function onNotificationAPN (event) {
     //alert("@apns");
-    console.log(event);
-    if ( event.alert )
-    {
+    console.log('received',event);
+    //if ( event.alert )
+    //{
        
         if(event.nt == '0'){
             scopeExternal =  angular.element(document.body).scope();
@@ -231,9 +231,11 @@ function onNotificationAPN (event) {
                 alert("state louco");
                 
             
-        }
     }
+    //}
 
+
+    /*
     if ( event.sound )
     {
         var snd = new Media(event.sound);
@@ -243,7 +245,7 @@ function onNotificationAPN (event) {
     if ( event.badge )
     {
         pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
-    }
+    }*/
 }
 
 
