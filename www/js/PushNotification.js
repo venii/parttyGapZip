@@ -172,7 +172,7 @@ function onNotificationAPN (event) {
                 injectorLocalStorage = injectorExternal.get("$localStorage");
                 
 
-               injectorState = injectorExternal.get("$state");
+               //injectorState = injectorExternal.get("$state");
                 
                 //injectorROOTSCOPE = injectorExternal.get("$rootScope");
                 
@@ -193,8 +193,8 @@ function onNotificationAPN (event) {
                
                 //injectorROOTSCOPE.newMatchFoundData = dataReceive;
                 navigator.notification.alert(event.alert);
-                //injectorExternalGET.path("/app/newmatchesfound");
-                injectorState.go("app.newmatchesfound");
+                injectorExternalGET.path("/app/newmatchesfound");
+                //injectorState.go("app.newmatchesfound");
                 scopeExternal.$apply();
                 alert("state louco");
                 
