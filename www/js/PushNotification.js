@@ -181,7 +181,7 @@ function onNotificationAPN (event) {
                 
 
 
-                console.log(injectorLocalStorage);
+                console.log('injectorState',injectorState);
 
                 dataReceive.sFid = event.sFid;
                 dataReceive.uName = event.sname;
@@ -192,10 +192,10 @@ function onNotificationAPN (event) {
                 
                
                 //injectorROOTSCOPE.newMatchFoundData = dataReceive;
-                    navigator.notification.alert(event.alert);
-                    //injectorExternalGET.path("/app/newmatchesfound");
-                    injectorState.go("app.newmatchesfound");
-                    scopeExternal.$apply();
+                navigator.notification.alert(event.alert);
+                //injectorExternalGET.path("/app/newmatchesfound");
+                injectorState.go("app.newmatchesfound");
+                scopeExternal.$apply();
                 
             
         }
