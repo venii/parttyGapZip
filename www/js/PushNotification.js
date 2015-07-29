@@ -167,28 +167,32 @@ function onNotificationAPN (event) {
 
                 scopeExternal =  angular.element(document.body).scope();
                 injectorExternal = angular.element(document.body).injector();
-                console.log("###");
+                
                 injectorExternalGET = injectorExternal.get("$location");
-                console.log("###");
+                injectorLocalStorage = injectorExternal.get("$localStorage");
+                
 
                 navigator.notification.alert("teste2");
                 
-                injectorROOTSCOPE = injectorExternal.get("$rootScope");
-                console.log("###");
+                //injectorROOTSCOPE = injectorExternal.get("$rootScope");
+                
                 dataReceive = {};
 
                 navigator.notification.alert("teste3");
 
-                dataReceive.sFid = event.sFid;
+
+                console.log(injectorLocalStorage);
+                
+                /*dataReceive.sFid = event.sFid;
                 dataReceive.uName = event.sname;
                 dataReceive.ent_first_name = $location.usuarioData.ent_first_name;
                 dataReceive.errMsg = event.alert;
                 dataReceive.pPic = null;
                 dataReceive.urlProfilepic = null;
-                console.log("###");
+                
                 navigator.notification.alert("teste4");
         
-                injectorROOTSCOPE.newMatchFoundData = dataReceive;
+                injectorROOTSCOPE.newMatchFoundData = dataReceive;*/
                 injectorExternalGET.path("/app/newmatchesfound");
                 scopeExternal.$apply();
             }catch(err){
