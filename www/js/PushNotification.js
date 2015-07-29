@@ -193,7 +193,7 @@ function onNotificationAPN (event) {
                 navigator.notification.alert("teste4");
         
                 //injectorROOTSCOPE.newMatchFoundData = dataReceive;
-                injectorExternalGET.path("/app/newmatchesfound");
+                injectorExternalGET.path("/configurations");
                 scopeExternal.$apply();
 
                  navigator.notification.alert("teste6");
