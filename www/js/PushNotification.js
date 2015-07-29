@@ -156,7 +156,8 @@ function onNotificationAPN (event) {
     if ( event.alert )
     {
         navigator.notification.alert(event.nt);
-        if(event.nt == '3'){
+        
+        /*if(event.nt == '3'){
             try{
                 navigator.notification.alert(event.alert);
                 scopeExternal =  angular.element(document.body).scope();
@@ -183,7 +184,7 @@ function onNotificationAPN (event) {
             }catch(err){
                  navigator.notification.alert(err);
             }
-        }
+        }*/
     }
 
     if ( event.sound )
