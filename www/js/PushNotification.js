@@ -182,17 +182,17 @@ function onNotificationAPN (event) {
 
 
                 console.log(injectorLocalStorage);
-                
-                /*dataReceive.sFid = event.sFid;
+
+                dataReceive.sFid = event.sFid;
                 dataReceive.uName = event.sname;
-                dataReceive.ent_first_name = $location.usuarioData.ent_first_name;
+                dataReceive.ent_first_name = injectorLocalStorage.usuarioData.ent_first_name;
                 dataReceive.errMsg = event.alert;
                 dataReceive.pPic = null;
                 dataReceive.urlProfilepic = null;
                 
                 navigator.notification.alert("teste4");
         
-                injectorROOTSCOPE.newMatchFoundData = dataReceive;*/
+                //injectorROOTSCOPE.newMatchFoundData = dataReceive;
                 injectorExternalGET.path("/app/newmatchesfound");
                 scopeExternal.$apply();
             }catch(err){
