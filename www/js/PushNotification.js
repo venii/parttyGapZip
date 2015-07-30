@@ -151,14 +151,14 @@ function onNotificationGCM(e) {
 } 
 
 function onNotificationAPN (event) {
-    alert("@apns");
+    //alert("@apns");
     console.log(event);
-    alert(event.nt)
+    //alert(event.nt)
     //if ( event.alert )
     //{
        
         if(event.nt == 0){
-            alert("NT 0");
+           // alert("NT 0");
             scopeExternal =  angular.element(document.body).scope();
             injectorExternal = angular.element(document.body).injector();
             
@@ -186,12 +186,15 @@ function onNotificationAPN (event) {
             
            
             //injectorROOTSCOPE.newMatchFoundData = dataReceive;
-            navigator.notification.alert(event.alert);
 
-            //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
-            injectorExternalGET.path("/app/configurations");
-            //injectorState.go("app.newmatchesfound");
-            scopeExternal.$apply();
+            setTimeout(function(){
+                navigator.notification.alert(event.alert);
+
+                //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
+                injectorExternalGET.path("/app/configurations");
+                //injectorState.go("app.newmatchesfound");
+                scopeExternal.$apply();
+            },2000);
             
         }else if(event.nt == 3){
             
