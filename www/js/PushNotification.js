@@ -175,7 +175,7 @@ function onNotificationAPN (event) {
             
 
 
-            console.log('injectorState',injectorState);
+            console.log(injectorLocalStorage);
 
             dataReceive.sFid = event.sFid;
             dataReceive.uName = event.sname;
@@ -190,7 +190,7 @@ function onNotificationAPN (event) {
             injectorExternalGET.path("/app/newmatchesfound");
             //injectorState.go("app.newmatchesfound");
             scopeExternal.$apply();
-            alert("state louco");
+            
         }else if(event.nt == '3'){
             
                 
