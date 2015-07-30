@@ -172,6 +172,9 @@ angular.module('starter', ['ionic','ui.bootstrap',
         templateUrl: "templates/newmatchesfound/newmatchesfound.html",
         controller: 'NewMatchesFoundReceiveCtrl'
       }
+    },onExit: function(){
+          angular.element(document.querySelector('#menuAPP')).removeClass('hidden');
+        
     }
     
   });
