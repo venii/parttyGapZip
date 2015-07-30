@@ -187,11 +187,13 @@ function onNotificationAPN (event) {
            
             //injectorROOTSCOPE.newMatchFoundData = dataReceive;
             navigator.notification.alert(event.alert);
-            injectorExternalGET.path("/app/newmatchesfound");
+
+            //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
+            injectorExternalGET.path("/app/configurations");
             //injectorState.go("app.newmatchesfound");
             scopeExternal.$apply();
             
-        }else if(event.nt == '3'){
+        }else if(event.nt == 3){
             
                 
                 //navigator.notification.alert(event.alert);
@@ -215,7 +217,6 @@ function onNotificationAPN (event) {
                 
 
 
-                console.log('injectorState',injectorState);
 
                 dataReceive.sFid = event.sFid;
                 dataReceive.uName = event.sname;
