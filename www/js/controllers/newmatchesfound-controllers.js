@@ -44,7 +44,7 @@ angular.module('newmatchesfound.controllers', ['starter','cards-animation-matche
 
        
         angular.element(document.querySelector('#menuAPP')).addClass('hidden');
-        //angular.element(document.querySelector('#newmatchesfoundView')).css("margin-top", "-40px");
+        angular.element(document.querySelector('#newmatchesfoundView')).css("margin-top", "-40px");
          console.log($rootScope.newMatchFoundData);
         
 

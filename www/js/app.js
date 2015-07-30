@@ -174,7 +174,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
       }
     },onExit: function(){
           angular.element(document.querySelector('#menuAPP')).removeClass('hidden');
-        
+          angular.element(document.querySelector('#newmatchesfoundView')).css("margin-top","");
     }
     
   });
