@@ -88,6 +88,7 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                     };
                     
                     $http.get($localStorage.inviteaction,{params: paramsToSend}).success(function(resp) {
+                            console.log(resp);
                             if($rootScope.invitedActionData == undefined)
                                 $rootScope.invitedActionData = new Array();
                             
