@@ -170,7 +170,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
     views: {
       'menuContent': {
         templateUrl: "templates/newmatchesfound/newmatchesfound.html",
-        controller: 'NewMatchesFoundCtrl'
+        controller: 'NewMatchesFoundReceiveCtrl'
       }
     }
     
