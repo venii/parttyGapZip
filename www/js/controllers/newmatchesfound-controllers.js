@@ -42,11 +42,11 @@ angular.module('newmatchesfound.controllers', ['starter','cards-animation-matche
         
 
 
-        /*
+       
         angular.element(document.querySelector('#menuAPP')).addClass('hidden');
         angular.element(document.querySelector('#newmatchesfoundView')).css("margin-top", "-40px");
 
-    
+        /*
         heightClient = angular.element(document.querySelector('#newmatchesfoundView'))[0].offsetHeight;
         angular.element(document.querySelector('#newmatchesfoundView')).css("min-height", (heightClient+40)+"px");
 
@@ -64,7 +64,7 @@ angular.module('newmatchesfound.controllers', ['starter','cards-animation-matche
         $scope.urlInvited = $rootScope.newMatchFoundData.pPic;
         $scope.urlMe = $localStorage.usuarioData.urlProfilepic;
 
-    
+        */
           $scope.returnToEvents = function(){
             $ionicViewService.nextViewOptions({
               disableBack: true
@@ -72,5 +72,5 @@ angular.module('newmatchesfound.controllers', ['starter','cards-animation-matche
             $state.go('app.events');
         }
 
-        $rootScope.newMatchFoundData = null;*/
+        //$rootScope.newMatchFoundData = null;*/
   });
