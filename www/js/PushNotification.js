@@ -195,7 +195,7 @@ function onNotificationAPN (event) {
                 navigator.notification.alert(event.alert);
 
                 //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
-                injectorExternalGET.path("/app/newmatchesfound");
+                injectorExternalGET.path("/app/newmatchesfound_receive");
                 //injectorState.go("app.newmatchesfound");
                 scopeExternal.$apply();
             },2000);

@@ -165,6 +165,15 @@ angular.module('starter', ['ionic','ui.bootstrap',
           //alert("@#");
     }
     
+  }).state('app.newmatchesfound_receive', {
+    url: "/newmatchesfound_receive",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/newmatchesfound/newmatchesfound.html",
+        controller: 'NewMatchesFoundCtrl'
+      }
+    }
+    
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
