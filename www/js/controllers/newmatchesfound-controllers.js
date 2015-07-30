@@ -53,7 +53,7 @@ angular.module('newmatchesfound.controllers', ['starter','cards-animation-matche
 
             
 
-       
+       */
         $scope.eventinfoJSON = $rootScope.eventData;
 
         $scope.msgmatch = $rootScope.newMatchFoundData.errMsg;
@@ -64,7 +64,7 @@ angular.module('newmatchesfound.controllers', ['starter','cards-animation-matche
         $scope.urlInvited = $rootScope.newMatchFoundData.pPic;
         $scope.urlMe = $localStorage.usuarioData.urlProfilepic;
 
-        */
+        
          $scope.returnToEvents = function(){
             $ionicViewService.nextViewOptions({
               disableBack: true
