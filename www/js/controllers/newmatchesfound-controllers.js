@@ -65,12 +65,12 @@ angular.module('newmatchesfound.controllers', ['starter','cards-animation-matche
         $scope.urlMe = $localStorage.usuarioData.urlProfilepic;
 
         */
-          $scope.returnToEvents = function(){
+         $scope.returnToEvents = function(){
             $ionicViewService.nextViewOptions({
               disableBack: true
             });
             $state.go('app.events');
         }
 
-        //$rootScope.newMatchFoundData = null;*/
+        $rootScope.newMatchFoundData = null;
   });
