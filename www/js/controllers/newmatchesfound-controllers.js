@@ -46,16 +46,9 @@ angular.module('newmatchesfound.controllers', ['starter','cards-animation-matche
         angular.element(document.querySelector('#menuAPP')).addClass('hidden');
         angular.element(document.querySelector('#newmatchesfoundView')).css("margin-top", "-40px");
          console.log($rootScope.newMatchFoundData);
-        /*
-        heightClient = angular.element(document.querySelector('#newmatchesfoundView'))[0].offsetHeight;
-        angular.element(document.querySelector('#newmatchesfoundView')).css("min-height", (heightClient+40)+"px");
+        
 
-
-            
-
-       */
-        $scope.eventinfoJSON = $rootScope.eventData;
-
+        
         $scope.msgmatch = $rootScope.newMatchFoundData.errMsg;
         $scope.nameMe = $localStorage.usuarioData.ent_first_name;
         $scope.nameInvited = $rootScope.newMatchFoundData.uName;
