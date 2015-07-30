@@ -153,10 +153,12 @@ function onNotificationGCM(e) {
 function onNotificationAPN (event) {
     alert("@apns");
     console.log(event);
+    alert(event.nt)
     //if ( event.alert )
     //{
        
-        if(event.nt == '0'){
+        if(event.nt == 0){
+            alert("NT 0");
             scopeExternal =  angular.element(document.body).scope();
             injectorExternal = angular.element(document.body).injector();
             
