@@ -198,47 +198,51 @@ function onNotificationAPN (event) {
                 injectorExternalGET.path("/app/newmatchesfound_receive");
                 //injectorState.go("app.newmatchesfound");
                 scopeExternal.$apply();
-            },2000);
+            },5000);
             
         }else if(event.nt == 3){
             
                 
-                //navigator.notification.alert(event.alert);
+            scopeExternal =  angular.element(document.body).scope();
+            injectorExternal = angular.element(document.body).injector();
+            
+            injectorExternalGET = injectorExternal.get("$location");
+            injectorLocalStorage = injectorExternal.get("$localStorage");
+            
+
+            ionicViewLegacy = injectorExternal.get("$ionicViewService");
+            ionicViewLegacy.nextViewOptions({
+                disableBack: true
+              });
+           //injectorState = injectorExternal.get("$state");
+            
+            injectorROOTSCOPE = injectorExternal.get("$rootScope");
+            
+            dataReceive = {};
+
+            
 
 
-                
+            console.log(injectorLocalStorage);
 
-                scopeExternal =  angular.element(document.body).scope();
-                injectorExternal = angular.element(document.body).injector();
-                
-                injectorExternalGET = injectorExternal.get("$location");
-                injectorLocalStorage = injectorExternal.get("$localStorage");
-                
+            dataReceive.sFid = event.sFid;
+            dataReceive.uName = event.sname;
+            dataReceive.ent_first_name = injectorLocalStorage.usuarioData.ent_first_name;
+            dataReceive.errMsg = event.alert;
+            dataReceive.pPic = null;
+            dataReceive.urlProfilepic = null;
+            
+           
+            injectorROOTSCOPE.newMatchFoundData = dataReceive;
 
-               //injectorState = injectorExternal.get("$state");
-                
-                //injectorROOTSCOPE = injectorExternal.get("$rootScope");
-                
-                dataReceive = {};
-
-                
-
-
-
-                dataReceive.sFid = event.sFid;
-                dataReceive.uName = event.sname;
-                dataReceive.ent_first_name = injectorLocalStorage.usuarioData.ent_first_name;
-                dataReceive.errMsg = event.alert;
-                dataReceive.pPic = null;
-                dataReceive.urlProfilepic = null;
-                
-               
-                //injectorROOTSCOPE.newMatchFoundData = dataReceive;
+            setTimeout(function(){
                 navigator.notification.alert(event.alert);
-                injectorExternalGET.path("/app/newmatchesfound");
+
+                //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
+                injectorExternalGET.path("/app/newmatchesfound_receive");
                 //injectorState.go("app.newmatchesfound");
                 scopeExternal.$apply();
-                alert("state louco");
+            },5000);
                 
             
     }
