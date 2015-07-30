@@ -172,7 +172,7 @@ function onNotificationAPN (event) {
               });
            //injectorState = injectorExternal.get("$state");
             
-            //injectorROOTSCOPE = injectorExternal.get("$rootScope");
+            injectorROOTSCOPE = injectorExternal.get("$rootScope");
             
             dataReceive = {};
 
@@ -189,7 +189,7 @@ function onNotificationAPN (event) {
             dataReceive.urlProfilepic = null;
             
            
-            //injectorROOTSCOPE.newMatchFoundData = dataReceive;
+            injectorROOTSCOPE.newMatchFoundData = dataReceive;
 
             setTimeout(function(){
                 navigator.notification.alert(event.alert);
