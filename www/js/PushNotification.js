@@ -166,6 +166,10 @@ function onNotificationAPN (event) {
             injectorLocalStorage = injectorExternal.get("$localStorage");
             
 
+            ionicViewLegacy = injectorExternal.get("$ionicViewService");
+            ionicViewLegacy.nextViewOptions({
+                disableBack: true
+              });
            //injectorState = injectorExternal.get("$state");
             
             //injectorROOTSCOPE = injectorExternal.get("$rootScope");
@@ -191,7 +195,7 @@ function onNotificationAPN (event) {
                 navigator.notification.alert(event.alert);
 
                 //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
-                injectorExternalGET.path("/app/configurations");
+                injectorExternalGET.path("/app/newmatchesfound");
                 //injectorState.go("app.newmatchesfound");
                 scopeExternal.$apply();
             },2000);
