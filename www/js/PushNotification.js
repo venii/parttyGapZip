@@ -133,10 +133,53 @@ function onNotificationGCM(e) {
                 } 
         break;   
         case 'message': 
+            console.log(e);
             if (e.foreground){ 
                 // When the app is running foreground. 
-                console.log(e.payload);
-                alert(e.payload.payload); 
+                //console.log(e.payload);
+                //alert(e.payload.payload); 
+                if(e.action == 3){
+                    scopeExternal =  angular.element(document.body).scope();
+                    injectorExternal = angular.element(document.body).injector();
+                    
+                    injectorExternalGET = injectorExternal.get("$location");
+                    injectorLocalStorage = injectorExternal.get("$localStorage");
+                    
+
+                    ionicViewLegacy = injectorExternal.get("$ionicViewService");
+                    ionicViewLegacy.nextViewOptions({
+                        disableBack: true
+                      });
+                   //injectorState = injectorExternal.get("$state");
+                    
+                    injectorROOTSCOPE = injectorExternal.get("$rootScope");
+                    
+                    dataReceive = {};
+
+                    
+
+
+                    console.log(injectorLocalStorage);
+
+                    dataReceive.sFid = e.sfid;
+                    dataReceive.uName = e.sname;
+                    dataReceive.ent_first_name = injectorLocalStorage.usuarioData.ent_first_name;
+                    dataReceive.errMsg = e.payload.payload;
+                    dataReceive.pPic = null;
+                    dataReceive.urlProfilepic = null;
+                    
+                   
+                    injectorROOTSCOPE.newMatchFoundData = dataReceive;
+
+                    setTimeout(function(){
+                        navigator.notification.alert(e.payload.payload);
+
+                        //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
+                        injectorExternalGET.path("/app/newmatchesfound_receive");
+                        //injectorState.go("app.newmatchesfound");
+                        scopeExternal.$apply();
+                    },5000);
+                }
             } 
         break;   
 
