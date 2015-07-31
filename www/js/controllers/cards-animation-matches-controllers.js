@@ -87,14 +87,18 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                         "ent_nome_fb" : jsonOBJ.name,
                     };
                     
-                    $http.get($localStorage.inviteaction,{params: paramsToSend}).success(function(resp) {
-                            console.log(resp);
-                            if($rootScope.invitedActionData == undefined)
-                                $rootScope.invitedActionData = new Array();
-                            
-                            $rootScope.invitedActionData.push(resp);
-                            callback(resp);
-                    });
+                    try{
+                        $http.get($localStorage.inviteaction,{params: paramsToSend}).success(function(resp) {
+                                console.log(resp);
+                                if($rootScope.invitedActionData == undefined)
+                                    $rootScope.invitedActionData = new Array();
+                                
+                                $rootScope.invitedActionData.push(resp);
+                                callback(resp);
+                        });
+                    }catch(err){
+                        alert("#ERR"+err);  
+                    }
                     
             };
 
@@ -123,7 +127,7 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                     
                     //console.log($rootScope.invitedActionData);
                     //console.log($registerMatches);
-                    
+            try{
                     angularService = this;
                     $http.get($localStorage.registermatchespartty,{params: paramsToSend}).success(function(resp) {
                         
@@ -164,6 +168,9 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                         }
                     });
 
+                }catch(err){
+                    alert("#ERR"+err);  
+                }   
                     
 
             };
