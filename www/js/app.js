@@ -62,7 +62,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
     }
   })
   .state('app.chat', {
-    url: "/chat",
+    url: "/chat/:idfb",
     views: {
       'menuContent': {
         templateUrl: "templates/chat/chat.html",
