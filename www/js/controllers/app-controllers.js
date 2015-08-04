@@ -1,6 +1,6 @@
 angular.module('app.controllers', ['starter'])
 
-.controller('AppCtrl', function(FriendsService,$scope,$state,$ionicSideMenuDelegate,$ionicViewService, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage,$stateParams) {
+.controller('AppCtrl', function(FriendsService,$scope,$state,$rootScope,$ionicSideMenuDelegate,$ionicViewService, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage,$stateParams) {
 
   // bind do menu $ionicSideMenuDelegat
 
@@ -87,12 +87,14 @@ angular.module('app.controllers', ['starter'])
 
 
 
-  $scope.loadchat = function(idfb){
+  $scope.loadchat = function(idfb,name,pic){
       $ionicViewService.nextViewOptions({
         disableBack: true
       });
 
       $state.go("app.chat",{"idfb" : idfb});
+      
+      $rootScope.chatUsrData = {"idfb" : idfb, "name" : name ,"pic" : pic};
   };
   
 }).service('FriendsService',function($sce,$compile,$localStorage,$ionicViewService,$http,$rootScope,$state,$ionicLoading,$templateRequest,$ionicSideMenuDelegate) {
@@ -131,8 +133,9 @@ angular.module('app.controllers', ['starter'])
                             // Let's put it into an HTML element and parse any directives and expressions
                             // in the code. (Note: This is just an example, modifying the DOM from within
                             // a controller is considered bad style.)
-                            if(resp.data.errNum == 50)
+                            if(resp.data.errNum == 50){
                               $scope.friendlist = resp.data.likes;
+                            }
 
                             $compile(element.html(template).contents())($scope);
 
