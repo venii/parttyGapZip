@@ -194,13 +194,18 @@ function onNotificationGCM(e) {
 } 
 
 function onNotificationAPN (event) {
-    //alert("@apns");
+    alert("@apns");
+    console.log(event);
+    /*
     console.log(event);
     //alert(event.nt)
     //if ( event.alert )
     //{
-       
-        if(event.nt == 0){
+        //message
+        if(event.nt == 2){
+
+        }else if(event.nt == 0){
+            //teste
            // alert("NT 0");
             scopeExternal =  angular.element(document.body).scope();
             injectorExternal = angular.element(document.body).injector();
@@ -244,7 +249,7 @@ function onNotificationAPN (event) {
             },5000);
             
         }else if(event.nt == 3){
-            
+            //MATCH FOUND
                 
             scopeExternal =  angular.element(document.body).scope();
             injectorExternal = angular.element(document.body).injector();
