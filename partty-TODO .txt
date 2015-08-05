@@ -1,0 +1,53 @@
+04-08-2015 -> criar services da lista de mensagens
+              integrar com ws mensagens
+              integrar mensagens ao apns e gcm
+
+
+
+git reset commit do ios voltar até versao sem crash (git reset --hard [Commit SHA id here])
+
+
+
+17-07-2015
+
+	IOS -> Revisar 
+		 // if none of the above states are matched, use this as the fallback
+  		(l->170)$urlRouterProvider.otherwise('/app/login');
+  		(l->93)  if($localStorage.token != undefined){ (localstorage.token tem token)
+
+
+  	20/07/1015 -> criar newmatchesfounds stack
+  				-> criar profile
+
+
+  			24/07/2015 -> enviar certificvado apple para WS
+  					implentar o push para android e ios quando receber matche
+
+
+  http://parttyappnoip.ddns.net/partty/servercode/ws/process.php/testIosPush?ent_ios_cer=&ent_cer_pass=&ent_message=&ent_push_token=
+
+
+  USAR CK.pem para enviar tokens
+      CKPROD.pem ou ParttyChatProd.pem ParttyChat.pem
+
+
+  acessar http://parttyappnoip.ddns.net/partty/servercode/ws/process.php/testIosPush
+
+
+  remover index.html dos alerts
+    http://stackoverflow.com/questions/10486403/how-to-change-the-default-heading-of-alert
+
+
+
+
+REVER LIKES !!!!
+rematches nao atualiza matchFound (cards-animation l:148)
+
+
+
+
+
+ADICIONAR matches via BROADCAST
+
+
+-> revisar registration do plugin quando resume do app
