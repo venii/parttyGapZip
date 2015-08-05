@@ -1,7 +1,5 @@
 <ion-view view-title="{{chatNameUsr}}">
   <ion-content id="chatView">
-    <h1>{{usuarioChat}}</h1>
-
 	<ion-list>
 	        <!--
 					<span style="width:64px;height:64px"><img src="{{friend.pPic}}" onerror="this.src ='/img/noimg.png';" style='border-radius: 150px;' width=64 heigth=64 /></span> {{friend.fName}}<br/>
@@ -15,9 +13,10 @@
 	 </ion-list>
 	  <div style="width:100%;position:absolute" id="msnBox" >
       <input type="text" style="    width: 100%;
-    float: left;" id="sendmessageTxtID" ng-model="sendmessageTxt" class="form-control" value="Digite aqui sua mensagem!">
+    float: left;" id="sendmessageTxtID" ng-model="msnboxtext" class="form-control" value="Digite aqui sua mensagem!" />
 
       <button style="float:right;margin-top:-33px;height:46px" class="btn btn-primary-matches-yah" ng-click="sendMessage()">Enviar</button>
+    	
     </div>
   </ion-content>
 </ion-view>

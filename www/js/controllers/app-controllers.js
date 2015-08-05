@@ -25,6 +25,7 @@ angular.module('app.controllers', ['starter'])
   $localStorage.registermatchespartty = $localStorage.restaddress + 'registerMatchespartty';
   $localStorage.updatedevicedetails = $localStorage.restaddress + '_updateDeviceDetails';
   $localStorage.getprofilematches = $localStorage.restaddress + 'getProfileMatches';
+  $localStorage.sendmessage = $localStorage.restaddress + 'sendMessage';
 
   $ionicViewService.nextViewOptions({
     disableBack: false

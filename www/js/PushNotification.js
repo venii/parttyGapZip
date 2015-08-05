@@ -138,7 +138,11 @@ function onNotificationGCM(e) {
                 // When the app is running foreground. 
                 //console.log(e.payload);
                 //alert(e.payload.payload); 
-                if(e.action == 3){
+                if(e.action == 2){
+                    //msg receive
+                    navigator.notification.alert("receive: "+e.payload.payload);
+                }else if(e.action == 3){
+                    //match found
                     scopeExternal =  angular.element(document.body).scope();
                     injectorExternal = angular.element(document.body).injector();
                     
@@ -196,12 +200,9 @@ function onNotificationGCM(e) {
 function onNotificationAPN (event) {
     //alert("@apns");
     console.log(event);
-    //alert(event.nt)
-    //if ( event.alert )
-    //{
-       
-        if(event.nt == 0){
-           // alert("NT 0");
+    
+    if(event.nt == 0){
+           // teste
             scopeExternal =  angular.element(document.body).scope();
             injectorExternal = angular.element(document.body).injector();
             
@@ -243,8 +244,8 @@ function onNotificationAPN (event) {
                 scopeExternal.$apply();
             },5000);
             
-        }else if(event.nt == 3){
-            
+    }else if(event.nt == 3){
+            //MATCH FOUND
                 
             scopeExternal =  angular.element(document.body).scope();
             injectorExternal = angular.element(document.body).injector();
@@ -288,6 +289,9 @@ function onNotificationAPN (event) {
             },5000);
                 
             
+    }else  if(event.nt == 2){
+            //message receive
+            navigator.notification.alert("receive: "+event.alert);
     }
     //}
 
