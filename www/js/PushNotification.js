@@ -138,7 +138,9 @@ function onNotificationGCM(e) {
                 // When the app is running foreground. 
                 //console.log(e.payload);
                 //alert(e.payload.payload); 
-                if(e.action == 3){
+                if(e.action == 2){
+                    alert(e.payload.payload);
+                }else if(e.action == 3){
                     scopeExternal =  angular.element(document.body).scope();
                     injectorExternal = angular.element(document.body).injector();
                     
@@ -194,16 +196,14 @@ function onNotificationGCM(e) {
 } 
 
 function onNotificationAPN (event) {
-    alert("@apns");
-    console.log(event);
-    /*
+    //alert("@apns");
     console.log(event);
     //alert(event.nt)
     //if ( event.alert )
     //{
         //message
         if(event.nt == 2){
-
+            alert(event.alert);
         }else if(event.nt == 0){
             //teste
            // alert("NT 0");
