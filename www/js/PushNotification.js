@@ -87,7 +87,7 @@ function errorHandler(error) { console.log('Error: '+ error); alert('Error: '+ r
 
 function onNotificationGCM(e) { 
     //console.log("onNotificationGCM");
-   // alert("onNotificationGCM");
+    //alert("onNotificationGCM");
     //alert('Event: '+ e.event);
    
     switch(e.event){ 
@@ -133,14 +133,15 @@ function onNotificationGCM(e) {
                 } 
         break;   
         case 'message': 
+            
             console.log(e);
             if (e.foreground){ 
                 // When the app is running foreground. 
                 //console.log(e.payload);
-                //alert(e.payload.payload); 
-                if(e.action == 2){
+                
+                if(e.payload.action == 2){
                     alert(e.payload.payload);
-                }else if(e.action == 3){
+                }else if(e.payload.action == 3){
                     scopeExternal =  angular.element(document.body).scope();
                     injectorExternal = angular.element(document.body).injector();
                     
@@ -163,8 +164,8 @@ function onNotificationGCM(e) {
 
                     console.log(injectorLocalStorage);
 
-                    dataReceive.sFid = e.sfid;
-                    dataReceive.uName = e.sname;
+                    dataReceive.sFid = e.payload.sfid;
+                    dataReceive.uName = e.payload.sname;
                     dataReceive.ent_first_name = injectorLocalStorage.usuarioData.ent_first_name;
                     dataReceive.errMsg = e.payload.payload;
                     dataReceive.pPic = null;
