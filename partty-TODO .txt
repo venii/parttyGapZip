@@ -3,7 +3,8 @@
               integrar mensagens ao apns e gcm
 
 
-
+10-08-2015 -> GCMIntentService -> on mensage -> colocar bundle como mensage e nao payload
+  l->74 extras.putString("message",extras.getString("payload"));
 git reset commit do ios voltar até versao sem crash (git reset --hard [Commit SHA id here])
 
 

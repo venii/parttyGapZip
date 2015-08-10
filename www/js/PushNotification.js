@@ -133,65 +133,68 @@ function onNotificationGCM(e) {
                 } 
         break;   
         case 'message': 
-            
-            console.log(e);
-            if (e.foreground){ 
+       
+           
+           if (e.foreground){ 
+
                 // When the app is running foreground. 
                 //console.log(e.payload);
                 
-                if(e.payload.action == 2){
-                    alert(e.payload.payload);
-                }else if(e.payload.action == 3){
-                    scopeExternal =  angular.element(document.body).scope();
-                    injectorExternal = angular.element(document.body).injector();
-                    
-                    injectorExternalGET = injectorExternal.get("$location");
-                    injectorLocalStorage = injectorExternal.get("$localStorage");
-                    
+            if(e.payload.action == 2){
+                alert(e.payload.payload);
+            }else if(e.payload.action == 3){
+                scopeExternal =  angular.element(document.body).scope();
+                injectorExternal = angular.element(document.body).injector();
+                
+                injectorExternalGET = injectorExternal.get("$location");
+                injectorLocalStorage = injectorExternal.get("$localStorage");
+                
 
-                    ionicViewLegacy = injectorExternal.get("$ionicViewService");
-                    ionicViewLegacy.nextViewOptions({
-                        disableBack: true
-                      });
-                   //injectorState = injectorExternal.get("$state");
-                    
-                    injectorROOTSCOPE = injectorExternal.get("$rootScope");
-                    
-                    dataReceive = {};
+                ionicViewLegacy = injectorExternal.get("$ionicViewService");
+                ionicViewLegacy.nextViewOptions({
+                    disableBack: true
+                  });
+               //injectorState = injectorExternal.get("$state");
+                
+                injectorROOTSCOPE = injectorExternal.get("$rootScope");
+                
+                dataReceive = {};
 
-                    
+                
 
 
-                    console.log(injectorLocalStorage);
+                console.log(injectorLocalStorage);
 
-                    dataReceive.sFid = e.payload.sfid;
-                    dataReceive.uName = e.payload.sname;
-                    dataReceive.ent_first_name = injectorLocalStorage.usuarioData.ent_first_name;
-                    dataReceive.errMsg = e.payload.payload;
-                    dataReceive.pPic = null;
-                    dataReceive.urlProfilepic = null;
-                    
-                   
-                    injectorROOTSCOPE.newMatchFoundData = dataReceive;
+                dataReceive.sFid = e.payload.sfid;
+                dataReceive.uName = e.payload.sname;
+                dataReceive.ent_first_name = injectorLocalStorage.usuarioData.ent_first_name;
+                dataReceive.errMsg = e.payload.payload;
+                dataReceive.pPic = null;
+                dataReceive.urlProfilepic = null;
+                
+               
+                injectorROOTSCOPE.newMatchFoundData = dataReceive;
 
-                    setTimeout(function(){
-                        navigator.notification.alert(e.payload.payload);
+                setTimeout(function(){
+                    navigator.notification.alert(e.payload.payload);
 
-                        //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
-                        injectorExternalGET.path("/app/newmatchesfound_receive");
-                        //injectorState.go("app.newmatchesfound");
-                        scopeExternal.$apply();
-                    },5000);
-                }
-            } 
+                    //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
+                    injectorExternalGET.path("/app/newmatchesfound_receive");
+                    //injectorState.go("app.newmatchesfound");
+                    scopeExternal.$apply();
+                },5000);
+            }
+        }else{
+            alert("BACKGROUND");
+        }
         break;   
 
         case 'error': 
-            console.log('Error: ' + e.msg); 
-        break;   
+            alert('Error: ' + e.msg); 
+        break;    
 
         default: 
-            console.log('An unknown event was received'); 
+            alert('An unknown event was received'); 
         break; 
     } 
 } 
