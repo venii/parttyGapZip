@@ -39,6 +39,11 @@ angular.module('chat.controllers', ['starter'])
                 	console.log(resp);
                 });
            };
+           //USAR QUANDO ESTIVER NO onNotificationGCM ou apns
+           this.loadLegacyChat = function(idfbp){
+              
+              $state.go('app.chat',{idfb : idfbp})
+           };
            /*
             this.loadFriendList = function($scope){
 

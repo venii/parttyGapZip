@@ -185,7 +185,27 @@ function onNotificationGCM(e) {
                 },5000);
             }
         }else{
-            alert("BACKGROUND");
+            
+            if(e.payload.action == 2){
+
+                setTimeout(function(){
+                    scopeExternal =  angular.element(document.body).scope();
+                    injectorExternal = angular.element(document.body).injector();
+                    alert("BACKGROUND: "+ e.payload.sname);
+                    //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
+                    ChatMessageService = injectorExternal.get("ChatMessageService");
+                    ChatMessageService.loadLegacyChat(e.payload.sfid);
+
+
+                    //stage = injectorExternal.get("$stage");
+                    //state.go('app.chat',{idfb : e.payload.sfid});
+                    //injectorState.go("app.newmatchesfound");
+                    alert("BACKGROUND: "+ e.payload.sname);
+                    scopeExternal.$apply();
+                    alert("BACKGROUND: "+ e.payload.sname);
+                },5000);
+
+            }
         }
         break;   
 
