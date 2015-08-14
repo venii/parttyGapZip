@@ -142,6 +142,13 @@ function onNotificationGCM(e) {
                 
             if(e.payload.action == 2){
                 alert(e.payload.payload);
+                
+                scopeExternal =  angular.element(document.body).scope();
+                injectorExternal = angular.element(document.body).injector();
+                ChatMessageService = injectorExternal.get("ChatMessageService");
+                ChatMessageService.addMSGtoList($rootScope.chatUsrData.lastMSG);
+                scopeExternal.$apply();
+                
             }else if(e.payload.action == 3){
                 scopeExternal =  angular.element(document.body).scope();
                 injectorExternal = angular.element(document.body).injector();
@@ -194,15 +201,18 @@ function onNotificationGCM(e) {
                     alert("BACKGROUND: "+ e.payload.sname);
                     //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
                     ChatMessageService = injectorExternal.get("ChatMessageService");
-                    ChatMessageService.loadLegacyChat(e.payload.sfid);
+
+                    console.log("service chatmsgse");
+                    console.log(ChatMessageService);
+                    ChatMessageService.loadLegacyChat(e.payload.sfid,e.payload.sname,null,e.payload.payload);
 
 
                     //stage = injectorExternal.get("$stage");
                     //state.go('app.chat',{idfb : e.payload.sfid});
                     //injectorState.go("app.newmatchesfound");
-                    alert("BACKGROUND: "+ e.payload.sname);
+                    //alert("BACKGROUND: "+ e.payload.sname);
                     scopeExternal.$apply();
-                    alert("BACKGROUND: "+ e.payload.sname);
+                    //alert("BACKGROUND: "+ e.payload.sname);
                 },5000);
 
             }

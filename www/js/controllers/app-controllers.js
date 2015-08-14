@@ -93,9 +93,13 @@ angular.module('app.controllers', ['starter'])
         disableBack: true
       });
 
+
+
+      delete $rootScope.chatUsrData;
+      $rootScope.chatUsrData = {"idfb" : idfb, "name" : name ,"pic" : pic};
+      
       $state.go("app.chat",{"idfb" : idfb});
       
-      $rootScope.chatUsrData = {"idfb" : idfb, "name" : name ,"pic" : pic};
   };
   
 }).service('FriendsService',function($sce,$compile,$localStorage,$ionicViewService,$http,$rootScope,$state,$ionicLoading,$templateRequest,$ionicSideMenuDelegate) {

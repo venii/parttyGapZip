@@ -8,6 +8,14 @@ angular.module('chat.controllers', ['starter'])
     
 
     $scope.chatNameUsr = $rootScope.chatUsrData.name;
+    $rootScope.logset = new Array();
+
+    console.log($rootScope.chatUsrData);
+    console.log("lastmsg "+$rootScope.chatUsrData.lastMSG);
+    //carrega dados
+    if($rootScope.chatUsrData.lastMSG != undefined)
+      ChatMessageService.addMSGtoList($rootScope.chatUsrData.lastMSG);
+
 
   	$scope.sendMessage = function(){
   		var scopo = this;
@@ -40,10 +48,18 @@ angular.module('chat.controllers', ['starter'])
                 });
            };
            //USAR QUANDO ESTIVER NO onNotificationGCM ou apns
-           this.loadLegacyChat = function(idfbp){
-              
-              $state.go('app.chat',{idfb : idfbp})
+           this.loadLegacyChat = function(idfbp,name,pic,lastmsg){
+              delete $rootScope.chatUsrData;
+              $rootScope.chatUsrData = {"idfb" : idfbp, "name" : name ,"pic" : pic, "lastMSG": lastmsg};
+              $state.go('app.chat',{idfb : idfbp});
            };
+
+           this.addMSGtoList = function(msg){
+                if($rootScope.logset == undefined)
+                  $rootScope.logset = new Array();
+                
+                $rootScope.logset.push(msg);
+           }
            /*
             this.loadFriendList = function($scope){
 

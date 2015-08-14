@@ -51,4 +51,8 @@ rematches nao atualiza matchFound (cards-animation l:148)
 ADICIONAR matches via BROADCAST
 
 
--> revisar registration do plugin quando resume do app
+-> revisar registration do plugin quando resume do app[]
+
+
+
+desativar wifi para acelerar token pushnotification
