@@ -38,10 +38,9 @@ angular.module('chat.controllers', ['starter'])
 
                   db.transaction(function(tx) {
                     //tx.executeSql('DROP TABLE IF EXISTS test_table');
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS chat (id integer primary key, data text, data_num integer)');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS chatlog (id_chatlog INTEGER PRIMARY KEY NOT NULL, fbID_receiver BIGINT (30), fbID_sender BIGINT (30), msg VARCHAR (255), data_msg TIMESTAMP);');
 
                     
-
                     // demonstrate PRAGMA:
                     /*db.executeSql("pragma table_info (test_table);", [], function(res) {
                       console.log("PRAGMA res: " + JSON.stringify(res));
@@ -62,10 +61,23 @@ angular.module('chat.controllers', ['starter'])
                       console.log("ERROR: " + e.message);
                     });*/
                   });
+                  return db;
                 }catch(err){
                     alert("ERROR DB LOAD");
                 }
-           }
+                return null;
+           };
+           
+           this.insertMSG = function(msg,fbsenderID,fbsenderName,fbreceiverID,fbreceiverName){
+              var db = this.initDB();
+              db.transaction(function(tx) {
+                  tx.executeSql("INSERT INTO chatlog (fbID_receiver, fbID_sender, msg , data_msg); VALUES (?,?,?,?)", [fbreceiverID, fbreceiverName,msg,'CURRENT_TIMESTAMP'], 
+                        function(tx, res) {
+                            console.log("insertId: " + res.insertId + " -- probably 1");
+                            console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
+                        });   
+              });
+           };
 
            this.sendMessageWS = function($scope,msg,idtosend){
            		
@@ -90,12 +102,12 @@ angular.module('chat.controllers', ['starter'])
               $state.go('app.chat',{idfb : idfbp});
            };
 
-           this.addMSGtoList = function(msg){
+           this.addMSGtoList = function(msg,fbsenderID,fbsenderName,fbreceiverID,fbreceiverName){
                 if($rootScope.logset == undefined)
                   $rootScope.logset = new Array();
 
 
-                this.initDB();
+                this.insertMSG(msg,fbsenderID,fbsenderName,fbreceiverID,fbreceiverName);
                 
                 $rootScope.logset.push(msg);
            }

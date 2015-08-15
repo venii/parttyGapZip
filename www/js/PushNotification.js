@@ -145,8 +145,11 @@ function onNotificationGCM(e) {
                 
                 scopeExternal =  angular.element(document.body).scope();
                 injectorExternal = angular.element(document.body).injector();
+
+                injectorLocalStorage = injectorExternal.get("$localStorage");
+
                 ChatMessageService = injectorExternal.get("ChatMessageService");
-                ChatMessageService.addMSGtoList($rootScope.chatUsrData.lastMSG);
+                ChatMessageService.addMSGtoList(e.payload.payload,e.payload.sfid,e.payload.sname,injectorLocalStorage.usuarioData.ent_fbid,injectorLocalStorage.usuarioData.ent_first_name);
                 scopeExternal.$apply();
                 
             }else if(e.payload.action == 3){
