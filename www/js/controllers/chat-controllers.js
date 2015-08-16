@@ -1,21 +1,33 @@
 angular.module('chat.controllers', ['starter'])
 
 .controller('ChatCtrl', function($scope,ChatMessageService, $stateParams,$rootScope,OpenFB,$localStorage,$cordovaToast,$ionicLoading,$ionicViewService,$state,parttyUtils) {
-    console.log($rootScope.chatUsrData);
+
 
     heightClient = angular.element(document.querySelector('#chatView'))[0].offsetHeight;
     angular.element(document.querySelector('#msnBox')).css("top", (heightClient-100)+"px");
     
 
     $scope.chatNameUsr = $rootScope.chatUsrData.name;
+    
+
+   
+    //
+
     $rootScope.logset = new Array();
 
-    console.log($rootScope.chatUsrData);
-    console.log("lastmsg "+$rootScope.chatUsrData.lastMSG);
     //carrega dados
-    if($rootScope.chatUsrData.lastMSG != undefined)
-      ChatMessageService.addMSGtoList($rootScope.chatUsrData.lastMSG);
-
+    //if($rootScope.chatUsrData.lastMSG != undefined)
+    // ChatMessageService.addMSGtoList($rootScope.chatUsrData.lastMSG);
+   
+    ChatMessageService.loadHistoryMSG($localStorage.usuarioData.ent_fbid,function(arrayProcessed){
+        for(ap in arrayProcessed){
+          alert("AEEEE " + arrayProcessed[ap]);
+          $rootScope.logset.push(arrayProcessed[ap]);
+        }
+        $rootScope.$apply();
+       
+    });
+   
 
   	$scope.sendMessage = function(){
   		var scopo = this;
@@ -31,7 +43,7 @@ angular.module('chat.controllers', ['starter'])
 
   	};
 }).service('ChatMessageService',function($sce,$compile,$localStorage,$ionicViewService,$http,$rootScope,$state,$ionicLoading,$templateRequest,$ionicSideMenuDelegate) {
-           
+           /*sqlite*/
            this.initDB = function(){
                 try{
                   var db = window.sqlitePlugin.openDatabase({name: "dbapp_partty.db"});
@@ -41,25 +53,7 @@ angular.module('chat.controllers', ['starter'])
                     tx.executeSql('CREATE TABLE IF NOT EXISTS chatlog (id_chatlog INTEGER PRIMARY KEY NOT NULL, fbID_receiver BIGINT (30), fbID_sender BIGINT (30), msg VARCHAR (255), data_msg TIMESTAMP);');
 
                     
-                    // demonstrate PRAGMA:
-                    /*db.executeSql("pragma table_info (test_table);", [], function(res) {
-                      console.log("PRAGMA res: " + JSON.stringify(res));
-                    });
-
-                    tx.executeSql("INSERT INTO test_table (data, data_num) VALUES (?,?)", ["test", 100], function(tx, res) {
-                      console.log("insertId: " + res.insertId + " -- probably 1");
-                      console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
-
-                      db.transaction(function(tx) {
-                        tx.executeSql("select count(id) as cnt from test_table;", [], function(tx, res) {
-                          console.log("res.rows.length: " + res.rows.length + " -- should be 1");
-                          console.log("res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
-                        });
-                      });
-
-                    }, function(e) {
-                      console.log("ERROR: " + e.message);
-                    });*/
+                   
                   });
                   return db;
                 }catch(err){
@@ -67,17 +61,51 @@ angular.module('chat.controllers', ['starter'])
                 }
                 return null;
            };
-           
+           /*sqlite*/
            this.insertMSG = function(msg,fbsenderID,fbsenderName,fbreceiverID,fbreceiverName){
               var db = this.initDB();
               db.transaction(function(tx) {
-                  tx.executeSql("INSERT INTO chatlog (fbID_receiver, fbID_sender, msg , data_msg); VALUES (?,?,?,?)", [fbreceiverID, fbreceiverName,msg,'CURRENT_TIMESTAMP'], 
+                  tx.executeSql("INSERT INTO chatlog (fbID_receiver, fbID_sender, msg , data_msg) VALUES (?,?,?,?);", [fbreceiverID, fbreceiverName,msg,'CURRENT_TIMESTAMP'], 
                         function(tx, res) {
                             console.log("insertId: " + res.insertId + " -- probably 1");
                             console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
                         });   
               });
            };
+           /*sqlite*/
+           this.loadHistoryMSG = function(idfb,callback){
+              var db = this.initDB();
+              
+
+              db.transaction(function(tx) {
+                tx.executeSql("SELECT * FROM chatlog WHERE fbID_receiver = '"+idfb+"';", [],function(tx, res) {
+
+                    console.log("Consulta  chatlog " + res.rows.length + " -- should be 1");
+                    var len = res.rows.length;
+                    var arrayRetorno = new Array();
+                    if(len > 0){
+                      
+                      console.log("Consulta chatlog msg start");
+                      for (var i = 0; i < len; i++) {
+                        console.log("Consulta chatlog msg" + res.rows.item(i).msg);
+                        arrayRetorno.push(res.rows.item(i).msg);
+                      }
+                      console.log("tamanho array logs "+arrayRetorno.length);
+                    }
+                    callback(arrayRetorno); //devolve um novo array
+                      
+                
+
+                });
+              });
+              
+
+              
+           };
+           /*sqlite*/
+          
+
+
 
            this.sendMessageWS = function($scope,msg,idtosend){
            		

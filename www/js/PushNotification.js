@@ -208,7 +208,7 @@ function onNotificationGCM(e) {
                     console.log("service chatmsgse");
                     console.log(ChatMessageService);
                     ChatMessageService.loadLegacyChat(e.payload.sfid,e.payload.sname,null,e.payload.payload);
-
+                    
 
                     //stage = injectorExternal.get("$stage");
                     //state.go('app.chat',{idfb : e.payload.sfid});
