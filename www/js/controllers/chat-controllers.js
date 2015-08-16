@@ -21,10 +21,16 @@ angular.module('chat.controllers', ['starter'])
    
     ChatMessageService.loadHistoryMSG($localStorage.usuarioData.ent_fbid,function(arrayProcessed){
         for(ap in arrayProcessed){
-          alert("AEEEE " + arrayProcessed[ap]);
-          $rootScope.logset.push(arrayProcessed[ap]);
+          
+          $rootScope.$apply(function(){
+            //alert("apply " + arrayProcessed[ap]);
+            //$rootScope.logset.push(arrayProcessed[ap]);
+            $rootScope.logset.push("add list");
+          });
         }
-        $rootScope.$apply();
+        
+
+
        
     });
    
