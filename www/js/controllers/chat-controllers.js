@@ -3,8 +3,8 @@ angular.module('chat.controllers', ['starter'])
 .controller('ChatCtrl', function($scope,ChatMessageService, $stateParams,$rootScope,OpenFB,$localStorage,$cordovaToast,$ionicLoading,$ionicViewService,$state,parttyUtils) {
 
 
-    heightClient = angular.element(document.querySelector('#chatView'))[0].offsetHeight;
-    angular.element(document.querySelector('#msnBox')).css("top", (heightClient-100)+"px");
+   // heightClient = angular.element(document.querySelector('#chatView'))[0].offsetHeight;
+    //angular.element(document.querySelector('#msnBox')).css("top", (heightClient-100)+"px");
     
 
     $scope.chatNameUsr = $rootScope.chatUsrData.name;
@@ -16,25 +16,58 @@ angular.module('chat.controllers', ['starter'])
     $rootScope.logset = new Array();
 
     //carrega dados
-    //if($rootScope.chatUsrData.lastMSG != undefined)
-    // ChatMessageService.addMSGtoList($rootScope.chatUsrData.lastMSG);
-   
-    ChatMessageService.loadHistoryMSG($localStorage.usuarioData.ent_fbid,function(arrayProcessed){
-        for(ap in arrayProcessed){
+    
+      
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+      
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+    $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+     
+     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
+    
+
+    setTimeout(function(){
+      ChatMessageService.loadHistoryMSG($localStorage.usuarioData.ent_fbid,function(arrayProcessed){
+ 
+          for(ap in arrayProcessed){
+            
+            $rootScope.$apply(function(){
+              //alert("apply " + arrayProcessed[ap]);
+              $rootScope.logset.push({ "msg" : arrayProcessed[ap].msg , "data" : arrayProcessed[ap].data_msg, "side": arrayProcessed[ap].me});
+              //revisa esta parte do code
+              
+            });
+          }
           
-          $rootScope.$apply(function(){
-            //alert("apply " + arrayProcessed[ap]);
-            //$rootScope.logset.push(arrayProcessed[ap]);
-            //revisa esta parte do code
-            $rootScope.logset.push("add list");
-          });
-        }
-        
 
 
-       
+         
+      },1000);
     });
-   
+
+
+    if($rootScope.chatUsrData.lastMSG != undefined)
+     ChatMessageService.addMSGtoList($rootScope.chatUsrData.lastMSG,0);
 
   	$scope.sendMessage = function(){
   		var scopo = this;
@@ -43,7 +76,7 @@ angular.module('chat.controllers', ['starter'])
   		scopo.msnboxtext = "";
 
   		setTimeout(function(){
-	  		ChatMessageService.sendMessageWS(scopo,msn,$rootScope.chatUsrData.idfb);
+	  		ChatMessageService.sendMessageWS(scopo,msn,$rootScope.chatUsrData.idfb,1);
 	  		
   		},100);
 
@@ -57,7 +90,7 @@ angular.module('chat.controllers', ['starter'])
 
                   db.transaction(function(tx) {
                     //tx.executeSql('DROP TABLE IF EXISTS test_table');
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS chatlog (id_chatlog INTEGER PRIMARY KEY NOT NULL, fbID_receiver BIGINT (30), fbID_sender BIGINT (30), msg VARCHAR (255), data_msg TIMESTAMP);');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS chatlog (id_chatlog INTEGER PRIMARY KEY NOT NULL, fbID_receiver BIGINT (30), fbID_sender BIGINT (30), me INT(1), msg VARCHAR (255), data_msg TIMESTAMP);');
 
                     
                    
@@ -69,10 +102,13 @@ angular.module('chat.controllers', ['starter'])
                 return null;
            };
            /*sqlite*/
-           this.insertMSG = function(msg,fbsenderID,fbsenderName,fbreceiverID,fbreceiverName){
+           this.insertMSG = function(msg,fbsenderID,fbsenderName,fbreceiverID,fbreceiverName,me){
               var db = this.initDB();
+
+              if(db == null)
+                return;
               db.transaction(function(tx) {
-                  tx.executeSql("INSERT INTO chatlog (fbID_receiver, fbID_sender, msg , data_msg) VALUES (?,?,?,?);", [fbreceiverID, fbreceiverName,msg,'CURRENT_TIMESTAMP'], 
+                  tx.executeSql("INSERT INTO chatlog (fbID_receiver, fbID_sender, msg , data_msg,me) VALUES (?,?,?,?,?);", [fbreceiverID, fbsenderID,msg,new Date().toLocaleString(),me], 
                         function(tx, res) {
                             console.log("insertId: " + res.insertId + " -- probably 1");
                             console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
@@ -82,7 +118,8 @@ angular.module('chat.controllers', ['starter'])
            /*sqlite*/
            this.loadHistoryMSG = function(idfb,callback){
               var db = this.initDB();
-              
+              if(db == null)
+                return;
 
               db.transaction(function(tx) {
                 tx.executeSql("SELECT * FROM chatlog WHERE fbID_receiver = '"+idfb+"';", [],function(tx, res) {
@@ -95,7 +132,7 @@ angular.module('chat.controllers', ['starter'])
                       console.log("Consulta chatlog msg start");
                       for (var i = 0; i < len; i++) {
                         console.log("Consulta chatlog msg" + res.rows.item(i).msg);
-                        arrayRetorno.push(res.rows.item(i).msg);
+                        arrayRetorno.push({"msg" : res.rows.item(i).msg , "data" : res.rows.item(i).data_msg, "side": res.rows.item(i).me});
                       }
                       console.log("tamanho array logs "+arrayRetorno.length);
                     }
@@ -137,71 +174,15 @@ angular.module('chat.controllers', ['starter'])
               $state.go('app.chat',{idfb : idfbp});
            };
 
-           this.addMSGtoList = function(msg,fbsenderID,fbsenderName,fbreceiverID,fbreceiverName){
+           this.addMSGtoList = function(msg,fbsenderID,fbsenderName,fbreceiverID,fbreceiverName,me){
                 if($rootScope.logset == undefined)
                   $rootScope.logset = new Array();
 
 
-                this.insertMSG(msg,fbsenderID,fbsenderName,fbreceiverID,fbreceiverName);
+                this.insertMSG(msg,fbsenderID,fbsenderName,fbreceiverID,fbreceiverName,me);
                 
-                $rootScope.logset.push(msg);
+                $rootScope.logset.push({"msg" : msg, "data" : new Date().toLocaleString(), "side": me});
            }
-           /*
-            this.loadFriendList = function($scope){
-
-              $ionicLoading.show({
-                  template: 'Carregando contatos...'
-              });
-            
-                setTimeout(function(){
-                    var postData = {
-                      "sessfb" : $localStorage.token,
-                      "sess_fb": $localStorage.token,
-                      "ent_user_fbid": $localStorage.usuarioData.ent_fbid ,
-                      
-                     
-
-                    };
-
-                  
-                    $http.get($localStorage.getprofilematches,{params: postData}).then(function(resp) {
-                        console.log(resp);
-
-                        var element = angular.element(document.querySelector('#friendlistload'));
-                        
-
-
-                        var templateUrl = $sce.getTrustedResourceUrl('templates/chat/friendlist.html');
-                        
-                        console.log(templateUrl);
-
-                        $templateRequest(templateUrl).then(function(template) {
-                            // template is the HTML template as a string
-                           // console.log(template);
-                            // Let's put it into an HTML element and parse any directives and expressions
-                            // in the code. (Note: This is just an example, modifying the DOM from within
-                            // a controller is considered bad style.)
-                            if(resp.data.errNum == 50){
-                              $scope.friendlist = resp.data.likes;
-                            }
-
-                            $compile(element.html(template).contents())($scope);
-
-                        }, function(err) {
-                            $ionicViewService.nextViewOptions({
-                              disableBack: true
-                            });
-                            //alert("Não há matches.")
-                           $ionicSideMenuDelegate.toggleRight();
-                            
-                            // An error has occurred
-                        });
-
-                        $ionicLoading.hide();
-                    });
-                    
-                },100);
-             
-            };*/
+           
 
       });

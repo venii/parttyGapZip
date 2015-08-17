@@ -149,7 +149,7 @@ function onNotificationGCM(e) {
                 injectorLocalStorage = injectorExternal.get("$localStorage");
 
                 ChatMessageService = injectorExternal.get("ChatMessageService");
-                ChatMessageService.addMSGtoList(e.payload.payload,e.payload.sfid,e.payload.sname,injectorLocalStorage.usuarioData.ent_fbid,injectorLocalStorage.usuarioData.ent_first_name);
+                ChatMessageService.addMSGtoList(e.payload.payload,e.payload.sfid,e.payload.sname,injectorLocalStorage.usuarioData.ent_fbid,injectorLocalStorage.usuarioData.ent_first_name,0);
                 scopeExternal.$apply();
                 
             }else if(e.payload.action == 3){
