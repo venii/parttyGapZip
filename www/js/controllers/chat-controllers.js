@@ -18,32 +18,7 @@ angular.module('chat.controllers', ['starter'])
     //carrega dados
     
       
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
-      
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
-
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
-
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
-
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
-
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
-
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
-
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
-    $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
-
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
-
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
-
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
-
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
      
-     $rootScope.logset.push({"msg" : "teste" , "data" : new Date().toLocaleString() });
     
 
     setTimeout(function(){
@@ -52,7 +27,7 @@ angular.module('chat.controllers', ['starter'])
           for(ap in arrayProcessed){
             
             $rootScope.$apply(function(){
-              //alert("apply " + arrayProcessed[ap]);
+              alert("apply ME " + arrayProcessed[ap].me);
               $rootScope.logset.push({ "msg" : arrayProcessed[ap].msg , "data" : arrayProcessed[ap].data_msg, "side": arrayProcessed[ap].me});
               //revisa esta parte do code
               
@@ -90,7 +65,7 @@ angular.module('chat.controllers', ['starter'])
 
                   db.transaction(function(tx) {
                     //tx.executeSql('DROP TABLE IF EXISTS test_table');
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS chatlog (id_chatlog INTEGER PRIMARY KEY NOT NULL, fbID_receiver BIGINT (30), fbID_sender BIGINT (30), me INT(1), msg VARCHAR (255), data_msg TIMESTAMP);');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS chatlog (id_chatlog INTEGER PRIMARY KEY NOT NULL, fbID_receiver BIGINT (30), fbID_sender BIGINT (30), me INTEGER(1), msg VARCHAR (255), data_msg TIMESTAMP);');
 
                     
                    
