@@ -25,6 +25,7 @@ angular.module('chat.controllers', ['starter'])
           $rootScope.$apply(function(){
             //alert("apply " + arrayProcessed[ap]);
             //$rootScope.logset.push(arrayProcessed[ap]);
+            //revisa esta parte do code
             $rootScope.logset.push("add list");
           });
         }
