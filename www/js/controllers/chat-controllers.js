@@ -1,6 +1,6 @@
 angular.module('chat.controllers', ['starter'])
 
-.controller('ChatCtrl', function($scope,ChatMessageService, $stateParams,$rootScope,OpenFB,$localStorage,$cordovaToast,$ionicLoading,$ionicViewService,$state,parttyUtils) {
+.controller('ChatCtrl', function($scope,ChatMessageService,$ionicScrollDelegate, $stateParams,$rootScope,OpenFB,$localStorage,$cordovaToast,$ionicLoading,$ionicViewService,$state,parttyUtils) {
 
 
    // heightClient = angular.element(document.querySelector('#chatView'))[0].offsetHeight;
@@ -18,18 +18,19 @@ angular.module('chat.controllers', ['starter'])
     //carrega dados
     
       
-     
+            
     
 
     setTimeout(function(){
-      ChatMessageService.loadHistoryMSG($localStorage.usuarioData.ent_fbid,function(arrayProcessed){
+      ChatMessageService.loadHistoryMSG($rootScope.chatUsrData.idfb,function(arrayProcessed){
  
           for(ap in arrayProcessed){
             
             $rootScope.$apply(function(){
-              alert("apply ME " + arrayProcessed[ap].me);
-              $rootScope.logset.push({ "msg" : arrayProcessed[ap].msg , "data" : arrayProcessed[ap].data_msg, "side": arrayProcessed[ap].me});
+             // alert("apply ME " + arrayProcessed[ap].side);
+              $rootScope.logset.push({ "msg" : arrayProcessed[ap].msg , "data" : arrayProcessed[ap].data_msg, "side": arrayProcessed[ap].side});
               //revisa esta parte do code
+              $ionicScrollDelegate.$getByHandle('mainScroll').scrollBottom();
               
             });
           }
@@ -39,6 +40,7 @@ angular.module('chat.controllers', ['starter'])
          
       },1000);
     });
+
 
 
     if($rootScope.chatUsrData.lastMSG != undefined)
@@ -51,13 +53,13 @@ angular.module('chat.controllers', ['starter'])
   		scopo.msnboxtext = "";
 
   		setTimeout(function(){
-	  		ChatMessageService.sendMessageWS(scopo,msn,$rootScope.chatUsrData.idfb,1);
+	  		ChatMessageService.sendMessageWS(scopo,msn,$rootScope.chatUsrData.idfb);
 	  		
   		},100);
 
 
   	};
-}).service('ChatMessageService',function($sce,$compile,$localStorage,$ionicViewService,$http,$rootScope,$state,$ionicLoading,$templateRequest,$ionicSideMenuDelegate) {
+}).service('ChatMessageService',function($sce,$compile,$localStorage,$ionicViewService,$http,$rootScope,$state,$ionicLoading,$templateRequest,$ionicSideMenuDelegate,$ionicScrollDelegate) {
            /*sqlite*/
            this.initDB = function(){
                 try{
@@ -97,7 +99,7 @@ angular.module('chat.controllers', ['starter'])
                 return;
 
               db.transaction(function(tx) {
-                tx.executeSql("SELECT * FROM chatlog WHERE fbID_receiver = '"+idfb+"';", [],function(tx, res) {
+                tx.executeSql("SELECT * FROM chatlog WHERE (fbID_receiver = '"+idfb+"')  ;", [],function(tx, res) {
 
                     console.log("Consulta  chatlog " + res.rows.length + " -- should be 1");
                     var len = res.rows.length;
@@ -137,9 +139,10 @@ angular.module('chat.controllers', ['starter'])
                   
 
                 };
-
+                var self = this;
                 $http.get($localStorage.sendmessage,{params: postData}).then(function(resp) {
                 	console.log(resp);
+                  self.addMSGtoList(msg,$localStorage.usuarioData.ent_fbid,"",idtosend,"",1);
                 });
            };
            //USAR QUANDO ESTIVER NO onNotificationGCM ou apns
@@ -157,6 +160,8 @@ angular.module('chat.controllers', ['starter'])
                 this.insertMSG(msg,fbsenderID,fbsenderName,fbreceiverID,fbreceiverName,me);
                 
                 $rootScope.logset.push({"msg" : msg, "data" : new Date().toLocaleString(), "side": me});
+
+                $ionicScrollDelegate.$getByHandle('mainScroll').scrollBottom();
            }
            
 
