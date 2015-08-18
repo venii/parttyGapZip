@@ -265,7 +265,10 @@ function onNotificationAPN (event) {
                     console.log("service chatmsgse");
                     console.log(ChatMessageService);
 
-                    
+                    ionicViewLegacy = injectorExternal.get("$ionicViewService");
+                    ionicViewLegacy.nextViewOptions({
+                        disableBack: true
+                      });
                    
 
                     ChatMessageService.addMSGtoList(event.alert,injectorLocalStorage.usuarioData.ent_fbid,injectorLocalStorage.usuarioData.ent_first_name, event.sFid,event.sname,0);

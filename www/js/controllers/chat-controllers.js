@@ -151,6 +151,11 @@ angular.module('chat.controllers', ['starter'])
            this.loadLegacyChat = function(idfbp,name,pic,lastmsg){
               delete $rootScope.chatUsrData;
               $rootScope.chatUsrData = {"idfb" : idfbp, "name" : name ,"pic" : pic, "lastMSG": lastmsg};
+
+             
+              $ionicViewService.nextViewOptions({
+                  disableBack: true
+                });
               $state.go('app.chat',{idfb : idfbp});
            };
 
