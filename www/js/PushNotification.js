@@ -82,8 +82,8 @@ function showResultPush(result){
    // alert(result);
 }
 
-function successHandler(result) { console.log('Success: '+ result); alert('Success: '+ result); }
-function errorHandler(error) { console.log('Error: '+ error); alert('Error: '+ result); }
+function successHandler(result) { console.log('Success: '+ result); /*alert('Success: '+ result);*/ }
+function errorHandler(error) { console.log('Error: '+ error); /*alert('Error: '+ result);*/ }
 
 function onNotificationGCM(e) { 
     //console.log("onNotificationGCM");
@@ -95,7 +95,7 @@ function onNotificationGCM(e) {
         case 'registered':
 
             if (e.regid.length > 0){ 
-                    alert("device token: "+e.regid);
+                    //alert("device token: "+e.regid);
                     //deviceRegistered(e.regid);
                     //INJETA O DEVICE VIA LEGACY CODE (FORA DO ANGULAR)
                     //REDIRECIONA PARA O NOVO CONTROLADOR
@@ -435,7 +435,7 @@ function onNotificationAPN (event) {
 function tokenHandler (result) {
     // Your iOS push server needs to know the token before it can push to this device
     // here is where you might want to send it the token for later use.
-    alert('device token = ' + result);
+   // alert('device token = ' + result);
     window.localStorage.devicetoken = result;
     scopeExternal =  angular.element(document.body).scope();
     
