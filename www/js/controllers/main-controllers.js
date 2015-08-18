@@ -35,7 +35,7 @@ angular.module('main.controllers', ['starter'])
             }
        });
        
-       alert("$scope.isLoadedMain: "+$scope.isLoadedMain);
+       //alert("$scope.isLoadedMain: "+$scope.isLoadedMain);
        
        setTimeout(function(){
          if($scope.isLoadedMain == undefined){
