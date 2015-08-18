@@ -75,7 +75,8 @@ angular.module('chat.controllers', ['starter'])
                   });
                   return db;
                 }catch(err){
-                    alert("ERROR DB LOAD");
+                    console.log("err dbload "+err);
+                    alert("ERROR DB LOAD" );
                 }
                 return null;
            };
