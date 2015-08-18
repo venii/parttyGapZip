@@ -1,3 +1,5 @@
+18-08-2015 -> chat ios / android - done
+
 04-08-2015 -> criar services da lista de mensagens
               integrar com ws mensagens
               integrar mensagens ao apns e gcm
