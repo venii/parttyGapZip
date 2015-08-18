@@ -43,8 +43,9 @@ angular.module('chat.controllers', ['starter'])
 
 
 
-    if($rootScope.chatUsrData.lastMSG != undefined)
-     ChatMessageService.addMSGtoList($rootScope.chatUsrData.lastMSG,0);
+    //if($rootScope.chatUsrData.lastMSG != undefined){
+    // ChatMessageService.addMSGtoList($rootScope.chatUsrData.lastMSG,0);
+   // }
 
   	$scope.sendMessage = function(){
   		var scopo = this;

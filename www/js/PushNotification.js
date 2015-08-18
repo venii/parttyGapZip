@@ -141,7 +141,7 @@ function onNotificationGCM(e) {
                 //console.log(e.payload);
                 
             if(e.payload.action == 2){
-                alert(e.payload.payload);
+                //alert(e.payload.payload);
                 
                 scopeExternal =  angular.element(document.body).scope();
                 injectorExternal = angular.element(document.body).injector();
@@ -197,16 +197,25 @@ function onNotificationGCM(e) {
         }else{
             
             if(e.payload.action == 2){
+                 
 
                 setTimeout(function(){
                     scopeExternal =  angular.element(document.body).scope();
                     injectorExternal = angular.element(document.body).injector();
-                    alert("BACKGROUND: "+ e.payload.sname);
+                    injectorLocalStorage = injectorExternal.get("$localStorage");
+
+                    
                     //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
                     ChatMessageService = injectorExternal.get("ChatMessageService");
 
                     console.log("service chatmsgse");
                     console.log(ChatMessageService);
+
+                    
+                   
+
+                    ChatMessageService.addMSGtoList(e.payload.payload,injectorLocalStorage.usuarioData.ent_fbid,injectorLocalStorage.usuarioData.ent_first_name, e.payload.sfid,e.payload.sname,0);
+                    //ChatMessageService.addMSGtoList($rootScope.chatUsrData.lastMSG,0);
                     ChatMessageService.loadLegacyChat(e.payload.sfid,e.payload.sname,null,e.payload.payload);
                     
 
@@ -216,7 +225,7 @@ function onNotificationGCM(e) {
                     //alert("BACKGROUND: "+ e.payload.sname);
                     scopeExternal.$apply();
                     //alert("BACKGROUND: "+ e.payload.sname);
-                },5000);
+                },2000);
 
             }
         }
@@ -224,6 +233,7 @@ function onNotificationGCM(e) {
 
         case 'error': 
             alert('Error: ' + e.msg); 
+
         break;    
 
         default: 
@@ -241,6 +251,36 @@ function onNotificationAPN (event) {
         //message
         if(event.nt == 2){
             alert(event.alert);
+
+
+               setTimeout(function(){
+                    scopeExternal =  angular.element(document.body).scope();
+                    injectorExternal = angular.element(document.body).injector();
+                    injectorLocalStorage = injectorExternal.get("$localStorage");
+
+                    
+                    //verificar app.js /newmatchesfound enter exit events -> create other controller wiht same configs
+                    ChatMessageService = injectorExternal.get("ChatMessageService");
+
+                    console.log("service chatmsgse");
+                    console.log(ChatMessageService);
+
+                    
+                   
+
+                    ChatMessageService.addMSGtoList(event.alert,injectorLocalStorage.usuarioData.ent_fbid,injectorLocalStorage.usuarioData.ent_first_name, event.sFid,event.sname,0);
+                    //ChatMessageService.addMSGtoList($rootScope.chatUsrData.lastMSG,0);
+                    ChatMessageService.loadLegacyChat(event.sFid,event.sname,null,event.alert);
+                    
+
+                    //stage = injectorExternal.get("$stage");
+                    //state.go('app.chat',{idfb : e.payload.sfid});
+                    //injectorState.go("app.newmatchesfound");
+                    //alert("BACKGROUND: "+ e.payload.sname);
+                    scopeExternal.$apply();
+                    //alert("BACKGROUND: "+ e.payload.sname);
+                },2000);
+
         }else if(event.nt == 0){
             //teste
            // alert("NT 0");
