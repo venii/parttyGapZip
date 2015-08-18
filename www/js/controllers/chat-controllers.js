@@ -64,7 +64,7 @@ angular.module('chat.controllers', ['starter'])
            /*sqlite*/
            this.initDB = function(){
                 try{
-                  var db = window.sqlitePlugin.openDatabase({name: "dbapp_partty.db"});
+                  var db = window.sqlitePlugin.openDatabase({name: "dbapp_partty.db", createFromLocation: 1});
 
                   db.transaction(function(tx) {
                     //tx.executeSql('DROP TABLE IF EXISTS test_table');
@@ -152,7 +152,7 @@ angular.module('chat.controllers', ['starter'])
               delete $rootScope.chatUsrData;
               $rootScope.chatUsrData = {"idfb" : idfbp, "name" : name ,"pic" : pic, "lastMSG": lastmsg};
 
-             
+
               $ionicViewService.nextViewOptions({
                   disableBack: true
                 });
