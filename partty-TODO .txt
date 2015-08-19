@@ -1,4 +1,5 @@
 18-08-2015 -> chat ios / android - done
+              -> add ionic plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git
 
 04-08-2015 -> criar services da lista de mensagens
               integrar com ws mensagens

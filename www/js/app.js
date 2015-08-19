@@ -122,6 +122,15 @@ try{
         }
       },
       //remover de app para nao carregar o side menu =)
+    }).state('app.profile', {
+      url: "/profile",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/profile/profile.html",
+          controller: 'ProfileCtrl'
+        }
+      },
+      //remover de app para nao carregar o side menu =)
     }).state('app.matches', {
       url: "/matches/:idevent",
       views: {
