@@ -28,6 +28,7 @@ angular.module('app.controllers', ['starter'])
   $localStorage.sendmessage = $localStorage.restaddress + 'sendMessage';
   $localStorage.getprofile = $localStorage.restaddress + 'getProfile';
   $localStorage.editprofile = $localStorage.restaddress + 'editProfile';
+  $localStorage.upload_user_image = $localStorage.restaddress + 'upload_user_image';
 
 
 

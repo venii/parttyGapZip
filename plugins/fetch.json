@@ -128,5 +128,14 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.badrit.Base64": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/hazemhagrass/phonegap-base64.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

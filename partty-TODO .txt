@@ -1,6 +1,10 @@
 18-08-2015 -> chat ios / android - done
               -> add ionic plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git
                      cordova plugin add https://github.com/wymsee/cordova-imagePicker.git
+                     cordova plugin add https://github.com/hazemhagrass/phonegap-base64.git
+
+                     Transformar image em base64 !
+
 04-08-2015 -> criar services da lista de mensagens
               integrar com ws mensagens
               integrar mensagens ao apns e gcm

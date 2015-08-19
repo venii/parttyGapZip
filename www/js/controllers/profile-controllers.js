@@ -29,12 +29,37 @@ angular.module('profile.controllers', ['starter'])
         
         window.imagePicker.getPictures(
             function(results) {
-                var element = angular.element(document.querySelector('#imgPIC'));
-                element.src = results;
-                $scope.imgPIC = results;
+                
+               
+
+                $scope.imgPIC = results[0];
                 $scope.$apply();
 
-                alert("image result "+results);
+                
+                 
+
+                  window.plugins.Base64.encodeFile(results[0], function(base64){
+                      console.log('file base64 encoding: ' + base64);
+
+                      var postData = {
+            
+                            "sess_fb": $localStorage.token,
+                            "ent_user_fbid" : $localStorage.usuarioData.ent_fbid,
+                            "ent_index_id" : 0,
+                            "ent_userimage" : base64
+                      };
+
+                      $http.get(  $localStorage.upload_user_image,{params: postData}).then(function(resp) {
+                          console.log(resp);
+                          //$scope.imgPIC = resp.data.profilePic;
+                          //$scope.mydesc.desc = resp.data.persDesc;
+                      });
+                  });
+
+                  
+                    //PEGA INFORMAÇOES NO WS DE USUARIO FACEBOOK
+                  
+
 
                 
             }, function (error) {
