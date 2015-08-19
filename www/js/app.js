@@ -216,7 +216,9 @@ try{
     // Identify app
     $httpProvider.defaults.useXDomain = true;
      delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  }]);
+  }]).config(['$compileProvider', function($compileProvider) {
+            $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|content):|data:image\//);
+        }]);
 }catch(err){
   alert(err.message);
 }

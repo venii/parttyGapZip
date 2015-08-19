@@ -26,15 +26,23 @@ angular.module('profile.controllers', ['starter'])
       };
 
       $scope.changephoto = function(){
-        alert("###");
         
         window.imagePicker.getPictures(
             function(results) {
-                for (var i = 0; i < results.length; i++) {
-                    console.log('Image URI: ' + results[i]);
-                }
+                var element = angular.element(document.querySelector('#imgPIC'));
+                element.src = results;
+                $scope.imgPIC = results;
+                $scope.$apply();
+
+                alert("image result "+results);
+
+                
             }, function (error) {
                 console.log('Error: ' + error);
+            },
+            {
+              maximumImagesCount: 1,
+
             }
         );
 
