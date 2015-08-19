@@ -10,7 +10,8 @@ angular.module('starter.controllers', ['ionic','ui.bootstrap','modal.controllers
                                            'matches.controllers',
                                 'cards-animation-matches.controllers',
                                 'newmatchesfound.controllers',
-                                'chat.controllers'
+                                'chat.controllers',
+                                'profile.controllers'
                                           
                                           ]);
 

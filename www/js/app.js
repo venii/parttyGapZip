@@ -16,7 +16,8 @@ try{
                                         ,'events.controllers'
                                         ,'matches.controllers',
                                        'cards-animation-matches.controllers',
-                                       'newmatchesfound.controllers'])
+                                       'newmatchesfound.controllers',
+                                       'profile.controllers'])
 
   .run(function($ionicPlatform,OpenFB) {
 

@@ -86,6 +86,17 @@ angular.module('app.controllers', ['starter'])
     
   };
 
+  $scope.profile = function() {
+    
+    $ionicViewService.nextViewOptions({
+      disableBack: true
+    });
+    
+    
+    $state.go("app.profile");
+    
+  };
+
 
 
   $scope.loadchat = function(idfb,name,pic){
