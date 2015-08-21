@@ -18,7 +18,9 @@ angular.module('profile.controllers', ['starter'])
             };
 
             $http.get($localStorage.editprofile,{params: postData}).then(function(resp) {
+                alert($localStorage.photoProfile64 );
                 alert("Atualizado");
+
             });
                 
         },1000);
@@ -34,27 +36,53 @@ angular.module('profile.controllers', ['starter'])
 
                 $scope.imgPIC = results[0];
                 $scope.$apply();
+                alert(results[0]);
 
+                /*function(){
+                      window.plugins.Base64.encodeFile(results[0], function(base64){
+                          /*console.log('file base64 encoding: ' + base64);
+
+                          var postData = {
+                
+                                "sess_fb": $localStorage.token,
+                                "ent_user_fbid" : $localStorage.usuarioData.ent_fbid,
+                                "ent_index_id" : 0,
+                                "ent_userimage" : base64
+                          };
+                          
+                          console.log("file base64 encoding 1 "+$localStorage.upload_user_image);
+                          parttyUtils.logPartty(postData);
+                          
+                          try{
+                          
+                            alert("##");
+                          
+                            $http.get(  $localStorage.upload_user_image,{params: postData}).then(function(resp) {
+                                console.log(resp);
+                                alert("gotch");
+                                //$scope.imgPIC = resp.data.profilePic;
+                                //$scope.mydesc.desc = resp.data.persDesc;
+                                console.log("file base64 encoding 3");
+                            },function(err){
+                              console.log(err);
+                              console.log("file base64 encoding 4");
+                            });
+                            
+                            console.log("file base64 encoding 2");
+                            alert("##");
+
+                          }catch(err){
+                            console.log("try base64 "+err);
+                            parttyUtils.logPartty(err);
+                          }
+                      
+                      });
+
+                }*/
                 
                  
 
-                  window.plugins.Base64.encodeFile(results[0], function(base64){
-                      console.log('file base64 encoding: ' + base64);
 
-                      var postData = {
-            
-                            "sess_fb": $localStorage.token,
-                            "ent_user_fbid" : $localStorage.usuarioData.ent_fbid,
-                            "ent_index_id" : 0,
-                            "ent_userimage" : base64
-                      };
-
-                      $http.get(  $localStorage.upload_user_image,{params: postData}).then(function(resp) {
-                          console.log(resp);
-                          //$scope.imgPIC = resp.data.profilePic;
-                          //$scope.mydesc.desc = resp.data.persDesc;
-                      });
-                  });
 
                   
                     //PEGA INFORMAÇOES NO WS DE USUARIO FACEBOOK
@@ -81,13 +109,15 @@ angular.module('profile.controllers', ['starter'])
 
 
 
-
+       console.log("getprofile 1");
         //PEGA INFORMAÇOES NO WS DE USUARIO FACEBOOK
       $http.get(  $localStorage.getprofile,{params: postData}).then(function(resp) {
-        console.log(resp);
+          console.log("getprofile 2");
+          console.log(resp);
           $scope.imgPIC = resp.data.profilePic;
           $scope.mydesc.desc = resp.data.persDesc;
       });
+      console.log("getprofile 3");
 
 
 });

@@ -7,7 +7,7 @@
 try{
   angular.module('starter', ['ionic','ui.bootstrap',
                                 'starter.controllers','sociogram.controllers','openfb',
-                                   'ionic.service.core','ionic.service.push','ng',
+                                   'ionic.service.core','ionic.service.push','ng','ngLoad',
                                         'app.controllers',
                                         ,'login.controllers',
                                         ,'main.controllers',

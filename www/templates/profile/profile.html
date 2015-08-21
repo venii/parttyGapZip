@@ -3,11 +3,11 @@
   			<center><h2>{{nome}}</h2></center>
   			<form novalidate name="profile" class="simple-form" style="padding-left:40px;font-size:25px">
   					Descrição pessoal:</br>
-  					<input type="text" name="desc" ng-model="mydesc.desc" style="width:80%;padding-left:-40px;" />
+  					<input type="text" name="desc" ng-model="mydesc.desc" style="width:80%;padding-left:-40px;border-radius: 10px;" />
   					</br>
-  					<img id="imgPIC" ng-src="{{imgPIC}}" ng-click="changephoto()" onerror="this.src ='img/noimg.png';" style="width:80%;height:200px;" />
+  					<img id="imgPIC" onload="alert(this.to)" ng-src="{{imgPIC}}" ng-click="changephoto()" onerror="this.src ='img/noimg.png';" style="width:80%;height:200px;border: 1px solid;border-radius:10px" />
   					</br>
-  					<button style="margin-left:20%" ng-click="processForm()">Atualizar</button>
+  					<button style="margin-left:-20px;margin-top:20px;border-radius: 10px;width:100%" ng-click="processForm()">Atualizar</button>
   			</form>
   </ion-content>
 </ion-view>
