@@ -15,8 +15,8 @@ angular.module('profile.controllers', ['starter'])
           var c = document.createElement("CANVAS");
           var ctx = c.getContext("2d");
           
-          ctx.drawImage(obj, 10, 10);
-
+          ctx.drawImage(obj, 0, 0);
+          //DIMINUIR QUALIDADE DA IMAGEM PARA DIMINUIR OS BITS VAO SER PASSADOS POR GET
           base64 = c.toDataURL();
           //alert(base64);
           var postData = {
