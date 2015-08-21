@@ -1,3 +1,8 @@
+21-08-2015 -> atualizado updte_upload_image para aceitar base64 e qualquer encryptaçao
+
+              long uri por causa da imagem sendo postada em get 
+              e se usar post a imagem nao vai
+
 18-08-2015 -> chat ios / android - done
               -> add ionic plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git
                      cordova plugin add https://github.com/wymsee/cordova-imagePicker.git

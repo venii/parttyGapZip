@@ -6,6 +6,48 @@ angular.module('profile.controllers', ['starter'])
       $scope.mydesc = {};
       $scope.Personal_Desc = "";
 
+
+      $scope.loadImage = function(){
+          //alert("#LOAD");
+          var obj = document.querySelector('#imgPIC');
+          console.log(obj.constructor.name);
+          console.log(obj.src);
+          var c = document.createElement("CANVAS");
+          var ctx = c.getContext("2d");
+          
+          ctx.drawImage(obj, 10, 10);
+
+          base64 = c.toDataURL();
+          //alert(base64);
+          var postData = {
+            
+               
+                "ent_user_fbid" : $localStorage.usuarioData.ent_fbid,
+                "ent_index_id" : 0,
+                "ent_userimage" : base64
+            };
+
+          $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
+          var filename = obj.src.replace(/^.*[\\\/]/, '');
+          console.log("filename "+filename);
+          if(filename != "noimg.png"){
+           // alert("###");
+
+
+            $http.get($localStorage.upload_user_image,{params: postData}).then(function(resp){
+                alert("1##" + resp.data.errMsg);
+                if(resp.data.errNum == "18"){
+                  angular.element(document.querySelector('#profilecontentmenu')).append("<img src='"+base64+"' style='border-radius: 150px;' width=64 heigth=64 />");
+                  alert("Sua foto de perfil foi trocada.");
+                }
+
+            },function(err){parttyUtils.logPartty(err)});
+          }
+          //alert("#@#");
+      };  
+      
+
       $scope.processForm = function(){
         
         setTimeout(function(){
@@ -18,7 +60,7 @@ angular.module('profile.controllers', ['starter'])
             };
 
             $http.get($localStorage.editprofile,{params: postData}).then(function(resp) {
-                alert($localStorage.photoProfile64 );
+                //alert($localStorage.photoProfile64 );
                 alert("Atualizado");
 
             });
@@ -36,7 +78,7 @@ angular.module('profile.controllers', ['starter'])
 
                 $scope.imgPIC = results[0];
                 $scope.$apply();
-                alert(results[0]);
+                
 
                 /*function(){
                       window.plugins.Base64.encodeFile(results[0], function(base64){
