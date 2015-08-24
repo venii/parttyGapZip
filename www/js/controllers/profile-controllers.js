@@ -60,6 +60,7 @@ angular.module('profile.controllers', ['starter'])
                 if (xhr.readyState === 4) {
                   if (xhr.status === 200) {
                     console.log(xhr.responseText);
+                    alert("Imagem Alterada com sucesso.");
                   } else {
                     console.error(xhr.statusText);
                   }
