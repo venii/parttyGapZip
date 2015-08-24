@@ -8,7 +8,7 @@ angular.module('profile.controllers', ['starter'])
 
 
       $scope.loadImage = function(){
-          //alert("#LOAD");
+          
           var obj = document.querySelector('#imgPIC');
           console.log(obj.constructor.name);
           console.log(obj.src);
@@ -34,15 +34,44 @@ angular.module('profile.controllers', ['starter'])
           if(filename != "noimg.png"){
            // alert("###");
 
+           /*
+            $http.jsonp($localStorage.upload_user_image,{params : postData}).then(function(resp){
+                console.log(resp.data.errMsg);
+                //alert("1##" + resp.data.errMsg);
 
-            $http.get($localStorage.upload_user_image,{params: postData}).then(function(resp){
-                alert("1##" + resp.data.errMsg);
                 if(resp.data.errNum == "18"){
                   angular.element(document.querySelector('#profilecontentmenu')).append("<img src='"+base64+"' style='border-radius: 150px;' width=64 heigth=64 />");
                   alert("Sua foto de perfil foi trocada.");
                 }
 
-            },function(err){parttyUtils.logPartty(err)});
+            },function(err){parttyUtils.logPartty(err)});*/
+
+
+            var formData = new FormData();
+              formData.append("ent_user_fbid", $localStorage.usuarioData.ent_fbid);
+              formData.append("ent_index_id", 0); 
+              formData.append("ent_userimage", base64); 
+
+              //Send form via AJAX
+              var xhr = new XMLHttpRequest();
+              xhr.open("POST", $localStorage.upload_user_image);  
+
+              xhr.onload = function (e) {
+                if (xhr.readyState === 4) {
+                  if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                  } else {
+                    console.error(xhr.statusText);
+                  }
+                }
+              };
+              xhr.onerror = function (e) {
+                console.error(xhr.statusText);
+              };
+
+
+              xhr.send(formData);
+
           }
           //alert("#@#");
       };  
@@ -137,7 +166,9 @@ angular.module('profile.controllers', ['starter'])
             },
             {
               maximumImagesCount: 1,
-
+              width:64,
+              heigth:64,
+              quality: 30
             }
         );
 
