@@ -10,15 +10,16 @@ angular.module('profile.controllers', ['starter'])
       $scope.loadImage = function(){
           
           var obj = document.querySelector('#imgPIC');
+         // alert("width: "+obj.width+" height: "+obj.height);
           console.log(obj.constructor.name);
           console.log(obj.src);
           var c = document.createElement("CANVAS");
           var ctx = c.getContext("2d");
           
-          ctx.drawImage(obj, 0, 0);
+          ctx.drawImage(obj, 0, 0,obj.width,obj.height);
           //DIMINUIR QUALIDADE DA IMAGEM PARA DIMINUIR OS BITS VAO SER PASSADOS POR GET
           base64 = c.toDataURL();
-          //alert(base64);
+          //alert("width: "+c.width+" height: "+c.height);
           var postData = {
             
                
@@ -108,58 +109,6 @@ angular.module('profile.controllers', ['starter'])
 
                 $scope.imgPIC = results[0];
                 $scope.$apply();
-                
-
-                /*function(){
-                      window.plugins.Base64.encodeFile(results[0], function(base64){
-                          /*console.log('file base64 encoding: ' + base64);
-
-                          var postData = {
-                
-                                "sess_fb": $localStorage.token,
-                                "ent_user_fbid" : $localStorage.usuarioData.ent_fbid,
-                                "ent_index_id" : 0,
-                                "ent_userimage" : base64
-                          };
-                          
-                          console.log("file base64 encoding 1 "+$localStorage.upload_user_image);
-                          parttyUtils.logPartty(postData);
-                          
-                          try{
-                          
-                            alert("##");
-                          
-                            $http.get(  $localStorage.upload_user_image,{params: postData}).then(function(resp) {
-                                console.log(resp);
-                                alert("gotch");
-                                //$scope.imgPIC = resp.data.profilePic;
-                                //$scope.mydesc.desc = resp.data.persDesc;
-                                console.log("file base64 encoding 3");
-                            },function(err){
-                              console.log(err);
-                              console.log("file base64 encoding 4");
-                            });
-                            
-                            console.log("file base64 encoding 2");
-                            alert("##");
-
-                          }catch(err){
-                            console.log("try base64 "+err);
-                            parttyUtils.logPartty(err);
-                          }
-                      
-                      });
-
-                }*/
-                
-                 
-
-
-
-                  
-                    //PEGA INFORMAÇOES NO WS DE USUARIO FACEBOOK
-                  
-
 
                 
             }, function (error) {
@@ -167,9 +116,9 @@ angular.module('profile.controllers', ['starter'])
             },
             {
               maximumImagesCount: 1,
-              width:64,
-              heigth:64,
-              quality: 30
+              width: 800,
+            height: 800,
+              quality: 50
             }
         );
 

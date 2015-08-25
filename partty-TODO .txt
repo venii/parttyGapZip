@@ -1,3 +1,5 @@
+25-08-2015
+    aumentar pics img
 21-08-2015 -> atualizado updte_upload_image para aceitar base64 e qualquer encryptaçao
 
               long uri por causa da imagem sendo postada em get 
