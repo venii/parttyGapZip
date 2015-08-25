@@ -29,7 +29,7 @@ angular.module('app.controllers', ['starter'])
   $localStorage.getprofile = $localStorage.restaddress + 'getProfile';
   $localStorage.editprofile = $localStorage.restaddress + 'editProfile';
   $localStorage.upload_user_image = $localStorage.restaddress + 'upload_user_image';
-
+  $localStorage.uploadchunk = $localStorage.restaddress + 'uploadChunk';
 
 
   

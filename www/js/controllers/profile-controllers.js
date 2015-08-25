@@ -20,13 +20,13 @@ angular.module('profile.controllers', ['starter'])
           //DIMINUIR QUALIDADE DA IMAGEM PARA DIMINUIR OS BITS VAO SER PASSADOS POR GET
           base64 = c.toDataURL();
           //alert("width: "+c.width+" height: "+c.height);
-          var postData = {
+          /*var postData = {
             
                
                 "ent_user_fbid" : $localStorage.usuarioData.ent_fbid,
                 "ent_index_id" : 0,
                 "ent_userimage" : base64
-            };
+            };*/
 
           $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
@@ -46,17 +46,31 @@ angular.module('profile.controllers', ['starter'])
                 }
 
             },function(err){parttyUtils.logPartty(err)});*/
-
+            /*var postData = {
+            
+               
+                "ent_user_fbid" : $localStorage.usuarioData.ent_fbid,
+                "ent_image_flag" : 1,
+                "ent_image_name" : 'profile_photo_'+$localStorage.usuarioData.ent_fbid+".png",
+                "ent_image_chunk" : base64
+            };*/
 
             var formData = new FormData();
+              //formData.append("ent_user_fbid", $localStorage.usuarioData.ent_fbid);
+              //formData.append("ent_index_id", 0); 
+              //formData.append("ent_userimage", base64); 
+
+
               formData.append("ent_user_fbid", $localStorage.usuarioData.ent_fbid);
-              formData.append("ent_index_id", 0); 
-              formData.append("ent_userimage", base64); 
+              formData.append("ent_image_flag", 1); 
+              formData.append("ent_image_chunk", base64); 
+              formData.append("ent_image_name", 'profile_photo_'+$localStorage.usuarioData.ent_fbid+".png"); 
 
               //Send form via AJAX
               var xhr = new XMLHttpRequest();
-              xhr.open("POST", $localStorage.upload_user_image);  
-
+              //xhr.open("POST", $localStorage.upload_user_image);  
+             
+              xhr.open("POST",  $localStorage.uploadchunk);  
               xhr.onload = function (e) {
                 if (xhr.readyState === 4) {
                   if (xhr.status === 200) {
@@ -135,6 +149,7 @@ angular.module('profile.controllers', ['starter'])
        console.log("getprofile 1");
         //PEGA INFORMAÇOES NO WS DE USUARIO FACEBOOK
       $http.get(  $localStorage.getprofile,{params: postData}).then(function(resp) {
+          //alert(resp.data.images);
           console.log("getprofile 2");
           console.log(resp);
           $scope.imgPIC = resp.data.profilePic;
