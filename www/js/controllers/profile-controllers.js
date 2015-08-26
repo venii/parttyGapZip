@@ -9,6 +9,9 @@ angular.module('profile.controllers', ['starter'])
 
       $scope.loadImage = function(){
           
+          var widthI = 300;
+          var heightI = 150;
+
           var obj = document.querySelector('#imgPIC');
          // alert("width: "+obj.width+" height: "+obj.height);
           console.log(obj.constructor.name);
@@ -16,7 +19,11 @@ angular.module('profile.controllers', ['starter'])
           var c = document.createElement("CANVAS");
           var ctx = c.getContext("2d");
           
-          ctx.drawImage(obj, 0, 0,obj.width,obj.height);
+          c.width = widthI;
+          c.height = heightI;
+
+          //ctx.drawImage(obj, 0, 0,obj.width-100,obj.height);
+          ctx.drawImage(obj, 0, 0,widthI,heightI);
           //DIMINUIR QUALIDADE DA IMAGEM PARA DIMINUIR OS BITS VAO SER PASSADOS POR GET
           base64 = c.toDataURL();
           //alert("width: "+c.width+" height: "+c.height);
@@ -131,7 +138,7 @@ angular.module('profile.controllers', ['starter'])
             {
               maximumImagesCount: 1,
               width: 800,
-            height: 800,
+              height: 800,
               quality: 50
             }
         );
