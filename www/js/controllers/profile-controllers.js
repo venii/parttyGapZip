@@ -6,6 +6,7 @@ angular.module('profile.controllers', ['starter'])
       $scope.mydesc = {};
       $scope.Personal_Desc = "";
 
+      $scope.changedphoto = false;
 
       $scope.loadImage = function(){
           
@@ -39,7 +40,7 @@ angular.module('profile.controllers', ['starter'])
 
           var filename = obj.src.replace(/^.*[\\\/]/, '');
           console.log("filename "+filename);
-          if(filename != "noimg.png"){
+          if(filename != "noimg.png" && $scope.changedphoto ){
            // alert("###");
 
            /*
@@ -127,7 +128,7 @@ angular.module('profile.controllers', ['starter'])
             function(results) {
                 
                
-
+                $scope.changedphoto = true;
                 $scope.imgPIC = results[0];
                 $scope.$apply();
 
