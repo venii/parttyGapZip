@@ -1,5 +1,7 @@
 25-08-2015
     aumentar pics img
+    //ADICIONAR LEFTJOIN COM t_entity_details e pushar profilePIC -> v
+
 21-08-2015 -> atualizado updte_upload_image para aceitar base64 e qualquer encryptaçao
 
               long uri por causa da imagem sendo postada em get 
@@ -15,7 +17,7 @@
 
                      Transformar image em base64 !
 
-04-08-2015 -> criar services da lista de mensagens
+04-08-2015 -> criar services da lista de mensagensgetfbidbysess
               integrar com ws mensagens
               integrar mensagens ao apns e gcm
 
