@@ -1,3 +1,10 @@
+07/09/2015-
+    adicionar badge no chat
+    adicionar ultima mensagem no chat
+    load profile ws img ao invez de pegar sempre no fb
+
+
+
 25-08-2015
     aumentar pics img
     //ADICIONAR LEFTJOIN COM t_entity_details e pushar profilePIC -> v

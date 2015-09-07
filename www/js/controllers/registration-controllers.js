@@ -8,18 +8,22 @@ angular.module('registration.controllers', ['starter'])
           template: 'Procurando por usuario...'
       });
 
-      //VALIDA SESSAO PARA PODER USAR
-      console.log(openFB.isMob());
+      
 
         devicetypeapp = 3;
-        if(openFB.isMob()){
-          if( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos")
-              devicetypeapp = 2;
-         
-          else if(device.platform == 'iOS')
-              devicetypeapp = 1;
-        }
 
+        if(typeof device !== "undefined"){
+            //VALIDA SESSAO PARA PODER USAR
+            console.log(openFB.isMob());
+
+            if(openFB.isMob() ){
+              if( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos")
+                  devicetypeapp = 2;
+             
+              else if(device.platform == 'iOS')
+                  devicetypeapp = 1;
+            }
+        }
 
 
       var postData = {
@@ -60,15 +64,15 @@ angular.module('registration.controllers', ['starter'])
                 */
 
                 devicetypeapp = 3;
-                
-                if(openFB.isMob()){
-                  if( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos")
-                      devicetypeapp = 2;
-                 
-                  else if(device.platform == 'iOS')
-                      devicetypeapp = 1;
+                if(typeof device !== "undefined"){
+                  if(openFB.isMob()){
+                    if( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos")
+                        devicetypeapp = 2;
+                   
+                    else if(device.platform == 'iOS')
+                        devicetypeapp = 1;
+                  }
                 }
-                
                 var postData = {
                     
                         "ent_fbid": resp.data.usuario.id,
@@ -90,7 +94,7 @@ angular.module('registration.controllers', ['starter'])
 
                 try{
 
-                    angular.element(document.querySelector('#profilecontentmenu')).append("<img src='"+resp.data.usuario.picture.data.url+"' style='border-radius: 150px;' width=64 heigth=64 />");
+                    angular.element(document.querySelector('#profilecontentmenu')).append("<img src='"+resp.data.usuario.picture.data.url+"' style='border-radius: 40px / 20px ;' width=64 heigth=64 />");
                 }catch(err){
                   console.log("IMG "+err);
                 }

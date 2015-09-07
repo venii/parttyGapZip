@@ -36,6 +36,6 @@
 	
 }
 
-.item{
+.carousel-inner > .item{
 	padding: 0px;
 }
