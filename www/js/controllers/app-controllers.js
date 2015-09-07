@@ -119,7 +119,7 @@ angular.module('app.controllers', ['starter'])
       
   };
   
-}).service('FriendsService',function($sce,$compile,$localStorage,$ionicViewService,$http,$rootScope,$state,$ionicLoading,$templateRequest,$ionicSideMenuDelegate) {
+}).service('FriendsService',function($sce,$compile,$localStorage,$ionicViewService,$http,$rootScope,$state,$ionicLoading,$templateRequest,$ionicSideMenuDelegate,ChatMessageService) {
            
             this.loadFriendList = function($scope){
 
@@ -157,6 +157,21 @@ angular.module('app.controllers', ['starter'])
                             // a controller is considered bad style.)
                             if(resp.data.errNum == 50){
                               $scope.friendlist = resp.data.likes;
+                             
+                              angular.forEach($scope.friendlist, function(value, key) {
+                                
+                                console.log('friendlist: ' + value.fbId);
+                                
+                                ChatMessageService.getLastMsg(value.fbId,1,function(xhr){
+                                  //alert(xhr[0].msg);
+                                  console.log(xhr);
+                                  $scope.$apply(function(){
+                                    value.lastmsgloaded = xhr[0].msg;
+                                  });
+                                });
+
+                              });
+
                             }
 
                             $compile(element.html(template).contents())($scope);

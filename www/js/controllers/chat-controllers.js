@@ -126,10 +126,39 @@ angular.module('chat.controllers', ['starter'])
               
            };
            /*sqlite*/
-          
+          this.getLastMsg = function(idfb,num,callback){
+              var db = this.initDB();
+              if(db == null)
+                return;
+
+              db.transaction(function(tx) {
+                tx.executeSql("SELECT * FROM chatlog WHERE (fbID_receiver = '"+idfb+"') ORDER BY id_chatlog DESC LIMIT "+num+" ;", [],function(tx, res) {
+
+                    console.log("Consulta  chatlog " + res.rows.length + " -- should be 1");
+                    var len = res.rows.length;
+                    var arrayRetorno = new Array();
+                    if(len > 0){
+                      
+                      console.log("Consulta last msg start");
+                      for (var i = 0; i < len; i++) {
+                        console.log("Consulta chatlog msg" + res.rows.item(i).msg);
+                        arrayRetorno.push({"msg" : res.rows.item(i).msg , "data" : res.rows.item(i).data_msg, "side": res.rows.item(i).me});
+                      }
+                      console.log("tamanho array logs "+arrayRetorno.length);
+                    }
+                    callback(arrayRetorno); //devolve um novo array
+                      
+                
+
+                });
+              });
+              
+
+              
+           };
 
 
-
+            /*sqlite*/
            this.sendMessageWS = function($scope,msg,idtosend){
            		
            		var postData = {
