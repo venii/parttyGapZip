@@ -36,6 +36,14 @@
 	
 }
 
+
+/*FRONT CSS*/
 .carousel-inner > .item{
 	padding: 0px;
+	background-color: red;
 }
+
+.carousel-caption{
+	
+}
+

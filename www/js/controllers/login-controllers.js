@@ -130,13 +130,18 @@ angular.module('login.controllers', ['starter'])
   },1000);
  
    
-}).controller('CarouselDemoCtrl', function ($scope) {
+}).controller('CarouselDemoCtrl', function ($scope,GeradorService) {
   $scope.myInterval = 5000;
   $scope.noWrapSlides = false;
   var slides = $scope.slides = [];
-  slides.push({image : 'img/gal/gal_img1.jpg' , text : ''});
-  slides.push({image : 'img/gal/gal_img2.jpg' , text : ''});
-  slides.push({image : 'img/gal/gal_img3.jpg' , text : ''});
+
+
+
+ // slides.push({/*image : 'img/gal/gal_img1.jpg'*/ , text : ''});
+  //slides.push({/*image : 'img/gal/gal_img2.jpg'*/ , text : ''});
+  slides.push({ text : 'Marque encontros e paquere na balada!', cor: GeradorService.randomColor()});
+  slides.push({ text : 'Marque encontros e paquere na balada!', cor: GeradorService.randomColor()});
+  
   /*
   $scope.addSlide = function() {
     var newWidth = 600 + slides.length + 1;
@@ -149,4 +154,10 @@ angular.module('login.controllers', ['starter'])
   for (var i=0; i<4; i++) {
     $scope.addSlide();
   }*/
-});
+  "#"+((1<<24)*Math.random()|0).toString(16)
+}).service('GeradorService',function($sce,$compile,$localStorage,$ionicViewService,$http,$rootScope,$state,$ionicLoading,$templateRequest,$ionicSideMenuDelegate,$ionicScrollDelegate) {
+          
+           this.randomColor = function(){
+              return "#"+((1<<24)*Math.random()|0).toString(16);
+           };
+  });
