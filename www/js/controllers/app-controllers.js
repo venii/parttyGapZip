@@ -44,7 +44,7 @@ angular.module('app.controllers', ['starter'])
      $ionicViewService.nextViewOptions({
       disableBack: true
      });
-
+ 
     $state.go('app.login');
     //if(!$state.is('login')){
     // alert("Sem acesso a internet");
