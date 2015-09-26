@@ -3,7 +3,7 @@
     adicionar ultima mensagem no chat
     load profile ws img ao invez de pegar sempre no fb
 
-
+    cordova plugin add org.apache.cordova.network-information
 
 25-08-2015
     aumentar pics img

@@ -19,7 +19,7 @@ try{
                                        'newmatchesfound.controllers',
                                        'profile.controllers'])
 
-  .run(function($ionicPlatform,OpenFB) {
+  .run(function($ionicPlatform,OpenFB,$cordovaNetwork) {
 
   //  OpenFB.init('574073299368611','http://parttyionic.ddns.net:8100/',window.localStorage);
 
@@ -37,8 +37,16 @@ try{
         StatusBar.styleDefault();
       }
 
-      console.log(window.plugins.pushNotification);
-    });
+      //console.log(window.plugins.pushNotification);
+      var type = $cordovaNetwork.getNetwork()
+
+      var isOnline = $cordovaNetwork.isOnline()
+
+      var isOffline = $cordovaNetwork.isOffline()
+
+
+      
+      });
   })
 
   .config(function($stateProvider, $urlRouterProvider,$httpProvider) {

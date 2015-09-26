@@ -1,6 +1,6 @@
 angular.module('app.controllers', ['starter'])
 
-.controller('AppCtrl', function(FriendsService,$scope,$state,$rootScope,$ionicSideMenuDelegate,$ionicViewService, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage,$stateParams) {
+.controller('AppCtrl', function(FriendsService,$cordovaNetwork,$scope,$state,$rootScope,$ionicSideMenuDelegate,$ionicViewService, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage,$stateParams) {
 
   // bind do menu $ionicSideMenuDelegat
 
@@ -31,7 +31,19 @@ angular.module('app.controllers', ['starter'])
   $localStorage.upload_user_image = $localStorage.restaddress + 'upload_user_image';
   $localStorage.uploadchunk = $localStorage.restaddress + 'uploadChunk';
 
+  // listen for Online event
+     // listen for Online event
+  $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
+    var onlineState = networkState;
+    //alert("@@@ON");
+  })
 
+  // listen for Offline event
+  $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
+    var offlineState = networkState;
+    alert("Sem acesso a internet");
+    ionic.Platform.exitApp();
+  })
   
   $ionicViewService.nextViewOptions({
     disableBack: false
