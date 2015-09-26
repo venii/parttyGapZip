@@ -46,7 +46,7 @@ angular.module('app.controllers', ['starter'])
     // alert("Sem acesso a internet");
     // $state.go("login");
     //}
-
+ 
   })
   
   $ionicViewService.nextViewOptions({

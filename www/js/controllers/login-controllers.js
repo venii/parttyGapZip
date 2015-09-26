@@ -71,7 +71,7 @@ angular.module('login.controllers', ['starter'])
                   });
 
                   $state.go('app.main');
-              }
+              } 
           
             });
          }else{
