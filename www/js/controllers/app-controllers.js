@@ -43,7 +43,8 @@ angular.module('app.controllers', ['starter'])
     var offlineState = networkState;
      $ionicViewService.nextViewOptions({
       disableBack: false
-    });
+     });
+
     $state.transitionTo('app.login');
     //if(!$state.is('login')){
     // alert("Sem acesso a internet");
