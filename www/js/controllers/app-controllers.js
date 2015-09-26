@@ -42,10 +42,10 @@ angular.module('app.controllers', ['starter'])
   $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
     var offlineState = networkState;
      $ionicViewService.nextViewOptions({
-      disableBack: false
+      disableBack: true
      });
 
-    $state.transitionTo('app.login');
+    $state.go('app.login');
     //if(!$state.is('login')){
     // alert("Sem acesso a internet");
     // $state.go("login");
@@ -54,7 +54,7 @@ angular.module('app.controllers', ['starter'])
   })
   
   $ionicViewService.nextViewOptions({
-    disableBack: false
+    disableBack: true
   });
   
   $ionicSideMenuDelegate.canDragContent(false);
