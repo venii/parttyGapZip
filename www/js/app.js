@@ -37,14 +37,6 @@ try{
         StatusBar.styleDefault();
       }
 
-      //console.log(window.plugins.pushNotification);
-      var type = $cordovaNetwork.getNetwork()
-
-      var isOnline = $cordovaNetwork.isOnline()
-
-      var isOffline = $cordovaNetwork.isOffline()
-
-
       
       });
   })

@@ -46,7 +46,7 @@ angular.module('login.controllers', ['starter'])
                               
                               
                           }, function(error) {
-                              alert("#");
+                              //alert("#");
                                $ionicViewService.nextViewOptions({
                                   disableBack: true
                                 });

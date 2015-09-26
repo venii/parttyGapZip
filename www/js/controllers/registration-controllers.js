@@ -143,7 +143,7 @@ angular.module('registration.controllers', ['starter'])
 
           }, function(err) {
             console.error('ERR', err);
-            alert(err);
+            alert("Problema com o servidor.");
 
             // err.status will contain the status code
             $ionicLoading.hide();

@@ -42,7 +42,11 @@ angular.module('app.controllers', ['starter'])
   $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
     var offlineState = networkState;
     alert("Sem acesso a internet");
-    ionic.Platform.exitApp();
+    if(navigator.app){
+        navigator.app.exitApp();
+    }else if(navigator.device){
+            navigator.device.exitApp();
+    }
   })
   
   $ionicViewService.nextViewOptions({
