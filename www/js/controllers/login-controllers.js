@@ -14,7 +14,7 @@ angular.module('login.controllers', ['starter'])
     $state.go("app.login");
 
 })
-.controller('LoginFBCtrl', function($scope,$state,$location,$cordovaOauth,$localStorage,$ionicViewService,$ionicSideMenuDelegate) {
+.controller('LoginFBCtrl', function($scope,$state,$location,$cordovaNetwork,$cordovaOauth,$localStorage,$ionicViewService,$ionicSideMenuDelegate) {
   //remove o history back quando usa GO() !
   console.log('Controller: LoginFBCtrl ');
   $ionicViewService.nextViewOptions({
@@ -23,11 +23,21 @@ angular.module('login.controllers', ['starter'])
   
   $scope.loginf = function(){
       
+
+
+
       $ionicViewService.nextViewOptions({
         disableBack: true
       });
 
        if(openFB.isMob()){
+
+
+          if(!$cordovaNetwork.isOnline()){
+              alert("Sem acesso a internet");
+              return 0;
+          }
+
            console.log("openFB.isMob() : "+openFB.isMob());
            
            document.addEventListener("deviceready", function () {
@@ -117,8 +127,13 @@ angular.module('login.controllers', ['starter'])
                ionic.Platform.ready(function(){
                  //  alert("ionic ready");
                    console.log("ionic ready");
-
-                   $state.go('app.main');
+                    if($cordovaNetwork.isOnline()){
+                    
+                         $state.go('app.main');
+                    }else{
+                      alert("Sem acesso a internet");
+             
+                    }
                });
          }else{
              //alert("webready");

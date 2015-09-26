@@ -37,16 +37,16 @@ angular.module('app.controllers', ['starter'])
     var onlineState = networkState;
     //alert("@@@ON");
   })
-
+ 
   // listen for Offline event
   $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
     var offlineState = networkState;
-    alert("Sem acesso a internet");
-    if(navigator.app){
-        navigator.app.exitApp();
-    }else if(navigator.device){
-            navigator.device.exitApp();
-    }
+    $state.transitionTo('app.login');
+    //if(!$state.is('login')){
+    // alert("Sem acesso a internet");
+    // $state.go("login");
+    //}
+
   })
   
   $ionicViewService.nextViewOptions({
@@ -56,14 +56,14 @@ angular.module('app.controllers', ['starter'])
   $ionicSideMenuDelegate.canDragContent(false);
 
   $scope.toggleLeftSideMenu = function() {
-    if($localStorage.token != undefined)
+    if($localStorage.token != undefined && $cordovaNetwork.isOnline())
       $ionicSideMenuDelegate.toggleLeft();
     else
       alert("É necessario autenticar antes de utilizar");
   };
 
   $scope.toggleRightSideMenu = function() {
-    if($localStorage.token != undefined){
+    if($localStorage.token != undefined && $cordovaNetwork.isOnline()){
       /*CARREGAR CONTATOS NESSA LINHA 1*/
 
 
