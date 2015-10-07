@@ -42,6 +42,12 @@ angular.module('main.controllers', ['starter'])
                                 "alert":"true",
                                 "ecb":"onNotificationAPN"
                             });
+               }else{
+                  $ionicViewService.nextViewOptions({
+                    disableBack: true
+                  });
+
+                  $state.go('app.registration');
                }
               }
             }
