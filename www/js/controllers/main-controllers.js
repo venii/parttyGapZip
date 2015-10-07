@@ -32,16 +32,18 @@ angular.module('main.controllers', ['starter'])
 
               
 
-                alert(model+" @@"+platform+" @@"+uuid);
-               window.plugins.pushNotification.register(
-                      tokenHandler,
-                      errorHandler,
-                      {
-                          "badge":"true",
-                          "sound":"true",
-                          "alert":"true",
-                          "ecb":"onNotificationAPN"
-                      });
+                if(model != "x86_64"){
+                     window.plugins.pushNotification.register(
+                            tokenHandler,
+                            errorHandler,
+                            {
+                                "badge":"true",
+                                "sound":"true",
+                                "alert":"true",
+                                "ecb":"onNotificationAPN"
+                            });
+               }
+              }
             }
        });
        
