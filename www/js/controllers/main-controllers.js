@@ -1,6 +1,6 @@
 angular.module('main.controllers', ['starter'])
 
-.controller('MainCtrl', function($scope, $stateParams,OpenFB,$localStorage,$cordovaToast,$ionicLoading,$ionicViewService,$state,parttyUtils) {
+.controller('MainCtrl', function($scope,$cordovaDevice, $stateParams,OpenFB,$localStorage,$cordovaToast,$ionicLoading,$ionicViewService,$state,parttyUtils) {
     //console.log(device.platform);
     
     //parttyUtils.logPartty(window.plugins.pushNotification);
@@ -23,6 +23,7 @@ angular.module('main.controllers', ['starter'])
                     {"senderID":"244606470402", "ecb":"onNotificationGCM"});
             }else{
                //alert("IOS");
+                alert($cordovaDevice.getModel());
                window.plugins.pushNotification.register(
                       tokenHandler,
                       errorHandler,
