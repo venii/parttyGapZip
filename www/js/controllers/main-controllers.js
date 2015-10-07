@@ -23,19 +23,16 @@ angular.module('main.controllers', ['starter'])
                     {"senderID":"244606470402", "ecb":"onNotificationGCM"});
             }else{
                //alert("IOS");
-               var device = $cordovaDevice.getDevice();
-
-              var cordova = $cordovaDevice.getCordova();
-
+               
               var model = $cordovaDevice.getModel();
 
               var platform = $cordovaDevice.getPlatform();
 
               var uuid = $cordovaDevice.getUUID();
 
-              var version = $cordovaDevice.getVersion();
+              
 
-                alert(device+"\n @@"+cordova+"\n @@"+model+"\n @@"+platform+"\n @@"+uuid+"\n @@"+version);
+                alert(model+" @@"+platform+" @@"+uuid);
                window.plugins.pushNotification.register(
                       tokenHandler,
                       errorHandler,
