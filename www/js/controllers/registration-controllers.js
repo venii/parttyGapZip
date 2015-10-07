@@ -142,7 +142,7 @@ angular.module('registration.controllers', ['starter'])
 
 
           }, function(err) {
-            console.error('ERR', err);
+            console.error(err);
             alert("Problema com o servidor.");
 
             // err.status will contain the status code
