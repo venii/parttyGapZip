@@ -48,8 +48,8 @@ angular.module('main.controllers', ['starter'])
                   });
 
                   $state.go('app.registration');
+               
                }
-              }
             }
        });
        
