@@ -17,7 +17,13 @@ angular.module('app.utils-service', ['starter'])
 			      }
 		    }
 
-		    
+		    this.setInternetState = function(state){
+		    	$localStorage.internetState = state;
+		    }
+
+		    this.getInternetState = function(){
+		    	return $localStorage.internetState;
+		    }
 
 		    this.showNoConnectionError = function(){
 		    	alert("É necessario ter conexao a internet para utilizar o sistema.");

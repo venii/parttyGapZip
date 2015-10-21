@@ -6,7 +6,8 @@ angular.module('app.controllers', ['starter'])
     $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage,$stateParams,
     MenuService,
     FriendsService,
-    AdressService) {
+    AdressService,
+    UtilsService) {
 
   $localStorage.httpserver = 'http://parttyappnoip.ddns.net';
   $localStorage.restaddress = $localStorage.httpserver+'/partty/servercode/ws/process.php/';
@@ -29,13 +30,14 @@ angular.module('app.controllers', ['starter'])
   $localStorage.uploadchunk = $localStorage.restaddress + 'uploadChunk';
 
   $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
-    var onlineState = networkState;
+    UtilsService.setInternetState(networkState);
     
   });
    
   $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
-    var offlineState = networkState;
+    UtilsService.setInternetState(networkState);
     $state.go('app.login');
+    
   });
   
   $scope.toggleLeftSideMenu = function() {
