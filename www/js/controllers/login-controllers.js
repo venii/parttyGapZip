@@ -14,137 +14,47 @@ angular.module('login.controllers', ['starter'])
     $state.go("app.login");
 
 })
-.controller('LoginFBCtrl', function($scope,$state,$location,$cordovaNetwork,$cordovaOauth,$localStorage,$ionicViewService,$ionicSideMenuDelegate) {
-  //remove o history back quando usa GO() !
-  console.log('Controller: LoginFBCtrl ');
+.controller('LoginFBCtrl', function($scope,$state,$location,
+  $cordovaNetwork,$cordovaOauth,$localStorage,$ionicViewService,$ionicSideMenuDelegate,
+  LoginService,UtilsService) {
+  
+
   $ionicViewService.nextViewOptions({
     disableBack: true 
   });
   
   $scope.loginf = function(){
-      
+     
+     if(UtilsService.isMob()){
 
+        if(!LoginService.isAuthFb()){
 
-
-      $ionicViewService.nextViewOptions({
-        disableBack: true
-      });
-
-       if(openFB.isMob()){
-
-
-          if(!$cordovaNetwork.isOnline()){
-              alert("Sem acesso a internet");
-              return 0;
-          }
-
-           console.log("openFB.isMob() : "+openFB.isMob());
-           
-           document.addEventListener("deviceready", function () {
-             if($localStorage.token == undefined){
-                   console.log("$localStorage.token : undefined");
-                   
-                   $cordovaOauth.facebook("574073299368611", ["email"]).then(function(result) {
-                              // results
-                              console.log("@AUTH FACEBOOK");
-                              $scope.tokenfbview = result.access_token;
-                              $localStorage.token = result.access_token;
-                              console.log(result);
-                             
-                               $state.go('app.main');
-                              //$location.path("/main");
-                              
-                              
-                          }, function(error) {
-                              //alert("#");
-                               console.log("error");
-                               $ionicViewService.nextViewOptions({
-                                  disableBack: true
-                                });
-                              $state.go('app.loggedout');
-                          });
-              }else{
-                  console.log("@app.main "+$localStorage.token);
-                  //$location.path("/main");
-                  
-                  $ionicViewService.nextViewOptions({
-                    disableBack: true
-                  });
-
-                  $state.go('app.main');
-              } 
-          
-            });
-         }else{
+              LoginService.doLogin(function(response){
+                LoginService.saveFBAuthObj(response); 
+                $state.go('app.main');
+              });
               
-             if($localStorage.token == undefined){
-
-                  openFB.init({ appId  : '574073299368611' });
-                  
-
-                  openFB.login(function(response){
-                    
-                    $scope.tokenfbview = response.authResponse.token;
-                    $localStorage.token = response.authResponse.token;
-
-                    $ionicViewService.nextViewOptions({
-                      disableBack: true
-                    });
-                    
-                    $state.go('app.main');
-
-                  }, {scope: 'email'});
-                
-              }else{
-                   
-                   $scope.tokenfbview = openFB.getToken();
-
-                   $ionicViewService.nextViewOptions({
-                    disableBack: true
-                   });
-
-                   $state.go('app.main');
-              }
-
+         }else{                  
+              $state.go('app.main');
          }
-  };
 
+        
+         
+     }else{
+          
+         if(!LoginService.isAuthFb()){
 
-
-
-  //aply timeout
-  //REDIR PARA MAIN SE TIVER SESSION
-  //verificar o motivo
-  // ios n entra no document.
-
-  setTimeout(function(){
-    
-      if($localStorage.token != undefined){
-         console.log("token without deviceready: "+$localStorage.token);
-         $ionicSideMenuDelegate.canDragContent(true);
-
-         if(openFB.isMob()){
-               console.log("IS MOB without deviceready ");
-               ionic.Platform.ready(function(){
-                 //  alert("ionic ready");
-                   console.log("ionic ready");
-                    if($cordovaNetwork.isOnline()){
-                    
-                         $state.go('app.main');
-                    }else{
-                      alert("Sem acesso a internet");
-             
-                    }
-               });
-         }else{
-             //alert("webready");
-              console.log("not is mob ionic ready");
-             $state.go('app.main');
+              LoginService.doLogin(function(response){
+                LoginService.saveFBAuthObj(response); 
+                $state.go('app.main');          
+              });
+              
+         }else{                  
+              $state.go('app.main');
          }
 
      }
-  },1000);
- 
+  };
    
 }).controller('CarouselDemoCtrl', function ($scope,GeradorService) {
   $scope.myInterval = 5000;

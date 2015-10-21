@@ -17,15 +17,16 @@ try{
                                         ,'matches.controllers',
                                        'cards-animation-matches.controllers',
                                        'newmatchesfound.controllers',
-                                       'profile.controllers'])
+                                       'profile.controllers',
+
+                                       /*SERVICES*/
+                                       'app.login-service',
+
+
+                                       ])
 
   .run(function($ionicPlatform,OpenFB,$cordovaNetwork) {
-
-  //  OpenFB.init('574073299368611','http://parttyionic.ddns.net:8100/',window.localStorage);
-
-     //OpenFB.init('574073299368611','http://parttyionic.ddns.net:8100/oauthcallback.html',window.localStorage);
-
-
+    
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
