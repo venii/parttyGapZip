@@ -12,19 +12,21 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
            var FBappId ='574073299368611';
 
            var FBscope = 'email';
+           
            this.doLogin = function(callback){
              this.doLoginFB(callback); 
            };
 
 
-          this.registerFBmobile = function(callback){
+           this.registerFBmobile = function(callback){
             
             document.addEventListener("deviceready", function () {
               
               $cordovaOauth.facebook(FBappId, [FBscope]).then(callback,this.errorHandlerLogin);
               
             });
-          }
+           
+           }
 
            this.doLoginFB = function(callback){
               if(UtilsService.isMob()){
@@ -45,10 +47,12 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
            this.saveFBAuthObj = function(response){
               $localStorage.authObj = response;
 
-              if(response.authResponse.token != undefined)
-                this.saveToken(response.authResponse.token);
-              else
+              //console.log(response.authResponse);
+
+              if(typeof(response.authResponse) == "undefined")
                 this.saveToken(response.access_token);
+              else
+                this.saveToken(response.authResponse.token);
            }
            
            this.saveToken = function(token){
