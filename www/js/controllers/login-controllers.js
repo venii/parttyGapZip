@@ -1,8 +1,9 @@
 angular.module('login.controllers', ['starter'])
 .controller('LoggedOutCtrl', function($scope,$state,OpenFB,LoginService) {
-    
+  
     LoginService.loggout(function(){
       OpenFB.logout();
+      
       $state.go("app.login");
     
     });

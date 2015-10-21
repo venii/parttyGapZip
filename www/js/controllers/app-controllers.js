@@ -54,6 +54,7 @@ angular.module('app.controllers', ['starter'])
 
   $scope.logout = function() {
     $state.go("app.loggedout");
+    
   };
 
   $scope.configurations = function() {
