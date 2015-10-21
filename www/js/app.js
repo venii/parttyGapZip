@@ -10,7 +10,7 @@ try{
                              'ionic.service.core','ionic.service.push',
                              'ng','ngCordova','ngLoad','ngStorage',
                              
-                             'app.controllers',
+                             'app.menu',
                              'login.controllers',
                              'main.controllers',
                              'registration.controllers',
