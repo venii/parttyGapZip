@@ -1,18 +1,11 @@
 angular.module('login.controllers', ['starter'])
-.controller('LoggedOutCtrl', function($scope,$state,$location,$cordovaOauth,$localStorage,$ionicViewService,OpenFB,$ionicSideMenuDelegate) {
+.controller('LoggedOutCtrl', function($scope,$state,OpenFB,LoginService) {
     
-    $ionicSideMenuDelegate.canDragContent(false);
-
-    delete $localStorage.token;
-    delete $localStorage;
-
-    OpenFB.logout();
-    $ionicViewService.nextViewOptions({
-      disableBack: true
+    LoginService.loggout(function(){
+      OpenFB.logout();
+      $state.go("app.login");
+    
     });
-    
-    $state.go("app.login");
-
 })
 .controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService) {
   
@@ -38,7 +31,7 @@ angular.module('login.controllers', ['starter'])
         
          
      }else{
-          
+      
          if(!LoginService.isAuthFb()){
 
               LoginService.doLogin(function(response){

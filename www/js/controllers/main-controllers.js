@@ -1,15 +1,7 @@
 angular.module('main.controllers', ['starter'])
+.controller('MainCtrl', function($scope,$state,UtilsService,MainService,$ionicLoading,$ionicViewService,$localStorage) {
 
-.controller('MainCtrl', function($scope,$cordovaDevice, $stateParams,OpenFB,$localStorage,$cordovaToast,$ionicLoading,$ionicViewService,$state,parttyUtils) {
-    //console.log(device.platform);
-    
-    //parttyUtils.logPartty(window.plugins.pushNotification);
-   // console.log(ProgressIndicator);
-    //alert("@");
-    //alert(openFB.isMob());
-    //alert(device.platform);
-    console.log("ismob?"+openFB.isMob());
-    if(openFB.isMob()){
+    if(UtilsService.isMob()){
         
         $ionicLoading.show({
           template: 'Carregando servidor de mensagem ...'

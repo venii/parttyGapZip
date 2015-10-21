@@ -1,6 +1,6 @@
 angular.module('app.login-service', ['app.utils-service','ngCordova'])
 .service('LoginService',  function(
-    $localStorage,$ionicViewService,
+    $localStorage,$ionicViewService,$ionicSideMenuDelegate,
     $http,$rootScope,$cordovaOauth,
 
     
@@ -67,5 +67,19 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
 
            this.isAuthFb = function(){
               return this.getToken() == undefined ? false : true;
+           }
+
+
+           this.loggout = function(callback){
+              $ionicSideMenuDelegate.canDragContent(false);
+
+              delete $localStorage.token;
+              delete $localStorage;
+
+              callback();
+           }
+
+           this.showNoAuthError = function(){
+              alert("É necessario autenticar antes de utilizar.");
            }
   });

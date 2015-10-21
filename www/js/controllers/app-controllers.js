@@ -1,18 +1,13 @@
 angular.module('app.controllers', ['starter'])
 
-.controller('AppCtrl', function(FriendsService,$cordovaNetwork,$scope,$state,$rootScope,$ionicSideMenuDelegate,$ionicViewService, $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage,$stateParams) {
+.controller('AppCtrl', function(
+    $scope,$state,$rootScope,
+    $ionicSideMenuDelegate,$ionicViewService, 
+    $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage,$stateParams,
+    MenuService) {
 
-  // bind do menu $ionicSideMenuDelegat
-
-  //NAO CARREGA O MENU EM CERTAS PAGINAS
- 
- 
-  //$localStorage.httpserver = 'http://parttyappnoip.ddns.net';
   $localStorage.httpserver = 'http://parttyappnoip.ddns.net';
-  
   $localStorage.restaddress = $localStorage.httpserver+'/partty/servercode/ws/process.php/';
-
-
   //var constants
   $localStorage.signup = $localStorage.restaddress + 'login';
   $localStorage.getfbidbysess = $localStorage.restaddress + 'getfbidbysess';
@@ -36,7 +31,7 @@ angular.module('app.controllers', ['starter'])
   $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
     var onlineState = networkState;
     //alert("@@@ON");
-  })
+  });
  
   // listen for Offline event
   $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
@@ -46,12 +41,9 @@ angular.module('app.controllers', ['starter'])
      });
  
     $state.go('app.login');
-    //if(!$state.is('login')){
-    // alert("Sem acesso a internet");
-    // $state.go("login");
-    //}
- 
-  })
+    
+
+  });
   
   $ionicViewService.nextViewOptions({
     disableBack: true
@@ -60,34 +52,23 @@ angular.module('app.controllers', ['starter'])
   $ionicSideMenuDelegate.canDragContent(false);
 
   $scope.toggleLeftSideMenu = function() {
-    if($localStorage.token != undefined && $cordovaNetwork.isOnline())
-      $ionicSideMenuDelegate.toggleLeft();
-    else
-      alert("É necessario autenticar antes de utilizar");
+    MenuService.toggleSideMenu('left');
   };
 
   $scope.toggleRightSideMenu = function() {
-    if($localStorage.token != undefined && $cordovaNetwork.isOnline()){
-      /*CARREGAR CONTATOS NESSA LINHA 1*/
-
-
-      FriendsService.loadFriendList($scope);
-      $ionicSideMenuDelegate.toggleRight();
-
-    }else
-      alert("É necessario autenticar antes de utilizar");
+      
+      MenuService.toggleSideMenu('left',function(){
+        FriendsService.loadFriendList($scope);
+        
+      });
+    
   };
 
   $scope.logout = function() {
-    //disabilita history back e deleta a var de token
     $ionicViewService.nextViewOptions({
       disableBack: true
     });
-    
-    
     $state.go("app.loggedout");
-    
- 
   };
 
   $scope.configurations = function() {

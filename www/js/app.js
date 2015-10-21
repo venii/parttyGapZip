@@ -20,13 +20,14 @@ try{
                                        'profile.controllers',
 
                                        /*SERVICES*/
+                                       'app.menu-service',
                                        'app.login-service',
-
+                                       'app.main-service',
 
                                        ])
 
   .run(function($ionicPlatform,OpenFB,$cordovaNetwork) {
-    
+
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)

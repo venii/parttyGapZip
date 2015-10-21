@@ -17,4 +17,7 @@ angular.module('app.utils-service', ['starter'])
 			      }
 		    }
 
+		    this.showNoConnectionError = function(){
+		    	alert("É necessario ter conexao a internet para utilizar o sistema.");
+		    }
   });
