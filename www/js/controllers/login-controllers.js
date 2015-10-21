@@ -10,10 +10,6 @@ angular.module('login.controllers', ['starter'])
 })
 .controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService) {
   
-  $ionicViewService.nextViewOptions({
-    disableBack: true 
-  });
-  
   $scope.loginf = function(){
      
      if(UtilsService.isMob()){

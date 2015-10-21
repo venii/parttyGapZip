@@ -19,6 +19,8 @@ angular.module('registration.controllers', ['starter'])
 
           RegistrationService.saveUserData(resp);
           RegistrationService.updateDeviceDetailsJSON(resp,deviceType);      
+          RegistrationService.changeCoverMenuPhoto(resp);
+          
           var userData = RegistrationService.getUserData();
           
           RegistrationService.loginParttyJSON(function(resp){
