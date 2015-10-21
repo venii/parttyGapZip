@@ -27,6 +27,7 @@ try{
                              'app.login-service',
                              'app.main-service',
                              'app.chat-service',
+                             'app.registration-service',
 
                                        ])
 
