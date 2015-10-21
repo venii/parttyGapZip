@@ -10,6 +10,7 @@ angular.module('main.controllers', ['starter'])
     if(UtilsService.isMob()){
       
        MainService.registerPushNotification(function(){
+          $ionicLoading.hide();
           MainService.registerPushNotificationOnMobile(); 
        });          
       

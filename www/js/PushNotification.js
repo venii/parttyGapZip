@@ -96,7 +96,6 @@ function onNotificationGCM(e) {
                     $scope = angular.element(document.body).scope();
                     $injector = angular.element(document.body).injector();
                     
-
                     MainService = $injector.get("MainService");
                     MainService.saveDeviceToken(e.regid);
                     
