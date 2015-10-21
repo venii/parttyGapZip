@@ -6,24 +6,27 @@
 // 'starter.controllers' is found in controllers.js
 try{
   angular.module('starter', ['ionic','ui.bootstrap',
-                                'starter.controllers','sociogram.controllers','openfb',
-                                   'ionic.service.core','ionic.service.push','ng','ngLoad',
-                                        'app.controllers',
-                                        ,'login.controllers',
-                                        ,'main.controllers',
-                                        ,'registration.controllers',
-                                        ,'configurations.controllers'
-                                        ,'events.controllers'
-                                        ,'matches.controllers',
-                                       'cards-animation-matches.controllers',
-                                       'newmatchesfound.controllers',
-                                       'profile.controllers',
+                             'sociogram.controllers','openfb',
+                             'ionic.service.core','ionic.service.push',
+                             'ng','ngCordova','ngLoad','ngStorage',
+                             
+                             'app.controllers',
+                             'login.controllers',
+                             'main.controllers',
+                             'registration.controllers',
+                             'configurations.controllers',
+                             'events.controllers',
+                             'matches.controllers',
+                             'cards-animation-matches.controllers',
+                             'newmatchesfound.controllers',
+                             'profile.controllers',
+                             'chat.controllers',
 
-                                       /*SERVICES*/
-                                       'app.menu-service',
-                                       'app.login-service',
-                                       'app.main-service',
-                                       'app.chat-service',
+                             /*SERVICES*/
+                             'app.menu-service',
+                             'app.login-service',
+                             'app.main-service',
+                             'app.chat-service',
 
                                        ])
 

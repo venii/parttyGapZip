@@ -1,6 +1,6 @@
 angular.module('registration.controllers', ['starter'])
 
-.controller('RegistrationCtrl', function($scope, $stateParams,$modal,$localStorage,$ionicLoading,$http,parttyUtils,$ionicViewService,$state,$cordovaDatePicker) {
+.controller('RegistrationCtrl', function($scope, $stateParams,$modal,$localStorage,$ionicLoading,$http,$ionicViewService,$state,$cordovaDatePicker) {
       $ionicLoading.hide();
       $scope.devicetoken = $localStorage.devicetoken;
 

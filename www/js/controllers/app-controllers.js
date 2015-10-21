@@ -5,7 +5,8 @@ angular.module('app.controllers', ['starter'])
     $ionicSideMenuDelegate,$ionicViewService, 
     $ionicModal,$location, $timeout,OpenFB,$ionicViewService,$localStorage,$stateParams,
     MenuService,
-    FriendsService) {
+    FriendsService,
+    AdressService) {
 
   $localStorage.httpserver = 'http://parttyappnoip.ddns.net';
   $localStorage.restaddress = $localStorage.httpserver+'/partty/servercode/ws/process.php/';
@@ -27,23 +28,14 @@ angular.module('app.controllers', ['starter'])
   $localStorage.upload_user_image = $localStorage.restaddress + 'upload_user_image';
   $localStorage.uploadchunk = $localStorage.restaddress + 'uploadChunk';
 
-  // listen for Online event
-     // listen for Online event
   $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
     var onlineState = networkState;
-    //alert("@@@ON");
+    
   });
    
-  // listen for Offline event
   $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
     var offlineState = networkState;
-     $ionicViewService.nextViewOptions({
-      disableBack: true
-     });
- 
     $state.go('app.login');
-    
-
   });
   
   $scope.toggleLeftSideMenu = function() {

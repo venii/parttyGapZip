@@ -86,52 +86,26 @@ function successHandler(result) { console.log('Success: '+ result); /*alert('Suc
 function errorHandler(error) { console.log('Error: '+ error); /*alert('Error: '+ result);*/ }
 
 function onNotificationGCM(e) { 
-    //console.log("onNotificationGCM");
-    //alert("onNotificationGCM");
-    //alert('Event: '+ e.event);
-   
+    
     switch(e.event){ 
 
         case 'registered':
 
             if (e.regid.length > 0){ 
-                    //alert("device token: "+e.regid);
-                    //deviceRegistered(e.regid);
-                    //INJETA O DEVICE VIA LEGACY CODE (FORA DO ANGULAR)
-                    //REDIRECIONA PARA O NOVO CONTROLADOR
-
-                  // alert("@init legacy code");
-                    window.localStorage.devicetoken = e.regid;
-
-                    scopeExternal =  angular.element(document.body).scope();
+                
+                    $scope = angular.element(document.body).scope();
+                    $injector = angular.element(document.body).injector();
                     
-                    injectorExternal = angular.element(document.body).injector();
-                    injectorExternalGET = injectorExternal.get("$location");
+
+                    MainService = $injector.get("MainService");
+                    MainService.saveDeviceToken(e.regid);
                     
-                    localStorageLegacy = injectorExternal.get("$localStorage");
-                    localStorageLegacy.devicetoken = e.regid;
-
-
-                    ionicViewLegacy = injectorExternal.get("$ionicViewService");
-                    ionicViewLegacy.nextViewOptions({
-                        disableBack: true
-                      });
-
-                    console.log("IOredirec");
-                    console.log(injectorExternalGET);
-
-
-                    console.log("current: "+injectorExternalGET.path());
-                   // alert("@last");
-                    injectorExternalGET.path("/app/registration");
-                    scopeExternal.$apply();
-
-                    console.log("current: "+injectorExternalGET.path());
-                   // alert("@end");
+                    $state = $injector.get("$state");
+                    $state.go("app.registration");
                     
-                  //  alert("@final");
                 } 
-        break;   
+        break;  
+
         case 'message': 
        
            
