@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 try{
   angular.module('starter', ['ionic','ui.bootstrap',
-                             'sociogram.controllers','openfb',
+                             'openfb',
                              'ionic.service.core','ionic.service.push',
                              'ng','ngCordova','ngLoad','ngStorage',
                              
