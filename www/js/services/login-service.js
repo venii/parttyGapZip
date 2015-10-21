@@ -44,7 +44,11 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
 
            this.saveFBAuthObj = function(response){
               $localStorage.authObj = response;
-              this.saveToken(response.authResponse.token);
+
+              if(response.authResponse.token != undefined)
+                this.saveToken(response.authResponse.token);
+              else
+                this.saveToken(response.access_token);
            }
            
            this.saveToken = function(token){
