@@ -22,7 +22,7 @@ angular.module('app.utils-service', ['starter'])
 		    }
 
 		    this.getInternetState = function(){
-		    	return $localStorage.internetState;
+		    	return (typeof $localStorage.internetState == "undefined" ? true : $localStorage.internetState );
 		    }
 
 		    this.showNoConnectionError = function(){

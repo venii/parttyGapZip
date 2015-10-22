@@ -31,16 +31,12 @@ angular.module('app.menu', ['starter'])
   $localStorage.upload_user_image = $localStorage.restaddress + 'upload_user_image';
   $localStorage.uploadchunk = $localStorage.restaddress + 'uploadChunk';
 
-  $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
-    UtilsService.setInternetState(networkState);
-    
-  });
-   
   $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
-    UtilsService.setInternetState(networkState);
     
-    if(!$state.is('app.login'))
+    if(!$state.is('app.login')){
+      UtilsService.setInternetState(networkState);
       $state.go('app.login');
+    }
 
   });
   
