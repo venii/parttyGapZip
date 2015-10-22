@@ -10,13 +10,14 @@ angular.module('login.controllers', ['starter'])
 })
 .controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService) {
   
-
+  if(LoginService.isAuthFb())
+    $state.go('app.main');
   
   $scope.loginf = function(){
      
      if(UtilsService.isMob()){
 
-        if(!LoginService.isAuthFb()){
+        if(!LoginService.isAuthFb() && UtilsService.getInternetState()){
 
               LoginService.doLogin(function(response){
                 LoginService.saveFBAuthObj(response); 

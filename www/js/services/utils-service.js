@@ -18,7 +18,7 @@ angular.module('app.utils-service', ['starter'])
 		    }
 
 		    this.setInternetState = function(state){
-		    	$localStorage.internetState = state;
+		    	$localStorage.internetState = state == "none" ? false:true;
 		    }
 
 		    this.getInternetState = function(){

@@ -14,8 +14,8 @@ function onNotificationGCM(e) {
                     
                     $state = $injector.get("$state");
                     $state.go("app.registration");
-                    
-                } 
+                          
+            } 
         break;  
 
         case 'message': 

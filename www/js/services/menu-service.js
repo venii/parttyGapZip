@@ -13,19 +13,19 @@ angular.module('app.menu-service', ['starter','app.utils-service','app.login-ser
            		if(LoginService.isAuthFb()){
 
            			if(UtilsService.isMob()){
-
+                  self = this;
            				document.addEventListener("deviceready", function () {
 		           			
-		           			if(UtilsService.getInternetState()){
-						      	   this.performToggleSideMenu(side);
+		           	    if(UtilsService.getInternetState()){
+						      	   self.performToggleSideMenu(side);
                        typeof(callback) != "undefined" ? callback() : null;
 					      	  
                     }else{
-					      		   UtilsService.showNoConnectionError();
+					      		  UtilsService.showNoConnectionError();
 					      	  
                     }
 
-				      	});
+				      	 });
            			}else{
            				this.performToggleSideMenu(side);
            				typeof(callback) != "undefined" ? callback() : null;
