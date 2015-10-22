@@ -32,15 +32,15 @@ angular.module('app.menu', ['starter'])
   $localStorage.uploadchunk = $localStorage.restaddress + 'uploadChunk';
 
   $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
-    console.log(networkState);
     UtilsService.setInternetState(networkState);
     
   });
    
   $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
-    console.log(networkState);
     UtilsService.setInternetState(networkState);
-    $state.go('app.login');
+    
+    if(!$state.is('app.login'))
+      $state.go('app.login');
 
   });
   
