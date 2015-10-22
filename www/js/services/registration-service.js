@@ -1,7 +1,7 @@
 angular.module('app.registration-service', ['starter','app.utils-service','app.registration-service','app.login-service','ngCordova'])
 .service('RegistrationService',  function(
     $localStorage,$ionicViewService,
-    $http,
+    $http,$cordovaDevice,
 
     
     /*
