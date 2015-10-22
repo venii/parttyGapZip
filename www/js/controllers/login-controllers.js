@@ -10,8 +10,8 @@ angular.module('login.controllers', ['starter'])
 })
 .controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService) {
   
-  if(LoginService.isAuthFb())
-    $state.go('app.main');
+  //if(LoginService.isAuthFb())
+  // $state.go('app.main');
   
   $scope.loginf = function(){
      
