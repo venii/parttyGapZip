@@ -9,6 +9,7 @@ try{
                              'openfb',
                              'ionic.service.core','ionic.service.push',
                              'ng','ngCordova','ngLoad','ngStorage',
+                             'ngIOS9UIWebViewPatch',
                              
                              'app.menu',
                              'login.controllers',
