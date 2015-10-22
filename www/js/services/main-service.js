@@ -1,7 +1,7 @@
 angular.module('app.main-service', ['starter','app.utils-service','app.login-service','ngCordova'])
 .service('MainService',  function(
     $localStorage,$ionicViewService,
-    $http,$cordovaOauth,
+    $http,$cordovaOauth,$cordovaDevice,
 
     
     /*
