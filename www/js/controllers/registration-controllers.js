@@ -32,7 +32,7 @@ angular.module('registration.controllers', ['starter'])
               $state.go('app.events');
 
 
-          },  function(){
+          },  function(err){
             $ionicLoading.hide();
             alert("Problema com o servidor.");
             $state.go('app.login');

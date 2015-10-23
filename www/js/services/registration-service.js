@@ -55,7 +55,7 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
                     callback(resp);
                   },function(err) {
                     console.error('ERR', err);
-                    callback_error();
+                    callback_error(err);
                 });
 
       }

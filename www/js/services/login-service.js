@@ -82,4 +82,11 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
            this.showNoAuthError = function(){
               alert("É necessario autenticar antes de utilizar.");
            }
+
+           this.checkUserByPass = function(){
+              if(LoginService.isAuthFb() && !LoginService.isAuthFb() && UtilsService.getInternetState())
+                return true;
+              return false;
+  
+           }
   });
