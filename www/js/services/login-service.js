@@ -84,8 +84,15 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
            }
 
            this.checkUserByPass = function(){
-              if(LoginService.isAuthFb() && !LoginService.isAuthFb() && UtilsService.getInternetState())
-                return true;
+              
+              if(UtilsService.isMob()){
+                if(this.isAuthFb() && UtilsService.getInternetState())
+                  return true;
+              
+              }else{
+                if(this.isAuthFb())
+                  return true;
+              }
               return false;
   
            }

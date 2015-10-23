@@ -31,9 +31,8 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
       this.verifyFBSessJSON = function(resp,callback){
           if(resp.data.error || !resp.data.usuario){
             alert("Autentique com o Facebook novamente.");
-            $ionicLoading.hide();
-
-            callback();
+            
+            LoginService.loggout(callback);
           }
       }
 
@@ -75,6 +74,15 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
       }
 
       this.saveUserData = function(resp){
+          
+          var profilePic = null;
+          
+          try{
+            profilePic = resp.data.usuario.picture.data.url;
+          }catch(err){
+            console.log('saveUserData: '+err);
+          }
+
           var postData = {
                   "ent_first_name"  : resp.data.usuario.name,
                   "ent_sex"         : (resp.data.usuario.gender == "male" ? 1 : 2),
@@ -82,7 +90,7 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
                   "ent_push_token"  : MainService.getDeviceToken(),
                   "ent_auth_type"   : 1,
                   "ent_fbid"        : resp.data.usuario.id,
-                  "urlProfilepic"   : resp.data.usuario.picture.data.url
+                  "urlProfilepic"   : profilePic
           };
 
           $localStorage.usuarioData = postData;

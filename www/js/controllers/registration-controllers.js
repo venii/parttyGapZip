@@ -4,7 +4,7 @@ angular.module('registration.controllers', ['starter'])
                                           $ionicLoading,
                                           $state,
                                           MainService,
-                                          RegistrationService) {
+                                          RegistrationService,LoginService) {
 
       var deviceType = MainService.getDeviceToken();
       
@@ -14,7 +14,8 @@ angular.module('registration.controllers', ['starter'])
 
       RegistrationService.getFBSessJSON(function(resp) {
           RegistrationService.verifyFBSessJSON(resp,function(){
-            $state.go('app.login');  
+              //Revisar se o verifyFBSessJSON esta realizando loggout no final do callback
+              $state.go('app.login');  
           });
 
           RegistrationService.saveUserData(resp);
