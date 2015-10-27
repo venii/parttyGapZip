@@ -1,6 +1,6 @@
 angular.module('profile.controllers', ['starter'])
 
-.controller('ProfileCtrl', function($scope, $stateParams,$modal,$localStorage,$ionicLoading,$http,parttyUtils,$ionicViewService,$state,$cordovaDatePicker) {
+.controller('ProfileCtrl', function($scope, $stateParams,$modal,$localStorage,$ionicLoading,$http,$ionicViewService,$state,$cordovaDatePicker) {
      
       $scope.nome = $localStorage.usuarioData.ent_first_name;
       $scope.mydesc = {};

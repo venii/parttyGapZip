@@ -22,6 +22,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
                              'app.main-service',
                              'app.chat-service',
                              'app.registration-service',
+                             'app.profile-service',
 
                                        ])
 
