@@ -100,7 +100,13 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
         return $localStorage.usuarioData;
       }
 
+      this.getUserFbID = function(){
+        return $localStorage.usuarioData.ent_fbid;
+      }
 
+      this.getUserFbName = function(){
+        return $localStorage.usuarioData.ent_first_name;
+      }
 
       this.changeCoverMenuPhoto = function(resp){
         try{

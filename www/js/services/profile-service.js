@@ -12,15 +12,15 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
     AdressService,
     LoginService,
     MainService,
-    RegistratonService
+    RegistrationService
     ) {
 		
-    	
+
       var widthI = 300;
       var heightI = 150;
 
       this.openPhotoPicker = function(callback){
-          
+         if(UtilsService.isMob()){ 
           window.imagePicker.getPictures(
             function(results) {
                 callback(results);
@@ -36,8 +36,32 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
               height: 800,
               quality: 50
             }
-        );
+          );
+        }else{
+          this.openPhotoPickerWEB(callback);
+          
+        }
+      }
 
+      this.openPhotoPickerWEB = function(callback){
+        element = document.querySelector("input[type=file]");
+        element.click();
+
+        
+        element.onchange = function(){
+          
+          var fr = new FileReader();
+          
+          fr.onload = function () {
+            elementPlacer = document.querySelector("#imgPIC");
+            elementPlacer.src = fr.result;
+            
+            callback({convertBase64 : true});
+               
+          }
+
+          fr.readAsDataURL(element.files[0]);
+        }
       }
 
       this.getProfile = function(token,fbid,callback){
@@ -87,6 +111,11 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
           });
       }
 
+      this.getBase64ActualImage = function(){
+        element = document.querySelector("#imgPIC");
+        return element.src;
+      }
+
       this.uploadPhoto = function (fbid,base64photo,callback){
           $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
           var formData = new FormData();
@@ -102,8 +131,6 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
           xhr.onload = function (e) {
               if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                  alert("Imagem Alterada com sucesso.");
-                  
                   callback(xhr);
                   
                 } else {
@@ -119,4 +146,5 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
           xhr.send(formData);
 
       }
+    
   });
