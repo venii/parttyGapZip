@@ -13,24 +13,12 @@ angular.module('profile.controllers', ['starter'])
 
 
       $scope.processForm = function(){
-        
-        setTimeout(function(){
-
-            var postData = {
-            
-              "sess_fb": $localStorage.token,
-              "ent_user_fbid" : $localStorage.usuarioData.ent_fbid,
-              "ent_pers_desc" : $scope.mydesc.desc
-            };
-
-            $http.get($localStorage.editprofile,{params: postData}).then(function(resp) {
-                //alert($localStorage.photoProfile64 );
-                alert("Atualizado");
-
-            });
-                
-        },1000);
-
+          var token = LoginService.getToken();
+          var fbid = RegistrationService.getUserFbID();
+          var desc = $scope.mydesc;
+          ProfileService.saveProfile(token,fbid,desc,function(){
+            alert("Atualizado");
+          });
       };
     
       $scope.changephoto = function(){

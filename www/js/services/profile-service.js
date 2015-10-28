@@ -106,7 +106,7 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
           };
 
           $http.get(AdressService.editprofile,{params: postData}).then(function(resp) {
-                alert("Atualizado");
+                
                 callback(resp);
           });
       }
