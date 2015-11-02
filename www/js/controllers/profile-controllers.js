@@ -51,7 +51,8 @@ angular.module('profile.controllers', ['starter'])
       
 
       ProfileService.getProfile(token,fbid,function(profilePic,persDesc){
+        
          $scope.imgPIC = profilePic;
-         $scope.mydesc.desc = persDesc;
+         $scope.mydesc.desc = JSON.parse(persDesc).desc;
       });
 });

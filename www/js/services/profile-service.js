@@ -23,6 +23,9 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
          if(UtilsService.isMob()){ 
           window.imagePicker.getPictures(
             function(results) {
+                elementPlacer = document.querySelector("#imgPIC");
+                elementPlacer.src = results[0];
+            
                 callback(results);
             },
 
@@ -127,7 +130,7 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
 
           var xhr = new XMLHttpRequest();
              
-          xhr.open("POST",  $localStorage.uploadchunk);  
+          xhr.open("POST",  AdressService.uploadchunk);  
           xhr.onload = function (e) {
               if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
