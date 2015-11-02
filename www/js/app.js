@@ -23,6 +23,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
                              'app.chat-service',
                              'app.registration-service',
                              'app.profile-service',
+                             'app.event-service',
 
                                        ])
 
@@ -135,7 +136,8 @@ angular.module('starter', ['ionic','ui.bootstrap',
       },
       //remover de app para nao carregar o side menu =)
     }).state('app.matches', {
-      url: "/matches/:idevent",
+      url: "/matches",
+      params : { dataEvent: null },      
       views: {
         'menuContent': {
           templateUrl: "templates/matches/matches.html",

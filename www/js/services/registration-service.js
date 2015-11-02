@@ -108,9 +108,9 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
         return $localStorage.usuarioData.ent_first_name;
       }
 
-      this.changeCoverMenuPhoto = function(resp){
+      this.changeCoverMenuPhoto = function(url){
         try{
-          angular.element(document.querySelector('#profilecontentmenu')).html("<img src='"+resp.data.usuario.picture.data.url+"' style='border-radius: 40px / 20px ;' width=64 heigth=64 />");
+          angular.element(document.querySelector('#profilecontentmenu')).html("<img src='"+url+"' style='border-radius: 40px / 20px ;width:64px;height:64px' width='64' heigth='64' />");
         }catch(err){
           console.log("changeCoverMenuPhoto: "+err);
         }

@@ -30,6 +30,7 @@ angular.module('profile.controllers', ['starter'])
               var base64 = ProfileService.getBase64ActualImage();
               console.log('changefoto',base64);
               ProfileService.uploadPhoto(fbid,base64,function(xhr){
+                  RegistrationService.changeCoverMenuPhoto(base64);
                   alert("Imagen Alterada");
               });
            
@@ -38,6 +39,7 @@ angular.module('profile.controllers', ['starter'])
               ProfileService.converImageBase64("imgPIC",function(base64){
                 
                 ProfileService.uploadPhoto(fbid,base64,function(xhr){
+                    RegistrationService.changeCoverMenuPhoto(base64);
                     alert("Imagen Alterada");
                 });
               });

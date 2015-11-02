@@ -1,9 +1,13 @@
 angular.module('matches.controllers', ['starter','cards-animation-matches.controllers'])
 
-.controller('MatchesCtrl', function (SendMatchesToWS,$ionicViewService,$templateRequest, $sce, $compile,$rootScope,$scope,$localStorage,$http,$ionicScrollDelegate,$ionicLoading,$state,$stateParams,$ionicSideMenuDelegate,SendMatchesToWS) {
-  		$ionicViewService.nextViewOptions({
-          disableBack: true
-        });
+.controller('MatchesCtrl', function (SendMatchesToWS,$stateParams,
+                        $ionicViewService,$templateRequest, 
+                        $sce, $compile,$rootScope,$scope,
+                        $localStorage,$http,$ionicScrollDelegate,
+                        $ionicLoading,$state,$stateParams,
+                        $ionicSideMenuDelegate,SendMatchesToWS) {
+  		
+
         angular.element(document.querySelector('#menuAPP')).addClass('hidden');
         angular.element(document.querySelector('#matchesView')).css("margin-top", "-40px");
 
@@ -12,10 +16,10 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
         angular.element(document.querySelector('#matchesView')).css("min-height", (heightClient+40)+"px");
 
 
-            
+                    
 
-        console.log($rootScope.eventData);
-        $scope.eventinfoJSON = $rootScope.eventData;
+        
+        $scope.eventinfoJSON = $stateParams.dataEvent;
 
         
     	$scope.backtoevents = function(){

@@ -1,5 +1,5 @@
 angular.module('app.utils-service', ['starter'])
-.service('UtilsService',function($localStorage) {
+.service('UtilsService',function($localStorage,$ionicLoading) {
           
            this.isMob = function() { 
 			     if( navigator.userAgent.match(/Android/i)
@@ -27,6 +27,16 @@ angular.module('app.utils-service', ['starter'])
 
 		    this.showNoConnectionError = function(){
 		    	alert("É necessario ter conexao a internet para utilizar o sistema.");
+		    }
+
+		    this.openDialogMsg = function(msg){
+		    	$ionicLoading.show({
+		          template: msg
+		      	});
+		    }
+
+		    this.closeDialogMsg = function(){
+		    	$ionicLoading.hide();
 		    }
 
   }).factory('AdressService', function() {

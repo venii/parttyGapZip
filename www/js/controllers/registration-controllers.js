@@ -20,7 +20,7 @@ angular.module('registration.controllers', ['starter'])
 
           RegistrationService.saveUserData(resp);
           RegistrationService.updateDeviceDetailsJSON(resp,deviceType);      
-          RegistrationService.changeCoverMenuPhoto(resp);
+          RegistrationService.changeCoverMenuPhoto(resp.data.usuario.picture.data.url);
           
           var userData = RegistrationService.getUserData();
           
