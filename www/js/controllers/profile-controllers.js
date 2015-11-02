@@ -28,7 +28,7 @@ angular.module('profile.controllers', ['starter'])
             //METODO WEB
             if(typeof(results.convertBase64) != "undefined"){
               var base64 = ProfileService.getBase64ActualImage();
-              
+              console.log('changefoto',base64);
               ProfileService.uploadPhoto(fbid,base64,function(xhr){
                   alert("Imagen Alterada");
               });

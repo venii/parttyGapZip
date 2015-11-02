@@ -1,4 +1,6 @@
 02/11/2015
+    resolver resultados do uploadChunk , a imagen ja esta sendo upada ok so falta o update dos reg no banco
+    
     add cordova plugin add https://github.com/wymsee/cordova-imagePicker.git
 07/09/2015-
     adicionar badge no chat

@@ -25,8 +25,11 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
             function(results) {
                 elementPlacer = document.querySelector("#imgPIC");
                 elementPlacer.src = results[0];
-            
-                callback(results);
+                elementPlacer.onload = function(){
+                  //console.log('onloadIMGCHANGE',results);
+                  callback(results);  
+                }
+                
             },
 
             function (error) {
@@ -87,13 +90,13 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
            
             var c = document.createElement("CANVAS");
             var ctx = c.getContext("2d");
-            
+                  
             c.width = widthI;
             c.height = heightI;
-
+            
             ctx.drawImage(obj, 0, 0,widthI,heightI);
             base64 = c.toDataURL();
-
+            console.log("base64",base64);
             callback(base64);
           
           }catch(err){
