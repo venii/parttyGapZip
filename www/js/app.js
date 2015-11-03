@@ -24,6 +24,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
                              'app.registration-service',
                              'app.profile-service',
                              'app.event-service',
+                             'app.match-service',
 
                                        ])
 
@@ -143,19 +144,8 @@ angular.module('starter', ['ionic','ui.bootstrap',
           templateUrl: "templates/matches/matches.html",
           controller: 'MatchesCtrl'
         }
-      },onExit: function(){
-            angular.element(document.querySelector('#menuAPP')).removeClass('hidden');
-          
-      },onEnter: function(){
-
-            angular.element(document.querySelector('#menuAPP')).addClass('hidden');
-            //angular.element(document.querySelector('#matchesView')).addClass('menuUptoTop');
-
-
-            angular.element(document.querySelector('#matchesView')).css("margin-top", "-40px");
-            
-            //angular.element(document.querySelector('#matchesView')).css("margin-top", "-40px");
-            //alert("@#");
+      },onExit: function(MatchService){
+          MatchService.showTopMenu();
       }
       
     }).state('app.newmatchesfound', {

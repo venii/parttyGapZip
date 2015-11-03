@@ -5,7 +5,7 @@ angular.module('events.controllers', ['starter'])
   
   var token = LoginService.getToken();
   EventService.getFirstEvent(token,function(resp){
-    	    $scope.items = resp.data.data;
+      	    $scope.items = resp.data.data;
             $scope.nextpag = resp.data.next;
             $scope.prevpag = resp.data.previous;
         
@@ -20,34 +20,31 @@ angular.module('events.controllers', ['starter'])
   $scope.checkScroll = function () {
    		
    		if($scope.nextpag != null && EventService.isEndList()){
-   			var postData = {
-            	"sessfb": token,
-            	"next": $scope.nextpag
-          	};
+   			
 
-
-          	UtilsService.openDialogMsg('Carregando mais Eventos...');
+        UtilsService.openDialogMsg('Carregando mais Eventos...');
           	
-          	if($scope.loadingscrollevents == undefined){
-               $scope.loadingscrollevents = true;
-			   EventService.getEvents(postData,function(resp) {
-				   	UtilsService.closeDialogMsg();
-          			
-			   		if(EventService.validateTokenFetchEvents(resp)){
-			   			for ( dado in resp.data.data) {
-					      $scope.items.push(resp.data.data[dado]);
-					    }	
+        if($scope.loadingscrollevents == undefined){
+          
+          $scope.loadingscrollevents = true;
+			    EventService.getEvents(postData,function(resp) {
+  				  UtilsService.closeDialogMsg();
+            			
+  			    if(EventService.validateTokenFetchEvents(resp)){
+  			   			for ( dado in resp.data.data) {
+  					      $scope.items.push(resp.data.data[dado]);
+  					    }	
 
-			   			$scope.nextpag = resp.data.next;
-			   			$scope.prevpag = resp.data.previous;
-			   			$scope.loadingscrollevents = false;	
-			   			$scope.loadingscrollevents = undefined;
-			   		}
-			 
-			   });
+  			   			$scope.nextpag = resp.data.next;
+  			   			$scope.prevpag = resp.data.previous;
+  			   			$scope.loadingscrollevents = false;	
+  			   			$scope.loadingscrollevents = undefined;
+  			   	}
+  			 
+  			 });
 			}
-   		}
-   };
+   	}
+  };
 
 }).controller('ControllerListEventsCtrl', function($scope) {
  	$scope.shouldShowDelete = false;
