@@ -2,7 +2,7 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
 
 .controller('MatchesCtrl', function (
                         $scope,$state,$stateParams,
-                        SendMatchesToWS,MatchService) {
+                        SendMatchesToWS,MatchService,UtilsService) {
   		
         MatchService.resizeHeight();    
         MatchService.hideTopMenu();
@@ -17,6 +17,14 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
     	};
     	
     	$scope.matches = function(){
-            SendMatchesToWS.loadMatches($scope);
+            UtilsService.openDialogMsg('Procurando matches...');
+                
+            SendMatchesToWS.loadMatches($scope,function(resp){
+                if(resp.error){
+                    alert("Não há matchs");
+                    UtilsService.closeDialogMsg();
+                    $state.go('app.events');
+                }
+            });
     	};
   });
