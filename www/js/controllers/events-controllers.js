@@ -5,10 +5,15 @@ angular.module('events.controllers', ['starter'])
   
   var token = LoginService.getToken();
   EventService.getFirstEvent(token,function(resp){
-      	    $scope.items = resp.data.data;
-            $scope.nextpag = resp.data.next;
-            $scope.prevpag = resp.data.previous;
-        
+
+      if(!EventService.validateTokenFetchEvents(resp)){
+        $state.go('app.loggedout');
+      }
+
+	    $scope.items = resp.data.data;
+      $scope.nextpag = resp.data.next;
+      $scope.prevpag = resp.data.previous;
+  
   });
 
   $scope.clickGridEvents = function(item,index){
@@ -25,11 +30,17 @@ angular.module('events.controllers', ['starter'])
         UtilsService.openDialogMsg('Carregando mais Eventos...');
           	
         if($scope.loadingscrollevents == undefined){
-          
+          var postData = {              
+            "sessfb" : token,
+            "next": $scope.nextpag
+          };
+
+
           $scope.loadingscrollevents = true;
 			    EventService.getEvents(postData,function(resp) {
   				  UtilsService.closeDialogMsg();
-            			
+            
+
   			    if(EventService.validateTokenFetchEvents(resp)){
   			   			for ( dado in resp.data.data) {
   					      $scope.items.push(resp.data.data[dado]);

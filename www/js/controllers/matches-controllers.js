@@ -1,10 +1,10 @@
 angular.module('matches.controllers', ['starter','cards-animation-matches.controllers'])
 
 .controller('MatchesCtrl', function (
-                        $state,$stateParams,
+                        $scope,$state,$stateParams,
                         SendMatchesToWS,MatchService) {
   		
-        MatchService.resizeHeigth();    
+        MatchService.resizeHeight();    
         MatchService.hideTopMenu();
         $scope.eventinfoJSON = $stateParams.dataEvent;
         
