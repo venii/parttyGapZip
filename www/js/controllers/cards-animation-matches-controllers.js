@@ -1,26 +1,25 @@
 angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing','ngAnimate', 'toastr'])
 
 .controller('card-stack-playground', function (
-                $state,SendMatchesToWS,$scope,
-                $rootScope,$ionicSideMenuDelegate,
-                $localStorage,toastr,$ionicViewService,
-                MatchService,LoginService,RegistrationService) {
-         
-         heightClient = angular.element(document.querySelector('.menu-content.pane'))[0].offsetHeight;
-         
-         angular.element(document.querySelector('#viewport')).css("min-height", heightClient+"px");
-         //angular.element(document.querySelector('#cardscontainer')).css("min-height", (heightClient-200)+"px");
-         
-        $ionicSideMenuDelegate.canDragContent(false);
-        console.log("stateParms",$stateParms);           
+                $state,$stateParams,$scope,
+                
+                MatchService,SendMatchesToWS,LoginService,
+                RegistrationService,MenuService) {
+        
+        MenuService.blockSideMenu(); 
+        $scope.eventinfoJSON = $stateParams.dataEvent;
+
+        
+        
+        $scope.cards = SendMatchesToWS.getCards();
+        $scope.cardrest = $scope.cards.length;
 
 
 
-        $scope.cards = [];
-        $scope.cardrest = 0;
-
-        if($rootScope.matchesData.data.length > 0){
-            //alert("@");
+        console.log('send',$scope);
+        
+        if(SendMatchesToWS.getCards().length > 0){
+            
             angular.forEach($rootScope.matchesData.data, function(value, key) {
                 if(value.id != $localStorage.usuarioData.ent_fbid)
                     $scope.cards.push(value);
@@ -28,6 +27,8 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
 
         }
         
+
+        /*
         $scope.cardrest = $rootScope.matchesData.data.length-1;
         
         $scope.clickLeft = function(){
@@ -72,7 +73,7 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                   
         }
 
-        
+        */
         
 
     })

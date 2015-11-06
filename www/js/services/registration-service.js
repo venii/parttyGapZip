@@ -83,7 +83,8 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
             console.log('saveUserData: '+err);
           }
 
-          var postData = {
+          try{
+            var postData = {
                   "ent_first_name"  : resp.data.usuario.name,
                   "ent_sex"         : (resp.data.usuario.gender == "male" ? 1 : 2),
                   "ent_device_type" : MainService.getDeviceType(),
@@ -91,9 +92,12 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
                   "ent_auth_type"   : 1,
                   "ent_fbid"        : resp.data.usuario.id,
                   "urlProfilepic"   : profilePic
-          };
+            };
 
-          $localStorage.usuarioData = postData;
+            $localStorage.usuarioData = postData;
+          }catch(err){
+            console.log('saveUserData(2): '+err);
+          }
       }
 
       this.getUserData = function(){

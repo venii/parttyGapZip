@@ -1,13 +1,15 @@
 function onNotificationGCM(e) { 
     
+    $scope = angular.element(document.body).scope();
+    $injector = angular.element(document.body).injector();
+                    
+
     switch(e.event){ 
 
         case 'registered':
 
             if (e.regid.length > 0){ 
                 
-                    $scope = angular.element(document.body).scope();
-                    $injector = angular.element(document.body).injector();
                     
                     MainService = $injector.get("MainService");
                     MainService.saveDeviceToken(e.regid);

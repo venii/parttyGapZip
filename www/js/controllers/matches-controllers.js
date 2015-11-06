@@ -20,11 +20,13 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
             UtilsService.openDialogMsg('Procurando matches...');
                 
             SendMatchesToWS.loadMatches($scope,function(resp){
+                UtilsService.closeDialogMsg();
+                    
                 if(resp.error){
-                    alert("Não há matchs");
-                    UtilsService.closeDialogMsg();
+                    alert("Não há matches");
                     $state.go('app.events');
                 }
+
             });
     	};
   });
