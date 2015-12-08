@@ -29,4 +29,6 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
 
             });
     	};
+
+        
   });

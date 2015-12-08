@@ -1,11 +1,7 @@
 function onNotificationAPN (event) {
-    //alert("@apns");
     console.log(event);
-    //alert(event.nt)
-    //if ( event.alert )
-    //{
-        //message
-        if(event.nt == 2){
+    
+    if(event.nt == 2){
             //alert(event.alert);
 
 
@@ -40,7 +36,7 @@ function onNotificationAPN (event) {
                     //alert("BACKGROUND: "+ e.payload.sname);
                 },2000);
 
-        }else if(event.nt == 0){
+    }else if(event.nt == 0){
             //teste
            // alert("NT 0");
             scopeExternal =  angular.element(document.body).scope();
@@ -84,7 +80,7 @@ function onNotificationAPN (event) {
                 scopeExternal.$apply();
             },5000);
             
-        }else if(event.nt == 3){
+    }else if(event.nt == 3){
             //MATCH FOUND
                 
             scopeExternal =  angular.element(document.body).scope();
