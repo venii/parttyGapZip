@@ -3,6 +3,9 @@ angular.module('main.controllers', ['starter'])
                               UtilsService,MainService,AdressService,
                               $ionicLoading,$ionicViewService,$localStorage) {
 
+
+  
+
     $ionicLoading.show({
           template: 'Carregando servidor de mensagem ...'
     });
