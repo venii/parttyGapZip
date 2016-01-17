@@ -151,5 +151,5 @@ function tokenHandler (result) {
     MainService.saveDeviceToken(result);
     
     $state = $injector.get("$state");
-    $state.go("/app/registration");
+    $state.go("app.registration");
 }
