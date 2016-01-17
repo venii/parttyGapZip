@@ -15,7 +15,7 @@ function onNotificationGCM(e) {
                     MainService.saveDeviceToken(e.regid);
                     
                     $state = $injector.get("$state");
-                    $state.go("app.registration");
+                    $state.go("/app/registration");
                           
             } 
         break;  
