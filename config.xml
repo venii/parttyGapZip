@@ -8,7 +8,9 @@
       Ionic Framework Team&#xD;&#xD;
     </author>
   <content src="index.html"/>
+
   <access origin="*" subdomains="true"/>
+  <access origin="http://192.168.0.56:8080/*" />
 
   <allow-navigation href="*"/>
 
