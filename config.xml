@@ -25,11 +25,20 @@
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
 
-    <feature name="http://api.phonegap.com/1.0/device" />
+  <plugin name="com.badrit.base64" spec="0.1.0" source="pgb" />
+  <plugin name="com.phonegap.plugins.pushplugin" spec="2.5.0" source="pgb" />
+  <plugin name="com.synconset.imagepicker" spec="1.0.4" source="pgb" />
+
+  <plugin name="io.litehelpers.cordova.sqlite" spec="0.7.10" source="pgb" />
+  <plugin name="nl.x-services.plugins.calendar" spec="4.2.4" source="pgb" />
+  <plugin name="nl.x-services.plugins.toast" spec="2.0.2" source="pgb" />
+  <plugin name="hu.dpal.phonegap.plugins.uniquedeviceid" spec="1.2.0" source="pgb" />
+  <plugin name="org.apache.cordova.network-information" spec="0.2.12" source="pgb" />
+
     <feature name="debug-server" required="true">
-       <param name="domain" value="http://debug.phonegap.com"/>
+       <param name="domain" value="http://192.168.0.56"/>
        <param name="key" value="1928227"/>
     </feature>
-  
+
   <icon src="resources\android\icon\drawable-hdpi-icon.png"/>
 </widget>
