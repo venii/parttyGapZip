@@ -34,6 +34,7 @@
   <plugin name="nl.x-services.plugins.toast" spec="2.0.2" source="pgb" />
   <plugin name="hu.dpal.phonegap.plugins.uniquedeviceid" spec="1.2.0" source="pgb" />
   <plugin name="org.apache.cordova.network-information" spec="0.2.12" source="pgb" />
+  <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
   <!--
     <feature name="debug-server" required="true">
        <param name="domain" value="http://192.168.0.56"/>
