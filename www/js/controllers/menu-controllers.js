@@ -5,7 +5,7 @@ angular.module('app.menu', ['starter'])
     $ionicSideMenuDelegate,$ionicViewService, 
     $ionicModal,$location, $timeout,OpenFB,
     $ionicViewService,$localStorage,$stateParams,
-    $cordovaNetwork,
+   
     MenuService,
     FriendsService,
     AdressService,
@@ -30,7 +30,7 @@ angular.module('app.menu', ['starter'])
   $localStorage.editprofile = $localStorage.restaddress + 'editProfile';
   $localStorage.upload_user_image = $localStorage.restaddress + 'upload_user_image';
   $localStorage.uploadchunk = $localStorage.restaddress + 'uploadChunk';
-
+  /*
   $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
     
     if(!$state.is('app.login')){
@@ -38,7 +38,7 @@ angular.module('app.menu', ['starter'])
       $state.go('app.login');
     }
 
-  });
+  });*/
   
   $scope.toggleLeftSideMenu = function() {
     MenuService.toggleSideMenu('left');

@@ -2,7 +2,7 @@ angular.module('app.menu-service', ['starter','app.utils-service','app.login-ser
 .service('MenuService',function(
 				$ionicSideMenuDelegate,
 				$localStorage,
-				$cordovaNetwork,
+				
 				UtilsService,
 				LoginService
 			) {

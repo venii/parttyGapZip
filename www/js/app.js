@@ -28,7 +28,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
 
                                        ])
 
-  .run(function($ionicPlatform,OpenFB,$cordovaNetwork) {
+  .run(function($ionicPlatform,OpenFB) {
 
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -43,14 +43,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
         StatusBar.styleDefault();
       }
 		*/
-      document.addEventListener("online", function(){
-      		console.log("online");
-      }, false);
-
-      document.addEventListener("offline", function(){
-      	console.log("offline");
-      }, false);
-
+   
     });
 
 

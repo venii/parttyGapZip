@@ -18,12 +18,12 @@ angular.module('app.utils-service', ['starter'])
 		    }
 
 		    this.setInternetState = function(state){
-		    	$localStorage.internetState = state == "none" ? false:true;
+		    	$localStorage.internetState = navigator.onLine;
 		    }
 
 		    this.getInternetState = function(){
 		    	//return (typeof $localStorage.internetState == "undefined" ? true : $localStorage.internetState );
-		    	return true;
+		    	return navigator.onLine;
 		    }
 
 		    this.showNoConnectionError = function(){
