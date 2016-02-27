@@ -41,8 +41,17 @@ angular.module('starter', ['ionic','ui.bootstrap',
         StatusBar.styleDefault();
       }
 
-      
-      });
+      document.addEventListener("online", function(){
+      		console.log("online");
+      }, false);
+
+      document.addEventListener("offline", function(){
+      	console.log("offline");
+      }, false);
+
+    });
+
+
   })
 
   .config(function($stateProvider, $urlRouterProvider,$httpProvider) {
