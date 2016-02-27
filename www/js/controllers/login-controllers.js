@@ -45,5 +45,10 @@ angular.module('login.controllers', ['starter'])
 
      }
   };
+
+
+  $scope.loginF1 = function(){
+    alert("#");
+  }
    
 });
