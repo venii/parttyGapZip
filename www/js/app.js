@@ -33,6 +33,8 @@ angular.module('starter', ['ionic','ui.bootstrap',
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
+
+    	/*
       if (window.cordova && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       }
@@ -40,7 +42,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
-
+		*/
       document.addEventListener("online", function(){
       		console.log("online");
       }, false);
