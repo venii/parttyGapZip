@@ -32,11 +32,11 @@
   <plugin name="io.litehelpers.cordova.sqlite" spec="0.7.10" source="pgb" />
   <plugin name="nl.x-services.plugins.calendar" spec="4.2.4" source="pgb" />
   <plugin name="nl.x-services.plugins.toast" spec="2.0.2" source="pgb" />
-  <!--<plugin name="hu.dpal.phonegap.plugins.uniquedeviceid" spec="1.2.0" source="pgb" />-->
+  <plugin name="hu.dpal.phonegap.plugins.uniquedeviceid" spec="1.2.0" source="pgb" />
   <plugin name="org.apache.cordova.network-information" spec="0.2.12" source="pgb" />
   <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
   <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
-  <plugin name="org.nypr.cordova.playerhaterplugin" spec="0.1.0" source="pgb" />
+  
   <!--
     <feature name="debug-server" required="true">
        <param name="domain" value="http://192.168.0.56"/>
