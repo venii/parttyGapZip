@@ -24,9 +24,7 @@ angular.module('app.main-service', ['starter','app.utils-service','app.login-ser
 
         this.registerPushNotificationOnMobile = function () {
             
-            if ( device.platform == 'android' || 
-            	 device.platform == 'Android' || 
-            	 device.platform == "amazon-fireos" ){
+            if ( UtilsService.isAndroid() ){
               
               window.plugins.pushNotification.register(
               		successHandler,
@@ -69,10 +67,10 @@ angular.module('app.main-service', ['starter','app.utils-service','app.login-ser
         if(typeof device !== "undefined"){
             
             if(UtilsService.isMob() ){
-              if( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos")
+              if( UtilsService.isAndroid())
                   devicetypeapp = 2;
              
-              else if(device.platform == 'iOS')
+              else if(UtilsService.isIOS())
                   devicetypeapp = 1;
             }
         }
