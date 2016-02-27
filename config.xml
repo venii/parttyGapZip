@@ -36,7 +36,7 @@
   <plugin name="org.apache.cordova.network-information" spec="0.2.12" source="pgb" />
   <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
   <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
-  <gap:plugin name="org.apache.cordova.device" />
+  <plugin name="org.nypr.cordova.playerhaterplugin" spec="0.1.0" source="pgb" />
   <!--
     <feature name="debug-server" required="true">
        <param name="domain" value="http://192.168.0.56"/>
