@@ -38,9 +38,5 @@
   <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
   
  
-    <feature name="debug-server" required="false">
-
-    </feature>
-
   <icon src="resources\android\icon\drawable-hdpi-icon.png"/>
 </widget>
