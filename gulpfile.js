@@ -62,8 +62,10 @@ gulp.task('watch', function() {
         //gulp.start('buildAndDownloadAPK',['gitADD','gitCommit','gitPush','updatePhoneGap']);
         gulp.start('gitADD',function(done){
             gulp.start('gitCommit',function(done){
-            
-          });
+              gulp.start('gitPush',function(done){
+              
+              });
+            });
         });
         
        
