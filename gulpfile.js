@@ -118,7 +118,7 @@ gulp.task('watch', function() {
 
 
 gulp.task('gitADD',shell.task([
-    'git add . '
+    'git add www/* config.xml '
 ]));
 
 gulp.task('gitRM',shell.task([
