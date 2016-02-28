@@ -61,6 +61,7 @@ gulp.task('watch', function() {
         
         //gulp.start('buildAndDownloadAPK',['gitADD','gitCommit','gitPush','updatePhoneGap']);
         gulp.start('gitADD',function(done){
+          gulp.start('gitRM',function(done){
             gulp.start('gitCommit',function(done){
               gulp.start('gitPush',function(done){
                 gulp.start('updatePhoneGap',function(done){
@@ -68,6 +69,7 @@ gulp.task('watch', function() {
                 });
               });
             });
+          });
         });
         
        
@@ -80,8 +82,13 @@ gulp.task('watch', function() {
 
 
 gulp.task('gitADD',shell.task([
-    'git add . ', 'git rm app-debug.apk'
+    'git add . '
 ]));
+
+gulp.task('gitRM',shell.task([
+    'git rm app-debug.apk'
+]));
+
 
 gulp.task('gitCommit',shell.task([
     'git commit -am "enviado pelo gulp" '
