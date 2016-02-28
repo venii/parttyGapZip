@@ -162,10 +162,8 @@ gulp.task('buildAndDownloadAPK',function(done){
 
 
          download.on("finish",function(){
-              console.log("end");
+              done();
          });
-        //},function(e){console.log(e);});
-
-    
+       
     });
 });
