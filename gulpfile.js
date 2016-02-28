@@ -157,7 +157,7 @@ gulp.task('buildAndDownloadAPK',function(done){
          
          var download = api.get('/apps/1936762/android').pipe(fs.createWriteStream('app-debug.apk')) .on('error', function(e) { console.log(e); });
 
-         readable.on('data', function(chunk){
+         download.on('data', function(chunk){
             console.log('Baixando %d bytes of data', chunk.length);
          });
 
