@@ -7,6 +7,8 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 
+var fs = require('fs');
+
 var paths = {
   sass: ['./scss/**/*.scss']
 };
@@ -25,9 +27,6 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
-gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
-});
 
 gulp.task('install', ['git-check'], function() {
   return bower.commands.install()
@@ -48,3 +47,51 @@ gulp.task('git-check', function(done) {
   }
   done();
 });
+
+
+gulp.task('watch', function() {
+  var client = require('phonegap-build-api');
+  var watcher = gulp.watch('www/**');
+  watcher.on('change', function(event) {
+      
+      
+      if(event.type == "changed"){
+        
+        
+        client.auth({ username: 'parttyapp@gmail.com', password: '210289aA' }, function(e, api) {
+          console.log("login into phonegap api success.");
+          api.get('/apps/1928227/android').pipe(fs.createWriteStream('app-debug.apk'));
+          
+      });
+        
+      } 
+       
+    });
+
+});
+ 
+
+/*
+var watcher = gulp.watch('www/**', ['zip']);
+watcher.on('change', function(event) {
+  //console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+  
+
+   console.log("###INICIANDO JSLINT###\n\n\n");
+  //gulp.start('jslint');
+  
+  if(event.type == "changed"){
+  	console.log("login into phonegap api");
+  	
+    client.auth({ username: 'parttyapp@gmail.com', password: '210289aA' }, function(e, api) {
+	    // time to make requests
+	    console.log(e);
+	    console.log(api);
+	});
+    //gulp.start('buildAPK',['closeAPK','jslint']);
+  }
+  //shell.task(['phonegap build android']);
+
+   
+});
+*/
