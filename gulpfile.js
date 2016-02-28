@@ -118,7 +118,7 @@ gulp.task('gitADD',shell.task([
 ]));
 
 gulp.task('gitRM',shell.task([
-    'git rm app-debug.apk app-debug.zip'
+    'git rm --ignore-unmatch app-debug.apk app-debug.zip'
 ]));
 
 
