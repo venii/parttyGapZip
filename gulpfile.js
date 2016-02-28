@@ -85,6 +85,9 @@ gulp.task('watch', function() {
             gulp.start('gitRM',function(done){
               gulp.start('gitPush',function(done){
                 gulp.start('updatePhoneGap',function(done){
+                  gulp.start('buildAndDownloadAPK',function(done){
+                      console.log("DONE");
+                  });
               
                 });
 
