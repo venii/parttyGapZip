@@ -86,10 +86,7 @@ gulp.task('watch', function() {
             gulp.start('gitPush',function(done){
               gulp.start('updatePhoneGap',function(done){
                 gulp.start('buildAndDownloadAPK',function(done){
-                    console.log("DONE");
-                    gulp.start('installAPK',function(done){
-                     console.log("Instalado");
-                    });
+                    
                 });
               });
             });
@@ -137,7 +134,7 @@ gulp.task('updatePhoneGap',shell.task([
 
 
 gulp.task('installAPK',shell.task([
-    'adb -r app-debug.apk'
+    'adb install -r app-debug.apk'
 ]));
 
 /*#1*/
@@ -162,7 +159,9 @@ gulp.task('buildAndDownloadAPK',function(done){
 
 
          download.on("finish",function(){
-              done();
+              gulp.start('installAPK',function(done){
+                console.log("Instalado");
+              });
          });
        
     });
