@@ -175,7 +175,7 @@ gulp.task('buildAndDownloadAPK',function(done){
          */    
          console.log("baixando apk.");
          
-         api.get('/apps/1936762/android').pipe(fs.createWriteStream('app-debug.apk'));
+         api.get('/apps/1936762/android').pipe(fs.createWriteStream('app-debug.apk')) .on('error', function(e) { console.log(e); });
 
         //},function(e){console.log(e);});
 
