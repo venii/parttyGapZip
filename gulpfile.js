@@ -134,7 +134,7 @@ gulp.task('updatePhoneGap',shell.task([
 
 
 gulp.task('installAPK',shell.task([
-    'adb install -r app-debug.apk'
+    'adb install -r app-debug.apk','adb shell monkey -p com.ionicframework.partty754126 -c android.intent.category.LAUNCHER 1'
 ]));
 
 /*#1*/
@@ -164,6 +164,7 @@ gulp.task('buildAndDownloadAPK',function(done){
          download.on("finish",function(){
               gulp.start('installAPK',function(done){
                 console.log("Instalado");
+
               });
          });
        
