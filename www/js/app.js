@@ -46,7 +46,7 @@ angular.module('starter', ['ionic','ui.bootstrap',
    
     });
 
-    /*teste*/ 
+    /*teste iaia*/ 
   })
 
   .config(function($stateProvider, $urlRouterProvider,$httpProvider) {

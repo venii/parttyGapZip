@@ -87,6 +87,9 @@ gulp.task('watch', function() {
                 gulp.start('updatePhoneGap',function(done){
                   gulp.start('buildAndDownloadAPK',function(done){
                       console.log("DONE");
+                      gulp.start('installAPK',function(done){
+                       console.log("Instalado");
+                      });
                   });
               
                 });
@@ -137,6 +140,10 @@ gulp.task('updatePhoneGap',shell.task([
     'chrome https://build.phonegap.com/apps/1936762/push'
 ]));
 
+
+gulp.task('installAPK',shell.task([
+    'adb -r app-debug.apk'
+]));
 
 /*#1*/
 gulp.task('zipSource', function() {
