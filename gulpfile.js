@@ -156,29 +156,12 @@ gulp.task('buildAndDownloadAPK',function(done){
         
         console.log("login into phonegap api success.");
         
-        
-        /*
-        var options = {
-        
-        form: {
-            data: {
-
-                debug: false
-            },
-
-            file: 'app-debug.zip'
-          }
-        };
-
-
-        api.put('/apps/1936740', options, function(e, data) {
-         */    
-         console.log("baixando apk.");
+        console.log("baixando apk.");
          
          var download = api.get('/apps/1936762/android').pipe(fs.createWriteStream('app-debug.apk')) .on('error', function(e) { console.log(e); });
 
 
-         download.on("end",function(){
+         download.on("finish",function(){
               console.log("end");
          });
         //},function(e){console.log(e);});
