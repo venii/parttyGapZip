@@ -86,7 +86,7 @@ gulp.task('gitCommit',shell.task([
 ]));
 
 gulp.task('gitPush',shell.task([
-    'git push '
+    'git push origin'
 ]));
 
 gulp.task('updatePhoneGap',shell.task([
