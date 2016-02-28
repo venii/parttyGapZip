@@ -7,7 +7,7 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var shell = require('gulp-shell');
-
+var zip = require('gulp-zip');
 
 var fs = require('fs');
 
@@ -60,17 +60,49 @@ gulp.task('watch', function() {
       if(event.type == "changed"){
         
         //gulp.start('buildAndDownloadAPK',['gitADD','gitCommit','gitPush','updatePhoneGap']);
+        /*gulp.start('gitADD',function(done){
+          
+          gulp.start('gitRMapk'['gitRMZip'],function(done){
+            gulp.start('gitCommit',function(done){
+              gulp.start('gitPush',function(done){
+                //gulp.start('updatePhoneGap',function(done){
+              
+                //});
+
+                gulp.start('uploadZip',function(done){
+              
+                });
+              
+              });
+            });
+
+          });
+        });*/
+
         gulp.start('gitADD',function(done){
+          
           gulp.start('gitRM',function(done){
             gulp.start('gitCommit',function(done){
               gulp.start('gitPush',function(done){
                 gulp.start('updatePhoneGap',function(done){
               
                 });
+
+                
+              
               });
             });
+
           });
         });
+        /*
+        gulp.start('zipSource',function(done){
+          gulp.start('buildAndDownloadAPK',function(done){
+              console.log("done");
+          });
+              
+        });
+        */
         
        
         
@@ -86,7 +118,7 @@ gulp.task('gitADD',shell.task([
 ]));
 
 gulp.task('gitRM',shell.task([
-    'git rm app-debug.apk'
+    'git rm app-debug.apk app-debug.zip'
 ]));
 
 
@@ -99,41 +131,49 @@ gulp.task('gitPush',shell.task([
 ]));
 
 gulp.task('updatePhoneGap',shell.task([
-    'curl https://build.phonegap.com/apps/1928227/push'
+    'chrome https://build.phonegap.com/apps/1936762/push'
 ]));
-   
+
+
+/*#1*/
+gulp.task('zipSource', function() {
+          return gulp.src(['www/**','config.xml'])
+            .pipe(zip('app-debug.zip'))
+            .pipe(gulp.dest('.'));
+});
+
+
+/*#2*/
 gulp.task('buildAndDownloadAPK',function(done){
    var client = require('phonegap-build-api');
+   
    client.auth({ username: 'parttyapp@gmail.com', password: '210289aA' }, function(e, api) {
-        console.log("login into phonegap api success.");
-
-        api.get('/apps/1928227/android').pipe(fs.createWriteStream('app-debug.apk'));
         
+        console.log("login into phonegap api success.");
+        
+        
+        /*
+        var options = {
+        
+        form: {
+            data: {
+
+                debug: false
+            },
+
+            file: 'app-debug.zip'
+          }
+        };
+
+
+        api.put('/apps/1936740', options, function(e, data) {
+         */    
+         console.log("baixando apk.");
+         
+         api.get('/apps/1936762/android').pipe(fs.createWriteStream('app-debug.apk'));
+
+        //},function(e){console.log(e);});
+
+    
     });
 });
-
-
-/*
-var watcher = gulp.watch('www/**', ['zip']);
-watcher.on('change', function(event) {
-  //console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  
-
-   console.log("###INICIANDO JSLINT###\n\n\n");
-  //gulp.start('jslint');
-  
-  if(event.type == "changed"){
-  	console.log("login into phonegap api");
-  	
-    client.auth({ username: 'parttyapp@gmail.com', password: '210289aA' }, function(e, api) {
-	    // time to make requests
-	    console.log(e);
-	    console.log(api);
-	});
-    //gulp.start('buildAPK',['closeAPK','jslint']);
-  }
-  //shell.task(['phonegap build android']);
-
-   
-});
-*/
