@@ -82,22 +82,19 @@ gulp.task('watch', function() {
         gulp.start('gitADD',function(done){
           
           gulp.start('gitCommit',function(done){
-            gulp.start('gitRM',function(done){
-              gulp.start('gitCommit',function(done){
-                gulp.start('gitPush',function(done){
-                  gulp.start('updatePhoneGap',function(done){
-                    gulp.start('buildAndDownloadAPK',function(done){
-                        console.log("DONE");
-                        gulp.start('installAPK',function(done){
-                         console.log("Instalado");
-                        });
+
+            gulp.start('gitPush',function(done){
+              gulp.start('updatePhoneGap',function(done){
+                gulp.start('buildAndDownloadAPK',function(done){
+                    console.log("DONE");
+                    gulp.start('installAPK',function(done){
+                     console.log("Instalado");
                     });
-                  });
                 });
               });
             });
-
           });
+     
         });
         /*
         gulp.start('zipSource',function(done){
