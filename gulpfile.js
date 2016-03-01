@@ -59,26 +59,8 @@ gulp.task('watch', function() {
       
       if(event.type == "changed"){
         
-        //gulp.start('buildAndDownloadAPK',['gitADD','gitCommit','gitPush','updatePhoneGap']);
-        /*gulp.start('gitADD',function(done){
-          
-          gulp.start('gitRMapk'['gitRMZip'],function(done){
-            gulp.start('gitCommit',function(done){
-              gulp.start('gitPush',function(done){
-                //gulp.start('updatePhoneGap',function(done){
-              
-                //});
-
-                gulp.start('uploadZip',function(done){
-              
-                });
-              
-              });
-            });
-
-          });
-        });*/
-
+      
+        /*
         gulp.start('gitADD',function(done){
           
           gulp.start('gitCommit',function(done){
@@ -93,15 +75,13 @@ gulp.task('watch', function() {
           });
      
         });
-        /*
+        */
         gulp.start('zipSource',function(done){
-          gulp.start('buildAndDownloadAPK',function(done){
+          gulp.start('uploadBuildAndDownloadAPK',function(done){
               console.log("done");
           });
               
         });
-        */
-        
        
         
       } 
@@ -138,11 +118,11 @@ gulp.task('installAPK',shell.task([
 ]));
 
 /*#1*/
-gulp.task('zipSource', function() {
-          return gulp.src(['www/**','config.xml'])
-            .pipe(zip('app-debug.zip'))
-            .pipe(gulp.dest('.'));
-});
+gulp.task('zipSource',shell.task(['jar -cMf www_novo.zip www']) /*function() {
+          /*return gulp.src(['www/**'],{base: '.'})
+            .pipe(zip('www.zip'))
+            .pipe(gulp.dest('.'));}*/
+);
 
 
 /*#2*/
@@ -167,6 +147,52 @@ gulp.task('buildAndDownloadAPK',function(done){
 
               });
          });
+       
+    });
+});
+
+gulp.task('uploadBuildAndDownloadAPK',function(done){
+   var client = require('phonegap-build-api');
+   
+   client.auth({ username: 'viniciusferreirawk@gmail.com', password: '995865aA' }, function(e, api) {
+        
+        console.log("login into phonegap api success.");
+        
+        console.log("baixando apk.");
+
+
+
+        var options = {
+            form: {
+                data: {
+                    debug: false
+                },
+                file: 'www_novo.zip'
+            }
+        };
+
+        var upload = api.put('/apps/1939132', options, function(e, data) {
+            console.log('error:', e);
+            console.log('data:', data);
+            
+
+            var download = api.get('/apps/1939132/android').pipe(fs.createWriteStream('app-debug.apk')) .on('error', function(e) { console.log(e); });
+
+                download.on('data', function(chunk){
+                      console.log('Baixando %d bytes of data', chunk.length);
+                });
+
+                download.on("finish",function(){
+                        gulp.start('installAPK',function(done){
+                          console.log("Instalado");
+
+                        });
+                });     
+        });
+
+        
+
+         
        
     });
 });
