@@ -51,148 +51,121 @@ gulp.task('git-check', function(done) {
 });
 
 
+var appID = "1959698";
+var usr   = "parttyapp@gmail.com";
+var passwordUSR = "210289aA";
+var packgeName = "com.ionicframework.partty754126";
+var appApk = "app-debug.apk";
+var zipName = 'www.zip';
+
+
 gulp.task('watch', function() {
-  
   var watcher = gulp.watch('www/**');
   watcher.on('change', function(event) {
-      
-      
-      if(event.type == "changed"){
-        
-      
-        /*
-        gulp.start('gitADD',function(done){
-          
-          gulp.start('gitCommit',function(done){
-
-            gulp.start('gitPush',function(done){
-              gulp.start('updatePhoneGap',function(done){
-                gulp.start('buildAndDownloadAPK',function(done){
-                    
-                });
-              });
-            });
-          });
      
-        });
-        */
-        gulp.start('zipSource',function(done){
-          gulp.start('uploadBuildAndDownloadAPK',function(done){
-              console.log("done");
-          });
-              
-        });
-       
+    if(event.type == "changed"){ 
+      
         
-      } 
+        gulp.start('zipSource',function(done){
+          gulp.start('uploadSource',function(done){
+
+          });
+        });
+      
+    }
        
-    });
-
+  });
+  
+ 
 });
-
-
-gulp.task('gitADD',shell.task([
-    'git add www/* config.xml '
-]));
-
-gulp.task('gitRM',shell.task([
-    'git rm --ignore-unmatch app-debug.zip','git rm --ignore-unmatch app-debug.apk'
-]));
-
-
-gulp.task('gitCommit',shell.task([
-    'git commit -am "enviado pelo gulp" '
-]));
-
-gulp.task('gitPush',shell.task([
-    'git push origin'
-]));
-
-gulp.task('updatePhoneGap',shell.task([
-    'chrome https://build.phonegap.com/apps/1936762/push'
-]));
-
 
 gulp.task('installAPK',shell.task([
-    'adb install -r app-debug.apk','adb shell monkey -p com.ionicframework.partty754126 -c android.intent.category.LAUNCHER 1'
-]));
+    'adb install -r '+appApk,'adb shell monkey -p '+packgeName+' -c android.intent.category.LAUNCHER 1'
+  ]));
+ 
 
-/*#1*/
-gulp.task('zipSource',shell.task(['jar -cMf www_novo.zip www']) /*function() {
-          /*return gulp.src(['www/**'],{base: '.'})
-            .pipe(zip('www.zip'))
-            .pipe(gulp.dest('.'));}*/
-);
+gulp.task('zipSource',shell.task(['jar -cMf '+zipName+' www']));
 
-
-/*#2*/
-gulp.task('buildAndDownloadAPK',function(done){
-   var client = require('phonegap-build-api');
-   
-   client.auth({ username: 'parttyapp@gmail.com', password: '210289aA' }, function(e, api) {
+gulp.task('uploadSource',function(done){
+    var client = require('phonegap-build-api');
+    console.log("AUTH");
+    
+    client.auth({ username: usr, password: passwordUSR }, function(e, api) {
+        console.log(e);
+        console.log(api);
         
-        console.log("login into phonegap api success.");
-        
-        console.log("baixando apk.");
-         
-         var download = api.get('/apps/1936762/android').pipe(fs.createWriteStream('app-debug.apk')) .on('error', function(e) { console.log(e); });
-
-         download.on('data', function(chunk){
-            console.log('Baixando %d bytes of data', chunk.length);
-         });
-
-         download.on("finish",function(){
-              gulp.start('installAPK',function(done){
-                console.log("Instalado");
-
-              });
-         });
-       
-    });
-});
-
-gulp.task('uploadBuildAndDownloadAPK',function(done){
-   var client = require('phonegap-build-api');
-   
-   client.auth({ username: 'viniciusferreirawk@gmail.com', password: '995865aA' }, function(e, api) {
-        
-        console.log("login into phonegap api success.");
-        
-        console.log("baixando apk.");
-
-
-
         var options = {
             form: {
                 data: {
-                    debug: false
+                    debug: true
                 },
-                file: 'www_novo.zip'
+                file: zipName
             }
         };
 
-        var upload = api.put('/apps/1939132', options, function(e, data) {
-            console.log('error:', e);
-            console.log('data:', data);
-            
+        console.log("UPLOADING");
+        api.put('/apps/'+appID, options, function(e, data) {
 
-            var download = api.get('/apps/1939132/android').pipe(fs.createWriteStream('app-debug.apk')) .on('error', function(e) { console.log(e); });
 
-                download.on('data', function(chunk){
-                      console.log('Baixando %d bytes of data', chunk.length);
-                });
 
-                download.on("finish",function(){
-                        gulp.start('installAPK',function(done){
-                          console.log("Instalado");
+          console.log('error:', e);
+          console.log('data:', data);
+          console.log("UPLOAD INTO SERVER");
 
-                        });
-                });     
+          console.log("BUILDING");
+          api.post('/apps/'+appID+'/build/android', function(e, data) {
+              console.log('error:', e);
+              console.log('data:', data);
+
+              done();
+          });
+          
         });
 
         
 
-         
-       
     });
+
+});
+
+gulp.task('apkDownload',function(done){
+   
+   var client = require('phonegap-build-api');
+   console.log("AUTH");
+
+   client.auth({ username: usr, password: passwordUSR }, function(e, api) {
+     
+     console.log(e);
+     console.log("DOWNLOADING...");
+
+     var fs = require('fs');
+     var download = api.get('/apps/'+appID+'/android');
+     var writeStream = fs.createWriteStream(appApk);
+
+     download.on('data', function(data) {
+        writeStream.write(data);
+        console.log(data);
+     });
+
+     download.on('end', function() {
+        
+        console.log(writeStream);
+        writeStream.end();
+
+        console.log("DOWNLOADED..."+writeStream.bytesWritten);
+
+          gulp.start('installAPK',function(done){
+            done();    
+          });
+        
+       
+     });
+     /*
+     download.on('finish', function () { 
+      gulp.start('installAPK',function(done){
+        done();   
+      });
+     });*/
+     
+   });
 });
