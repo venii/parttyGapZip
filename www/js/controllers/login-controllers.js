@@ -17,16 +17,16 @@ angular.module('login.controllers', ['starter'])
      
      if(UtilsService.isMob()){
 
-        if(!LoginService.isAuthFb() && UtilsService.getInternetState()){
+        //if(!LoginService.isAuthFb() && UtilsService.getInternetState()){
 
               LoginService.doLogin(function(response){
                 LoginService.saveFBAuthObj(response); 
                 $state.go('app.main');
               });
               
-         }else{                  
-              $state.go('app.main');
-         }
+         //}else{                  
+         //     $state.go('app.main');
+         //}
 
         
          
@@ -45,10 +45,5 @@ angular.module('login.controllers', ['starter'])
 
      }
   };
-
-
-  $scope.loginF1 = function(){
-    alert("#");
-  }
    
 });
