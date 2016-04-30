@@ -32,16 +32,16 @@ angular.module('login.controllers', ['starter'])
          
      }else{
       
-         if(!LoginService.isAuthFb()){
+         //if(!LoginService.isAuthFb()){
 
               LoginService.doLogin(function(response){
                 LoginService.saveFBAuthObj(response); 
                 $state.go('app.main');          
               });
               
-         }else{                  
-              $state.go('app.main');
-         }
+       //  }else{                  
+        //      $state.go('app.main');
+         //}
 
      }
   };

@@ -27,9 +27,9 @@ angular.module('registration.controllers', ['starter'])
           RegistrationService.loginParttyJSON(function(resp){
               $ionicLoading.hide();
               
-              RegistrationService.isNewUser(resp,function(){
-                $state.go('app.configurations');
-              });
+              //RegistrationService.isNewUser(resp,function(){
+              //  $state.go('app.configurations');
+              // });
               $state.go('app.events');
 
 
