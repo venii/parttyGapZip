@@ -19,14 +19,16 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
       var widthI = 300;
       var heightI = 150;
 
+      //função para abrir galeria do mobile
       this.openPhotoPicker = function(callback){
          if(UtilsService.isMob()){ 
           window.imagePicker.getPictures(
             function(results) {
+                
                 elementPlacer = document.querySelector("#imgPIC");
                 elementPlacer.src = results[0];
+                
                 elementPlacer.onload = function(){
-                  //console.log('onloadIMGCHANGE',results);
                   callback(results);  
                 }
                 
@@ -49,11 +51,12 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
         }
       }
 
+      //função para abrir selecionar arquivos do browser
       this.openPhotoPickerWEB = function(callback){
+      
         element = document.querySelector("input[type=file]");
         element.click();
-
-        
+  
         element.onchange = function(){
           
           var fr = new FileReader();
@@ -70,6 +73,7 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
         }
       }
 
+      //função para retornar json com dados do usario da api do partty
       this.getProfile = function(token,fbid,callback){
         
         var postData = {
@@ -83,7 +87,7 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
 
       }
 
-      // id => #imgPIC
+      // função para converter imagem para base64
       this.converImageBase64 = function(id,callback){
           try{
             var obj = document.querySelector('#'+id);
@@ -96,14 +100,14 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
             
             ctx.drawImage(obj, 0, 0,widthI,heightI);
             base64 = c.toDataURL();
-            console.log("base64",base64);
+            
             callback(base64);
-          
           }catch(err){
             console.log("converImageBase64: "+err);
           }
       }
 
+      //função para atualizar profile
       this.saveProfile = function(token,fbid,desc,callback){
           var postData = {
             "sess_fb": token,
@@ -117,11 +121,13 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
           });
       }
 
+      //funçao para pegar a src da imagem atual em base64
       this.getBase64ActualImage = function(){
         element = document.querySelector("#imgPIC");
         return element.src;
       }
 
+      //função para atualizar photo da api do partty
       this.uploadPhoto = function (fbid,base64photo,callback){
           $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
           var formData = new FormData();
@@ -148,9 +154,7 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
               console.error(xhr.statusText);
           };
 
-
           xhr.send(formData);
-
       }
     
   });
