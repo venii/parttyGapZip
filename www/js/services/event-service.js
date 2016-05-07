@@ -43,14 +43,15 @@ angular.module('app.event-service', ['starter','app.utils-service','app.registra
           return true;
               
       }
-      
+
       //função para verificar se é o fim da lista de eventos (utilizando as refs da graph api e scroll)
       this.isEndList = function(){
         var currentTop = $ionicScrollDelegate.$getByHandle('scroller').getScrollPosition().top;
         var maxTop = $ionicScrollDelegate.$getByHandle('scroller').getScrollView().__maxScrollTop;
 
-        if (currentTop >= maxTop)
+        if (currentTop >= maxTop){
           return true;
+        }
         return false;
       }
   });
