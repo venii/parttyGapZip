@@ -1,6 +1,6 @@
 angular.module('app.utils-service', ['starter'])
 .service('UtilsService',function($localStorage,$ionicLoading) {
-          
+           //função para verificar se é mobile (true - mobile / false - web)
            this.isMob = function() { 
 			     if( navigator.userAgent.match(/Android/i)
 			     || navigator.userAgent.match(/webOS/i)
@@ -17,6 +17,7 @@ angular.module('app.utils-service', ['starter'])
 			      }
 		    }
 
+		    //função para verificar se é IOS
 		    this.isIOS = function(){
 			     if ( navigator.userAgent.match(/iPhone/i)
 			     || navigator.userAgent.match(/iPad/i)
@@ -30,41 +31,45 @@ angular.module('app.utils-service', ['starter'])
 			      }
 		    }
 
+		    //função para verificar se é Android
 		    this.isAndroid = function(){
-		    	 if( navigator.userAgent.match(/Android/i)
-			    
-			     ){
+		    	 if(navigator.userAgent.match(/Android/i)){
 			        return true;
-			      }
-			     else {
+			     }else{
 			        return false;
-			      }
+			     }
 		    }
 
+		    //função para atualizar estado da internet
 		    this.setInternetState = function(state){
 		    	$localStorage.internetState = navigator.onLine;
 		    }
 
+		    //função para retornar estado da internet
 		    this.getInternetState = function(){
-		    	//return (typeof $localStorage.internetState == "undefined" ? true : $localStorage.internetState );
 		    	return navigator.onLine;
 		    }
 
+		    //função de error de conection
 		    this.showNoConnectionError = function(){
 		    	alert("É necessario ter conexao a internet para utilizar o sistema.");
 		    }
 
+		    //função para abrir loading
 		    this.openDialogMsg = function(msg){
 		    	$ionicLoading.show({
 		          template: msg
 		      	});
 		    }
 
+		    //função para fechar loading
 		    this.closeDialogMsg = function(){
 		    	$ionicLoading.hide();
 		    }
 
   }).factory('AdressService', function() {
+  			//fabrica com todos os endereços dos hooks da api
+
   			var httpserver = 'http://parttyappnoip.ddns.net';
 			var restaddress = httpserver+'/partty/servercode/ws/process.php/';
 			  
