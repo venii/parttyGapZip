@@ -16,6 +16,7 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
 		
     	this.getFBSessJSON = function(callback){
           var  deviceType = MainService.getDeviceType();
+        
           var postData = {
             "devicetypeapp" : deviceType,
             "sess_fb": LoginService.getToken()
@@ -25,7 +26,6 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
           $http.get(AdressService.getfbidbysess,{params: postData}).then(function(resp) {
             callback(resp);
           });
-      
       }
 
       this.verifyFBSessJSON = function(resp,callback){
@@ -48,14 +48,14 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
       }
 
       this.loginParttyJSON = function(callback,callback_error){
-                var postData = this.getUserData();
-                $http.get($localStorage.restaddress+'login',{params: postData}).then(function(resp) {
-                    $localStorage.usuarioData.age = resp.data.age;
-                    callback(resp);
-                  },function(err) {
-                    console.error('ERR', err);
-                    callback_error(err);
-                });
+        var postData = this.getUserData();
+
+        $http.get($localStorage.restaddress+'login',{params: postData}).then(function(resp) {
+            $localStorage.usuarioData.age = resp.data.age;
+            callback(resp);
+          },function(err) {
+            callback_error(err);
+        });
 
       }
 

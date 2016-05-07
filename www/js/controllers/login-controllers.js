@@ -8,7 +8,7 @@ angular.module('login.controllers', ['starter'])
     });
 })
 .controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService) {
-  
+  //fluxo login -> main
   $scope.loginf = function(){
      //verifica se é mobile     
      if(UtilsService.isMob()){
