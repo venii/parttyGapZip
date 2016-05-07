@@ -18,10 +18,12 @@ angular.module('registration.controllers', ['starter'])
 
       //pega sessao em json do facebook da local storage
       RegistrationService.getFBSessJSON(function(resp) {
+
           RegistrationService.verifyFBSessJSON(resp,function(){
               //se a sessao for invalida volta para o login para revalidar FB
               $state.go('app.login');  
           });
+
           //atualiza usuario e troca foto de perfil se necessario
           RegistrationService.saveUserData(resp);
           RegistrationService.updateDeviceDetailsJSON(resp,deviceType);      
