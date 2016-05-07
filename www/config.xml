@@ -30,21 +30,18 @@
   <plugin name="com.badrit.base64" spec="0.1.0" source="pgb" />
   <plugin name="com.phonegap.plugins.pushplugin" spec="2.5.0" source="pgb" />
   <plugin name="com.synconset.imagepicker" spec="1.0.4" source="pgb" />
-
+  <plugin name="org.apache.cordova.inappbrowser" spec="0.6.0" source="pgb" />
   <plugin name="io.litehelpers.cordova.sqlite" spec="0.7.10" source="pgb" />
   <plugin name="nl.x-services.plugins.calendar" spec="4.2.4" source="pgb" />
   <plugin name="nl.x-services.plugins.toast" spec="2.0.2" source="pgb" />
   <plugin name="hu.dpal.phonegap.plugins.uniquedeviceid" spec="1.2.0" source="pgb" />
   <plugin name="org.apache.cordova.network-information" spec="0.2.12" source="pgb" />
   <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
-  <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
-  
   <plugin name="com.phonegap.plugins.facebookconnect" spec="0.9.0" source="pgb">
     <param name="APP_ID" value="574073299368611" />
     <param name="APP_NAME" value="partty" /> 
   </plugin>
 
-  <plugin name="org.apache.cordova.inappbrowser" spec="0.6.0" source="pgb" />
  
   <icon src="resources\android\icon\drawable-hdpi-icon.png"/>
 </widget>
