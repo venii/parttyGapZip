@@ -11,16 +11,16 @@ angular.module('profile.controllers', ['starter'])
       
       $scope.changedphoto = false;
 
-
       $scope.processForm = function(){
           var token = LoginService.getToken();
           var fbid = RegistrationService.getUserFbID();
           var desc = $scope.mydesc;
+          
           ProfileService.saveProfile(token,fbid,desc,function(){
             alert("Atualizado");
           });
       };
-    
+      //função para trocar de foto (upload convertBase64 retorno url-valida)
       $scope.changephoto = function(){
         ProfileService.openPhotoPicker(function(results){
             var fbid = RegistrationService.getUserFbID();
@@ -43,17 +43,15 @@ angular.module('profile.controllers', ['starter'])
                     alert("Imagen Alterada");
                 });
               });
-            }
-            
-        });
-      };
+            }      
+      });
+     };
 
       var fbid = RegistrationService.getUserFbID();
       var token = LoginService.getToken();
       
-
+      //pega foto do profile
       ProfileService.getProfile(token,fbid,function(profilePic,persDesc){
-        
          $scope.imgPIC = profilePic;
          $scope.mydesc.desc = JSON.parse(persDesc).desc;
       });

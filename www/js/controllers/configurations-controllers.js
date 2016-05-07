@@ -2,68 +2,60 @@ angular.module('configurations.controllers', ['ionic'])
 
 .controller('ConfigurationsCtrl', function ($scope,$localStorage,$http,$ionicLoading) {
 	
-  
+  //tela de configuraçao de criterio para procurar no cache
+
 	//init padrao das var (sexo, usar usuarios do partty)
 	$scope.userregistered = 0;
 	$scope.gender = 1;
 
+  //funções para atualizar preferencias de criterio
+
 	$scope.updateCheckboxUserRegistrados = function(parrtyusers){
 		setTimeout(function(){
-			//alert("@"+ws);
-			//console.log(homen +"@"+$scope.homen);parrtyusers
-			$scope.userregistered = (parrtyusers === true ? 0: 1 );
-			//alert("changed");
-		},100);
+	
+  		$scope.userregistered = (parrtyusers === true ? 0: 1 );
+	
+  	},100);
 	};
 
 	$scope.updateRadioGender = function(gender){
 		setTimeout(function(){
-			//console.log(homen +"@"+$scope.homen);
-			$scope.gender = gender;
-			//alert("changed");
-		},100);
+	
+  		$scope.gender = gender;
+	
+  	},100);
 	};
-
-
 
 	$scope.updateCheckboxHomen = function(homen){
 		setTimeout(function(){
-			console.log(homen +"@"+$scope.homen);
-			$scope.homen = (homen === true ? false : true);
-			//alert("changed");
-		},100);
+		
+    	$scope.homen = (homen === true ? false : true);
+		
+    },100);
 	};
 
 	$scope.updateCheckboxMulher = function(mulher){
 		setTimeout(function(){
-			console.log(mulher +"@"+$scope.mulher);
-			$scope.mulher = (mulher === true ? false : true);
-			//alert("changed");
-		},100);
+	
+  		$scope.mulher = (mulher === true ? false : true);
+	
+  	},100);
 	};
     
 
-   $scope.updatepreferences = function(){
-  	 var procurandopor = '3';
+  $scope.updatepreferences = function(){
+  	var procurandopor = '3';
   	//update dados de preferencia via ws
-
-  	
-	
-	if($scope.homen === true && $scope.mulher === false){
-			//homen
-  			procurandopor = 1;
-  	
-  	}
-  	
-  	if($scope.homen === false && $scope.mulher === true){
-  			//mulher
-  			procurandopor = 2;
-  	}
-  	
-
-  	
-  		
-
+  	if($scope.homen === true && $scope.mulher === false){
+  		//homen
+    	procurandopor = 1;
+    }
+    	
+    if($scope.homen === false && $scope.mulher === true){
+    	//mulher
+    	procurandopor = 2;
+    }
+    
   	var postData = {
                 
 	    "sess_fb": $localStorage.token,
@@ -76,14 +68,13 @@ angular.module('configurations.controllers', ['ionic'])
 	    "ent_pref_sex" : procurandopor,
 	    "ent_pref_radius" : 0,
 		
-		"user_filter_register"  : $scope.userregistered,  
+		  "user_filter_register"  : $scope.userregistered,  
 	    "user_use_age" : 0
 	    
 
 	  };
 
-	  console.log(postData);
-
+  	  
 	  $ionicLoading.show({
           template: 'Atualizando preferencias...'
       });
@@ -92,35 +83,26 @@ angular.module('configurations.controllers', ['ionic'])
 			console.log(resp);
 			$ionicLoading.hide();
 	  });
-
   	  
   };
 
-   
-
-
-
-
-  var postData = {
-                
+  var postData = {            
     "sess_fb": $localStorage.token,
     "ent_user_fbid": $localStorage.usuarioData.ent_fbid 
   };
   
-  $ionicLoading.show({
-          template: 'Carregando preferencias...'
-      });
-
+  $ionicLoading.show({ template: 'Carregando preferencias...' });
+  //carrega valores do ws do usuario
   $http.get($localStorage.getpreferences,{params: postData}).then(function(resp) {
   		//carrega dados do ws
   		$scope.upperage = resp.data.prUAge;
   		$scope.lowerage = resp.data.prLAge;
 
-  		if(resp.data.sex == '1')
+  		if(resp.data.sex == '1'){
   			$scope.iam = 'Homen';
-  		else
+  		}else{
   			$scope.iam = 'Mulher';
-
+      }
 
   		if(resp.data.prSex == '1'){
   			$scope.homen = true;
@@ -143,11 +125,6 @@ angular.module('configurations.controllers', ['ionic'])
   			$scope.parrtyusers = false;
   		}
 
-
   		$ionicLoading.hide();
-
   });
-
-
- 
 });
