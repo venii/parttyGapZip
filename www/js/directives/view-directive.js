@@ -4,6 +4,7 @@ angular.module('starter').directive("fileread", [function () {
             fileread: "="
         },
         link: function (scope, element, attributes) {
+            
             element.bind("change", function (changeEvent) {
                 var reader = new FileReader();
                 reader.onload = function (loadEvent) {
