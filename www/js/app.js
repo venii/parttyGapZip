@@ -171,6 +171,8 @@ angular.module('starter', [	 'ionic',
   .config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+ 
   }])
   .config(['$compileProvider', function($compileProvider) {
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|content):|data:image\//);

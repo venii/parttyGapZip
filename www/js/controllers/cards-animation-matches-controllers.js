@@ -80,8 +80,8 @@ angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing',
                     if(resp.error){
                             UtilsService.openDialogMsg('Procurando matches...');
                             //envia todos os matches 
-            
-                            SendMatchesToWS.loadMatches($scope.parent,function(resp){
+                            console.log($scope);
+                            SendMatchesToWS.loadMatches($scope.$parent,$scope.$parent.eventinfoJSON.id,function(resp){
                                 UtilsService.closeDialogMsg();
                                     
                                 if(resp.error){

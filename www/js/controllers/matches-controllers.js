@@ -7,9 +7,9 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
         //calcular e set tamanho da tela , esconde topMenu
         MatchService.resizeHeight();    
         MatchService.hideTopMenu();
-        
-        $scope.eventinfoJSON = $stateParams.dataEvent;
-        
+          
+        $scope.eventinfoJSON = $state.params.dataEvent;
+       
         //função para voltar para eventos
     	$scope.backtoevents = function(){
     		$state.go("app.events");
@@ -25,7 +25,7 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
             UtilsService.openDialogMsg('Procurando matches...');
 
             //retornar matches do servidor partty (processados por graph ou pelo sistema de cache)    
-            SendMatchesToWS.loadMatches($scope,function(resp){
+            SendMatchesToWS.loadMatches($scope,$scope.eventinfoJSON.id,function(resp){
                 UtilsService.closeDialogMsg();
                     
                 if(resp.error){

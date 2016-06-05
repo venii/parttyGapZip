@@ -124,15 +124,17 @@ angular.module('app.match-service', ['starter'])
             //função para carrega matches de pessoas que estão no cache do server
             //baseadas nos criterios do perfil
 
-            this.loadMatches = function($scope,callback){
+            this.loadMatches = function($scope,idevent,callback){
             	
                 self = this;
+
+                console.log($scope);
 
                 var postData = {
                 	"sessfb" : LoginService.getToken(),
                 	"sess_fb": LoginService.getToken(),
                 	"ent_user_fbid": RegistrationService.getUserFbID(),
-                	"idevent" : $scope.eventinfoJSON.id
+                	"idevent" : idevent
                 };
 
                 $http.get(AdressService.findmatchespartty,{params: postData}).then(function(resp) {
