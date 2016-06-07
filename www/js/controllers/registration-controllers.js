@@ -34,11 +34,8 @@ angular.module('registration.controllers', ['starter'])
           //autentica os dados no servidor do partty
           RegistrationService.loginParttyJSON(function(resp){
               $ionicLoading.hide();
-              //se é um novo usuario envia para configuraçoes a primeira vez
-              RegistrationService.isNewUser(resp,function(){
-                $state.go('app.configurations');
-              });
-              //se nao envia direto para eventos
+
+              
               $state.go('app.events');
 
           },function(err){

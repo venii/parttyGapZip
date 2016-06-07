@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.partty754126" version="0.0.1" android-versionCode="11" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="br.parrty.gap" version="0.0.1" android-versionCode="11" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   
 
   <name>partty</name>
@@ -26,11 +26,13 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
-
+ 
   <plugin name="com.badrit.base64" spec="0.1.0" source="pgb" />
   <plugin name="com.phonegap.plugins.pushplugin" spec="2.5.0" source="pgb" />
   <plugin name="com.synconset.imagepicker" spec="1.0.4" source="pgb" />
   <plugin name="org.apache.cordova.inappbrowser" spec="0.6.0" source="pgb" />
+  <plugin name="cordova-plugin-device" spec="1.0.1" source="pgb" /> 
+
   <plugin name="io.litehelpers.cordova.sqlite" spec="0.7.10" source="pgb" />
   <plugin name="nl.x-services.plugins.calendar" spec="4.2.4" source="pgb" />
   <plugin name="nl.x-services.plugins.toast" spec="2.0.2" source="pgb" />
