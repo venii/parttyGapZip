@@ -1,4 +1,4 @@
-angular.module('cards-animation-matches.controllers', ['starter', 'gajus.swing','ngAnimate', 'toastr'])
+angular.module('cards-animation-matches.controllers', ['starter'])
 
 .controller('card-stack-playground', function (
                 $state,$stateParams,$scope,

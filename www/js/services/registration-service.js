@@ -128,4 +128,5 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
         }
 
       }
+
   });

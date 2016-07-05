@@ -1,7 +1,7 @@
 angular.module('app.login-service', ['app.utils-service','ngCordova'])
 .service('LoginService',  function(
     $localStorage,$ionicViewService,$ionicSideMenuDelegate,
-    $http,$rootScope,$cordovaOauth,
+    $http,$rootScope,$cordovaOauth,$cordovaFacebook,
 
     
     /*
@@ -33,7 +33,15 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
            this.doLoginFB = function(callback){
               if(UtilsService.isMob()){
                 //registra funçao para ser executa apos da janela do fb abrir(mobile)
-                this.registerFBmobile(callback);
+                $cordovaFacebook.login(["public_profile", "email", "user_friends"])
+                .then(function(success) {
+                  
+                  callback();
+                }, function (error) {
+
+                  console.log(error);
+                });
+
               }else{
                 //abre plugin do FB para web (navegador)
                 openFB.init({ appId  : FBappId });

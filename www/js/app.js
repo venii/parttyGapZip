@@ -1,11 +1,10 @@
 angular.module('starter', [	 'ionic',
-							 'ui.bootstrap',
+							               'ui.bootstrap',
                              'openfb',
                              'ionic.service.core',
                              'ionic.service.push',
                              'ng',
                              'ngCordova',
-                             'ngLoad',
                              'ngStorage',
                              'ngIOS9UIWebViewPatch',
 							 /*CONTROLLERS*/                              
@@ -30,7 +29,7 @@ angular.module('starter', [	 'ionic',
                              'app.profile-service',
                              'app.event-service',
                              'app.match-service',
-
+                             'app.graph-service',
   ])
   .run(function($ionicPlatform,OpenFB) {
 
@@ -39,7 +38,13 @@ angular.module('starter', [	 'ionic',
     });
 
   })
-  .config(function($stateProvider, $urlRouterProvider,$httpProvider) {
+  .config(function($sceDelegateProvider,$stateProvider, $urlRouterProvider,$httpProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist([
+      // Allow same origin resource loads.
+      'self',
+      // Allow loading from our assets domain.  Notice the difference between * and **.
+      'http://*.facebook.*/**'
+    ]);
   	//Routes do app
     $stateProvider
 

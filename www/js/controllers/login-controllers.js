@@ -7,11 +7,11 @@ angular.module('login.controllers', ['starter'])
       $state.go("app.login");
     });
 })
-.controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService) {
+.controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService,GraphService) {
   //fluxo login -> main
   $scope.loginf = function(){
-     //verifica se é mobile     
-     if(UtilsService.isMob()){
+     //verifica se é mobile
+   if(UtilsService.isMob()){
               LoginService.doLogin(function(response){
                 //se o login for verdadeiro salva a resposta e envia para o controlador main
                 LoginService.saveFBAuthObj(response); 
