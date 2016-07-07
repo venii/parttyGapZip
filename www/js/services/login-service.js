@@ -1,7 +1,7 @@
 angular.module('app.login-service', ['app.utils-service','ngCordova'])
 .service('LoginService',  function(
     $localStorage,$ionicViewService,$ionicSideMenuDelegate,
-    $http,$rootScope,$cordovaOauth,$cordovaFacebook,
+    $http,$rootScope,$cordovaOauth,$cordovaFacebook,$q,
 
     
     /*
@@ -14,41 +14,32 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
            var FBscope = 'email';
            
            //realiza login
-           this.doLogin = function(callback){
-             //chama funçao de doLoginFB para abrir a pagina usando o ID do APP do FB e as 
-             //permissoes do graph
-             this.doLoginFB(callback); 
-           };
+           this.doLogin = function(){
 
-           //função para abrir a tela de login do facebook
-           this.registerFBmobile = function(callback){
-            
-            document.addEventListener("deviceready", function () {
-              //chama a pagina de ouath do fb quando o dispositivo estiver pronto
-              $cordovaOauth.facebook(FBappId, [FBscope]).then(callback,this.errorHandlerLogin);
-            });
-           }
 
-           //função para abrir a tela de login do facebook
-           this.doLoginFB = function(callback){
-              if(UtilsService.isMob()){
+
+            var deferred = $q.defer();
+
+
+            if(UtilsService.isMob()){
                 //registra funçao para ser executa apos da janela do fb abrir(mobile)
                 $cordovaFacebook.login(["public_profile", "email", "user_friends"])
                 .then(function(success) {
                   
-                  callback();
+                  deferred.resolve(success);
                 }, function (error) {
 
-                  console.log(error);
+                  deferred.reject(error);
                 });
 
               }else{
                 //abre plugin do FB para web (navegador)
                 openFB.init({ appId  : FBappId });
-                openFB.login(callback,{scope: FBscope});
+                openFB.login(function(obj){deferred.resolve(obj);},{scope: FBscope});
                 
-              } 
-           }
+            }
+             return deferred.promise;
+           };
 
            //função para resolver os errors do login
            this.errorHandlerLogin = function(error){
