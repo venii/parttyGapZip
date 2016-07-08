@@ -12,14 +12,13 @@ angular.module('login.controllers', ['starter'])
   $scope.loginf = function(){
      //verifica se é mobile
    if(UtilsService.isMob()){
-        LoginService.doLogin().then(function(){
+        LoginService.doLogin().then(function(response){
           console.log(response);
           //se o login for verdadeiro salva a resposta e envia para o controlador main
           //LoginService.saveFBAuthObj(response); 
           //$state.go('app.main');
         });
               
-
     }else{
         LoginService.doLogin().then(function(response){
           console.log(response);    

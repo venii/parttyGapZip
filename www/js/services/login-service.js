@@ -15,30 +15,26 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
            
            //realiza login
            this.doLogin = function(){
+              var deferred = $q.defer();
 
+              if(UtilsService.isMob()){
+                    //registra funçao para ser executa apos da janela do fb abrir(mobile)
+                    $cordovaFacebook.login(["public_profile", "email", "user_friends"])
+                    .then(function(success) {
+                      
+                      deferred.resolve(success);
+                    }, function (error) {
 
-
-            var deferred = $q.defer();
-
-
-            if(UtilsService.isMob()){
-                //registra funçao para ser executa apos da janela do fb abrir(mobile)
-                $cordovaFacebook.login(["public_profile", "email", "user_friends"])
-                .then(function(success) {
-                  
-                  deferred.resolve(success);
-                }, function (error) {
-
-                  deferred.reject(error);
-                });
+                      deferred.reject(error);
+                    });
 
               }else{
-                //abre plugin do FB para web (navegador)
-                openFB.init({ appId  : FBappId });
-                openFB.login(function(obj){deferred.resolve(obj);},{scope: FBscope});
-                
-            }
-             return deferred.promise;
+                    //abre plugin do FB para web (navegador)
+                    openFB.init({ appId  : FBappId });
+                    openFB.login(function(obj){deferred.resolve(obj);},{scope: FBscope});
+                    
+              }
+              return deferred.promise;
            };
 
            //função para resolver os errors do login
