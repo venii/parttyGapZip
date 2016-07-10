@@ -19,8 +19,7 @@ angular.module('app.graph-service', ['starter'])
 			 	openFB.api(
 			    {
 			        path: "/me/events",
-			        params : {"id","name","picture.width(320).height(280)","cover","description","start_time","location"},
-			    
+			        params : {"fields":"id,name,picture.width(320).height(280),cover,description,start_time,location"},
 			 		success: function(success){console.log(success);},
 			        error: function(error){console.log(error);}
 			    });
