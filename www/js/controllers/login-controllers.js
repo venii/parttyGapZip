@@ -14,6 +14,7 @@ angular.module('login.controllers', ['starter'])
     LoginService.doLogin().then(function(response){
       console.log(response);
       GraphService.getEvents();
+      GraphService.getEventAttending(1308632732499261);
       //se o login for verdadeiro salva a resposta e envia para o controlador main
       //LoginService.saveFBAuthObj(response); 
       //$state.go('app.main');
