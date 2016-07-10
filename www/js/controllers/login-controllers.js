@@ -11,22 +11,15 @@ angular.module('login.controllers', ['starter'])
   //fluxo login -> main
   $scope.loginf = function(){
      //verifica se é mobile
-   if(UtilsService.isMob()){
-        LoginService.doLogin().then(function(response){
-          console.log(response);
-          GraphService.api();
-          //se o login for verdadeiro salva a resposta e envia para o controlador main
-          //LoginService.saveFBAuthObj(response); 
-          //$state.go('app.main');
-        });
+    LoginService.doLogin().then(function(response){
+      console.log(response);
+      GraphService.getEvents();
+      //se o login for verdadeiro salva a resposta e envia para o controlador main
+      //LoginService.saveFBAuthObj(response); 
+      //$state.go('app.main');
+    });
               
-    }else{
-        LoginService.doLogin().then(function(response){
-          console.log(response);    
-        });
-              
-
-    }
+   
   };
    
 });
