@@ -13,7 +13,7 @@ angular.module('app.graph-service', ['starter'])
 			      deferred.resolve(success);
 			    }, function (error) {
 			      // error
-			      deferred.reject(success);
+			      deferred.reject(false);
 			    });
 			 
 			 }else{
@@ -22,7 +22,7 @@ angular.module('app.graph-service', ['starter'])
 			        path: "/me/events",
 			        params : {"fields":"id,name,picture.width(320).height(280),cover,description,start_time,location"},
 			 		success: function(success){deferred.resolve(success);},
-			        error: function(error){deferred.reject(error);}
+			        error: function(error){deferred.reject(false);}
 			    });
 			 }
 
@@ -38,10 +38,10 @@ angular.module('app.graph-service', ['starter'])
              	$cordovaFacebook.api(grapCall, ["public_profile"])
 			    .then(function(success) {
 			      // success
-			      deferred.resolve(success);
+			      deferred.resolve({attending: success, eventFb : eventFb});
 			    }, function (error) {
 			      // error
-			      deferred.reject(success);
+			      deferred.reject(false);
 			    });
 			 
 			 }else{
@@ -49,8 +49,8 @@ angular.module('app.graph-service', ['starter'])
 			    {
 			        path: "/"+eventFb+"/attending",
 			        params : {"fields":"id,picture.width(800).height(600),first_name,name", "limit":"10"},
-			 		success: function(success){deferred.resolve(success);},
-			        error: function(error){deferred.reject(error);}
+			 		success: function(success){deferred.resolve({attending: success, eventFb : eventFb});},
+			        error: function(error){deferred.reject(false);}
 			    });
 			 }
 		 	 return deferred.promise;
