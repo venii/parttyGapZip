@@ -12,11 +12,30 @@ angular.module('login.controllers', ['starter'])
   $scope.loginf = function(){
      //verifica se é mobile
     LoginService.doLogin().then(function(response){
-      console.log(response);
+      //console.log(response);
       GraphService.getEventsFB().then(function(r){
         for(var i in r.data){
           var evt = r.data[i];
-          GraphService.addEvents(evt);
+          evt_id = evt.id;
+
+          
+          GraphService.addEvent(evt);
+          
+          console.log(evt_id);
+
+          GraphService.getEventAttendingFB(evt_id).then(function(r2){
+            
+
+            for(var i2 in r2.data){
+              var attending = r2.data[i2];
+              console.log(evt_id,attending);
+              GraphService.addAttendingToEvent(evt_id,attending); 
+            }
+          });
+          
+          //console.log(GraphService.getEvent(1308632732499261));
+          //console.log(GraphService.removeEvent(1308632732499261));
+
         }
       });
       //GraphService.getEventAttendingFB(1308632732499261);
