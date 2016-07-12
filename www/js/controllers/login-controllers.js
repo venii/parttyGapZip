@@ -17,19 +17,18 @@ angular.module('login.controllers', ['starter'])
         for(var i in r.data){
           var evt = r.data[i];
           evt_id = evt.id;
-
-          
+  
           GraphService.addEvent(evt);
           
           //console.log(evt_id);
 
           GraphService.getEventAttendingFB(evt_id).then(function(r2){
-            //console.log(r2);
+            // console.log('r2',r2);
 
-            for(var i2 in r2.attending){
-              var att = r2.attending[i2];
+            for(var i2 in r2.attending.data){
+              var att = r2.attending.data[i2];
               
-              console.log(r2.eventFb,att);
+              //console.log(r2.eventFb,att);
               
               GraphService.addAttendingToEvent(r2.eventFb,att); 
             }
