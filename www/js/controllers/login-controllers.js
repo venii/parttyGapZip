@@ -13,8 +13,13 @@ angular.module('login.controllers', ['starter'])
      //verifica se é mobile
     LoginService.doLogin().then(function(response){
       console.log(response);
-      GraphService.getEvents();
-      GraphService.getEventAttending(1308632732499261);
+      GraphService.getEventsFB().then(function(r){
+        for(var i in r.data){
+          var evt = r.data[i];
+          GraphService.addEvents(evt);
+        }
+      });
+      //GraphService.getEventAttendingFB(1308632732499261);
       //se o login for verdadeiro salva a resposta e envia para o controlador main
       //LoginService.saveFBAuthObj(response); 
       //$state.go('app.main');
