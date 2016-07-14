@@ -1,6 +1,35 @@
 angular.module('app.graph-service', ['starter'])
 .service('GraphService',function($q,UtilsService, $localStorage,$ionicLoading,$q,$http,$cordovaFacebook) {
            //função para verificar se é mobile (true - mobile / false - web)
+           this.getMeFB = function() { 
+             var deferred = $q.defer();
+
+             if(UtilsService.isMob()){
+                grapCall = "me";
+            
+                $cordovaFacebook.api(grapCall, ["public_profile"])
+                .then(function(success) {
+                  // success
+                  deferred.resolve(success);
+                }, function (error) {
+                  // error
+                  deferred.reject(false);
+                });
+             
+             }else{
+                openFB.api(
+                {
+                    path: "/me",
+                    
+                    success: function(success){deferred.resolve(success);},
+                    error: function(error){deferred.reject(false);}
+                });
+             }
+
+             return deferred.promise;
+           }
+
+
            this.getEventsFB = function() { 
            	 var deferred = $q.defer();
 

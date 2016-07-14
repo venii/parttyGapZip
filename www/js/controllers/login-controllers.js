@@ -12,7 +12,11 @@ angular.module('login.controllers', ['starter'])
   $scope.loginf = function(){
      //verifica se é mobile
     LoginService.doLogin().then(function(response){
-      //console.log(response);
+      console.log(response);
+      GraphService.getMeFB().then(function(r){
+        console.log('getMeFB',r);
+      });
+
       GraphService.getEventsFB().then(function(r){
         for(var i in r.data){
           var evt = r.data[i];
