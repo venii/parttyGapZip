@@ -5,7 +5,7 @@ angular.module('app.graph-service', ['starter'])
              var deferred = $q.defer();
 
              if(UtilsService.isMob()){
-                grapCall = "me";
+                grapCall = "me?fields=picture.width(320).height(280),name,gender,email,age_range";
             
                 $cordovaFacebook.api(grapCall, ["public_profile"])
                 .then(function(success) {
@@ -20,7 +20,7 @@ angular.module('app.graph-service', ['starter'])
                 openFB.api(
                 {
                     path: "/me",
-                    
+                    params : {fields : "picture.width(320).height(280),name,gender,email,age_range"},
                     success: function(success){deferred.resolve(success);},
                     error: function(error){deferred.reject(false);}
                 });
