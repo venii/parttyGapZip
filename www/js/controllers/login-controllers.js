@@ -12,12 +12,13 @@ angular.module('login.controllers', ['starter'])
   $scope.loginf = function(){
      //verifica se é mobile
     LoginService.doLogin().then(function(response){
-      console.log(response);
+      
+
       GraphService.getMeFB().then(function(r){
-        console.log('getMeFB',r);
+        LoginService.savePerfilFB(response);
       });
 
-      GraphService.getEventsFB().then(function(r){
+      /*GraphService.getEventsFB().then(function(r){
         for(var i in r.data){
           var evt = r.data[i];
           evt_id = evt.id;
@@ -42,7 +43,7 @@ angular.module('login.controllers', ['starter'])
           //console.log(GraphService.removeEvent(1308632732499261));
 
         }
-      });
+      });*/
       //GraphService.getEventAttendingFB(1308632732499261);
       //se o login for verdadeiro salva a resposta e envia para o controlador main
       //LoginService.saveFBAuthObj(response); 

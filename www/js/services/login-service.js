@@ -44,8 +44,8 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
            }
 
            //função de salvar no localstorage o json vindo do servidor do FB (graph)
-           this.saveFBAuthObj = function(response){
-              $localStorage.authObj = response;
+           this.savePerfilFB = function(response){
+              $localStorage.perfil = response;
               //trata tipos vindo da GRAPH API e do Servidor do partty
               if(typeof(response.authResponse) == "undefined"){
                 this.saveToken(response.access_token);
