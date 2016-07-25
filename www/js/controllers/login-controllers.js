@@ -7,14 +7,15 @@ angular.module('login.controllers', ['starter'])
       $state.go("app.login");
     });
 })
-.controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService,GraphService) {
+.controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService,GraphService,Perfil) {
   //fluxo login -> main
   $scope.loginf = function(){
      //verifica se é mobile
     LoginService.doLogin().then(function(response){
-      
+      console.log(Perfil);
 
       GraphService.getMeFB().then(function(r){
+
         LoginService.savePerfilFB(response);
       });
 
