@@ -30,11 +30,13 @@ angular.module('starter', [	 'ionic',
                              'app.event-service',
                              'app.match-service',
                              'app.graph-service',
+                             'app.sql-service'
   ])
-  .run(function($ionicPlatform,OpenFB) {
+  .run(function($ionicPlatform,OpenFB,SQLService) {
 
     $ionicPlatform.ready(function() {
-   
+      /*Inicia o DB*/
+      SQLService.createSchema();
     });
 
   })
