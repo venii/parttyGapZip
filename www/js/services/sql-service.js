@@ -1,7 +1,7 @@
 angular.module('app.sql-service', ['starter'])
-.factory('Perfil', function($resource) {
+.factory('Perfil', function($resource,HOST_API) {
   	/*Model de Perfil*/
-  	return $resource('/perfil/:id');
+  	return $resource(HOST_API+'/perfil/:id');
 })
 .service('SQLService',function($q,$localStorage,$ionicLoading,UtilsService,Perfil) {
            this.getDB = function() {
@@ -35,7 +35,8 @@ angular.module('app.sql-service', ['starter'])
                 		
                 		var data = {};
                 		
-                    	Perfil.save(data, function() {
+                    	Perfil.save(data, function(r) {
+                    		console.log('save',r);
 						   //data saved. do something here.
 						});
                 	});

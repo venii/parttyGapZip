@@ -39,6 +39,7 @@ angular.module('starter', [	 'ionic',
                              
 
   ])
+  .value("HOST_API","http://localhost:8080")
   .run(function($ionicPlatform,OpenFB,SQLService) {
 
     $ionicPlatform.ready(function() {
