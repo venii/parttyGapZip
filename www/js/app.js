@@ -6,8 +6,24 @@ angular.module('starter', [	 'ionic',
                              'ng',
                              'ngCordova',
                              'ngStorage',
+                             'ngResource',
                              'ngIOS9UIWebViewPatch',
-							 /*CONTROLLERS*/                              
+
+                             /*SERVICES*/
+                             'app.menu-service',
+                             'app.login-service',
+                             'app.main-service',
+                             'app.chat-service',
+                             'app.registration-service',
+                             'app.profile-service',
+                             'app.event-service',
+                             'app.match-service',
+                             'app.graph-service',
+                             'app.sql-service',
+
+
+
+							               /*CONTROLLERS*/                              
                              'app.menu',
                              'login.controllers',
                              'main.controllers',
@@ -20,21 +36,15 @@ angular.module('starter', [	 'ionic',
                              'profile.controllers',
                              'chat.controllers',
 
-                             /*SERVICES*/
-                             'app.menu-service',
-                             'app.login-service',
-                             'app.main-service',
-                             'app.chat-service',
-                             'app.registration-service',
-                             'app.profile-service',
-                             'app.event-service',
-                             'app.match-service',
-                             'app.graph-service',
+                             
+
   ])
-  .run(function($ionicPlatform,OpenFB) {
+  .value("HOST_API","http://localhost:8080")
+  .run(function($ionicPlatform,OpenFB,SQLService) {
 
     $ionicPlatform.ready(function() {
-   
+      /*Inicia o DB*/
+      SQLService.createSchema();
     });
 
   })
