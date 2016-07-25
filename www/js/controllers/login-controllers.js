@@ -18,7 +18,7 @@ angular.module('login.controllers', ['starter'])
         LoginService.savePerfilFB(response);
       });
 
-      /*GraphService.getEventsFB().then(function(r){
+      GraphService.getEventsFB().then(function(r){
         for(var i in r.data){
           var evt = r.data[i];
           evt_id = evt.id;
@@ -28,12 +28,12 @@ angular.module('login.controllers', ['starter'])
           //console.log(evt_id);
 
           GraphService.getEventAttendingFB(evt_id).then(function(r2){
-            // console.log('r2',r2);
+            console.log('r2',r2);
 
             for(var i2 in r2.attending.data){
               var att = r2.attending.data[i2];
               
-              //console.log(r2.eventFb,att);
+              console.log(r2.eventFb,att);
               
               GraphService.addAttendingToEvent(r2.eventFb,att); 
             }
@@ -43,7 +43,7 @@ angular.module('login.controllers', ['starter'])
           //console.log(GraphService.removeEvent(1308632732499261));
 
         }
-      });*/
+      });
       //GraphService.getEventAttendingFB(1308632732499261);
       //se o login for verdadeiro salva a resposta e envia para o controlador main
       //LoginService.saveFBAuthObj(response); 
