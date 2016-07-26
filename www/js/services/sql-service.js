@@ -30,17 +30,18 @@ angular.module('app.sql-service', ['starter'])
                     	/*tabelas do DB
 							usar campos dos $resources
                     	*/
-                    	tx.executeSql('CREATE TABLE IF NOT EXISTS chatlog (id_chatlog INTEGER PRIMARY KEY NOT NULL, fbID_receiver BIGINT (30), fbID_sender BIGINT (30), me INTEGER(1), msg VARCHAR (255), data_msg TIMESTAMP);');
-                    	tx.executeSql('CREATE TABLE IF NOT EXISTS chatlog (id_chatlog INTEGER PRIMARY KEY NOT NULL, fbID_receiver BIGINT (30), fbID_sender BIGINT (30), me INTEGER(1), msg VARCHAR (255), data_msg TIMESTAMP);');
-                		
+                    	tx.executeSql('CREATE TABLE IF NOT EXISTS fb_events           (id_fb_events   BIGINT PRIMARY KEY NOT NULL, nome VARCHAR (255), data_evento TIMESTAMP);');
+                    	tx.executeSql('CREATE TABLE IF NOT EXISTS fb_events_attending (id_fb_events_attending BIGINT PRIMARY KEY NOT NULL, id_fb_events BIGINT);');
+                		  tx.executeSql('CREATE TABLE IF NOT EXISTS fb_profiles         (id_fb_profiles BIGINT PRIMARY KEY NOT NULL, id_fb_attending BIGINT);');
+                    
                 		var data = {};
                 		
                     	Perfil.save(data, function(r) {
                     		console.log('save',r);
-						   //data saved. do something here.
-						});
-                	});
-               	});
+						            //data saved. do something here.
+						          });
+                });
+              });
            }
 
 
