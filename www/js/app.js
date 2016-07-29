@@ -44,6 +44,7 @@ angular.module('starter', [	 'ionic',
 
     $ionicPlatform.ready(function() {
       /*Inicia o DB*/
+      SQLService.deleteSchema();
       SQLService.createSchema();
     });
 

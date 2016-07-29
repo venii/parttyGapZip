@@ -4,6 +4,7 @@ angular.module('app.sql-service', ['starter'])
   	return $resource(HOST_API+'/perfil/:id');
 })
 .service('SQLService',function($q,$localStorage,$ionicLoading,UtilsService,Perfil,GraphService) {
+           this.debug = true;
 
            this.schema = [
                             { nome: "fb_events", campos: ["id_fb_events", "nome","data_evento"] },
@@ -12,14 +13,19 @@ angular.module('app.sql-service', ['starter'])
 
  
                          ];
+            this.getSchema = function(){
+              return this.schema;
+            }
 
+            this.isDebug = function() {
+              return this.debug;
+            }
            
            this.getDB = function() {
            		var deferred = $q.defer();
            		try{
                   
-           		  var db = openDatabase("dbapp_partty.db", "1.0", "dbapp_partty.db", 200000);
-                
+           		  var db = window.openDatabase("dbapp_partty.db", "1.0", "parttyapp", 1000000);
                 deferred.resolve(db);
 
               }catch(err){
@@ -31,40 +37,88 @@ angular.module('app.sql-service', ['starter'])
 
 
            this.createSchema = function(){
+              service = this;
            		this.getDB().then(function(db){
            			db.transaction(function(tx) {
-                    	/*tabelas do DB
-							             usar campos dos $resources
-                    	*/
-                    	tx.executeSql('CREATE TABLE IF NOT EXISTS fb_events           (id_fb_events           unique, nome,data_evento);');
-                    	tx.executeSql('CREATE TABLE IF NOT EXISTS fb_events_attending (id_fb_events_attending unique, id_fb_events,id_fb_attending);');
-                      tx.executeSql('CREATE TABLE IF NOT EXISTS pt_chat             (id_pt_chat             unique, id_fb_sender,id_fb_receiver,data_envio);');
-                      tx.executeSql('CREATE TABLE IF NOT EXISTS pt_perfil           (id_pt_perfil           unique, if_fb,nome,sexo,idade,email,foto,fb_token,pt_token);');
-                      
-                      /* implementar outros metodos
-                      GraphService.getMeFB().then(function(r){
-                        Perfil.save(r, function(r) {
-                          console.log('save',r);
-                          //data saved. do something here.
-                        });
+                  /*tabelas do DB
+							      usar campos dos $resources
+                  */
+
+                  var schema = service.getSchema();
+                  for(i in schema){
+                      var table = schema[i];
+                      console.log(table);
+                      service.createTable(table.nome,table.campos);
+                  }
+                  /* implementar outros metodos
+                    GraphService.getMeFB().then(function(r){
+                      Perfil.save(r, function(r) {
+                        console.log('save',r);
+                        //data saved. do something here.
                       });
-                		  */
-                		
-                    	
+                    });
+                	*/
+                	  	
                 });
               });
            }
 
-           this.createTable = function(nome,campos){
+           this.deleteSchema = function(){
+              service = this;
+              this.getDB().then(function(db){
+
+                db.transaction(function(tx) {
+                 /*tabelas do DB
+                    usar campos dos $resources
+                  */
+                  var schema = service.getSchema();
+                  for(i in schema){
+                      var table = schema[i];
+                      
+                      service.dropTable(table.nome);
+                  }
+                });
+              });
+           }
+           this.dropTable = function(nome){
+              service = this;
               /*por enquanto a primeira field eh sempre unique (id)*/
               this.getDB().then(function(db){
                 db.transaction(function(tx) {
+                  var sql = 'DROP TABLE '+nome+' ;';
+                  
+                  if(service.isDebug()){
+                    console.log(sql);  
+                  }
+
+                  tx.executeSql(sql);
                 
-                  tx.executeSql('INSERT INTO foo ('+campos.join(',')+') VALUES (' +')', [id, userValue]);
+                  });
+              });
+             
+
+           }
+
+           this.createTable = function(nome,campos){
+              service = this;
+              /*por enquanto a primeira field eh sempre unique (id)*/
+              this.getDB().then(function(db){
+                db.transaction(function(tx) {
+                  
+                  campos[0] = campos[0] + " unique";
+                  
+                  var campos_table = campos.join(',');
+                  var sql = 'CREATE TABLE IF NOT EXISTS '+nome+' ('+campos_table+');';
+                 
+                  if(service.isDebug()){
+                    console.log(sql);  
+                  }
+                  
+                  tx.executeSql(sql);
                 
                 });
               });
-             }
+             
 
            }
 
