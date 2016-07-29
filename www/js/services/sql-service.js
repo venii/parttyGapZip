@@ -142,8 +142,7 @@ angular.module('app.sql-service', ['starter'])
 
             this.getDB().then(function(db){
               db.transaction(function(tx) {
-                console.log(table.campos);
-
+                
                 var campos_table   = table.campos.join(',');
 
                 for(i in array_campos){
@@ -162,6 +161,64 @@ angular.module('app.sql-service', ['starter'])
               });
             });
            }
+
+           /*usar nomes dos campos*/
+           this.updateIntoTable = function(nome_table,array_campos,id){
+            var table = this.getSchemaTable(nome_table);
+            var service = this;
+
+            this.getDB().then(function(db){
+              db.transaction(function(tx) {
+                
+                var setFields = new Array;
+                for(var i in array_campos){
+                  setFields.push(i + " = '"+array_campos[i]+"'");
+                }
+                
+                var sql = 'UPDATE '+table.nome+' SET '+setFields.join(',')+' WHERE '+table.campos[0]+' = "'+id+'"';
+
+                if(service.isDebug()){
+                  console.log(sql);  
+                }
+
+                tx.executeSql(sql);
+              
+              });
+            });
+           }
+
+           this.findById = function(nome_table,id){
+            var table = this.getSchemaTable(nome_table);
+            var service = this;
+            var deferred = $q.defer();
+
+            this.getDB().then(function(db){
+              db.transaction(function(tx) {
+                
+                var sql = 'SELECT * FROM '+table.nome+' WHERE '+table.campos[0]+' = "'+id+'"';
+  
+                if(service.isDebug()){
+                  console.log(sql);  
+                }
+
+                var rs = tx.executeSql(sql,[], function (tx, results) {
+
+                  var len = results.rows.length;
+                  
+                  if(len > 0){
+                      deferred.resolve(results.rows);
+                  }else{
+                      deferred.reject(false);
+                  }
+                  
+                    
+               }, function(){deferred.reject(false);});
+
+              });
+            });
+
+            return deferred.promise;
+          }
 
 
   });

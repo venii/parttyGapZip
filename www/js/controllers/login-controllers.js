@@ -19,6 +19,19 @@ angular.module('login.controllers', ['starter'])
         SQLService.insertIntoTable('fb_events',['id_fb_events','nome','data_evento']);
         SQLService.insertIntoTable('fb_events',['id_fb_events2','nome','data_evento']);
         SQLService.insertIntoTable('fb_events',['id_fb_events3','nome','data_evento']);
+
+
+        SQLService.findById('fb_events','id_fb_events2').then(function(r){
+          var obj = r[0];
+          console.log(obj);
+          
+          obj.nome = "tiririca";
+
+          SQLService.updateIntoTable('fb_events',obj,obj.id_fb_events);
+
+          console.log(obj);
+          
+        });
         LoginService.savePerfilFB(response);
       });
       /*
