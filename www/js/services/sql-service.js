@@ -11,10 +11,21 @@ angular.module('app.sql-service', ['starter'])
                             { nome: "fb_events_attending", campos: ["id_fb_events_attending", "id_fb_events","id_fb_attending"] },
                             { nome: "pt_chat", campos: ["id_pt_chat", "id_fb_sender","id_fb_receiver","msg","data_envio"] },
 
- 
                          ];
             this.getSchema = function(){
               return this.schema;
+            }
+
+            this.getSchemaTable = function(nome){
+              var schema = service.getSchema();
+              
+              for(i in schema){
+                var table = schema[i];
+                if(table.nome == nome){
+                  return table;
+                }
+              }
+              return null;
             }
 
             this.isDebug = function() {
@@ -47,7 +58,6 @@ angular.module('app.sql-service', ['starter'])
                   var schema = service.getSchema();
                   for(i in schema){
                       var table = schema[i];
-                      console.log(table);
                       service.createTable(table.nome,table.campos);
                   }
                   /* implementar outros metodos
@@ -122,11 +132,27 @@ angular.module('app.sql-service', ['starter'])
 
            }
 
-           this.insertIntoTable = function(){
+
+           this.insertIntoTable = function(nome_table,array_campos){
+            var table = this.getSchemaTable(nome_table);
+            var service = this;
+
             this.getDB().then(function(db){
               db.transaction(function(tx) {
-              
-                tx.executeSql('INSERT INTO foo (id, text) VALUES (?, ?)', [id, userValue]);
+                console.log(table.campos);
+                
+                var campos_table   = table.campos.join(',');
+                var qtd_coringa    = table.campos.length; //vulgo ?
+                var campos_coringa = new Array(qtd_coringa + 1).join( "?" );
+
+                var sql = 'INSERT INTO '+table.nome+' ('+campos_table+') VALUES ('+campos_coringa+')';
+
+                if(service.isDebug()){
+                  console.log(sql,array_campos);  
+                }
+                  
+
+                tx.executeSql('INSERT INTO '+table.nome+' ('+campos_table+') VALUES ('+campos_coringa+')', array_campos);
               
               });
             });

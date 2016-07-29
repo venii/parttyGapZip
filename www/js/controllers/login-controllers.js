@@ -7,18 +7,19 @@ angular.module('login.controllers', ['starter'])
       $state.go("app.login");
     });
 })
-.controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService,GraphService) {
+.controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService,GraphService,SQLService) {
   //fluxo login -> main
   $scope.loginf = function(){
      //verifica se é mobile
     LoginService.doLogin().then(function(response){
 
-
+      console.log(SQLService.getSchemaTable('fb_events'));
       GraphService.getMeFB().then(function(r){
 
+        SQLService.insertIntoTable('fb_events',['id_fb_events','nome','data_evento']);
         LoginService.savePerfilFB(response);
       });
-
+      /*
       GraphService.getEventsFB().then(function(r){
         for(var i in r.data){
           var evt = r.data[i];
@@ -44,7 +45,7 @@ angular.module('login.controllers', ['starter'])
           //console.log(GraphService.removeEvent(1308632732499261));
 
         }
-      });
+      });*/
       //GraphService.getEventAttendingFB(1308632732499261);
       //se o login for verdadeiro salva a resposta e envia para o controlador main
       //LoginService.saveFBAuthObj(response); 
