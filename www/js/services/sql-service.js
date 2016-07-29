@@ -22,6 +22,7 @@ angular.module('app.sql-service', ['starter'])
               for(i in schema){
                 var table = schema[i];
                 if(table.nome == nome){
+                  table.campos[0] = table.campos[0].replace(" unique","");
                   return table;
                 }
               }
@@ -92,7 +93,7 @@ angular.module('app.sql-service', ['starter'])
            }
            this.dropTable = function(nome){
               service = this;
-              /*por enquanto a primeira field eh sempre unique (id)*/
+              
               this.getDB().then(function(db){
                 db.transaction(function(tx) {
                   var sql = 'DROP TABLE '+nome+' ;';
@@ -111,10 +112,10 @@ angular.module('app.sql-service', ['starter'])
 
            this.createTable = function(nome,campos){
               service = this;
-              /*por enquanto a primeira field eh sempre unique (id)*/
               this.getDB().then(function(db){
                 db.transaction(function(tx) {
-                  
+                  /*por enquanto a primeira field eh sempre unique (id)*/
+             
                   campos[0] = campos[0] + " unique";
                   
                   var campos_table = campos.join(',');
@@ -140,7 +141,7 @@ angular.module('app.sql-service', ['starter'])
             this.getDB().then(function(db){
               db.transaction(function(tx) {
                 console.log(table.campos);
-                
+
                 var campos_table   = table.campos.join(',');
                 var qtd_coringa    = table.campos.length; //vulgo ?
                 var campos_coringa = new Array(qtd_coringa + 1).join( "?" );
