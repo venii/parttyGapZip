@@ -38,6 +38,8 @@ angular.module('app.sql-service', ['starter'])
            		try{
                   
            		  var db = window.openDatabase("dbapp_partty.db", "1.0", "parttyapp", 1000000);
+
+
                 deferred.resolve(db);
 
               }catch(err){
@@ -143,17 +145,19 @@ angular.module('app.sql-service', ['starter'])
                 console.log(table.campos);
 
                 var campos_table   = table.campos.join(',');
-                var qtd_coringa    = table.campos.length; //vulgo ?
-                var campos_coringa = new Array(qtd_coringa + 1).join( "?" );
 
-                var sql = 'INSERT INTO '+table.nome+' ('+campos_table+') VALUES ('+campos_coringa+')';
+                for(i in array_campos){
+                  array_campos[i] = "\'"+array_campos[i]+"\'";
+                }
+
+                var campos_valor   = array_campos.join(",");
+                var sql = 'INSERT INTO '+table.nome+' ('+campos_table+') VALUES ('+campos_valor+')';
 
                 if(service.isDebug()){
-                  console.log(sql,array_campos);  
+                  console.log(sql);  
                 }
-                  
 
-                tx.executeSql('INSERT INTO '+table.nome+' ('+campos_table+') VALUES ('+campos_coringa+')', array_campos);
+                tx.executeSql(sql);
               
               });
             });

@@ -17,6 +17,8 @@ angular.module('login.controllers', ['starter'])
       GraphService.getMeFB().then(function(r){
 
         SQLService.insertIntoTable('fb_events',['id_fb_events','nome','data_evento']);
+        SQLService.insertIntoTable('fb_events',['id_fb_events2','nome','data_evento']);
+        SQLService.insertIntoTable('fb_events',['id_fb_events3','nome','data_evento']);
         LoginService.savePerfilFB(response);
       });
       /*
