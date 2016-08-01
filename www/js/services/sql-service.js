@@ -1,6 +1,31 @@
 angular.module('app.sql-service', ['starter'])
 .factory('Perfil', function($resource,HOST_API) {
   	/*Model de Perfil*/
+    var Perfil = $resource(HOST_API+'/perfil/:id',
+      
+      { update: {
+        method: 'PUT'
+      }
+
+    });
+
+      
+
+    Perfil.prototype.update = function(cb) {
+     
+      return Perfil.update({
+      
+        id: this.id
+      
+        }, angular.extend({}, this, {
+      
+          _id: undefined
+        }), cb);
+   
+    };
+
+
+
   	return $resource(HOST_API+'/perfil/:id');
 })
 .service('SQLService',function($q,$localStorage,$ionicLoading,UtilsService,Perfil,GraphService) {

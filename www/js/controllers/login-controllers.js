@@ -7,15 +7,28 @@ angular.module('login.controllers', ['starter'])
       $state.go("app.login");
     });
 })
-.controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService,GraphService,SQLService) {
+.controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService,GraphService,SQLService,Perfil) {
   //fluxo login -> main
   $scope.loginf = function(){
      //verifica se é mobile
-    LoginService.doLogin().then(function(response){
+    LoginService.autenticarFB().then(function(response){
 
-      console.log(SQLService.getSchemaTable('fb_events'));
-      GraphService.getMeFB().then(function(r){
+      GraphService.getMeFB().then(function(response){
+        LoginService.savePerfil(response);
+        
+        Perfil.save(response, function(r) {
+                        console.log('save',r);
+                        //data saved. do something here.
+                      });
+        
+        console.log(response);
 
+        Perfil.update(response, function(r) {
+                        console.log('update',r);
+                        //data saved. do something here.
+                      });
+
+        /*
         SQLService.insertIntoTable('fb_events',['id_fb_events','nome','data_evento']);
         SQLService.insertIntoTable('fb_events',['id_fb_events2','nome','data_evento']);
         SQLService.insertIntoTable('fb_events',['id_fb_events3','nome','data_evento']);
@@ -32,7 +45,7 @@ angular.module('login.controllers', ['starter'])
           console.log(obj);
           
         });
-        LoginService.savePerfilFB(response);
+        */
       });
       /*
       GraphService.getEventsFB().then(function(r){

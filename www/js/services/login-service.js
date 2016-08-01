@@ -14,7 +14,7 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
            var FBscope = 'email';
            
            //realiza login
-           this.doLogin = function(){
+           this.autenticarFB = function(){
               var deferred = $q.defer();
 
               if(UtilsService.isMob()){
@@ -44,30 +44,25 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
            }
 
            //função de salvar no localstorage o json vindo do servidor do FB (graph)
-           this.savePerfilFB = function(response){
+           this.savePerfil = function(response){
               $localStorage.perfil = response;
               //trata tipos vindo da GRAPH API e do Servidor do partty
               if(typeof(response.authResponse) == "undefined"){
-                this.saveToken(response.access_token);
+                this.setToken(response.access_token);
               
               }else{
-                this.saveToken(response.authResponse.token);
+                this.setToken(response.authResponse.token);
               }
            }
            
            //função de salvar o token no localStorage
-           this.saveToken = function(token){
+           this.setToken = function(token){
               $localStorage.token = token;
            }
 
            //funçao de retornar o token
            this.getToken = function(){
               return $localStorage.token;
-           }
-
-           //função para verificar se esta autenticado no fb , se possuir token voce esta autenticado
-           this.isAuthFb = function(){
-              return this.getToken() == undefined ? false : true;
            }
 
            //função para realizar o login excluindo os dados do localStorage
@@ -81,24 +76,4 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
               callback();
            }
 
-           //função de eerror de autenticacao
-           this.showNoAuthError = function(){
-              alert("É necessario autenticar antes de utilizar.");
-           }
-
-           //função  de verificar se esta autenticado no FB e tem internet
-           this.checkUserByPass = function(){
-              
-              if(UtilsService.isMob()){
-                if(this.isAuthFb() && UtilsService.getInternetState())
-                  return true;
-              
-              }else{
-                if(this.isAuthFb()){
-                  return true;
-                }
-              }
-              return false;
-  
-           }
   });
