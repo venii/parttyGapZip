@@ -1,13 +1,9 @@
 angular.module('app.sql-service', ['starter'])
 .factory('Perfil', function($resource,HOST_API) {
   	/*Model de Perfil*/
-    var Perfil = $resource(HOST_API+'/perfil/:id',
+    var Perfil = $resource(HOST_API+'/perfil/:id',{ id: '@id' },
       
-      { update: {
-        method: 'PUT'
-      }
-
-    });
+      { update: {method: 'PUT'} });
 
       
 
@@ -23,11 +19,11 @@ angular.module('app.sql-service', ['starter'])
         }), cb);
    
     };
-
-
-
-  	return $resource(HOST_API+'/perfil/:id');
+    
+  	return Perfil;
 })
+
+
 .service('SQLService',function($q,$localStorage,$ionicLoading,UtilsService,Perfil,GraphService) {
            this.debug = true;
 

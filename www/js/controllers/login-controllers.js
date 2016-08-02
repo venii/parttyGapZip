@@ -15,7 +15,7 @@ angular.module('login.controllers', ['starter'])
 
       GraphService.getMeFB().then(function(response){
         LoginService.savePerfil(response);
-        
+       
         Perfil.save(response, function(r) {
                         console.log('save',r);
                         //data saved. do something here.
