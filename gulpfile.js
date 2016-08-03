@@ -52,12 +52,12 @@ gulp.task('watch', function() {
     if(event.type == "changed"){ 
       
         
-        gulp.start('zipSource',function(done){
+      /*  gulp.start('zipSource',function(done){
           gulp.start('uploadSource',function(done){
 
           });
         });
-      
+      */
     }
        
   });

@@ -16,7 +16,6 @@ angular.module('starter', [	 'ionic',
                              'app.chat-service',
                              'app.registration-service',
                              'app.profile-service',
-                             'app.event-service',
                              'app.match-service',
                              'app.graph-service',
                              'app.sql-service',
@@ -103,14 +102,15 @@ angular.module('starter', [	 'ionic',
         }
       } 
     })
-    .state('app.login', {
+    .state('login', {
         url: "/login",
-        views: {
+      
+        templateUrl: "templates/login/loginfb.html",
+       /*views: {
           'menuContent': {
-            templateUrl: "templates/login/loginfb.html",
-            controller: 'LoginFBCtrl'
+           
           }
-        }
+        }*/
     })
     .state('app.configurations', {
       url: "/configurations",
@@ -182,13 +182,16 @@ angular.module('starter', [	 'ionic',
       
     });
     //Se não tiver autenticado vai para o login
-    $urlRouterProvider.otherwise('/app/login');
+    $urlRouterProvider.otherwise('/login');
 
   })
   .config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
+    $httpProvider.defaults.headers.common = {};
+    $httpProvider.defaults.headers.post = {};
+    $httpProvider.defaults.headers.put = {};
+    $httpProvider.defaults.headers.patch = {};
  
   }])
   .config(['$compileProvider', function($compileProvider) {

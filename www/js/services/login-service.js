@@ -1,7 +1,7 @@
 angular.module('app.login-service', ['app.utils-service','ngCordova'])
 .service('LoginService',  function(
     $localStorage,$ionicViewService,$ionicSideMenuDelegate,
-    $http,$rootScope,$cordovaOauth,$cordovaFacebook,$q,
+    $http,$rootScope,$cordovaOauth,$cordovaFacebook,$q,SQLService,
 
     
     /*
@@ -37,22 +37,16 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
               return deferred.promise;
            };
 
-           //função para resolver os errors do login
-           this.errorHandlerLogin = function(error){
-              console.log(error);
-              alert("LOGINSERVICE: "+error);
-           }
-
            //função de salvar no localstorage o json vindo do servidor do FB (graph)
            this.savePerfil = function(response){
-              $localStorage.perfil = response;
-              //trata tipos vindo da GRAPH API e do Servidor do partty
-              if(typeof(response.authResponse) == "undefined"){
-                this.setToken(response.access_token);
-              
-              }else{
-                this.setToken(response.authResponse.token);
-              }
+
+              //["id_pt_profiles", "nome" , "gender" , "picture"]
+              idfb = response.id;
+              nome = response.name;
+              sexo = response.gender;
+              pict = response.picture.data.url;
+              SQLService.insertIntoTable('pt_profiles',[idfb,nome,sexo,pict]);
+
            }
            
            //função de salvar o token no localStorage
