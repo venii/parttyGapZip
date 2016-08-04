@@ -1,5 +1,5 @@
 angular.module('app.graph-service', ['starter'])
-.service('GraphService',function($q,UtilsService, $localStorage,$ionicLoading,$q,$http,$cordovaFacebook) {
+.service('GraphService',function($q,UtilsService, $localStorage,$ionicLoading,$q,$http,$cordovaFacebook,SQLService) {
            //função para verificar se é mobile (true - mobile / false - web)
            this.getMeFB = function() { 
              var deferred = $q.defer();
@@ -88,21 +88,21 @@ angular.module('app.graph-service', ['starter'])
 
 
      	   this.addEvent = function(eventFbObj){
-     	   		var events = $localStorage.events;
-     	   		if(events === undefined){
-     	   			events = new Array();
-     	   		}
-
-     	   		var exitsEvent = this.getEvent(eventFbObj.id);
-     	   	
-     	   		if(exitsEvent == null){
-     	   			events.push(eventFbObj);
-     	   		}
-
-     	   		$localStorage.events = events;
-
-     	   		return false;
      	   		
+                idfb = eventFbObj.id;
+                nome = eventFbObj.name;
+                descricao = "eventFbObj.description";
+                data_evento = eventFbObj.start_time;
+                image = eventFbObj.picture.data.url;
+
+                idfb = '2';
+                nome = '2';
+                descricao = "2";
+                data_evento = '2';
+                image = '2';
+
+                SQLService.insertIntoTable('fb_events',[idfb,nome,descricao,data_evento,image]);
+
      	   }
 
      	   this.removeEvent = function(eventfb){

@@ -8,10 +8,13 @@ angular.module('events.controllers', ['starter'])
       for(var i in r.data){
           var evt = r.data[i];
           evt_id = evt.id;
-  
+    
+          
+
+          
           GraphService.addEvent(evt);
           
-          //console.log(evt_id);
+          console.log(evt_id,evt);
 
           /*GraphService.getEventAttendingFB(evt_id).then(function(r2){
             console.log('r2',r2);
