@@ -173,13 +173,17 @@ angular.module('app.sql-service', ['starter'])
                 }
 
                 var campos_valor   = array_campos.join(",");
+                
                 var sql = 'INSERT INTO '+table.nome+' ('+campos_table+') VALUES ('+campos_valor+')';
 
                 if(service.isDebug()){
                   console.log(sql);  
                 }
 
-                tx.executeSql(sql);
+                tx.executeSql(sql,
+                              null,
+                              function(transaction,success){console.log("SQL success",transaction,success);},
+                              function(transaction, error){console.log("SQL error",transaction,error)});
               
               });
             });

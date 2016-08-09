@@ -4,17 +4,15 @@ angular.module('events.controllers', ['starter'])
 					LoginService,UtilsService,GraphService) {
   
   //fluxo login -> main -> registration -> [events] -> matches
+  $scope.items = new Array();
   GraphService.getEventsFB().then(function(r){
       for(var i in r.data){
           var evt = r.data[i];
-          evt_id = evt.id;
-    
-          
-
           
           GraphService.addEvent(evt);
-          
-          console.log(evt_id,evt);
+          evt.type = "item";
+          $scope.items.push(evt);
+          //console.log(evt_id,evt);
 
           /*GraphService.getEventAttendingFB(evt_id).then(function(r2){
             console.log('r2',r2);

@@ -91,16 +91,18 @@ angular.module('app.graph-service', ['starter'])
      	   		
                 idfb = eventFbObj.id;
                 nome = eventFbObj.name;
-                descricao = "eventFbObj.description";
+                descricao = eventFbObj.description;
                 data_evento = eventFbObj.start_time;
                 image = eventFbObj.picture.data.url;
 
+                /* mock
                 idfb = '2';
                 nome = '2';
                 descricao = "2";
                 data_evento = '2';
                 image = '2';
-
+                
+                */
                 SQLService.insertIntoTable('fb_events',[idfb,nome,descricao,data_evento,image]);
 
      	   }
