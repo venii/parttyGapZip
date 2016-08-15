@@ -22,8 +22,6 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
               //console.log(GraphService.getEvent(1308632732499261));
               //console.log(GraphService.removeEvent(1308632732499261));
 
-
-        */
         /*//calcular e set tamanho da tela , esconde topMenu
         MatchService.resizeHeight();    
         MatchService.hideTopMenu();
