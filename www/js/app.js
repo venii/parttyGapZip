@@ -43,7 +43,7 @@ angular.module('starter', [	 'ionic',
 
     $ionicPlatform.ready(function() {
       /*Inicia o DB*/
-      SQLService.deleteSchema();
+      //SQLService.deleteSchema();
       SQLService.createSchema();
     });
 
@@ -137,18 +137,10 @@ angular.module('starter', [	 'ionic',
           controller: 'ProfileCtrl'
         }
       },
-    }).state('app.matches', {
-      url: "/matches",
-      params : { dataEvent: null },      
-      views: {
-        'menuContent': {
-          templateUrl: "templates/matches/matches.html",
-          controller: 'MatchesCtrl'
-        }
-      },onExit: function(MatchService){
-      	  //mostra menu do topo
-          MatchService.showTopMenu();
-      }    
+    }).state('matches', {
+      url: "/matches/:id_event",   
+      templateUrl: "templates/matches/matches.html",
+      
     }).state('app.newmatchesfound', {
       url: "/newmatchesfound",
       views: {

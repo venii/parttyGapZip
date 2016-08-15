@@ -3,8 +3,28 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
 .controller('MatchesCtrl', function (
                         $scope,$state,$stateParams,
                         SendMatchesToWS,MatchService,UtilsService) {
-  		
-        //calcular e set tamanho da tela , esconde topMenu
+  		/*
+
+              //console.log(evt_id,evt);
+
+              /*GraphService.getEventAttendingFB(evt_id).then(function(r2){
+                console.log('r2',r2);
+
+                for(var i2 in r2.attending.data){
+                  var att = r2.attending.data[i2];
+                  
+                  console.log(r2.eventFb,att);
+                  
+                  GraphService.addAttendingToEvent(r2.eventFb,att); 
+                }
+              });**/
+              
+              //console.log(GraphService.getEvent(1308632732499261));
+              //console.log(GraphService.removeEvent(1308632732499261));
+
+
+        */
+        /*//calcular e set tamanho da tela , esconde topMenu
         MatchService.resizeHeight();    
         MatchService.hideTopMenu();
           
@@ -37,5 +57,5 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
             });
     	};
 
-        
+        */
   });

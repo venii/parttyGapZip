@@ -107,25 +107,6 @@ angular.module('app.graph-service', ['starter'])
 
      	   }
 
-     	   this.removeEvent = function(eventfb){
-     	   		var events = $localStorage.events;
-     	   		if(events === undefined){
-     	   			events = new Array();
-     	   		}
-
-     	   		for(i in events){
-     	   			var e = events[i];
-     	   			if(e.id == eventfb){
-     	   				return e;
-     	   			} 
-     	   		}
-
-     	   		$localStorage.events = events;
-
-     	   		return null;
-     	   		
-     	   }
-
      	   this.getEvent = function(eventFbId){
 				var events = $localStorage.events;
 
@@ -148,76 +129,23 @@ angular.module('app.graph-service', ['starter'])
      	   	
      	   }
 
-     	   this.getEventIndex = function(eventFbId){
-				var events = $localStorage.events;
+            this.removeEvent = function(eventfb){
+                var events = $localStorage.events;
+                if(events === undefined){
+                    events = new Array();
+                }
 
-     	   		if(events === undefined){
-     	   			
-     	   			events = new Array();
-     	   			$localStorage.events = events;
-     	   			
-     	   			return -1;
-     	   		}
+                for(i in events){
+                    var e = events[i];
+                    if(e.id == eventfb){
+                        return e;
+                    } 
+                }
 
-     	   		for(i in events){
-     	   			var e = events[i];
-     	   			if(e.id == eventFbId){
-     	   				return i;
-     	   			} 
-     	   		}
+                $localStorage.events = events;
 
-     	   		return -1;
-     	   	
-     	   }
+                return null;
+                
+           }
 
-     	   this.addAttendingToEvent = function(eventFbId,attendingFbObj){
-     	   		var index = this.getEventIndex(eventFbId);
-     	   		
-     	   		if(index != -1 ){
-     	   			try{
-	     	   			var evt = $localStorage.events[index];
-	     	   		}catch(ex){
-	     	   			$localStorage.events = new Array();
-	     	   			index = 0;
-	     	   		}
-
-	     	   		if($localStorage.events[index].attending === undefined){
-	     	   			$localStorage.events[index].attending = new Array();
-	     	   		}
-
-	     	   		var exitsAttending = this.getAttendingToEvent(eventFbId,attendingFbObj.id);
-	     	   	
-	     	   		if(exitsAttending == null){
-	     	   			$localStorage.events[index].attending.push(attendingFbObj);
-						return true;
-	     	   		}
-
-	
-	     	   	}
-     	   		return false;
-     	   		
-     	   }
-
-     	   this.getAttendingToEvent = function(eventFbId,attendingFbId){
-				var events = $localStorage.events;
-
-     	   		if(events === undefined){
-     	   			
-     	   			events = new Array();
-     	   			$localStorage.events = events;
-     	   			
-     	   			return null;
-     	   		}
-     	   		var index = this.getEventIndex(eventFbId);
-     	   		
-     	   		for(i in events[index]){
-     	   			var attending = events[index][i];
-     	   			if(attending.id == attendingFbId){
-     	   				return attending;
-     	   			} 
-     	   		}
-
-     	   		return null;
-     	   	
-     	   }
 });

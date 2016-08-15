@@ -1,4 +1,5 @@
 angular.module('app.sql-service', ['starter'])
+/*PERFIL*/
 .factory('Perfil', function($resource,HOST_API) {
   	/*Model de Perfil*/
     var Perfil = $resource(HOST_API+'/perfil/:id',{ id: '@id' },
@@ -22,7 +23,30 @@ angular.module('app.sql-service', ['starter'])
     
   	return Perfil;
 })
+/*PERFIL*/
+/*EVENTO*/
+.factory('Evento', function($resource,HOST_API) {
+    /*Model de Perfil*/
+    var Evento = $resource(HOST_API+'/evento/:id',{ id: '@id' },
+      
+      { update: {method: 'PUT'} });
 
+    Evento.prototype.update = function(cb) {
+     
+      return Evento.update({
+      
+        id: this.id
+      
+        }, angular.extend({}, this, {
+      
+          _id: undefined
+        }), cb);
+   
+    };
+    
+    return Evento;
+})
+/*EVENTO*/
 
 .service('SQLService',function($q,$localStorage,$ionicLoading,UtilsService,Perfil) {
            this.debug = true;
@@ -223,6 +247,39 @@ angular.module('app.sql-service', ['starter'])
               db.transaction(function(tx) {
                 
                 var sql = 'SELECT * FROM '+table.nome+' WHERE '+table.campos[0]+' = "'+id+'"';
+  
+                if(service.isDebug()){
+                  console.log(sql);  
+                }
+
+                var rs = tx.executeSql(sql,[], function (tx, results) {
+
+                  var len = results.rows.length;
+                  
+                  if(len > 0){
+                      deferred.resolve(results.rows);
+                  }else{
+                      deferred.reject(false);
+                  }
+                  
+                    
+               }, function(){deferred.reject(false);});
+
+              });
+            });
+
+            return deferred.promise;
+          }
+
+          this.getAll = function(nome_table){
+            var table = this.getSchemaTable(nome_table);
+            var service = this;
+            var deferred = $q.defer();
+
+            this.getDB().then(function(db){
+              db.transaction(function(tx) {
+                
+                var sql = 'SELECT * FROM '+table.nome;
   
                 if(service.isDebug()){
                   console.log(sql);  

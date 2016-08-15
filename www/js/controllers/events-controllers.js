@@ -1,7 +1,6 @@
 angular.module('events.controllers', ['starter'])
 
-.controller('EventsCtrl', function ($scope,$stateParams,$state,
-					LoginService,UtilsService,GraphService) {
+.controller('EventsCtrl', function ($scope,$stateParams,$state,LoginService,UtilsService,GraphService) {
   
   //fluxo login -> main -> registration -> [events] -> matches
   $scope.items = new Array();
@@ -12,25 +11,13 @@ angular.module('events.controllers', ['starter'])
           GraphService.addEvent(evt);
           evt.type = "item";
           $scope.items.push(evt);
-          //console.log(evt_id,evt);
-
-          /*GraphService.getEventAttendingFB(evt_id).then(function(r2){
-            console.log('r2',r2);
-
-            for(var i2 in r2.attending.data){
-              var att = r2.attending.data[i2];
-              
-              console.log(r2.eventFb,att);
-              
-              GraphService.addAttendingToEvent(r2.eventFb,att); 
-            }
-          });**/
           
-          //console.log(GraphService.getEvent(1308632732499261));
-          //console.log(GraphService.removeEvent(1308632732499261));
-
       }
   });
+
+  $scope.entraEvento = function(id_fb){
+    $state.go('matches',{id_event : id_fb});
+  }
 }).controller('ControllerListEventsCtrl', function($scope) {
   //controlador da lista de eventos
  	$scope.shouldShowDelete = false;
