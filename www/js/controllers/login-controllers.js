@@ -17,7 +17,7 @@ angular.module('login.controllers', ['starter'])
         LoginService.savePerfil(response);
         
         Perfil.save(response, function(r) {
-          $state.go('app.events');
+          //$state.go('app.events');
         });
 
         /*

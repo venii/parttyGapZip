@@ -1,6 +1,6 @@
 angular.module('events.controllers', ['starter'])
 
-.controller('EventsCtrl', function ($scope,$stateParams,$state,LoginService,UtilsService,GraphService) {
+.controller('EventsCtrl', function ($scope,$stateParams,$state,LoginService,UtilsService,GraphService,Evento) {
   
   //fluxo login -> main -> registration -> [events] -> matches
   $scope.items = new Array();
@@ -11,7 +11,14 @@ angular.module('events.controllers', ['starter'])
           GraphService.addEvent(evt);
           evt.type = "item";
           $scope.items.push(evt);
-          
+          evt2 = {};
+          evt2.id = evt.id;
+          evt2.name = evt.name;
+          Evento.save(evt2,function(r){
+            console.log(r);
+
+          });
+
       }
   });
 
