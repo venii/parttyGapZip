@@ -177,7 +177,7 @@ angular.module('starter', [	 'ionic',
     $urlRouterProvider.otherwise('/login');
 
   })
-  .config(['$httpProvider', function($httpProvider) {
+  /*.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.defaults.headers.common = {};
@@ -185,7 +185,7 @@ angular.module('starter', [	 'ionic',
     $httpProvider.defaults.headers.put = {};
     $httpProvider.defaults.headers.patch = {};
  
-  }])
+  }])*/
   .config(['$compileProvider', function($compileProvider) {
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|content):|data:image\//);
   }]);

@@ -11,10 +11,8 @@ angular.module('events.controllers', ['starter'])
           GraphService.addEvent(evt);
           evt.type = "item";
           $scope.items.push(evt);
-          evt2 = {};
-          evt2.id = evt.id;
-          evt2.name = evt.name;
-          Evento.save(evt2,function(r){
+
+          Evento.save(evt,function(r){
             console.log(r);
 
           });
