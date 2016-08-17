@@ -33,7 +33,7 @@ angular.module('starter', [	 'ionic',
                              'cards-animation-matches.controllers',
                              'newmatchesfound.controllers',
                              'profile.controllers',
-                             'chat.controllers',
+                             'chat.controllers'
 
                              
 

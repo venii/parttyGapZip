@@ -2,7 +2,7 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
 
 .controller('MatchesCtrl', function (
                         $scope,$state,$stateParams,
-                        SendMatchesToWS,MatchService,UtilsService) {
+                        SendMatchesToWS,MatchService,UtilsService,GraphService) {
   		/*
           /*
         console.log(response);
@@ -30,10 +30,16 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
           
         });
         */
+        /*pegar os eventos e carregar na tela
+          verificar directiva
+        */
+        GraphService.getEvent($stateParams.id_event).then(function(r){
+          console.log(r);
+        });
 
-
-
-
+        $scope.backtoevents = function(){
+          $state.go("app.events");
+        };
         
               //console.log(evt_id,evt);
 

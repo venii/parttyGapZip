@@ -108,24 +108,13 @@ angular.module('app.graph-service', ['starter'])
      	   }
 
      	   this.getEvent = function(eventFbId){
-				var events = $localStorage.events;
+				var deferred = $q.defer();
 
-     	   		if(events === undefined){
-     	   			
-     	   			events = new Array();
-     	   			$localStorage.events = events;
-     	   			
-     	   			return null;
-     	   		}
-
-     	   		for(i in events){
-     	   			var e = events[i];
-     	   			if(e.id == eventFbId){
-     	   				return e;
-     	   			} 
-     	   		}
-
-     	   		return null;
+                var result = SQLService.findById('fb_events',eventFbId).then(function(r){
+                    deferred.resolve(r);
+                });
+                
+     	   		return deferred.promise;
      	   	
      	   }
 
