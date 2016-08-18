@@ -9,7 +9,6 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
     */
 
     UtilsService,
-    AdressService,
     LoginService,
     MainService,
     RegistrationService

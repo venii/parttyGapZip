@@ -8,30 +8,8 @@ angular.module('app.menu', ['starter'])
    
     MenuService,
     FriendsService,
-    AdressService,
     UtilsService) {
 
-  $localStorage.httpserver = 'http://parttyappnoip.ddns.net';
-  $localStorage.restaddress = $localStorage.httpserver+'/partty/servercode/ws/process.php/';
-  //var constants
-  $localStorage.signup = $localStorage.restaddress + 'login';
-  $localStorage.getfbidbysess = $localStorage.restaddress + 'getfbidbysess';
-  $localStorage.updatedob = $localStorage.restaddress + 'updatedob';
-  $localStorage.geteventsfb = $localStorage.restaddress + 'geteventsfb';
-  $localStorage.getpreferences = $localStorage.restaddress + 'getPreferences';
-  $localStorage.updatepreferences = $localStorage.restaddress + 'updatePreferences';
-  $localStorage.findmatchespartty = $localStorage.restaddress + 'findMatchespartty';
-  $localStorage.inviteaction = $localStorage.restaddress + 'inviteAction';
-  $localStorage.registermatchespartty = $localStorage.restaddress + 'registerMatchespartty';
-  $localStorage.updatedevicedetails = $localStorage.restaddress + '_updateDeviceDetails';
-  $localStorage.getprofilematches = $localStorage.restaddress + 'getProfileMatches';
-  $localStorage.sendmessage = $localStorage.restaddress + 'sendMessage';
-  $localStorage.getprofile = $localStorage.restaddress + 'getProfile';
-  $localStorage.editprofile = $localStorage.restaddress + 'editProfile';
-  $localStorage.upload_user_image = $localStorage.restaddress + 'upload_user_image';
-  $localStorage.uploadchunk = $localStorage.restaddress + 'uploadChunk';
-
-  //gerencia chat , menus superiores (top) e armazena urls da api do partty
 
   //função para abrir menu esquerdo top  
   $scope.toggleLeftSideMenu = function() {
@@ -42,8 +20,7 @@ angular.module('app.menu', ['starter'])
   $scope.toggleRightSideMenu = function() {
       //carrega lista de amigos
       MenuService.toggleSideMenu('right',function(){
-        FriendsService.loadFriendList($scope);
-        
+        FriendsService.loadFriendList($scope);        
       });
   };
 

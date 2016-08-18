@@ -34,7 +34,9 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
           verificar directiva
         */
         GraphService.getEvent($stateParams.id_event).then(function(r){
-          console.log(r);
+          if(r.length > 0){
+            $scope.eventinfoJSON = r[0];
+          }
         });
 
         $scope.backtoevents = function(){
@@ -58,21 +60,6 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
               //console.log(GraphService.getEvent(1308632732499261));
               //console.log(GraphService.removeEvent(1308632732499261));
 
-        /*//calcular e set tamanho da tela , esconde topMenu
-        MatchService.resizeHeight();    
-        MatchService.hideTopMenu();
-          
-        $scope.eventinfoJSON = $state.params.dataEvent;
-       
-        //função para voltar para eventos
-    	$scope.backtoevents = function(){
-    		$state.go("app.events");
-    	};
-
-        //função de info (ainda nao implementada)
-    	$scope.info = function(){
-    		
-    	};
 
     	//função para carregar os matches do servidor do partty
     	$scope.matches = function(){
@@ -91,5 +78,4 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
             });
     	};
 
-        */
   });

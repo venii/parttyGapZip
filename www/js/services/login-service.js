@@ -10,7 +10,6 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
     UtilsService) {
             
            var FBappId ='574073299368611';
-
            var FBscope = 'email';
            
            //realiza login
@@ -46,7 +45,16 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
               sexo = response.gender;
               pict = response.picture.data.url;
               SQLService.insertIntoTable('pt_profiles',[idfb,nome,sexo,pict]);
+           }
 
+           this.getPerfil = function(){
+              var deferred = $q.defer();
+
+              var result = SQLService.getAll('pt_profiles',eventFbId).then(function(r){
+                 deferred.resolve(r[0]);
+              });
+                
+              return deferred.promise;
            }
            
            //função de salvar o token no localStorage

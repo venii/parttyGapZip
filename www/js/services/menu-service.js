@@ -8,34 +8,21 @@ angular.module('app.menu-service', ['starter','app.utils-service','app.login-ser
 			) {
           
 
-           this.toggleSideMenu = function(side,callback){
+           this.toggleSideMenu = function(side){
            		
-           		if(LoginService.isAuthFb()){
+           		if(UtilsService.isMob()){
+                self = this;
 
-           			if(UtilsService.isMob()){
-                  self = this;
-           				document.addEventListener("deviceready", function () {
-		           			
-		           	    if(UtilsService.getInternetState()){
-						      	   self.performToggleSideMenu(side);
-                       typeof(callback) != "undefined" ? callback() : null;
-					      	  
-                    }else{
-					      		  UtilsService.showNoConnectionError();
-					      	  
-                    }
-
-				      	 });
-           			}else{
-           				this.performToggleSideMenu(side);
-           				typeof(callback) != "undefined" ? callback() : null;
-           			}
-
-           		}else{
-           			LoginService.showNoAuthError();
-           		}
-           		
-
+		           	if(UtilsService.getInternetState()){
+						      self.performToggleSideMenu(side);	  
+                }else{
+					      	UtilsService.showNoConnectionError();  
+                }
+                
+              }else{
+                self = this;
+                self.performToggleSideMenu(side);   
+              }
            }
 
            this.performToggleSideMenu = function(side){

@@ -1,6 +1,6 @@
 angular.module('main.controllers', ['starter'])
 .controller('MainCtrl', function($scope,$state,
-                              UtilsService,MainService,AdressService,
+                              UtilsService,MainService,
                               $ionicLoading,$ionicViewService,$localStorage) {
     //fluxo login -> [main] -> registration
     //se for mobile, no arquivo de push tem o redirecionamento para o controlador registration

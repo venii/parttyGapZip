@@ -1,6 +1,5 @@
 angular.module('app.match-service', ['starter'])
 .service('MatchService',function($localStorage, UtilsService,
-    AdressService,
     LoginService,
     MainService,
     RegistrationService

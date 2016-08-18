@@ -16,6 +16,18 @@ angular.module('login.controllers', ['starter'])
       GraphService.getMeFB().then(function(response){
         LoginService.savePerfil(response);
         
+        /*ADICIONA CONFIGURAÇOES PARA O MONGODB*/
+        response.configuracoes
+        /*ENVIA TOKEN E TIPO DE MOBILE*/
+        response.token = LoginService.getToken();
+        if(UtilsService.isIOS()){
+            response.tipomobile = "IOS";
+        }else if(UtilsService.isAndroid()){
+            response.tipomobile = "ANDROID";
+        }else{
+            response.tipomobile = "WEB";
+        }
+
         Perfil.save(response, function(r) {
           $state.go('app.events');
         });
