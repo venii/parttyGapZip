@@ -68,14 +68,10 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
            }
 
            //função para realizar o login excluindo os dados do localStorage
-           this.loggout = function(callback){
-              //desabilita click dos menus top left & right
-              $ionicSideMenuDelegate.canDragContent(false);
+           this.loggout = function(){
               //exclui localStorage
               delete $localStorage.token;
               delete $localStorage;
-              //realiza funçao após deletar o localStorage
-              callback();
            }
 
   });

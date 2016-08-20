@@ -179,4 +179,21 @@ angular.module('starter', [	 'ionic',
   })
   .config(['$compileProvider', function($compileProvider) {
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|content):|data:image\//);
-  }]);
+  
+  }]).factory('$exceptionHandler', ['$log','$injector' , function($log,$injector) {
+    return function myExceptionHandler(exception, cause) {
+     
+      if(exception.hasOwnProperty('code')){
+        if(exception.code == 190){
+          $log.warn(exception, cause);
+          var LoginService = $injector.get("LoginService");
+          var $state       = $injector.get("$state");
+         
+          LoginService.loggout();
+          $state.go('login');
+
+        }
+      }
+      //$log.warn(exception, cause);
+    };
+  }]);;

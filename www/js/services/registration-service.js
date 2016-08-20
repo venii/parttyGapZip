@@ -7,9 +7,7 @@ angular.module('app.registration-service', ['starter','app.utils-service','app.r
     /*
       Nosso servicos
     */
-
     UtilsService,
-    AdressService,
     LoginService,
     MainService
     ) {

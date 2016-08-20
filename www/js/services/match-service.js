@@ -36,7 +36,7 @@ angular.module('app.match-service', ['starter'])
 		$sce,$compile,$localStorage,$ionicViewService,
 		$http,$rootScope,$state,$ionicLoading,$templateRequest,
 
-		RegistrationService,LoginService,AdressService,UtilsService) {
+		RegistrationService,LoginService,UtilsService) {
         
             var cardList = [];
         

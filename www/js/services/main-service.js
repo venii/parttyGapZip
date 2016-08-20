@@ -7,9 +7,7 @@ angular.module('app.main-service', ['starter','app.utils-service','app.login-ser
     /*
       Nosso servicos
     */
-
     UtilsService,
-    AdressService,
     LoginService
 
     ) {
