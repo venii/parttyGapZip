@@ -4,6 +4,8 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
                         $scope,$state,$stateParams,
                         SendMatchesToWS,MatchService,UtilsService,GraphService) {
 
+        $scope.eventinfoJSON = null;
+
   		  /*
           /*
         console.log(response);
@@ -38,10 +40,10 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
         $scope.info = function(){
             $scope.showMatchesInfo = true;
             
+
             GraphService.getEvent($stateParams.id_event).then(function(r){
               if(r.length > 0){
                 $scope.eventinfoJSON = r[0];
-                
                 $scope.showMatchesInfo = false;
               }
             });
@@ -49,9 +51,8 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
         
         //função para carregar os matches do servidor do partty
         $scope.matches = function(){
-            $scope.showMatches = true;
-                
-            //$scope.showMatches = false;
+            $scope.showMatches = true;    
+            $scope.showMatches = false;
         };
 
         $scope.backtoevents = function(){
