@@ -25,6 +25,7 @@ angular.module('events.controllers', ['starter'])
   $scope.entraEvento = function(id_fb){
     $state.go('matches',{id_event : id_fb});
   }
+  
 }).controller('ControllerListEventsCtrl', function($scope) {
   //controlador da lista de eventos
  	$scope.shouldShowDelete = false;

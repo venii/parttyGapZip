@@ -3,6 +3,7 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
 .controller('MatchesCtrl', function (
                         $scope,$state,$stateParams,
                         SendMatchesToWS,MatchService,UtilsService,GraphService) {
+
   		/*
           /*
         console.log(response);
@@ -33,12 +34,20 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
         /*pegar os eventos e carregar na tela
           verificar directiva
         */
-        GraphService.getEvent($stateParams.id_event).then(function(r){
-          if(r.length > 0){
-            $scope.eventinfoJSON = r[0];
-          }
-        });
-
+        
+        
+        $scope.info = function(){
+            $scope.showMatchesInfo = true;
+            
+            GraphService.getEvent($stateParams.id_event).then(function(r){
+              if(r.length > 0){
+                $scope.eventinfoJSON = r[0];
+                
+                $scope.showMatchesInfo = false;
+              }
+            });
+        }
+        
         $scope.backtoevents = function(){
           $state.go("app.events");
         };

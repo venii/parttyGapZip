@@ -3,40 +3,39 @@
   <ion-content>
 
   		<tabset class="tabsetoverride" >
-		    <tab   select="info()">
-		    		<tab-heading>
-				        <center><i class="glyphicon glyphicon-info-sign"> </i>   </center>
-				    </tab-heading>
-				    	<div style="width:100%; height:100%">
-				    		<div style="width:100%;height:100px;margin-top:10px;border: 1px solid">
-				    			
+		    <tab select="info()">
+	    		<tab-heading>
+			        <center><i class="glyphicon glyphicon-info-sign"> </i>   </center>
+			    </tab-heading>
+		    	<div style="width:100%; height:100%">
 
-				    			<img style="width:100%;height:100%" ng-src="{{eventinfoJSON.image}}" no-img />
-				    		</div>
-				    			
-				    			<h1>{{eventinfoJSON.nome}}</h1>
+		    		<div align="center" style="margin-top:40px" ng-show="showMatchesInfo">
+		  				<ion-spinner >Carregando eventos</ion-spinner>
+		  			</div>
 
-				    			<div style="width:100%;height:100px;margin-top:10px;">
-				    			{{eventinfoJSON.descricao ? eventinfoJSON.descricao : 'Sem descrição'}}
-
-				    			</div>
-
-				    	</div>
+		    		<div style="width:100%;height:100px;margin-top:10px;border: 1px solid" ng-show="!showMatchesInfo">
+		    			<img style="width:100%;height:100%" ng-src="{{eventinfoJSON.image}}" no-img />
+		    		</div>
+		    		<h1 ng-show="!showMatchesInfo">{{eventinfoJSON.nome}}</h1>
+		    		<div style="width:100%;height:100px;margin-top:10px;" ng-show="!showMatchesInfo">
+		    			{{eventinfoJSON.descricao ? eventinfoJSON.descricao : 'Sem descrição'}}
+					</div>
+		    	</div>
 		    </tab>
+
 		    <tab select="matches()" id="matches" >
 		    		<tab-heading>
 				        <center><i class="glyphicon glyphicon-glass"> </i></center>
 				    </tab-heading>
-		   			<div id="includeCards"  style="width:100%; height:100%"></div>
+		   			<div id="includeCards" style="width:100%; height:100%"></div>
 				  
 		    </tab>
-		     <tab   select="backtoevents()">
-		    		<tab-heading>
-				        <center><i class="glyphicon glyphicon-backward"></i> </center> 
-				    </tab-heading>
 
+		     <tab select="backtoevents()">
+		     	<tab-heading>
+					<center><i class="glyphicon glyphicon-backward"></i> </center> 
+				</tab-heading>
 		    </tab>	    
 		  </tabset>
-
   </ion-content>
 </ion-view>
