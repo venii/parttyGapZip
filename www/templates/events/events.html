@@ -3,6 +3,9 @@
 
 
   		<ion-scroll delegate-handle="scroller" on-scroll="checkScroll()" direction="y" style="width: 100%; height: 100%">
+  			<div align="center" style="margin-top:40px" ng-show="showEvents">
+  				<ion-spinner >Carregando eventos</ion-spinner>
+  			</div>
   			<ion-list ng-controller="ControllerListEventsCtrl"
 			          show-delete="shouldShowDelete"
 			          show-reorder="shouldShowReorder"
