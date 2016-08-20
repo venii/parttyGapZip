@@ -4,7 +4,7 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
                         $scope,$state,$stateParams,
                         SendMatchesToWS,MatchService,UtilsService,GraphService) {
 
-  		/*
+  		  /*
           /*
         console.log(response);
 
@@ -35,7 +35,6 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
           verificar directiva
         */
         
-        
         $scope.info = function(){
             $scope.showMatchesInfo = true;
             
@@ -48,6 +47,13 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
             });
         }
         
+        //função para carregar os matches do servidor do partty
+        $scope.matches = function(){
+            $scope.showMatches = true;
+                
+            //$scope.showMatches = false;
+        };
+
         $scope.backtoevents = function(){
           $state.go("app.events");
         };
@@ -70,21 +76,6 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
               //console.log(GraphService.removeEvent(1308632732499261));
 
 
-    	//função para carregar os matches do servidor do partty
-    	$scope.matches = function(){
-            UtilsService.openDialogMsg('Procurando matches...');
-
-            //retornar matches do servidor partty (processados por graph ou pelo sistema de cache)    
-            SendMatchesToWS.loadMatches($scope,$scope.eventinfoJSON.id,function(resp){
-                UtilsService.closeDialogMsg();
-                    
-                if(resp.error){
-                    //se não tem matches envia para eventos novamente
-                    alert("Não há matches");
-                    $state.go('app.events');
-                }
-
-            });
-    	};
+    	
 
   });

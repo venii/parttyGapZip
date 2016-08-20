@@ -10,14 +10,14 @@
 		    	<div style="width:100%; height:100%">
 
 		    		<div align="center" style="margin-top:40px" ng-show="showMatchesInfo">
-		  				<ion-spinner >Carregando eventos</ion-spinner>
+		  				<ion-spinner ></ion-spinner>
 		  			</div>
 
 		    		<div style="width:100%;height:100px;margin-top:10px;border: 1px solid" ng-show="!showMatchesInfo">
 		    			<img style="width:100%;height:100%" ng-src="{{eventinfoJSON.image}}" no-img />
 		    		</div>
 		    		<h1 ng-show="!showMatchesInfo">{{eventinfoJSON.nome}}</h1>
-		    		<div style="width:100%;height:100px;margin-top:10px;" ng-show="!showMatchesInfo">
+		    		<div style="width:100%;height:100%;margin-top:10px;" ng-show="!showMatchesInfo">
 		    			{{eventinfoJSON.descricao ? eventinfoJSON.descricao : 'Sem descrição'}}
 					</div>
 		    	</div>
@@ -27,7 +27,12 @@
 		    		<tab-heading>
 				        <center><i class="glyphicon glyphicon-glass"> </i></center>
 				    </tab-heading>
-		   			<div id="includeCards" style="width:100%; height:100%"></div>
+		   			
+		   			<div id="includeCards" style="width:100%; height:100%" ng-show="!showMatches"></div>
+				  	
+				  	<div id="includeCards" style="width:100%; height:100%;margin-top:200px" ng-show="showMatches" align="center">
+				  		<ion-spinner ></ion-spinner>
+				  	</div>
 				  
 		    </tab>
 
