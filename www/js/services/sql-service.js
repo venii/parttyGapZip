@@ -1,4 +1,29 @@
 angular.module('app.sql-service', ['starter'])
+/*PREFERENCIAS*/
+.factory('Preferencias', function($resource,HOST_API) {
+    /*Model de Preferencias*/
+    var Preferencias = $resource(HOST_API+'/preferencias/:id',{ id: '@id' },
+      
+      { update: {method: 'PUT'} });
+
+      
+
+    Preferencias.prototype.update = function(cb) {
+     
+      return Preferencias.update({
+      
+        id: this.id
+      
+        }, angular.extend({}, this, {
+      
+          _id: undefined
+        }), cb);
+   
+    };
+    
+    return Preferencias;
+})
+/*PREFERENCIAS*/
 /*PERFIL*/
 .factory('Perfil', function($resource,HOST_API) {
   	/*Model de Perfil*/

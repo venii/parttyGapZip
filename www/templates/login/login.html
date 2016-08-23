@@ -19,6 +19,9 @@
         <label class="item">
           <button class="button button-block button-positive" type="submit">Log in</button>
         </label>
+        <div align="center" style="margin-top:40px" ng-show="showLoginSpinner">
+          <ion-spinner >Carregando eventos</ion-spinner>
+        </div>
       </div>
     </form>
   </ion-content>
