@@ -258,8 +258,13 @@ angular.module('app.sql-service', ['starter'])
                   console.log(sql);  
                 }
 
+                
+                var valores = Object.keys(array_campos).map(function(k) { return array_campos[k] });
+                
+                valores.splice(0,1);
+
                 tx.executeSql(sql,
-                              array_campos,
+                              valores,
                               function(transaction,success){console.log("SQL success",transaction,success);},
                               function(transaction, error){console.log("SQL error",transaction,error)});
               
