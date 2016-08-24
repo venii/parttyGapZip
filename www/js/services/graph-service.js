@@ -121,7 +121,7 @@ angular.module('app.graph-service', ['starter'])
                 image = '2';
                 
                 */
-                SQLService.insertIntoTable('fb_events',[idfb,nome,descricao,data_evento,image]);
+                SQLService.insertIntoTable('fb_events',[idfb,nome,descricao,data_evento,image,null]);
 
      	   }
 

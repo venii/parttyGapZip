@@ -2,14 +2,25 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
 
 .controller('MatchesCtrl', function (
                         $scope,$state,$stateParams,
-                        SendMatchesToWS,MatchService,UtilsService,GraphService) {
+                        SendMatchesToWS,MatchService,UtilsService,GraphService,SQLService) {
 
         $scope.eventinfoJSON = null;
 
+        SQLService.findById('fb_events','190568661357844').then(function(r){
+          var obj = r[0];
+          console.log(obj);
+          
+          obj.descricao = "tiririca";
+
+          SQLService.updateIntoTable('fb_events',obj,obj.id_fb_events);
+
+          console.log(obj);
+          
+        });
   		  /*
           /*
         console.log(response);
-
+        
         Perfil.update(response, function(r) {
                         console.log('update',r);
                         //data saved. do something here.

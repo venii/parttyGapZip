@@ -39,12 +39,19 @@ angular.module('starter', [	 'ionic',
 
   ])
   .value("HOST_API","http://localhost:8080")
-  .run(function($ionicPlatform,OpenFB,SQLService) {
+  .run(function($ionicPlatform,OpenFB,SQLService,UtilsService,LoginService) {
 
     $ionicPlatform.ready(function() {
       /*Inicia o DB*/
       //SQLService.deleteSchema();
       SQLService.createSchema();
+      if(UtilsService.isIOS()){
+          LoginService.setTipoDevice("IOS");
+      }else if(UtilsService.isAndroid()){
+          LoginService.setTipoDevice("ANDROID");
+      }else{
+          LoginService.setTipoDevice("WEB");
+      }
     });
 
   })
@@ -104,13 +111,7 @@ angular.module('starter', [	 'ionic',
     })
     .state('login', {
         url: "/login",
-      
         templateUrl: "templates/login/loginfb.html",
-       /*views: {
-          'menuContent': {
-           
-          }
-        }*/
     })
     .state('app.configurations', {
       url: "/configurations",

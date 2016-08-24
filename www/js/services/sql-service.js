@@ -217,20 +217,19 @@ angular.module('app.sql-service', ['starter'])
                 
                 var campos_table   = table.campos.join(',');
 
-                for(i in array_campos){
-                  array_campos[i] = "\'"+array_campos[i]+"\'";
-                }
-
                 var campos_valor   = array_campos.join(",");
                 
-                var sql = 'INSERT INTO '+table.nome+' ('+campos_table+') VALUES ('+campos_valor+')';
+                var wildcards = service.pad(array_campos.length,'?,');
+                wildcards = wildcards.substring(0, wildcards.length - 1);
+
+                var sql = 'INSERT INTO '+table.nome+' ('+campos_table+') VALUES ('+wildcards+')';
 
                 if(service.isDebug()){
                   console.log(sql);  
                 }
 
                 tx.executeSql(sql,
-                              null,
+                              array_campos,
                               function(transaction,success){console.log("SQL success",transaction,success);},
                               function(transaction, error){console.log("SQL error",transaction,error)});
               
@@ -248,16 +247,21 @@ angular.module('app.sql-service', ['starter'])
                 
                 var setFields = new Array;
                 for(var i in array_campos){
-                  setFields.push(i + " = '"+array_campos[i]+"'");
+                  setFields.push(i + " = ?");
                 }
+
+                var idset = setFields.splice(0,1)[0].replace(" = ?","");
                 
-                var sql = 'UPDATE '+table.nome+' SET '+setFields.join(',')+' WHERE '+table.campos[0]+' = "'+id+'"';
+                var sql = 'UPDATE '+table.nome+' SET '+setFields.join(',')+' WHERE '+idset+' = "'+id+'"';
 
                 if(service.isDebug()){
                   console.log(sql);  
                 }
 
-                tx.executeSql(sql);
+                tx.executeSql(sql,
+                              array_campos,
+                              function(transaction,success){console.log("SQL success",transaction,success);},
+                              function(transaction, error){console.log("SQL error",transaction,error)});
               
               });
             });
@@ -329,5 +333,13 @@ angular.module('app.sql-service', ['starter'])
             return deferred.promise;
           }
 
-
+          this.pad = function(len, c){
+              var i=0;
+              var pad = '';
+              while(i<len){
+                pad += c;
+                i++;
+              }
+              return pad;
+          }
   });

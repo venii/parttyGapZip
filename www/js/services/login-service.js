@@ -67,11 +67,19 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
               return $localStorage.token;
            }
 
+           this.setTipoDevice = function(tipo){
+              $localStorage.tipoMobile = tipo;
+           }
+
+           this.getTipoDevice = function(){
+              return $localStorage.tipoMobile;
+           }
+
            //função para realizar o login excluindo os dados do localStorage
            this.loggout = function(){
               //exclui localStorage
-              delete $localStorage.token;
               delete $localStorage;
+              SQLService.deleteSchema();
            }
 
   });

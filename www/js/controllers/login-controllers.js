@@ -19,25 +19,7 @@ angular.module('login.controllers', ['starter'])
       GraphService.getMeFB().then(function(response){
         LoginService.savePerfil(response);
 
-
         Perfil.save(response, function(r) {
-          console.log(r);
-          /*
-             
-                response.configuracoes
-
-                response.token = LoginService.getToken();
-                if(UtilsService.isIOS()){
-                    response.tipomobile = "IOS";
-                }else if(UtilsService.isAndroid()){
-                    response.tipomobile = "ANDROID";
-                }else{
-                    response.tipomobile = "WEB";
-                }
-
-
-
-          */
           $scope.showLoginSpinner = false;
           $state.go('app.events');
         });

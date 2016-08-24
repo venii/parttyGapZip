@@ -1,30 +1,33 @@
 <ion-view view-title="Configurações" cache-view="false">
   <ion-content>
-  		<form novalidate name="configurations" class="simple-form" style="padding-left:40px;font-size:25px">
-  						
-  			Eu sou : <div class="btn-group">
+  		<form novalidate name="configurations" style="padding-left:40px;font-size:25px">
+  			<div>		
+  				<div>Eu sou :</div>
+  				<div class="btn-group">
         				<label class="btn btn-primary" ng-model="iam" ng-click="updateRadioGender(1)" btn-radio="'Homen'">Homen</label>
        
         				<label class="btn btn-primary" ng-model="iam" ng-click="updateRadioGender(2)" btn-radio="'Mulher'">Mulher</label>
-    				</div>
-					<br/>
-					<br/>
-			Estou procurando por:
-					<div class="btn-group">
-					        <label class="btn btn-primary" ng-click="updateCheckboxHomen(homen)" ng-model="homen" btn-checkbox >Homen</label>
-					        <label class="btn btn-primary" ng-click="updateCheckboxMulher(mulher)" ng-model="mulher" btn-checkbox >Mulher</label>
-					</div>
-					    <br/>
-					    <br/>
-			Pesquisar por usuarios do Partty:
+    			</div>
+    		</div>
+    		
+			<br/>
+			<br/>
 
-					     
-					 <div class="btn-group">
-					       <label class="btn btn-primary" ng-click="updateCheckboxUserRegistrados(parrtyusers)" ng-model="parrtyusers" btn-checkbox>Sim</label>
-				    </div>
-					    <br/>
-					    <br/>
-  						<center><button ng-click="atualizaPreferencias()"  class="btn btn-primary">Atualizar informaçoes</button></center>
+			<div>
+				<div>Estou procurando por:</div>
+				<div class="btn-group">
+				        <label class="btn btn-primary" ng-model="lookingfor" btn-checkbox >Homen</label>
+				        <label class="btn btn-primary" ng-model="lookingfor" btn-checkbox >Mulher</label>
+				</div>
+			</div>
+			
+			<br/>
+			
+			<div>
+				<center>
+					<button ng-click="atualizaPreferencias()"  class="btn btn-primary">Atualizar informaçoes</button>
+				</center>
+  			</div>
   		</form>
   </ion-content>
 </ion-view>
