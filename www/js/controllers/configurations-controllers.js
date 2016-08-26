@@ -1,18 +1,21 @@
 angular.module('configurations.controllers', ['ionic'])
 
-.controller('ConfigurationsCtrl', function ($scope,$localStorage,$ionicLoading,Preferencias) {
+.controller('ConfigurationsCtrl', function ($scope,$localStorage,$ionicLoading,Preferencias,LoginService) {
   
   $scope.iam = null;
   $scope.lookingfor = null;
   $scope.token = null;
-  $scope.tipoMobile = null;
+  $scope.tipoDevice = null;
 
   $scope.atualizaPreferencias = function(){
-  	  var data = {};
-  	  
-  	  console.log($scope);
+  	  var data = {"id": $localStorage.fbid,
+                  "iam"        : $scope.iam,
+                  "lookingfor" : $scope.localStorage,
+                  "token"      : $localStorage.token,
+                  "tipoDevice" : $localStorage.tipoDevice
+                  };
 
-  	  Preferencias.save(data,function(r){
+  	  Preferencias.update(data,function(r){
   	  	console.log(r);
   	  });
 

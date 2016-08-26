@@ -39,18 +39,18 @@ angular.module('starter', [	 'ionic',
 
   ])
   .value("HOST_API","http://localhost:8080")
-  .run(function($ionicPlatform,OpenFB,SQLService,UtilsService,LoginService) {
+  .run(function($ionicPlatform,OpenFB,SQLService,UtilsService,LoginService,$localStorage) {
 
     $ionicPlatform.ready(function() {
       /*Inicia o DB*/
       //SQLService.deleteSchema();
       SQLService.createSchema();
       if(UtilsService.isIOS()){
-          LoginService.setTipoDevice("IOS");
+          $localStorage.tipoDevice = "IOS";
       }else if(UtilsService.isAndroid()){
-          LoginService.setTipoDevice("ANDROID");
+          $localStorage.tipoDevice = "ANDROID";
       }else{
-          LoginService.setTipoDevice("WEB");
+          $localStorage.tipoDevice = "WEB";
       }
     });
 

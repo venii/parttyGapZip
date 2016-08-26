@@ -50,29 +50,11 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
            this.getPerfil = function(){
               var deferred = $q.defer();
 
-              var result = SQLService.getAll('pt_profiles',eventFbId).then(function(r){
+              var result = SQLService.getAll('pt_profiles',$localStorage.fbid).then(function(r){
                  deferred.resolve(r[0]);
               });
                 
               return deferred.promise;
-           }
-           
-           //função de salvar o token no localStorage
-           this.setToken = function(token){
-              $localStorage.token = token;
-           }
-
-           //funçao de retornar o token
-           this.getToken = function(){
-              return $localStorage.token;
-           }
-
-           this.setTipoDevice = function(tipo){
-              $localStorage.tipoMobile = tipo;
-           }
-
-           this.getTipoDevice = function(){
-              return $localStorage.tipoMobile;
            }
 
            //função para realizar o login excluindo os dados do localStorage

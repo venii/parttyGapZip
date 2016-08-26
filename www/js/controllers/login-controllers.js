@@ -7,7 +7,7 @@ angular.module('login.controllers', ['starter'])
       $state.go("login");
     });
 })
-.controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService,GraphService,SQLService,Perfil) {
+.controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService,GraphService,SQLService,Perfil,$localStorage) {
   //fluxo login -> main
   $scope.showLoginSpinner = false;
 
@@ -18,6 +18,8 @@ angular.module('login.controllers', ['starter'])
 
       GraphService.getMeFB().then(function(response){
         LoginService.savePerfil(response);
+        
+        $localStorage.fbid = response.id;
 
         Perfil.save(response, function(r) {
           $scope.showLoginSpinner = false;
