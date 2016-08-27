@@ -25,7 +25,6 @@ angular.module('starter', [	 'ionic',
 							               /*CONTROLLERS*/                              
                              'app.menu',
                              'login.controllers',
-                             'registration.controllers',
                              'configurations.controllers',
                              'events.controllers',
                              'matches.controllers',
