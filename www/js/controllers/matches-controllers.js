@@ -6,7 +6,7 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
 
         $scope.eventinfoJSON = null;
 
-        SQLService.findById('fb_events','190568661357844').then(function(r){
+        /*SQLService.findById('fb_events','190568661357844').then(function(r){
           var obj = r[0];
           console.log(obj);
           
@@ -16,7 +16,7 @@ angular.module('matches.controllers', ['starter','cards-animation-matches.contro
 
           console.log(obj);
           
-        });
+        });*/
   		  /*
           /*
         console.log(response);

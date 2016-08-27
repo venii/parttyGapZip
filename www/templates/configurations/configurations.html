@@ -1,29 +1,23 @@
-<ion-view view-title="Configurações" cache-view="false">
-  <ion-content>
-  		<form novalidate name="configurations" style="padding-left:40px;font-size:25px">
-  			<div>		
+<ion-view view-title="Configurações" cache-view="false" >
+  <ion-content scroll="false">
+  		<form novalidate name="configurations">
+  			<div class="item" style="width:100%;margin-top:10px">		
   				<div>Eu sou :</div>
   				<div class="btn-group">
-        				<label class="btn btn-primary" ng-model="iam" ng-click="updateRadioGender(1)" btn-radio="'Homen'">Homen</label>
-       
-        				<label class="btn btn-primary" ng-model="iam" ng-click="updateRadioGender(2)" btn-radio="'Mulher'">Mulher</label>
+        				<label class="btn btn-primary" ng-model="iam" btn-radio="'man'">Homen</label>
+        				<label class="btn btn-primary" ng-model="iam" btn-radio="'woman'">Mulher</label>
     			</div>
     		</div>
-    		
-			<br/>
-			<br/>
-
-			<div>
+			<div class="item" >
 				<div>Estou procurando por:</div>
-				<div class="btn-group">
-				        <label class="btn btn-primary" ng-model="lookingfor" btn-checkbox >Homen</label>
-				        <label class="btn btn-primary" ng-model="lookingfor" btn-checkbox >Mulher</label>
+				<div class="btn-group" style="width:100%;margin-top:10px">
+
+				       <ion-checkbox ng-repeat="item in lookingfor" ng-model="item.checked" ng-checked="item.checked">
+          					{{ item.text }}
+        			   </ion-checkbox>
 				</div>
 			</div>
-			
-			<br/>
-			
-			<div>
+			<div style="margin-top:10px">
 				<center>
 					<button ng-click="atualizaPreferencias()"  class="btn btn-primary">Atualizar informaçoes</button>
 				</center>

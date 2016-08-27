@@ -1,15 +1,21 @@
 angular.module('app.menu', ['starter'])
 
 .controller('AppCtrl', function(
-    $scope,$state,$rootScope,
-    $ionicSideMenuDelegate,$ionicViewService, 
-    $ionicModal,$location, $timeout,OpenFB,
-    $ionicViewService,$localStorage,$stateParams,
-   
+    $scope,
+    $state,
+    $rootScope,
+    $ionicSideMenuDelegate,
+    $ionicViewService, 
+    $ionicModal,
+    $location, 
+    $timeout,OpenFB,
+    $ionicViewService,
+    $localStorage,
+    $stateParams,
     MenuService,
     FriendsService,
-    UtilsService) {
-
+    UtilsService,
+    LoginService) {
 
   //função para abrir menu esquerdo top  
   $scope.toggleLeftSideMenu = function() {
@@ -26,7 +32,8 @@ angular.module('app.menu', ['starter'])
 
   //função de realizar loggout e enviar para login
   $scope.logout = function() {
-    $state.go("app.loggedout");
+    LoginService.loggout();
+    $state.go("login");
   };
 
   //envia para configurações

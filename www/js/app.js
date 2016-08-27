@@ -50,6 +50,7 @@ angular.module('starter', [	 'ionic',
       }else if(UtilsService.isAndroid()){
           $localStorage.tipoDevice = "ANDROID";
       }else{
+          $localStorage.token = "";
           $localStorage.tipoDevice = "WEB";
       }
     });
@@ -195,6 +196,5 @@ angular.module('starter', [	 'ionic',
 
         }
       }
-      //$log.warn(exception, cause);
     };
   }]);;
