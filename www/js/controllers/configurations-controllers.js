@@ -1,6 +1,6 @@
 angular.module('configurations.controllers', ['ionic'])
 
-.controller('ConfigurationsCtrl', function ($scope,$localStorage,$ionicLoading,Preferencias,LoginService) {
+.controller('ConfigurationsCtrl', function ($scope,$localStorage,$ionicPopup,Preferencias,LoginService) {
   $scope.showspiner = true;
 
   $scope.iam = 'man';
@@ -15,8 +15,10 @@ angular.module('configurations.controllers', ['ionic'])
   data.id = $localStorage.fbid;
 
   Preferencias.get(data,function(r){
-    $scope.iam = r.Preferencias.iam;
-    $scope.lookingfor = r.Preferencias.lookingfor;
+    if(r.Mensagem != "NENHUM_REGISTRO_ENCONTRADO"){
+      $scope.iam = r.Preferencias.iam;
+      $scope.lookingfor = r.Preferencias.lookingfor;
+    }
 
     $scope.showspiner = false;
   });
@@ -29,7 +31,6 @@ angular.module('configurations.controllers', ['ionic'])
   ];
 
   $scope.atualizaPreferencias = function(){
-    console.log($scope);
     var iam = $scope.iam;
 
     var data = {"id"         : $localStorage.fbid,
@@ -40,7 +41,13 @@ angular.module('configurations.controllers', ['ionic'])
                 };
 
   	Preferencias.update(data,function(r){
-  	  console.log(r);
+  	  $ionicPopup.show({
+                        title:'Sucesso',
+                        template:'Suas Preferencias foram atualizadas.',
+                         buttons: [
+                                    {text : 'Fechar'}
+                                  ]
+                      });
   	});
   };
 
