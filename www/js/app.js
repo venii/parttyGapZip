@@ -38,8 +38,8 @@ angular.module('starter', [	 'ionic',
                              
 
   ])
-  .value("HOST_API","http://localhost:8080")
-  .run(function($ionicPlatform,OpenFB,SQLService,UtilsService,LoginService,$localStorage) {
+  .value("HOST_API","http://127.0.0.1:8080")
+  .run(function($ionicPlatform,OpenFB,SQLService,UtilsService,LoginService,$localStorage,$http) {
 
     $ionicPlatform.ready(function() {
       /*Inicia o DB*/
@@ -55,6 +55,8 @@ angular.module('starter', [	 'ionic',
       }
     });
 
+     
+    
   })
   .config(function($sceDelegateProvider,$stateProvider, $urlRouterProvider,$httpProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
@@ -73,15 +75,7 @@ angular.module('starter', [	 'ionic',
       templateUrl: "templates/core/menu.html",
       controller: 'AppCtrl'
     })
-    .state('app.loggedout', {
-      url: "/loggedout",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/login/loggedout.html",
-          controller: 'LoggedOutCtrl'
-        }
-      }
-    })
+
     .state('app.chat', {
       url: "/chat/:idfb",
       views: {
@@ -100,15 +94,6 @@ angular.module('starter', [	 'ionic',
         }
       }
       
-    })
-    .state('app.registration', {
-      url: "/registration",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/core/registration.html",
-          controller: 'RegistrationCtrl'
-        }
-      } 
     })
     .state('login', {
         url: "/login",
@@ -177,12 +162,8 @@ angular.module('starter', [	 'ionic',
     });
     //Se não tiver autenticado vai para o login
     $urlRouterProvider.otherwise('/login');
-
-  })
-  .config(['$compileProvider', function($compileProvider) {
-    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|content):|data:image\//);
   
-  }]).factory('$exceptionHandler', ['$log','$injector' , function($log,$injector) {
+  }).factory('$exceptionHandler', ['$log','$injector' , function($log,$injector) {
     return function myExceptionHandler(exception, cause) {
      
       if(exception.hasOwnProperty('code')){
