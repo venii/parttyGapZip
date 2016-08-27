@@ -25,7 +25,6 @@ angular.module('starter', [	 'ionic',
 							               /*CONTROLLERS*/                              
                              'app.menu',
                              'login.controllers',
-                             'main.controllers',
                              'registration.controllers',
                              'configurations.controllers',
                              'events.controllers',
@@ -84,16 +83,6 @@ angular.module('starter', [	 'ionic',
            controller: 'ChatCtrl'
         }
       }
-    })
-    .state('app.main', {
-      url: "/main",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/core/main.html",
-          controller: 'MainCtrl'
-        }
-      }
-      
     })
     .state('login', {
         url: "/login",
