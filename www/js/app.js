@@ -153,7 +153,9 @@ angular.module('starter', [	 'ionic',
   
   }).factory('$exceptionHandler', ['$log','$injector' , function($log,$injector) {
     return function myExceptionHandler(exception, cause) {
-     
+      
+      $log.warn(exception, cause);
+
       if(exception.hasOwnProperty('code')){
         if(exception.code == 190){
           $log.warn(exception, cause);

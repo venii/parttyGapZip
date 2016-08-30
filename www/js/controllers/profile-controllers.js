@@ -1,6 +1,6 @@
 angular.module('profile.controllers', ['starter'])
 
-.controller('ProfileCtrl', function($scope,$state,$localStorage,ProfileService,LoginService,Perfil) {
+.controller('ProfileCtrl', function($scope,$state,$localStorage,$ionicPopup,ProfileService,LoginService,Perfil) {
       $scope.showSpinner = true;
 
       $scope.nome = "";
@@ -19,10 +19,20 @@ angular.module('profile.controllers', ['starter'])
       });
 
 
+
       $scope.changephoto1 = function(){
-        console.log("##");
+        var slot = 1;
         ProfileService.returnFoto().then(function(blob){
-          console.log(blob);
+          ProfileService.uploadPhoto(blob,slot);
+            
+            $ionicPopup.show({
+              title:'Sucesso',
+              template:'Foto enviada ao servidor com sucesso.',
+               buttons: [
+                          {text : 'Fechar'}
+                        ]
+            });
+            
         });
       }
 

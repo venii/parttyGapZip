@@ -10,7 +10,6 @@ angular.module('configurations.controllers', ['ionic'])
     { text: "Mulher", value:"woman", checked: false }
   ];
 
-
   var data = {};
   data.id = $localStorage.fbid;
 
@@ -23,13 +22,6 @@ angular.module('configurations.controllers', ['ionic'])
     $scope.showspiner = false;
   });
   
-  $scope.serverSideList = [
-    { text: "Go", value: "go" },
-    { text: "Python", value: "py" },
-    { text: "Ruby", value: "rb" },
-    { text: "Java", value: "jv" }
-  ];
-
   $scope.atualizaPreferencias = function(){
     var iam = $scope.iam;
 

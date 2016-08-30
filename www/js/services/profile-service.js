@@ -4,20 +4,9 @@ angular.module('app.profile-service', ['starter'])
     $http,
     $cordovaDevice,
     $q,
-    
-    /*
-      Nosso servicos
-    */
-
     UtilsService
     ) {
-		
-
-      var widthI = 300;
-      var heightI = 150;
-
-      //função para abrir galeria do mobile
-      this.returnFoto = function(callback){
+     this.returnFoto = function(callback){
          var defer = $q.defer();
 
          if(UtilsService.isMob()){ 
@@ -58,15 +47,16 @@ angular.module('app.profile-service', ['starter'])
         return defer.promise
       }
 
-      //função para atualizar photo da api do partty
-      this.uploadPhoto = function (fbid,base64photo,callback){
+      this.uploadPhoto = function (blob,slot){
+          var defer = $q.defer();
+          
           $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+          
           var formData = new FormData();
 
-          formData.append("ent_user_fbid", fbid);
-          formData.append("ent_image_flag", 1); 
-          formData.append("ent_image_chunk", base64photo); 
-          formData.append("ent_image_name", 'profile_photo_'+fbid+".png"); 
+          formData.append("fbif",  $localStorage.fbid); 
+          formData.append("photo", blob); 
+          formData.append("slot",  slot); 
 
           var xhr = new XMLHttpRequest();
              
@@ -74,18 +64,20 @@ angular.module('app.profile-service', ['starter'])
           xhr.onload = function (e) {
               if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                  callback(xhr);
-                  
-                } else {
-                  callback(xhr);
+                  defer.resolve(xhr);
+                }else{
+                  defer.resolve(xhr);
                 }
               }
           };
+          
           xhr.onerror = function (e) {
-              console.error(xhr.statusText);
+              defer.reject(xhr.statusText);
           };
 
           xhr.send(formData);
+
+          return defer.promise;
       }
     
   });
