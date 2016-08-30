@@ -55,9 +55,10 @@ angular.module('app.profile-service', ['starter'])
 
           var formData = new FormData();
           
-          formData.append("fbif",  fbid); 
+          formData.append("fbid",  fbid);
+          formData.append("slot",  slot);
           formData.append("photo", blob); 
-          formData.append("slot",  slot); 
+ 
 
           $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
           $http.post(HOST_API+"/upload_image",formData, {
