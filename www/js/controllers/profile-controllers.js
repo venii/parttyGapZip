@@ -66,7 +66,6 @@ angular.module('profile.controllers', ['starter'])
 
           Perfil.update($scope.perfil,function(r){
             $scope.perfil = r.Perfil;
-
             $scope.showSpinner = false;
           });
       }
