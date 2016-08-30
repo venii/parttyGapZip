@@ -62,7 +62,7 @@ angular.module('app.profile-service', ['starter'])
 
           var xhr = new XMLHttpRequest();
              
-          xhr.open("POST",  HOST_API+"/perfil/upload_image/"+fbid);  
+          xhr.open("POST",  HOST_API+"/perfil/upload_image");  
           xhr.onload = function (e) {
               if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
