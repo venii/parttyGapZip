@@ -1,6 +1,6 @@
 angular.module('profile.controllers', ['starter'])
 
-.controller('ProfileCtrl', function($scope,$state,$localStorage,$ionicPopup,ProfileService,LoginService,Perfil,HOST_API) {
+.controller('ProfileCtrl', function($scope,$state,$localStorage,$ionicPopup,$timeout,ProfileService,LoginService,Perfil,HOST_API) {
       $scope.showSpinner = true;
 
       
@@ -29,8 +29,7 @@ angular.module('profile.controllers', ['starter'])
         var slot = 1;
         ProfileService.returnFoto().then(function(blob){
           ProfileService.uploadPhoto(blob,slot);
-            $scope.imgPIC1 = $scope.url_photo_slot = HOST_API+"/uploads/"+fbid+"-"+slot+".jpg";
-
+            
             $ionicPopup.show({
               title:'Sucesso',
               template:'Foto enviada ao servidor com sucesso.',
@@ -38,6 +37,10 @@ angular.module('profile.controllers', ['starter'])
                           {text : 'Fechar'}
                         ]
             });
+
+            $timeout(function(){
+              $scope.imgPIC1 = $scope.url_photo_slot + slot+".jpg";
+            },1000);
             
         });
       }
