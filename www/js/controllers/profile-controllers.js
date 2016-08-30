@@ -56,9 +56,20 @@ angular.module('profile.controllers', ['starter'])
 
 
       $scope.updateProfile = function(){
+          $scope.perfil.descricao = $scope.descricao;
 
+          $scope.perfil.imgPIC1 = $scope.imgPIC1;
+          $scope.perfil.imgPIC2 = $scope.imgPIC2;
+          $scope.perfil.imgPIC3 = $scope.imgPIC3;
+          $scope.perfil.imgPIC4 = $scope.imgPIC4;
+          $scope.perfil.imgPIC5 = $scope.imgPIC5;
+
+          Perfil.update($scope.perfil,function(r){
+            $scope.perfil = r.Perfil;
+
+            $scope.showSpinner = false;
+          });
       }
-
 
       /*faz upload para a api*/
       $scope.uploadFile = function(slot){
