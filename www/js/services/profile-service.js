@@ -4,7 +4,8 @@ angular.module('app.profile-service', ['starter'])
     $http,
     $cordovaDevice,
     $q,
-    UtilsService
+    UtilsService,
+    HOST_API
     ) {
      this.returnFoto = function(callback){
          var defer = $q.defer();
@@ -53,14 +54,15 @@ angular.module('app.profile-service', ['starter'])
           $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
           
           var formData = new FormData();
+          var fbid = $localStorage.fbid;
 
-          formData.append("fbif",  $localStorage.fbid); 
+          formData.append("fbif",  fbid); 
           formData.append("photo", blob); 
           formData.append("slot",  slot); 
 
           var xhr = new XMLHttpRequest();
              
-          xhr.open("POST",  AdressService.uploadchunk);  
+          xhr.open("POST",  HOST_API+"/perfil/upload_image/"+fbid);  
           xhr.onload = function (e) {
               if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
