@@ -5,6 +5,7 @@ angular.module('events.controllers', ['starter'])
   //fluxo login -> main -> registration -> [events] -> matches
   $scope.items = new Array();
   $scope.showEvents = true;
+  
   GraphService.getEventsFB().then(function(r){
       for(var i in r.data){
           var evt = r.data[i];

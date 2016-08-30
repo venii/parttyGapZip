@@ -1,17 +1,15 @@
-angular.module('app.profile-service', ['starter','app.utils-service','app.registration-service','app.login-service','ngCordova'])
+angular.module('app.profile-service', ['starter'])
 .service('ProfileService',  function(
-    $localStorage,$ionicViewService,
-    $http,$cordovaDevice,
-
+    $localStorage,
+    $http,
+    $cordovaDevice,
+    $q,
     
     /*
       Nosso servicos
     */
 
-    UtilsService,
-    LoginService,
-    MainService,
-    RegistrationService
+    UtilsService
     ) {
 		
 
@@ -19,111 +17,45 @@ angular.module('app.profile-service', ['starter','app.utils-service','app.regist
       var heightI = 150;
 
       //função para abrir galeria do mobile
-      this.openPhotoPicker = function(callback){
+      this.returnFoto = function(callback){
+         var defer = $q.defer();
+
          if(UtilsService.isMob()){ 
           window.imagePicker.getPictures(
             function(results) {
-                
-                elementPlacer = document.querySelector("#imgPIC");
-                elementPlacer.src = results[0];
-                
-                elementPlacer.onload = function(){
-                  callback(results);  
-                }
-                
-            },
+              var uri = results[0];
+              
+              var xhr = new XMLHttpRequest();
+              xhr.responseType = 'blob';
 
-            function (error) {
-                console.log('Error: ' + error);
-            },
-            
-            {
+              xhr.onload = function() {
+                  var blob = xhr.response;               
+                  q.resolve(blob);
+              };
+
+              xhr.open('GET', uri);
+              xhr.send();
+
+              
+            },{
               maximumImagesCount: 1,
-              width: 800,
-              height: 800,
-              quality: 50
+              width: 300,
+              height: 300,
+              quality: 20
             }
           );
-        }else{
-          this.openPhotoPickerWEB(callback);
-          
-        }
-      }
-
-      //função para abrir selecionar arquivos do browser
-      this.openPhotoPickerWEB = function(callback){
-      
-        element = document.querySelector("input[type=file]");
-        element.click();
-  
-        element.onchange = function(){
-          
-          var fr = new FileReader();
-          
-          fr.onload = function () {
-            elementPlacer = document.querySelector("#imgPIC");
-            elementPlacer.src = fr.result;
-            
-            callback({convertBase64 : true});
-               
-          }
-
-          fr.readAsDataURL(element.files[0]);
-        }
-      }
-
-      //função para retornar json com dados do usario da api do partty
-      this.getProfile = function(token,fbid,callback){
         
-        var postData = {
-              "sess_fb": token,
-              "ent_user_fbid" : fbid
-        };
-
-        $http.get(AdressService.getprofile,{params: postData}).then(function(resp) {
-          callback(resp.data.profilePic,resp.data.persDesc);
-        });
-
-      }
-
-      // função para converter imagem para base64
-      this.converImageBase64 = function(id,callback){
-          try{
-            var obj = document.querySelector('#'+id);
-           
-            var c = document.createElement("CANVAS");
-            var ctx = c.getContext("2d");
-                  
-            c.width = widthI;
-            c.height = heightI;
-            
-            ctx.drawImage(obj, 0, 0,widthI,heightI);
-            base64 = c.toDataURL();
-            
-            callback(base64);
-          }catch(err){
-            console.log("converImageBase64: "+err);
+        }else{
+          
+          element = document.querySelector("input[type=file]");
+          element.click();
+          
+          element.onchange = function(){
+            defer.resolve(element.files[0]);
           }
-      }
+        }
 
-      //função para atualizar profile
-      this.saveProfile = function(token,fbid,desc,callback){
-          var postData = {
-            "sess_fb": token,
-            "ent_user_fbid" : fbid,
-            "ent_pers_desc" : desc
-          };
-
-          $http.get(AdressService.editprofile,{params: postData}).then(function(resp) {
-                
-                callback(resp);
-          });
-      }
-
-      //funçao para pegar a src da imagem atual em base64
-      this.getBase64ActualImage = function(){
-        element = document.querySelector("#imgPIC");
-        return element.src;
+        return defer.promise
       }
 
       //função para atualizar photo da api do partty
