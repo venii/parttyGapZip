@@ -61,16 +61,20 @@ angular.module('app.profile-service', ['starter'])
           formData.append("slot",  slot); 
 
           var xhr = new XMLHttpRequest();
-             
+          var boundary = Math.random().toString().substr(2);
+          
+          
           xhr.open("POST",  HOST_API+"/perfil/upload_image");  
+          xhr.setRequestHeader("content-type","multipart/form-data; charset=utf-8; boundary=" + boundary);   
+          
           xhr.onload = function (e) {
-              if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                  defer.resolve(xhr);
-                }else{
-                  defer.resolve(xhr);
-                }
-              }
+            
+            defer.resolve(xhr);
+             
+
+
+                
+
           };
           
           xhr.onerror = function (e) {
