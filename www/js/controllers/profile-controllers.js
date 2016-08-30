@@ -1,14 +1,19 @@
 angular.module('profile.controllers', ['starter'])
 
-.controller('ProfileCtrl', function($scope,$state,$localStorage,$ionicPopup,ProfileService,LoginService,Perfil) {
+.controller('ProfileCtrl', function($scope,$state,$localStorage,$ionicPopup,ProfileService,LoginService,Perfil,HOST_API) {
       $scope.showSpinner = true;
 
+      
       $scope.nome = "";
       $scope.descricao = "";
 
       $scope.perfil = null;
 
       var fbid = $localStorage.fbid;
+      $scope.url_photo_slot = HOST_API+"/uploads/"+fbid+"-";
+
+
+
       var data = {};
       data.id = fbid;
 
@@ -24,7 +29,8 @@ angular.module('profile.controllers', ['starter'])
         var slot = 1;
         ProfileService.returnFoto().then(function(blob){
           ProfileService.uploadPhoto(blob,slot);
-            
+            $scope.imgPIC1 = $scope.url_photo_slot = HOST_API+"/uploads/"+fbid+"-"+slot+".jpg";
+
             $ionicPopup.show({
               title:'Sucesso',
               template:'Foto enviada ao servidor com sucesso.',
