@@ -51,38 +51,26 @@ angular.module('app.profile-service', ['starter'])
       this.uploadPhoto = function (blob,slot){
           var defer = $q.defer();
           
-          $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-          
-          var formData = new FormData();
           var fbid = $localStorage.fbid;
 
+          var formData = new FormData();
+          
           formData.append("fbif",  fbid); 
           formData.append("photo", blob); 
           formData.append("slot",  slot); 
 
-          var xhr = new XMLHttpRequest();
-          var boundary = Math.random().toString().substr(2);
-          
-          
-          xhr.open("POST",  HOST_API+"/perfil/upload_image");  
-          xhr.setRequestHeader("content-type","multipart/form-data; charset=utf-8; boundary=" + boundary);   
-          
-          xhr.onload = function (e) {
-            
+          $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+          $http.post(HOST_API+"/upload_image",formData, {
+              transformRequest: angular.identity,
+              headers: {'Content-Type': undefined}
+          })
+          .success(function(xhr){
             defer.resolve(xhr);
-             
-
-
-                
-
-          };
+          })
+          .error(function(xhr){
+            defer.reject(xhr);
+          });
           
-          xhr.onerror = function (e) {
-              defer.reject(xhr.statusText);
-          };
-
-          xhr.send(formData);
-
           return defer.promise;
       }
     
