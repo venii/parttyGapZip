@@ -64,6 +64,8 @@ angular.module('profile.controllers', ['starter'])
           $scope.perfil.imgPIC4 = $scope.imgPIC4;
           $scope.perfil.imgPIC5 = $scope.imgPIC5;
 
+          delete $scope.perfil._id;
+
           Perfil.update($scope.perfil,function(r){
             $scope.perfil = r.Perfil;
             $scope.showSpinner = false;
