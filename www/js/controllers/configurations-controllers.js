@@ -25,7 +25,7 @@ angular.module('configurations.controllers', ['ionic'])
   $scope.atualizaPreferencias = function(){
     var iam = $scope.iam;
 
-    var data = {"id"         : $localStorage.fbid,
+    var data = {  "id"         : $localStorage.fbid,
                   "iam"        : iam,
                   "lookingfor" : $scope.lookingfor,
                   "token"      : $localStorage.token,
