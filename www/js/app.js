@@ -62,7 +62,8 @@ angular.module('starter', [	 'ionic',
       'self',
       // Allow loading from our assets domain.  Notice the difference between * and **.
       'http://*.facebook.*/**',
-      'http://localhost.*/**'
+      'http://localhost.*/**',
+      'http://127.0.0.1:8080/**',
     ]);
   	//Routes do app
     $stateProvider

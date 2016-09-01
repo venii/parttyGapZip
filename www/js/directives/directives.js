@@ -47,7 +47,7 @@ angular.module('starter')
                     }
 
                     element[0].onerror = function(e){
-                        element[0].src = "img/no-img.jpg";
+                        element[0].src = "img/noimg.png";
                         angular.element(document.querySelector('.spinner2_'+spinnerIndex)).remove();
                     }
                     
@@ -63,8 +63,12 @@ angular.module('starter')
                     };
  
                     xhr.open('GET', urlToload);
-                    xhr.send();
-                                    
+                    
+                    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+                    //xhr.setRequestHeader('Access-Control-Allow-Methods', 'PUT,GET,POST,DELETE');
+                    xhr.setRequestHeader('Access-Control-Allow-Headers', 'Content-Type,Connection');
+                    
+                    xhr.send();       
                 },1000,true);
             }
         }

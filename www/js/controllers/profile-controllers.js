@@ -3,10 +3,6 @@ angular.module('profile.controllers', ['starter'])
 .controller('ProfileCtrl', function($q,$scope,$state,$localStorage,$ionicPopup,$timeout,ProfileService,LoginService,Perfil,HOST_API) {
       $scope.showSpinner = true;
 
-      
-      $scope.nome = "";
-      $scope.descricao = "";
-
       $scope.perfil = null;
 
       var fbid = $localStorage.fbid;
