@@ -62,11 +62,8 @@ angular.module('starter')
                         element[0].src = urlToload;
                     };
  
-                    xhr.open('GET', urlToload);
-                    
-                    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+                    xhr.open('GET', urlToload,true);
                     //xhr.setRequestHeader('Access-Control-Allow-Methods', 'PUT,GET,POST,DELETE');
-                    xhr.setRequestHeader('Access-Control-Allow-Headers', 'Content-Type,Connection');
                     
                     xhr.send();       
                 },1000,true);
