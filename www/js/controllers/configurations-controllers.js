@@ -10,13 +10,17 @@ angular.module('configurations.controllers', ['ionic'])
     { text: "Mulher", value:"woman", checked: false }
   ];
 
+
+
   var data = {};
   data.id = $localStorage.fbid;
 
   Preferencias.get(data,function(r){
     if(r.Mensagem != "NENHUM_REGISTRO_ENCONTRADO"){
       $scope.iam = r.Preferencias.iam;
-      $scope.lookingfor = r.Preferencias.lookingfor;
+      if(r.Preferencias.lookingfor !== undefined){
+        $scope.lookingfor = r.Preferencias.lookingfor;
+      }
     }
 
     $scope.showspiner = false;
