@@ -23,6 +23,8 @@ angular.module('profile.controllers', ['starter'])
       $scope.changephoto1 = function(){
         $scope.uploadFile(1).then(function(uri){
           $scope.perfil.imgPIC1 = uri;
+          //cover da img
+          $localStorage.imgCover = uri;
         });
       }
 

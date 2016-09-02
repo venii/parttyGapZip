@@ -3,8 +3,7 @@ angular.module('cards-animation-matches.controllers', ['starter'])
 .controller('card-stack-playground', function (
                 $state,$stateParams,$scope,
                 
-                MatchService,SendMatchesToWS,LoginService,
-                RegistrationService,MenuService,UtilsService) {
+                MatchService,SendMatchesToWS,LoginService,MenuService,UtilsService) {
         
         //controlador dos cards
         //like dislike
