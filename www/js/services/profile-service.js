@@ -11,6 +11,7 @@ angular.module('app.profile-service', ['starter'])
          var defer = $q.defer();
 
          if(UtilsService.isMob()){ 
+         
           window.imagePicker.getPictures(
             function(results) {
               var uri = results[0];
@@ -79,8 +80,14 @@ angular.module('app.profile-service', ['starter'])
         try{
           
           var url = $localStorage.imgCover;
-          angular.element(document.querySelector('#profilecontentmenu')).html("<div><img src='"+url+"' style='border-radius: 40px / 20px ;width:64px;height:64px' width='64' heigth='64' /></div>");
-        
+          var profileDom = document.querySelector('#profileCover');
+
+          if(profileDom.querySelector('img') === null){
+            angular.element(profileDom).append("<img src='"+url+"' style='border-radius: 40px;' no-img width='64' heigth='64' />");
+          }else{
+            profileDom[0].src = url;
+          }
+
         }catch(err){
           console.log("loadCoverProfileFoto:",err);
         }

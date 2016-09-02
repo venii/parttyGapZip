@@ -2,6 +2,7 @@ angular.module('app.menu', ['starter'])
 
 .controller('AppCtrl', function(
     $scope,
+    $state,
     MenuService,
     FriendsService,
     UtilsService,

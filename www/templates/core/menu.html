@@ -6,14 +6,13 @@
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" ng-controller="AppCtrl" ng-click="toggleLeftSideMenu()">
         </button>
-
       </ion-nav-buttons>
 
-
-        <ion-nav-buttons side="right">
+      <ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-navicon" ng-controller="AppCtrl" ng-click="toggleRightSideMenu()">
         </button>
       </ion-nav-buttons>
+
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
@@ -25,7 +24,8 @@
     <ion-content>
       <ion-list>
         <ion-item nav-clear menu-close ng-click="profile()" >
-          Profile <span id="profilecontentmenu" ></span>
+          <div>Profile</div>
+          <div id="profileCover"></div>
         </ion-item>
         
         <ion-item nav-clear menu-close ng-click="events()">
