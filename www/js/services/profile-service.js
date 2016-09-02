@@ -85,7 +85,7 @@ angular.module('app.profile-service', ['starter'])
           if(profileDom.querySelector('img') === null){
             angular.element(profileDom).append("<img src='"+url+"' style='border-radius: 40px;' no-img width='64' heigth='64' />");
           }else{
-            profileDom[0].src = url;
+            profileDom.querySelector('img').src = url;
           }
 
         }catch(err){
