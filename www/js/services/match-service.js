@@ -1,8 +1,7 @@
 angular.module('app.match-service', ['starter'])
 .service('MatchService',function($localStorage, UtilsService,
     LoginService,
-    MainService,
-    RegistrationService
+    MainService
    ) {
           //função para esconder o menuTop
           this.hideTopMenu = function(){
@@ -36,8 +35,8 @@ angular.module('app.match-service', ['starter'])
 		$sce,$compile,$localStorage,$ionicViewService,
 		$http,$rootScope,$state,$ionicLoading,$templateRequest,
 
-		RegistrationService,LoginService,UtilsService) {
-        
+		LoginService,UtilsService) {
+            /*
             var cardList = [];
         
             //envia o action para poder gerar o match !
@@ -115,11 +114,11 @@ angular.module('app.match-service', ['starter'])
                     }else{
                         angularService.loadMatches($scope);
                     }
-                    */
+                    
                     callback({error : true});
                 });                    
             };
-
+            */
             //função para carrega matches de pessoas que estão no cache do server
             //baseadas nos criterios do perfil
 
