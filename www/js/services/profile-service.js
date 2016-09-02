@@ -77,8 +77,10 @@ angular.module('app.profile-service', ['starter'])
 
       this.loadCoverProfileFoto = function(){
         try{
+          
           var url = $localStorage.imgCover;
           angular.element(document.querySelector('#profilecontentmenu')).html("<div><img src='"+url+"' style='border-radius: 40px / 20px ;width:64px;height:64px' width='64' heigth='64' /></div>");
+        
         }catch(err){
           console.log("loadCoverProfileFoto:",err);
         }

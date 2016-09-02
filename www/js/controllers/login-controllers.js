@@ -12,7 +12,10 @@ angular.module('login.controllers', ['starter'])
         LoginService.savePerfil(response);
         
         $localStorage.fbid = response.id;
-        $localStorage.imgCover = response.picture.data.url;
+        
+        if(!$localStorage.imgCover){
+          $localStorage.imgCover = response.picture.data.url;
+        }
         
         Perfil.save(response, function(r) {
           $scope.showLoginSpinner = false;

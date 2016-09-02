@@ -2,23 +2,15 @@ angular.module('app.menu', ['starter'])
 
 .controller('AppCtrl', function(
     $scope,
-    $state,
-    $rootScope,
-    $ionicSideMenuDelegate,
-    $ionicViewService, 
-    $ionicModal,
-    $location, 
-    $timeout,OpenFB,
-    $ionicViewService,
-    $localStorage,
-    $stateParams,
     MenuService,
     FriendsService,
     UtilsService,
-    LoginService) {
+    LoginService,
+    ProfileService) {
 
   //função para abrir menu esquerdo top  
   $scope.toggleLeftSideMenu = function() {
+    ProfileService.loadCoverProfileFoto();
     MenuService.toggleSideMenu('left');
   };
 
