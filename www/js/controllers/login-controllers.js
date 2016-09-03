@@ -1,5 +1,5 @@
 angular.module('login.controllers', ['starter'])
-.controller('LoginFBCtrl', function($scope,$state,$ionicViewService,LoginService,UtilsService,GraphService,SQLService,Perfil,$localStorage) {
+.controller('LoginFBCtrl', function($scope,$state,$localStorage,LoginService,GraphService,Perfil) {
   //fluxo login -> main
   $scope.showLoginSpinner = false;
 
@@ -26,7 +26,6 @@ angular.module('login.controllers', ['starter'])
       });
     });
               
-   
   };
    
 });

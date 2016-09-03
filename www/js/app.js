@@ -23,13 +23,12 @@ angular.module('starter', [	 'ionic',
                              'configurations.controllers',
                              'events.controllers',
                              'matches.controllers',
-                             'cards-animation-matches.controllers',
-                             'newmatchesfound.controllers',
+                             'matchesfound.controllers',
                              'profile.controllers',
                              'chat.controllers'
   ])
   .value("HOST_API","http://127.0.0.1:8080")
-  .run(function($ionicPlatform,OpenFB,SQLService,UtilsService,LoginService,$localStorage,$http) {
+  .run(function($ionicPlatform,SQLService,UtilsService,$localStorage) {
 
     $ionicPlatform.ready(function() {
       /*Inicia o DB*/
@@ -48,14 +47,12 @@ angular.module('starter', [	 'ionic',
 
   .config(function($sceDelegateProvider,$stateProvider, $urlRouterProvider,$httpProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
-      // Allow same origin resource loads.
       'self',
-      // Allow loading from our assets domain.  Notice the difference between * and **.
       'http://*.facebook.*/**',
       'http://localhost.*/**',
       'http://127.0.0.1:8080/**',
     ]);
-  	//Routes do app
+
     $stateProvider
 
     .state('app', {
@@ -107,37 +104,9 @@ angular.module('starter', [	 'ionic',
       
     })
 
-    .state('app.newmatchesfound', {
-      url: "/newmatchesfound",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/newmatchesfound/newmatchesfound.html",
-          controller: 'NewMatchesFoundCtrl'
-        }
-      },onExit: function(){
-          //Ajuste de CSS
-            angular.element(document.querySelector('#menuAPP')).removeClass('hidden');   
-      },onEnter: function(){
-          //Ajuste de CSS
-            angular.element(document.querySelector('#menuAPP')).addClass('hidden');
-            angular.element(document.querySelector('#newmatchesfoundView')).css("margin-top", "-40px");
-      }
-    }).state('app.newmatchesfound_receive', {
-      url: "/newmatchesfound_receive",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/newmatchesfound/newmatchesfound.html",
-          controller: 'NewMatchesFoundReceiveCtrl'
-        }
-      },onExit: function(){
-          //Ajuste de CSS
-            angular.element(document.querySelector('#menuAPP')).removeClass('hidden');   
-      },onEnter: function(){
-          //Ajuste de CSS
-            angular.element(document.querySelector('#menuAPP')).addClass('hidden');
-            angular.element(document.querySelector('#newmatchesfoundView')).css("margin-top", "-40px");
-      }
-      
+    .state('matchesfound', {
+      url: "/matchesfound",
+      templateUrl: "templates/matchesfound/matchesfound.html",
     })
 
     .state('app.chat', {

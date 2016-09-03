@@ -1,6 +1,6 @@
 angular.module('events.controllers', ['starter'])
 
-.controller('EventsCtrl', function ($scope,$stateParams,$state,LoginService,UtilsService,GraphService,Evento) {
+.controller('EventsCtrl', function ($scope,$state,GraphService,Evento) {
   
   //fluxo login -> main -> registration -> [events] -> matches
   $scope.items = new Array();
@@ -27,9 +27,4 @@ angular.module('events.controllers', ['starter'])
     $state.go('matches',{id_event : id_fb});
   }
   
-}).controller('ControllerListEventsCtrl', function($scope) {
-  //controlador da lista de eventos
- 	$scope.shouldShowDelete = false;
- 	$scope.shouldShowReorder = false;
- 	$scope.listCanSwipe = true
 });

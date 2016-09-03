@@ -2,16 +2,17 @@ angular.module('app.menu-service', ['starter','app.utils-service','app.login-ser
 .service('MenuService',function($ionicSideMenuDelegate) {
           
    this.toggleSideMenu = function(side){
-      s.performToggleSideMenu(side);   
+      this.performToggleSideMenu(side);   
    }
 
    this.performToggleSideMenu = function(side){
    		if(side == 'left'){
 				$ionicSideMenuDelegate.toggleLeft();
-      }
-			if(side == 'right'){
+         }
+			
+         if(side == 'right'){
 				$ionicSideMenuDelegate.toggleRight();
-      }						    
+         }						    
    }
 
    this.blockSideMenu = function(){

@@ -1,40 +1,11 @@
 angular.module('app.match-service', ['starter'])
-.service('MatchService',function($localStorage, UtilsService,
-    LoginService
-   ) {
-          //função para esconder o menuTop
-          this.hideTopMenu = function(){
-          	menuAPP = angular.element(document.querySelector('#menuAPP'));
-          	menuAPP.addClass('hidden');
-        	
-        	matchesView = angular.element(document.querySelector('#matchesView'));
-        	matchesView.css("margin-top", "-40px");
-          }
-
-          //função para mostrar o menu do top
-          this.showTopMenu = function(){
-          	 menuAPP = angular.element(document.querySelector('#menuAPP'));
-          	 menuAPP.removeClass('hidden');
-          }
-
-          //função para recalcular o tamanho da tela
-          this.resizeHeight = function(){
-          	heightClient = angular.element(document.querySelector('#matchesView'))[0].offsetHeight;
-        	angular.element(document.querySelector('#matchesView')).css("min-height", (heightClient+40)+"px");
-          }
-
-          //função para recalcular o tamanho dos cards de match
-          this.resizeHeightMatchCards = function(){
-            heightClient = angular.element(document.querySelector('#matchesView'))[0].offsetHeight;
-            angular.element(document.querySelector('#matchesView')).css("min-height", (heightClient+40)+"px");
-          }
+.service('MatchService',function() {
+          
 })
 
 .service('SendMatchesToWS',function(
 		$sce,$compile,$localStorage,$ionicViewService,
-		$http,$rootScope,$state,$ionicLoading,$templateRequest,
-
-		LoginService,UtilsService) {
+		$http,$rootScope,$state,$ionicLoading,$templateRequest,LoginService,UtilsService) {
             /*
             var cardList = [];
         

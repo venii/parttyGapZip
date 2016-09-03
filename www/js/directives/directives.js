@@ -34,8 +34,7 @@ angular.module('starter')
             var spinnerIndex = document.querySelectorAll('ion-spinner').length;
         
             var spinner = $compile("<ion-spinner class='spinner2_"+spinnerIndex+" fade-in'></ion-spinner>")(scope);
-            console.log(spinner);
-
+        
             angular.element(element[0].parentElement).append(spinner);
 
             $timeout(function () {
@@ -51,8 +50,6 @@ angular.module('starter')
                     angular.element(document.querySelector('.spinner2_'+spinnerIndex)).remove();
                 }
                 
-                
-
                 var urlToload = element[0].src;
 
                 //carrega IMAGEM como blob

@@ -1,6 +1,6 @@
 angular.module('configurations.controllers', ['ionic'])
 
-.controller('ConfigurationsCtrl', function ($scope,$localStorage,$ionicPopup,Preferencias,LoginService) {
+.controller('ConfigurationsCtrl', function ($scope,$localStorage,$ionicPopup,Preferencias) {
   $scope.showspiner = true;
 
   $scope.iam = 'man';
@@ -9,8 +9,6 @@ angular.module('configurations.controllers', ['ionic'])
     { text: "Homen", value:"man",    checked: true },
     { text: "Mulher", value:"woman", checked: false }
   ];
-
-
 
   var data = {};
   data.id = $localStorage.fbid;
