@@ -8,7 +8,18 @@ angular.module('starter', [	 'ionic',
                              'ngStorage',
                              'ngResource',
                              'ngIOS9UIWebViewPatch',
-
+                             /*CONTROLLERS*/                              
+                             'app.menu',
+                             'login.controllers',
+                             
+                             'events.controllers',
+                             
+                             'matches.controllers',
+                             'configurations.controllers',
+                             'matchesfound.controllers',
+                             
+                             'profile.controllers',
+                             'chat.controllers',
                              /*SERVICES*/
                              'app.menu-service',
                              'app.login-service',
@@ -16,16 +27,7 @@ angular.module('starter', [	 'ionic',
                              'app.profile-service',
                              'app.match-service',
                              'app.graph-service',
-                             'app.sql-service',
-							               /*CONTROLLERS*/                              
-                             'app.menu',
-                             'login.controllers',
-                             'configurations.controllers',
-                             'events.controllers',
-                             'matches.controllers',
-                             'matchesfound.controllers',
-                             'profile.controllers',
-                             'chat.controllers'
+                             'app.sql-service'							              
   ])
   .value("HOST_API","http://127.0.0.1:8080")
   .run(function($ionicPlatform,SQLService,UtilsService,$localStorage) {

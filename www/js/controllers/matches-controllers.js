@@ -1,8 +1,6 @@
-angular.module('matches.controllers', ['starter','cards-animation-matches.controllers'])
+angular.module('matches.controllers', ['starter'])
 
-.controller('MatchesCtrl', function (
-                        $scope,$state,$stateParams,
-                        SendMatchesToWS,MatchService,UtilsService,GraphService,SQLService) {
+.controller('MatchesCtrl', function ($scope,$state,$stateParams,SendMatchesToWS,MatchService,UtilsService,GraphService,SQLService) {
 
         $scope.eventinfoJSON = null;
 
