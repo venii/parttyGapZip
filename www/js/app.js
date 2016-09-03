@@ -12,15 +12,11 @@ angular.module('starter', [	 'ionic',
                              /*SERVICES*/
                              'app.menu-service',
                              'app.login-service',
-                             'app.main-service',
                              'app.chat-service',
                              'app.profile-service',
                              'app.match-service',
                              'app.graph-service',
                              'app.sql-service',
-
-
-
 							               /*CONTROLLERS*/                              
                              'app.menu',
                              'login.controllers',
@@ -31,9 +27,6 @@ angular.module('starter', [	 'ionic',
                              'newmatchesfound.controllers',
                              'profile.controllers',
                              'chat.controllers'
-
-                             
-
   ])
   .value("HOST_API","http://127.0.0.1:8080")
   .run(function($ionicPlatform,OpenFB,SQLService,UtilsService,LoginService,$localStorage,$http) {
@@ -51,10 +44,8 @@ angular.module('starter', [	 'ionic',
           $localStorage.tipoDevice = "WEB";
       }
     });
-
-     
-    
   })
+
   .config(function($sceDelegateProvider,$stateProvider, $urlRouterProvider,$httpProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
       // Allow same origin resource loads.
@@ -74,19 +65,11 @@ angular.module('starter', [	 'ionic',
       controller: 'AppCtrl'
     })
 
-    .state('app.chat', {
-      url: "/chat/:idfb",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/chat/chat.html",
-           controller: 'ChatCtrl'
-        }
-      }
-    })
     .state('login', {
         url: "/login",
         templateUrl: "templates/login/loginfb.html",
     })
+    
     .state('app.configurations', {
       url: "/configurations",
       views: {
@@ -96,7 +79,9 @@ angular.module('starter', [	 'ionic',
         }
       },
       
-    }).state('app.events', {
+    })
+    
+    .state('app.events', {
       url: "/events",
       views: {
         'menuContent': {
@@ -104,7 +89,9 @@ angular.module('starter', [	 'ionic',
           controller: 'EventsCtrl'
         }
       },
-    }).state('app.profile', {
+    })
+
+    .state('app.profile', {
       url: "/profile",
       views: {
         'menuContent': {
@@ -112,11 +99,15 @@ angular.module('starter', [	 'ionic',
           controller: 'ProfileCtrl'
         }
       },
-    }).state('matches', {
+    })
+
+    .state('matches', {
       url: "/matches/:id_event",   
       templateUrl: "templates/matches/matches.html",
       
-    }).state('app.newmatchesfound', {
+    })
+
+    .state('app.newmatchesfound', {
       url: "/newmatchesfound",
       views: {
         'menuContent': {
@@ -124,10 +115,10 @@ angular.module('starter', [	 'ionic',
           controller: 'NewMatchesFoundCtrl'
         }
       },onExit: function(){
-      		//Ajuste de CSS
+          //Ajuste de CSS
             angular.element(document.querySelector('#menuAPP')).removeClass('hidden');   
       },onEnter: function(){
-      		//Ajuste de CSS
+          //Ajuste de CSS
             angular.element(document.querySelector('#menuAPP')).addClass('hidden');
             angular.element(document.querySelector('#newmatchesfoundView')).css("margin-top", "-40px");
       }
@@ -139,15 +130,26 @@ angular.module('starter', [	 'ionic',
           controller: 'NewMatchesFoundReceiveCtrl'
         }
       },onExit: function(){
-      		//Ajuste de CSS
+          //Ajuste de CSS
             angular.element(document.querySelector('#menuAPP')).removeClass('hidden');   
       },onEnter: function(){
-      		//Ajuste de CSS
+          //Ajuste de CSS
             angular.element(document.querySelector('#menuAPP')).addClass('hidden');
             angular.element(document.querySelector('#newmatchesfoundView')).css("margin-top", "-40px");
       }
       
+    })
+
+    .state('app.chat', {
+      url: "/chat/:idfb",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/chat/chat.html",
+           controller: 'ChatCtrl'
+        }
+      }
     });
+    
     //Se não tiver autenticado vai para o login
     $urlRouterProvider.otherwise('/login');
   

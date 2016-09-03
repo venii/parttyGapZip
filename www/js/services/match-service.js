@@ -1,7 +1,6 @@
 angular.module('app.match-service', ['starter'])
 .service('MatchService',function($localStorage, UtilsService,
-    LoginService,
-    MainService
+    LoginService
    ) {
           //função para esconder o menuTop
           this.hideTopMenu = function(){

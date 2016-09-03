@@ -1,6 +1,6 @@
 angular.module('profile.controllers', ['starter'])
 
-.controller('ProfileCtrl', function($q,$scope,$state,$localStorage,$ionicPopup,$timeout,ProfileService,LoginService,Perfil,HOST_API) {
+.controller('ProfileCtrl', function($q,$scope,$localStorage,$ionicPopup,$timeout,ProfileService,Perfil,HOST_API) {
       $scope.showSpinner = true;
 
       $scope.perfil = null;
@@ -23,7 +23,7 @@ angular.module('profile.controllers', ['starter'])
       }
 
       $scope.changephoto1 = function(){
-        
+
         $scope.uploadFile(1).then(function(uri){ 
           $scope.perfil.imgPIC1 = cacheImg(uri);
           //cover da img

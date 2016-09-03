@@ -1,5 +1,5 @@
 angular.module('app.utils-service', ['starter'])
-.service('UtilsService',function($localStorage,$ionicLoading) {
+.service('UtilsService',function() {
            //função para verificar se é mobile (true - mobile / false - web)
            this.isMob = function() { 
 			     if( navigator.userAgent.match(/Android/i)
@@ -39,32 +39,4 @@ angular.module('app.utils-service', ['starter'])
 			        return false;
 			     }
 		    }
-
-		    //função para atualizar estado da internet
-		    this.setInternetState = function(state){
-		    	$localStorage.internetState = navigator.onLine;
-		    }
-
-		    //função para retornar estado da internet
-		    this.getInternetState = function(){
-		    	return navigator.onLine;
-		    }
-
-		    //função de error de conection
-		    this.showNoConnectionError = function(){
-		    	alert("É necessario ter conexao a internet para utilizar o sistema.");
-		    }
-
-		    //função para abrir loading
-		    this.openDialogMsg = function(msg){
-		    	$ionicLoading.show({
-		          template: msg
-		      	});
-		    }
-
-		    //função para fechar loading
-		    this.closeDialogMsg = function(){
-		    	$ionicLoading.hide();
-		    }
-
   });
