@@ -18,37 +18,41 @@ angular.module('profile.controllers', ['starter'])
         $scope.showSpinner = false;
       });
 
-
+      function cacheImg(img){
+        return img+"?v="+Math.random();
+      }
 
       $scope.changephoto1 = function(){
-        $scope.uploadFile(1).then(function(uri){
-          $scope.perfil.imgPIC1 = uri;
+        
+        $scope.uploadFile(1).then(function(uri){ 
+          $scope.perfil.imgPIC1 = cacheImg(uri);
           //cover da img
           $localStorage.imgCover = uri;
         });
       }
 
       $scope.changephoto2 = function(){
+
         $scope.uploadFile(2).then(function(uri){
-          $scope.perfil.imgPIC2 = uri;
+          $scope.perfil.imgPIC2 = cacheImg(uri);
         });
       }
 
       $scope.changephoto3 = function(){
         $scope.uploadFile(3).then(function(uri){
-          $scope.perfil.imgPIC3 = uri;
+          $scope.perfil.imgPIC3 = cacheImg(uri);
         });
       }
 
       $scope.changephoto4 = function(){
         $scope.uploadFile(4).then(function(uri){
-          $scope.perfil.imgPIC4 = uri;
+          $scope.perfil.imgPIC4 = cacheImg(uri);
         });
       }
 
       $scope.changephoto5 = function(){
         $scope.uploadFile(5).then(function(uri){
-          $scope.perfil.imgPIC5 = uri;
+          $scope.perfil.imgPIC5 = cacheImg(uri);
         });
       }
 

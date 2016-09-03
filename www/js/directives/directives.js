@@ -29,45 +29,46 @@ angular.module('starter')
             var getExtensionUrl = $filter('getExtensionUrl');
             var fileExtension = getExtensionUrl(element[0].src);
 
-            if(fileExtension != "svg"){
+            element[0].style.display = "none";
 
-                element[0].style.display = "none";
+            var spinnerIndex = document.querySelectorAll('ion-spinner').length;
+        
+            var spinner = $compile("<ion-spinner class='spinner2_"+spinnerIndex+" fade-in'></ion-spinner>")(scope);
+            console.log(spinner);
 
-                var spinnerIndex = document.querySelectorAll('ion-spinner').length;
+            angular.element(element[0].parentElement).append(spinner);
+
+            $timeout(function () {
+                
+                element[0].onload = function(e){
+                    element[0].style.display = "block";
+                    element[0].classList.add("fade-in");
+                    angular.element(document.querySelector('.spinner2_'+spinnerIndex)).remove();
+                }
+
+                element[0].onerror = function(e){
+                    element[0].src = "img/noimg.png";
+                    angular.element(document.querySelector('.spinner2_'+spinnerIndex)).remove();
+                }
+                
+                
+
+                var urlToload = element[0].src;
+
+                //carrega IMAGEM como blob
+                var xhr = new XMLHttpRequest();
+                xhr.responseType = 'blob';
+
+                xhr.onload = function() {
+                    var blob = xhr.response;
+                    element[0].src = urlToload;
+                };
+
+                xhr.open('GET', urlToload,true);
+                //xhr.setRequestHeader('Access-Control-Allow-Methods', 'PUT,GET,POST,DELETE');
+                xhr.send();       
+            },1000,true);
             
-                var spinner = $compile("<ion-spinner class='spinner2_"+spinnerIndex+" fade-in'></ion-spinner>")(scope);
-                angular.element(element[0].parentElement).append(spinner);
-
-                $timeout(function () {
-                    
-                    element[0].onload = function(e){
-                        element[0].style.display = "block";
-                        element[0].classList.add("fade-in");
-                        angular.element(document.querySelector('.spinner2_'+spinnerIndex)).remove();
-                    }
-
-                    element[0].onerror = function(e){
-                        element[0].src = "img/noimg.png";
-                        angular.element(document.querySelector('.spinner2_'+spinnerIndex)).remove();
-                    }
-                    
-                    var urlToload = element[0].src;
-
-                    //carrega IMAGEM como blob
-                    var xhr = new XMLHttpRequest();
-                    xhr.responseType = 'blob';
-
-                    xhr.onload = function() {
-                        var blob = xhr.response;
-                        element[0].src = urlToload;
-                    };
- 
-                    xhr.open('GET', urlToload,true);
-                    //xhr.setRequestHeader('Access-Control-Allow-Methods', 'PUT,GET,POST,DELETE');
-                    
-                    xhr.send();       
-                },1000,true);
-            }
         }
 
     };
