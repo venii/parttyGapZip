@@ -6,10 +6,7 @@
   			<div align="center" style="margin-top:40px" ng-show="showEvents">
   				<ion-spinner ></ion-spinner>
   			</div>
-  			<ion-list ng-controller="ControllerListEventsCtrl"
-			          show-delete="shouldShowDelete"
-			          show-reorder="shouldShowReorder"
-			          can-swipe="listCanSwipe">
+  			<ion-list>
 								  
 								  <ion-item ng-repeat="item in items"
 								            class="item-thumbnail-left" ng-click="clickGridEvents(item,$index)" style="background: url('{{item.url}}')  no-repeat">
