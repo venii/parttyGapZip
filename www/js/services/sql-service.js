@@ -78,7 +78,7 @@ angular.module('app.sql-service', ['starter'])
 
            this.schema = [
                             { nome: "fb_events", campos: ["id_fb_events", "nome","descricao","data_evento","image","pre_matches_done"] },
-                            { nome: "fb_events_attending", campos: ["id_fb_events_attending", "id_fb_events","id_fb_attending"] },
+                            { nome: "fb_events_attending", campos: ["id_fb_events_attending", "id_fb_events","id_fb_attending","nome","picture"] },
                             { nome: "pt_chat", campos: ["id_pt_chat", "id_fb_sender","id_fb_receiver","msg","data_envio"] },
                             { nome: "pt_profiles", campos: ["id_pt_profiles", "nome" , "gender" , "picture"] },
 
@@ -293,7 +293,40 @@ angular.module('app.sql-service', ['starter'])
                   if(len > 0){
                       deferred.resolve(results.rows);
                   }else{
-                      deferred.reject(false);
+                      deferred.reject(null);
+                  }
+                  
+                    
+               }, function(){deferred.reject(false);});
+
+              });
+            });
+
+            return deferred.promise;
+          }
+
+          this.findByWhere = function(nome_table,where){
+            var table = this.getSchemaTable(nome_table);
+            var service = this;
+            var deferred = $q.defer();
+
+            this.getDB().then(function(db){
+              db.transaction(function(tx) {
+                
+                var sql = 'SELECT * FROM '+table.nome+' WHERE '+where;
+  
+                if(service.isDebug()){
+                  console.log(sql);  
+                }
+                
+                var rs = tx.executeSql(sql,[], function (tx, results) {
+
+                  var len = results.rows.length;
+                  
+                  if(len > 0){
+                      deferred.resolve(results.rows);
+                  }else{
+                      deferred.resolve(null);
                   }
                   
                     
@@ -326,7 +359,7 @@ angular.module('app.sql-service', ['starter'])
                   if(len > 0){
                       deferred.resolve(results.rows);
                   }else{
-                      deferred.reject(false);
+                      deferred.reject(null);
                   }
                   
                     

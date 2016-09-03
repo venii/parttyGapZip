@@ -105,6 +105,8 @@ angular.module('app.graph-service', ['starter'])
      	   }
 
 
+
+           /*WEBSQL -> GRAPH FB*/
      	   this.addEvent = function(eventFbObj){
      	   		
                 idfb = eventFbObj.id;
@@ -118,25 +120,24 @@ angular.module('app.graph-service', ['starter'])
                 nome = '2';
                 descricao = "2";
                 data_evento = '2';
-                image = '2';
-                
-                */
+                image = '2';*/
                 SQLService.insertIntoTable('fb_events',[idfb,nome,descricao,data_evento,image,null]);
-
      	   }
+
+           this.updateEvent = function(event_obj){
+                SQLService.updateIntoTable('fb_events',event_obj,event_obj.id_fb_events);
+           }
 
      	   this.getEvent = function(eventFbId){
 				var deferred = $q.defer();
-
                 var result = SQLService.findById('fb_events',eventFbId).then(function(r){
                     deferred.resolve(r);
                 });
                 
      	   		return deferred.promise;
-     	   	
      	   }
 
-            this.removeEvent = function(eventfb){
+           this.removeEvent = function(eventfb){
                 var events = $localStorage.events;
                 if(events === undefined){
                     events = new Array();
@@ -152,7 +153,43 @@ angular.module('app.graph-service', ['starter'])
                 $localStorage.events = events;
 
                 return null;
-                
            }
 
+           this.addAttendingEvent = function(attendinEventFbObj){
+                var defer = $q.defer();
+
+                this.getAttendingEvent(attendinEventFbObj.id,attendinEventFbObj.eventFb).then(function(rAttending){
+                  if(rAttending == null){
+                    
+                    id_fb_events          = attendinEventFbObj.id;
+                    id_fb_attending       = attendinEventFbObj.eventFb;
+                    nome                  = attendinEventFbObj.name;
+                    picture               = attendinEventFbObj.picture.data.url;
+                    
+                    SQLService.insertIntoTable('fb_events_attending',[null,id_fb_events,id_fb_attending,nome,picture]);
+                    defer.resolve(true);
+
+                  }else{
+
+                    defer.resolve(false);
+                  }
+                  
+                });
+
+                return defer.promise;
+           }
+
+           this.getAttendingEvent = function(eventFbId,attendingFbId){
+                var deferred = $q.defer();
+                var where = "id_fb_events = '"+eventFbId+"' AND id_fb_attending = '"+attendingFbId+"'";
+
+                var result = SQLService.findByWhere('fb_events_attending',where).then(function(r){
+                    deferred.resolve(r);
+                });
+                
+                return deferred.promise;
+           }
+
+
+           /*WEBSQL -> GRAPH FB*/
 });
