@@ -62,6 +62,7 @@ angular.module('app.login-service', ['app.utils-service','ngCordova'])
               //exclui localStorage
               delete $localStorage;
               SQLService.deleteSchema();
+              SQLService.createSchema();
            }
 
   });
