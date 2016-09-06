@@ -1,10 +1,11 @@
 <ion-view view-title="Configurações" cache-view="false" >
-  <ion-content scroll="false">
-      <div ng-if="showspiner">
+  <ion-content scroll="false" style="heigth:100%;">
+      <div ng-if="showspiner" style="heigth:100%;">
         <center><ion-spinner ></ion-spinner></center>
       </div>
-      <div ng-if="!showspiner">
-      		<form novalidate name="configurations">
+      <div ng-if="!showspiner" style="min-height:100%;relative" >
+      		
+
       			<div class="item" style="width:100%;margin-top:10px">		
       				<div>Eu sou :</div>
 
@@ -15,7 +16,7 @@
                    
         			</div>
         		</div>
-    			<div class="item" >
+    			<div class="item" style="margin-top:10px" >
     				<div>Estou procurando por: </div>
     				<div class="btn-group" style="width:100%;margin-top:10px">
 
@@ -24,12 +25,12 @@
             			   </ion-checkbox>
     				</div>
     			</div>
-    			<div style="margin-top:10px">
+    			<div style="position:absolute;bottom:0;width:100%">
     				<center>
-    					<button ng-click="atualizaPreferencias()" class="btn btn-primary">Atualizar informaçoes</button>
+    					<button ng-click="atualizaPreferencias()" class="btn button-full button-royal tbtext" style="border-color: #6b46e5;background-color: #886aea;color: #fff;">Atualizar informaçoes</button>
     				</center>
       			</div>
-      		</form>
+  
       </div>
   </ion-content>
 </ion-view>
