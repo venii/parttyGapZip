@@ -7649,6 +7649,12 @@ a.button {
     font-family: "Raleway", "Roboto", sans-serif;
 }
 
-.list{
+.menu .list{
   margin-right: 10px;
 } 
+
+.itempartty{
+  height:200px;
+  border: 2px solid black;
+  
+}

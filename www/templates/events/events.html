@@ -5,26 +5,34 @@
 			<ion-spinner ></ion-spinner>
 		</div>
 		
-		<ion-list>
-			<ion-item class="item-thumbnail-left">
-	            Meus Eventos
-	        </ion-item>
+		<div ng-show="!showEvents" style="width:100%;heigth:100%">
+			<div class="item-thumbnail-left tbtext">
+	            <div style="margin-left:-20px;margin-left: -70px;border-bottom: 3px solid black;padding-top:50px">Seus Eventos</div>
+	        </div>
 	  		
-	  		<ion-item ng-repeat="item in items"
-	            class="item-thumbnail-left" ng-click="clickGridEvents(item,$index)">
-				
-				<div ng-if="item.type=='item'" ng-click="entraEvento(item.id)" style="position:relative">
-					<div style="width:100%;height:100%">
-				    	<img no-img ng-src="{{item.picture}}" no-img />
+	  		<div ng-repeat="item in items" ng-click="clickGridEvents(item,$index)" style="width:100%;heigth:100%;box-shadow: inset 0 0 5px 2.5px white" >
+	  			<div class="itempartty">
+		  			<div style="width:100%;height:100%">
+					    <img ng-src="{{item.picture}}" style="width:100%;height:100%" no-img  />
+					</div>
+
+					<div class="tbtext" style="margin-top:-70px;width:100%">
+				    	<div> >{{item.name}}</div>
+				    	<div >{{item.start_time | date:'dd/MM/yyyy HH:mm:ss'}}</div>
+				    	
 				    </div>
-				    <div style="position:absolute;bottom:0;">
+				
+				</div>
+				
+				<!--
+				<div style="position:absolute;bottom:0;">
 				    	<h2 >{{item.name}}</h2>
 				    	<h4 >{{item.start_time | date:'dd/MM/yyyy HH:mm:ss'}}</h4>
 				    	
 				    </div>
-				</div>
-	  		</ion-item>
-		</ion-list>
+				</div>-->
+	  		</div>
+		</div>
 
 
   </ion-content>
