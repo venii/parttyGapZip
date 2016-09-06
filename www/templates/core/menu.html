@@ -18,24 +18,46 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
-      <h1 class="title">Partty</h1>
-    </ion-header-bar>
-    <ion-content>
-      <ion-list>
+    
+    <ion-content scroll="false">
+      <br/> <br/>
+      <ion-list >
         <ion-item nav-clear menu-close ng-click="profile()" >
-          <div>Profile</div>
-          <div id="profileCover"><img src='' no-img style='border-radius: 40px;' no-img width='64' heigth='64' /></div>
+         
+          <div class="flexcontainer">
+            <div id="profileCover">
+              <img src='' no-img style='border-radius: 40px;border: 1px solid white;' no-img width='64' heigth='64' />
+            </div>
+            <div class="tbtext">Profile</div>
+          </div>
+
+
         </ion-item>
         
         <ion-item nav-clear menu-close ng-click="events()">
-          Eventos
+                <div class="flexcontainer">
+                  <div>
+                      <img src='img/event_button.png' no-img style='border-radius: 40px;' no-img width='64' heigth='64' />
+                  </div>
+                  <div class="tbtext">Eventos</div>
+                </div>
+
         </ion-item>
         <ion-item nav-clear menu-close ng-click="configurations()">
-          Configuracoes
+              <div class="flexcontainer">
+                  <div>
+                      <img src='img/setting_icon.png' no-img style='border-radius: 40px;' no-img width='64' heigth='64' />
+                  </div>
+                  <div class="tbtext">Config</div>
+                </div>
         </ion-item>
         <ion-item nav-clear menu-close ng-click="logout()">
-          Logout
+          <div class="flexcontainer">
+                  <div>
+                      <img src='img/logout.png' no-img style='border-radius: 40px;' no-img width='64' heigth='64' />
+                  </div>
+                  <div class="tbtext">Loggout</div>
+                </div>
         </ion-item>
       </ion-list>
     </ion-content>

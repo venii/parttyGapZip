@@ -42,7 +42,6 @@ angular.module('matches.controllers', ['starter'])
                     
                     GraphService.addAttendingEvent(attendingEvent).then(function(rAttending){
                       if(rAttending){
-                        $scope.eventinfoJSON.pre_matches_done += 1;
                         GraphService.updateEvent($scope.eventinfoJSON);
                       }
                     });
@@ -50,11 +49,11 @@ angular.module('matches.controllers', ['starter'])
                   
               });
 
-              
+              $scope.cards = r.attending.data;
 
             }else{ 
               /*Se for maior carrega os attending da API (usuarios realmente ativos) */ 
-
+              //$scope.cards = r.attending;
             }
 
             $scope.showMatches = false;
@@ -64,5 +63,5 @@ angular.module('matches.controllers', ['starter'])
           $state.go("app.events");
         };
   }).controller('MatchesCardsCtrl', function ($scope,$state,$stateParams,MatchService) {
-
+      $scope.eventinfoJSON.pre_matches_done += 1;
   });
