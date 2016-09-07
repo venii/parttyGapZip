@@ -9,6 +9,7 @@ angular.module('events.controllers', ['starter'])
   GraphService.getEventsFB().then(function(r){
       for(var i in r.data){
           var evt = r.data[i];
+          //GraphService.getEventPic(evt.id);
           
           GraphService.addEvent(evt);
           evt.type = "item";
@@ -16,7 +17,7 @@ angular.module('events.controllers', ['starter'])
           $scope.items.push(evt);
 
           Evento.save(evt,function(r){
-            console.log(r);
+            //console.log(r);
           });
 
       }

@@ -10,27 +10,22 @@
 	            <div style="margin-left:-20px;margin-left: -70px;border-bottom: 3px solid black;padding-top:50px">Seus Eventos</div>
 	        </div>
 	  		
-	  		<div ng-repeat="item in items" ng-click="clickGridEvents(item,$index)" style="width:100%;heigth:100%;box-shadow: inset 0 0 5px 2.5px white" >
-	  			<div class="itempartty">
-		  			<div style="width:100%;height:100%">
-					    <img ng-src="{{item.picture}}" style="width:100%;height:100%" no-img  />
-					</div>
+	  		<div ng-repeat="item in items track by $index" style="width:100%;heigth:100%;" >
+	  			<button ng-click="entraEvento(item,$index)" style="width:100%;background-color:#444;border:none;">
+		  			<div class="itempartty" >
+			  			<div style="width:100%;height:100%;box-shadow: inset 0 0 5px 2.5px white">
+						    <img ng-src="{{item.cover.source}}" style="width:100%;height:100%;box-shadow: inset 0 0 5px 2.5px white" no-img  />
+						</div>
 
-					<div class="tbtext" style="margin-top:-70px;width:100%">
-				    	<div> >{{item.name}}</div>
-				    	<div >{{item.start_time | date:'dd/MM/yyyy HH:mm:ss'}}</div>
-				    	
-				    </div>
+						<div class="tbtext" style="margin-top:-70px;width:100%">
+					    	<div> >{{item.name}}</div>
+					    	<div >{{item.start_time | date:'dd/MM/yyyy HH:mm:ss'}}</div>
+					    	
+					    </div>
+					
+					</div>
+				</button>
 				
-				</div>
-				
-				<!--
-				<div style="position:absolute;bottom:0;">
-				    	<h2 >{{item.name}}</h2>
-				    	<h4 >{{item.start_time | date:'dd/MM/yyyy HH:mm:ss'}}</h4>
-				    	
-				    </div>
-				</div>-->
 	  		</div>
 		</div>
 

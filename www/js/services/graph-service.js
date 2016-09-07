@@ -1,5 +1,7 @@
 angular.module('app.graph-service', ['starter'])
 .service('GraphService',function($q,UtilsService, $localStorage,$ionicLoading,$q,$http,$cordovaFacebook,SQLService,$exceptionHandler) {
+           //picture
+        
            //função para verificar se é mobile (true - mobile / false - web)
            this.getMeFB = function() { 
              var deferred = $q.defer();
@@ -40,68 +42,68 @@ angular.module('app.graph-service', ['starter'])
            	 var deferred = $q.defer();
 
            	 if(UtilsService.isMob()){
-             	grapCall = "me/events?fields=id,name,picture.width(320).height(280),cover,description,start_time,location";
-           	
-             	$cordovaFacebook.api(grapCall, ["public_profile"])
-			    .then(function(success) {
-			      // success
-			      deferred.resolve(success);
-			    }, function (error) {
-			      // error
-                  throw(new Error(error));
-			      deferred.reject(false);
-			    });
-			 
-			 }else{
-			 	openFB.api(
-			    {
-			        path: "/me/events",
-			        params : {"fields":"id,name,picture.width(320).height(280),cover,description,start_time,location"},
-			 		success: function(success){
-                        deferred.resolve(success);
-                    },
-			        error: function(error){
-                        $exceptionHandler(error);
-                        deferred.reject(false);
-                    }
-			    });
-			 }
+                   	grapCall = "me/events?fields=id,name,picture.width(320).height(280),cover,description,start_time,location";
+                 	
+                   	$cordovaFacebook.api(grapCall, ["public_profile"])
+      			    .then(function(success) {
+      			      // success
+      			      deferred.resolve(success);
+      			    }, function (error) {
+      			      // error
+                        throw(new Error(error));
+      			      deferred.reject(false);
+      			    });
+      			 
+      			 }else{
+      			 	openFB.api(
+      			    {
+      			        path: "/me/events",
+      			        params : {"fields":"id,name,picture.width(320).height(280),cover,description,start_time,location"},
+      			 		success: function(success){
+                              deferred.resolve(success);
+                          },
+      			        error: function(error){
+                              $exceptionHandler(error);
+                              deferred.reject(false);
+                          }
+      			    });
+      			 }
 
-			 return deferred.promise;
+			       return deferred.promise;
      	   }	
 
      	   this.getEventAttendingFB = function(eventFb) { 
-			 var deferred = $q.defer();
-           	 		
-           	 if(UtilsService.isMob()){
-             	grapCall = "/"+eventFb+"/attending?fields=id,picture.width(800).height(600),first_name,name&limit=10";
-           	
-             	$cordovaFacebook.api(grapCall, ["public_profile"])
-			    .then(function(success) {
-			      // success
-			      deferred.resolve({attending: success, eventFb : eventFb});
-			    }, function (error) {
-			      // error
-                  $exceptionHandler(error);
-			      deferred.reject(false);
-			    });
-			 
-			 }else{
-			 	openFB.api(
-			    {
-			        path: "/"+eventFb+"/attending",
-			        params : {"fields":"id,picture.width(800).height(600),first_name,name", "limit":"10"},
-			 		success: function(success){
-                        deferred.resolve({attending: success, eventFb : eventFb});
-                    },
-			        error: function(error){
-                        $exceptionHandler(error);
-                        deferred.reject(false);
-                    }
-			    });
-			 }
-		 	 return deferred.promise;
-     	  
+        			 var deferred = $q.defer();
+                   	 		
+                   	 if(UtilsService.isMob()){
+                     	grapCall = "/"+eventFb+"/attending?fields=id,picture.width(800).height(600),first_name,name&limit=10";
+                   	
+                     	$cordovaFacebook.api(grapCall, ["public_profile"])
+        			    .then(function(success) {
+        			      // success
+        			      deferred.resolve({attending: success, eventFb : eventFb});
+        			    }, function (error) {
+        			      // error
+                          $exceptionHandler(error);
+        			      deferred.reject(false);
+        			    });
+        			 
+        			 }else{
+        			 	openFB.api(
+        			    {
+        			        path: "/"+eventFb+"/attending",
+        			        params : {"fields":"id,picture.width(800).height(600),first_name,name", "limit":"10"},
+        			 		success: function(success){
+                                deferred.resolve({attending: success, eventFb : eventFb});
+                            },
+        			        error: function(error){
+                                $exceptionHandler(error);
+                                deferred.reject(false);
+                            }
+        			    });
+        			 }
+        		 	 return deferred.promise;
+             	  
      	   }
 
 
@@ -113,7 +115,7 @@ angular.module('app.graph-service', ['starter'])
                 nome = eventFbObj.name;
                 descricao = eventFbObj.description;
                 data_evento = eventFbObj.start_time;
-                image = eventFbObj.picture.data.url;
+                image = eventFbObj.cover.source;
 
                 /* mock
                 idfb = '2';
@@ -125,16 +127,16 @@ angular.module('app.graph-service', ['starter'])
      	   }
 
            this.updateEvent = function(event_obj){
-                SQLService.updateIntoTable('fb_events',event_obj,event_obj.id_fb_events);
+              SQLService.updateIntoTable('fb_events',event_obj,event_obj.id_fb_events);
            }
 
      	   this.getEvent = function(eventFbId){
-				var deferred = $q.defer();
-                var result = SQLService.findById('fb_events',eventFbId).then(function(r){
-                    deferred.resolve(r);
-                });
-                
-     	   		return deferred.promise;
+    				var deferred = $q.defer();
+                    var result = SQLService.findById('fb_events',eventFbId).then(function(r){
+                        deferred.resolve(r);
+                    });
+                    
+         	  return deferred.promise;
      	   }
 
            this.removeEvent = function(eventfb){
