@@ -27,7 +27,8 @@ angular.module('starter', [	 'ionic',
                              'app.profile-service',
                              'app.match-service',
                              'app.graph-service',
-                             'app.sql-service'							              
+                             'app.sql-service',
+                             'app.resources-service'							              
   ])
   .value("HOST_API","http://127.0.0.1:8080")
   .run(function($ionicPlatform,SQLService,UtilsService,$localStorage) {
