@@ -115,14 +115,13 @@ angular.module('app.graph-service', ['starter'])
                 nome = eventFbObj.name;
                 descricao = eventFbObj.description;
                 data_evento = eventFbObj.start_time;
-                image = eventFbObj.cover.source;
+                
+                try{
+                  image = eventFbObj.cover.source;
+                }catch(e){
 
-                /* mock
-                idfb = '2';
-                nome = '2';
-                descricao = "2";
-                data_evento = '2';
-                image = '2';*/
+                }
+
                 SQLService.insertIntoTable('fb_events',[idfb,nome,descricao,data_evento,image,null]);
      	   }
 
@@ -132,14 +131,15 @@ angular.module('app.graph-service', ['starter'])
 
      	   this.getEvent = function(eventFbId){
     				var deferred = $q.defer();
-                    var result = SQLService.findById('fb_events',eventFbId).then(function(r){
-                        deferred.resolve(r);
-                    });
+            
+            var result = SQLService.findById('fb_events',eventFbId).then(function(r){
+                deferred.resolve(r);
+            });
                     
          	  return deferred.promise;
      	   }
 
-           this.removeEvent = function(eventfb){
+         this.removeEvent = function(eventfb){
                 var events = $localStorage.events;
                 if(events === undefined){
                     events = new Array();
