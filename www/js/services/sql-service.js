@@ -157,8 +157,16 @@ angular.module('app.sql-service', ['starter'])
 
                 tx.executeSql(sql,
                               array_campos,
-                              function(transaction,success){console.log("SQL success",transaction,success);},
-                              function(transaction, error){console.log("SQL error",transaction,error)});
+                              function(transaction,success){
+                                                            if(service.isDebug()){
+                                                              console.log("SQL success",transaction,success);
+                                                            }
+                                                           },
+                              function(transaction, error){
+                                                             if(service.isDebug()){
+                                                              console.log("SQL error",transaction,error)
+                                                             }
+                                                          });
               
               });
             });
@@ -192,8 +200,14 @@ angular.module('app.sql-service', ['starter'])
 
                 tx.executeSql(sql,
                               valores,
-                              function(transaction,success){console.log("SQL success",transaction,success);},
-                              function(transaction, error){console.log("SQL error",transaction,error)});
+                              function(transaction,success){if(service.isDebug()){
+                                                              console.log("SQL success",transaction,success);
+                                                            }
+                                                           },
+                              function(transaction, error){if(service.isDebug()){
+                                                              console.log("SQL error",transaction,error);
+                                                             }
+                                                          });
               
               });
             });
