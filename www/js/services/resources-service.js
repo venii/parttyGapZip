@@ -70,4 +70,47 @@ angular.module('app.resources-service', ['starter'])
     };
     
     return Evento;
+})
+.factory('Attending', function($resource,HOST_API) {
+    /*Model de Perfil*/
+    var Attending = $resource(HOST_API+'/attending',{ id: '@id' },
+      
+      { update: {method: 'PUT'} });
+
+    Attending.prototype.update = function(cb) {
+     
+      return Attending.update({
+      
+        id: this.id
+      
+        }, angular.extend({}, this, {
+      
+          _id: undefined
+        }), cb);
+   
+    };
+    
+    return Attending;
+})
+
+.factory('Matches', function($resource,HOST_API) {
+    /*Model de Perfil*/
+    var Matches = $resource(HOST_API+'/matches',{ id: '@id' },
+      
+      { update: {method: 'PUT'} });
+
+    Matches.prototype.update = function(cb) {
+     
+      return Matches.update({
+      
+        id: this.id
+      
+        }, angular.extend({}, this, {
+      
+          _id: undefined
+        }), cb);
+   
+    };
+    
+    return Matches;
 });

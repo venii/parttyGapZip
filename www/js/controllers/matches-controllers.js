@@ -1,11 +1,17 @@
 angular.module('matches.controllers', ['starter'])
 
-.controller('MatchesCtrl', function ($scope,$state,$stateParams,GraphService,SQLService) {
+.controller('MatchesCtrl', function ($scope,$state,$stateParams,$localStorage,GraphService,SQLService,Attending) {
         
         $scope.maxPreMatchesDone = 10;
 
         $scope.eventinfoJSON = null;
         $scope.ideventfb = 0;
+
+        var data = {};
+        data.id_fb_events    = $stateParams.id_event;
+        data.id_fb_attending = $localStorage.fbid;
+        
+        Attending.save(data);
 
         $scope.info = function(){
             $scope.showMatchesInfo = true;
