@@ -1,7 +1,7 @@
 angular.module('app.sql-service', ['starter'])
 /*PREFERENCIAS*/
 .service('SQLService',function($q,$localStorage,$ionicLoading,UtilsService,Perfil) {
-           this.debug = true;
+           this.debug = false;
 
            this.schema = [
                             { nome: "fb_events", campos: ["id_fb_events", "nome","descricao","data_evento","image","pre_matches_done"] },

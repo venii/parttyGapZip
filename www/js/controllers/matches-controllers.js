@@ -1,6 +1,6 @@
 angular.module('matches.controllers', ['starter'])
 
-.controller('MatchesCtrl', function ($scope,$state,$stateParams,$localStorage,GraphService,SQLService,Perfil,Attending) {
+.controller('MatchesCtrl', function ($scope,$state,$stateParams,$localStorage,GraphService,SQLService,Preferencias,Perfil,Attending) {
         
         $scope.maxPreMatchesDone = 10;
 
@@ -50,7 +50,7 @@ angular.module('matches.controllers', ['starter'])
             if($scope.eventinfoJSON.pre_matches_done <= $scope.maxPreMatchesDone){
               /*Se for menor carrega os maxPreMatchesDone vindo do graph */
               
-              GraphService.getEventAttendingFB($scope.ideventfb).then(function(r){
+              /*GraphService.getEventAttendingFB($scope.ideventfb).then(function(r){
                   console.log(r);
                   for(var i in r.attending.data){
                     
@@ -66,7 +66,8 @@ angular.module('matches.controllers', ['starter'])
                   
               });
 
-              $scope.cards = r.attending.data;
+              $scope.cards = r.attending.data;*/
+              $scope.getAttendingFromApi();
 
             }else{ 
               /*Se for maior carrega os attending da API (usuarios realmente ativos) */ 
@@ -75,6 +76,31 @@ angular.module('matches.controllers', ['starter'])
 
             $scope.showMatches = false;
         };
+
+        $scope.getAttendingFromApi = function(){
+            var data = {};
+            data.id = $localStorage.fbid;
+
+            Preferencias.get(data,function(r){
+              if(r.Mensagem != "NENHUM_REGISTRO_ENCONTRADO"){
+                $scope.iam = r.Preferencias.iam;
+                if(r.Preferencias.lookingfor !== undefined){
+                  $scope.lookingfor = r.Preferencias.lookingfor;
+                }
+
+
+                var data = {};
+                data.id_event   = $stateParams.id_event;
+                data.lookingfor = $scope.lookingfor;
+
+                Attending.get(data,function(r){
+                  console.log(r);
+                });
+
+              }
+            });
+            
+        }
 
         $scope.backtoevents = function(){
           $state.go("app.events");
