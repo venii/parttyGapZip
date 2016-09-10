@@ -91,7 +91,7 @@ angular.module('matches.controllers', ['starter'])
 
                 var data = {};
                 data.id_event   = $stateParams.id_event;
-                data.lookingfor = $scope.lookingfor;
+                data.lookingfor = 1;
 
                 Attending.get(data,function(r){
                   console.log(r);
