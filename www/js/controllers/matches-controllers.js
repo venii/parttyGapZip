@@ -1,6 +1,6 @@
 angular.module('matches.controllers', ['starter'])
 
-.controller('MatchesCtrl', function ($scope,$state,$stateParams,$localStorage,GraphService,SQLService,Attending) {
+.controller('MatchesCtrl', function ($scope,$state,$stateParams,$localStorage,GraphService,SQLService,Perfil,Attending) {
         
         $scope.maxPreMatchesDone = 10;
 
@@ -8,11 +8,22 @@ angular.module('matches.controllers', ['starter'])
         $scope.ideventfb = 0;
 
         var data = {};
-        data.id_fb_events    = $stateParams.id_event;
-        data.id_fb_attending = $localStorage.fbid;
+        data.id = $localStorage.fbid;
         
-        Attending.save(data);
+        Perfil.get(data,function(r){
 
+          var data = {};
+          data.id_fb_events    = $stateParams.id_event;
+          data.id_fb_attending = $localStorage.fbid;
+          data.nome            = r.Perfil.name;
+          data.pic             = r.Perfil.imgPIC1;
+
+          Attending.save(data);
+
+        });
+       
+
+        
         $scope.info = function(){
             $scope.showMatchesInfo = true;
           
