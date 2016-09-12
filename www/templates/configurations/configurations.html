@@ -1,0 +1,36 @@
+<ion-view view-title="Configurações" cache-view="false" >
+  <ion-content scroll="false" style="heigth:100%;">
+      <div ng-if="showspiner" style="heigth:100%;">
+        <center><ion-spinner ></ion-spinner></center>
+      </div>
+      <div ng-if="!showspiner" style="min-height:100%;relative" >
+      		
+
+      			<div class="item" style="width:100%;margin-top:10px">		
+      				<div>Eu sou :</div>
+
+      				<div class="btn-group" style="width:100%;">
+                  <ion-radio  ng-value="'man'"   ng-model="iam" ng-change="updateIam('man')">Homen</ion-radio>
+                  <ion-radio  ng-value="'woman'" ng-model="iam" ng-change="updateIam('woman')">Mulher</ion-radio>
+            
+                   
+        			</div>
+        		</div>
+    			<div class="item" style="margin-top:10px" >
+    				<div>Estou procurando por: </div>
+    				<div class="btn-group" style="width:100%;margin-top:10px">
+
+    				       <ion-checkbox ng-repeat="item in lookingfor" ng-model="item.checked" ng-checked="item.checked">
+              					{{ item.text }}
+            			   </ion-checkbox>
+    				</div>
+    			</div>
+    			<div style="position:absolute;bottom:0;width:100%">
+    				<center>
+    					<button ng-click="atualizaPreferencias()" class="btn button-full button-royal tbtext" style="border-color: #6b46e5;background-color: #886aea;color: #fff;">Atualizar informaçoes</button>
+    				</center>
+      			</div>
+  
+      </div>
+  </ion-content>
+</ion-view>

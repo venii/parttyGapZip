@@ -1,0 +1,57 @@
+<ion-view view-title="Profile" cache-view="false" >
+  <ion-content scroll="false" style="color: black">
+  		<div ng-show="showSpinner" align="center">
+          <ion-spinner ></ion-spinner>
+        </div>
+        <form novalidate name="profile" class="simple-form" ng-show="!showSpinner">
+  			<div style="background-color: #8380ec; opacity:0.61; width:100%; height: 80%">
+				<div align="center">
+				  <h3 style="font-size: 2em">{{perfil.name}}</h3>
+				</div>
+				<div>
+					<div style="width:100%;" align="center">
+					  <div style="width:128;height:128">
+						<img id="imgPIC1" no-img width="128" heigh="128" ng-src="{{perfil.imgPIC1}}" ng-click="changephoto1()" style="border-radius:10px; width:128px; height:128px" />
+					  </div>
+				   </div>
+				   <div style="display: inline-flex;width:100%;margin-top:10px;align-items: center; justify-content: center;">
+					  <div style="width:20%">
+						  <div style="width:80px;height:80px">
+							<img id="imgPIC2" no-img width="80" heigh="80" ng-src="{{perfil.imgPIC2}}" ng-click="changephoto2()" style="border: solid 1px white; border-radius: 5px 0px 0px 5px; width:80px; height:80px"/>
+						  </div>
+					  </div>
+					  <div style="width:20%">
+						  <div style="width:80px;height:80px">
+							<img id="imgPIC3" no-img width="80" heigh="80" ng-src="{{perfil.imgPIC3}}" ng-click="changephoto3()" style="border: solid 1px white; width:80px;height: 80px" />
+						  </div>
+					  </div>
+					  <div style="width:20%">
+						  <div style="width:80px;height:80px">
+							<img id="imgPIC4" no-img width="80" heigh="80" ng-src="{{perfil.imgPIC4}}" ng-click="changephoto4()" style="border: solid 1px white; width:80px;height: 80px" />
+						  </div>
+					  </div>
+					  <div style="width:20%5">
+						  <div style="width:80px;height:80px">
+							<img id="imgPIC" no-img width="80" heigh="80" ng-src="{{perfil.imgPIC5}}" ng-click="changephoto5()" style="border: solid 1px white; border-radius: 0px 5px 5px 0px; width:80px; height:80px"/>
+						  </div>
+					  </div>
+					</div>
+				</div>
+				<div style="padding-left:20px; padding-top: 3px;">
+                  <h4  style="font-size: 1.3em">Descrição pessoal:</h4>
+                </div>
+				<div style="padding-top:1px;">
+				</div>
+			</div>
+            <div style="width:100%;margin-top:2px">
+              <div>
+                  <input style="padding-top: 2px" type="text" name="desc" ng-model="perfil.descricao" placeholder="500 caracteres" style="width:100%; padding-left:10px; padding-bottom:25%"/>
+              </div>
+            </div>
+            <div>
+  				<button id="buttomProfile" class="button button-full button-royal" ng-click="updateProfile()">Atualizar</button>
+                <input type="file" style="display:none" name="webUploadApproach" ng-model="webUploadApproach" accept="image/*" />
+            </div>
+  		</form>
+  </ion-content>
+</ion-view>
