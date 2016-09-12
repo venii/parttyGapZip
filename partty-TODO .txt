@@ -1,0 +1,88 @@
+02/11/2015
+    resolver resultados do uploadChunk , a imagen ja esta sendo upada ok so falta o update dos reg no banco
+    
+    add cordova plugin add https://github.com/wymsee/cordova-imagePicker.git
+07/09/2015-
+    adicionar badge no chat
+    adicionar ultima mensagem no chat
+    load profile ws img ao invez de pegar sempre no fb
+
+    cordova plugin add org.apache.cordova.network-information
+
+25-08-2015
+    aumentar pics img
+    //ADICIONAR LEFTJOIN COM t_entity_details e pushar profilePIC -> v
+
+21-08-2015 -> atualizado updte_upload_image para aceitar base64 e qualquer encryptaçao
+
+              long uri por causa da imagem sendo postada em get 
+              e se usar post a imagem nao via
+
+
+              DIMINUIR OS BITS DA IMAGE
+
+18-08-2015 -> chat ios / android - done
+              -> add ionic plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git
+                     cordova plugin add https://github.com/wymsee/cordova-imagePicker.git
+                     cordova plugin add https://github.com/hazemhagrass/phonegap-base64.git
+
+                     Transformar image em base64 !
+
+04-08-2015 -> criar services da lista de mensagensgetfbidbysess
+              integrar com ws mensagens
+              integrar mensagens ao apns e gcm
+
+
+10-08-2015 -> GCMIntentService -> on mensage -> colocar bundle como mensage e nao payload
+  l->74 extras.putString("message",extras.getString("payload"));
+git reset commit do ios voltar até versao sem crash (git reset --hard [Commit SHA id here])
+
+
+
+17-07-2015
+
+	IOS -> Revisar 
+		 // if none of the above states are matched, use this as the fallback
+  		(l->170)$urlRouterProvider.otherwise('/app/login');
+  		(l->93)  if($localStorage.token != undefined){ (localstorage.token tem token)
+
+
+  	20/07/1015 -> criar newmatchesfounds stack
+  				-> criar profile
+
+
+  			24/07/2015 -> enviar certificvado apple para WS
+  					implentar o push para android e ios quando receber matche
+
+
+  http://parttyappnoip.ddns.net/partty/servercode/ws/process.php/testIosPush?ent_ios_cer=&ent_cer_pass=&ent_message=&ent_push_token=
+
+
+  USAR CK.pem para enviar tokens
+      CKPROD.pem ou ParttyChatProd.pem ParttyChat.pem
+
+
+  acessar http://parttyappnoip.ddns.net/partty/servercode/ws/process.php/testIosPush
+
+
+  remover index.html dos alerts
+    http://stackoverflow.com/questions/10486403/how-to-change-the-default-heading-of-alert
+
+
+
+
+REVER LIKES !!!!
+rematches nao atualiza matchFound (cards-animation l:148)
+
+
+
+
+
+ADICIONAR matches via BROADCAST
+
+
+-> revisar registration do plugin quando resume do app[]
+
+
+
+desativar wifi para acelerar token pushnotification
