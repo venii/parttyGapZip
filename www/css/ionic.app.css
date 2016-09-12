@@ -2306,7 +2306,11 @@ html {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+<<<<<<< HEAD
   font-family: "Raleway", "Roboto", sans-serif;
+=======
+  font-family: sans-serif;
+>>>>>>> b1a91213b8bffff5bb70cd59f969d7ecffb0c06e
   /* 1 */
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -2365,7 +2369,11 @@ hr {
  */
 code, kbd, pre, samp {
   font-size: 1em;
+<<<<<<< HEAD
   font-family: "Raleway", "Roboto", sans-serif; }
+=======
+  font-family: monospace, serif; }
+>>>>>>> b1a91213b8bffff5bb70cd59f969d7ecffb0c06e
 
 /**
  * Improve readability of pre-formatted text in all browsers.
@@ -2566,7 +2574,11 @@ body, .ionic-body {
   color: #000;
   word-wrap: break-word;
   font-size: 14px;
+<<<<<<< HEAD
   font-family: "Raleway", "Roboto", sans-serif;
+=======
+  font-family: "Helvetica Neue", "Roboto", sans-serif;
+>>>>>>> b1a91213b8bffff5bb70cd59f969d7ecffb0c06e
   line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
@@ -2793,7 +2805,11 @@ cite {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   color: #000;
   font-weight: 500;
+<<<<<<< HEAD
   font-family: "Raleway", "Roboto", sans-serif;
+=======
+  font-family: "Helvetica Neue", "Roboto", sans-serif;
+>>>>>>> b1a91213b8bffff5bb70cd59f969d7ecffb0c06e
   line-height: 1.2; }
   h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small {
     font-weight: normal;
@@ -4135,7 +4151,11 @@ ion-tabs.tabs-color-active-dark .tab-item {
   white-space: nowrap;
   font-weight: 400;
   font-size: 14px;
+<<<<<<< HEAD
   font-family: "Raleway", "Roboto", sans-serif;
+=======
+  font-family: "Helvetica Neue", "Roboto", sans-serif;
+>>>>>>> b1a91213b8bffff5bb70cd59f969d7ecffb0c06e
   opacity: 0.7; }
   .tab-item:hover {
     cursor: pointer; }
@@ -5632,7 +5652,11 @@ label, input, button, select, textarea {
   line-height: 1.42857; }
 
 input, button, select, textarea {
+<<<<<<< HEAD
   font-family: "Raleway", "Roboto", sans-serif; }
+=======
+  font-family: "Helvetica Neue", "Roboto", sans-serif; }
+>>>>>>> b1a91213b8bffff5bb70cd59f969d7ecffb0c06e
 
 .item-input {
   display: -webkit-box;
@@ -5840,6 +5864,7 @@ input[type="file"] {
   width: 200px; }
 
 input::-moz-placeholder, textarea::-moz-placeholder {
+<<<<<<< HEAD
   color: black;
   font-family: "Raleway", "Roboto", sans-serif;
   text-indent:0px;  }
@@ -5852,6 +5877,14 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   font-family: "Raleway", "Roboto", sans-serif;
   text-indent:0px;  }
   
+=======
+  color: #aaaaaa; }
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #aaaaaa; }
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #aaaaaa;
+  text-indent: 0; }
+>>>>>>> b1a91213b8bffff5bb70cd59f969d7ecffb0c06e
 
 input[disabled], select[disabled], textarea[disabled], input[readonly]:not(.cloned-text-input), textarea[readonly]:not(.cloned-text-input), select[readonly] {
   background-color: #f8f8f8;
@@ -7668,6 +7701,7 @@ a.button {
 
 .item .item-radio{
   background-color: red;
+
 }
 
 #buttomProfile{
@@ -7680,3 +7714,4 @@ a.button {
 }
 
 	
+

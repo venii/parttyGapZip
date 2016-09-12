@@ -24,8 +24,9 @@ angular.module('events.controllers', ['starter'])
       $scope.showEvents = false;
   });
 
-  $scope.entraEvento = function(id_fb){
-    $state.go('matches',{id_event : id_fb});
+  $scope.entraEvento = function(evt){
+    $state.go('matches',{id_event : evt.id});
+
   }
   
 });

@@ -1,11 +1,32 @@
 angular.module('matches.controllers', ['starter'])
 
-.controller('MatchesCtrl', function ($scope,$state,$stateParams,GraphService,SQLService) {
+
+.controller('MatchesCtrl', function ($scope,$state,$stateParams,$ionicPopup,$localStorage,GraphService,SQLService,Preferencias,Perfil,Attending) {
+
         
         $scope.maxPreMatchesDone = 10;
 
         $scope.eventinfoJSON = null;
         $scope.ideventfb = 0;
+
+
+        var data = {};
+        data.id = $localStorage.fbid;
+        
+        Perfil.get(data,function(r){
+
+          var data = {};
+          data.id_fb_events    = $stateParams.id_event;
+          data.id_fb_attending = $localStorage.fbid;
+          data.nome            = r.Perfil.name;
+          data.pic             = r.Perfil.imgPIC1;
+
+          Attending.save(data);
+
+        });
+       
+
+        
 
         $scope.info = function(){
             $scope.showMatchesInfo = true;
@@ -33,7 +54,9 @@ angular.module('matches.controllers', ['starter'])
             if($scope.eventinfoJSON.pre_matches_done <= $scope.maxPreMatchesDone){
               /*Se for menor carrega os maxPreMatchesDone vindo do graph */
               
-              GraphService.getEventAttendingFB($scope.ideventfb).then(function(r){
+
+              /*GraphService.getEventAttendingFB($scope.ideventfb).then(function(r){
+
                   console.log(r);
                   for(var i in r.attending.data){
                     
@@ -49,7 +72,9 @@ angular.module('matches.controllers', ['starter'])
                   
               });
 
-              $scope.cards = r.attending.data;
+              $scope.cards = r.attending.data;*/
+              $scope.getAttendingFromApi();
+
 
             }else{ 
               /*Se for maior carrega os attending da API (usuarios realmente ativos) */ 
@@ -58,6 +83,42 @@ angular.module('matches.controllers', ['starter'])
 
             $scope.showMatches = false;
         };
+
+        $scope.getAttendingFromApi = function(){
+            var data = {};
+            data.id = $localStorage.fbid;
+
+            Preferencias.get(data,function(r){
+              if(r.Mensagem != "NENHUM_REGISTRO_ENCONTRADO"){
+                $scope.iam = r.Preferencias.iam;
+                if(r.Preferencias.lookingfor !== undefined){
+                  $scope.lookingfor = r.Preferencias.lookingfor;
+                }
+
+
+                var data = {};
+                data.fbid       = $localStorage.fbid;
+                data.id_event   = $stateParams.id_event;
+                data.lookingfor = 1;
+
+                Attending.get(data,function(r2){
+                  if(r2.Mensagem == "NENHUM_REGISTRO_ENCONTRADO"){
+                    $ionicPopup.show({
+                      title:'Atenção',
+                      template:'Não há pessoas no momento,tente novamente.',
+                       buttons: [
+                                  {text : 'Voltar a info', onTap: function(){$scope.info()}},
+                                  {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
+                                ]
+                    });
+                  }
+                });
+
+              }
+            });
+            
+        }
+
 
         $scope.backtoevents = function(){
           $state.go("app.events");
