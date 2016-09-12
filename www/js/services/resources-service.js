@@ -75,7 +75,12 @@ angular.module('app.resources-service', ['starter'])
     /*Model de Perfil*/
     var Attending = $resource(HOST_API+'/attending',{ id: '@id' },
       
-      { update: {method: 'PUT'} });
+      { update: {method: 'PUT'},
+        get:{
+            method:'GET',
+            url: HOST_API+'/attending/:fbid/:id_event/:lookingfor'
+        } 
+      });
 
     Attending.prototype.update = function(cb) {
      

@@ -90,6 +90,7 @@ angular.module('matches.controllers', ['starter'])
 
 
                 var data = {};
+                data.fbid       = $lookingfor.fbid;
                 data.id_event   = $stateParams.id_event;
                 data.lookingfor = 1;
 
