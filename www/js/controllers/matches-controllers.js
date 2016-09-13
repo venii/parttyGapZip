@@ -100,7 +100,7 @@ angular.module('matches.controllers', ['starter'])
                       title:'Atenção',
                       template:'Não há pessoas no momento,tente novamente.',
                        buttons: [
-                                  {text : 'Tentar novamente', onTap: function(){$scope.getAttendingFromApi()}},
+                                  {text : 'Voltar a info', onTap: function(){$scope.info()}},
                                   {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
                                 ]
                     });
