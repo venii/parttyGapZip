@@ -1,6 +1,6 @@
 angular.module('matches.controllers', ['starter'])
 
-.controller('MatchesCtrl', function ($scope,$state,$stateParams,$localStorage,GraphService,SQLService,Preferencias,Perfil,Attending) {
+.controller('MatchesCtrl', function ($scope,$state,$stateParams,$ionicPopup,$localStorage,GraphService,SQLService,Preferencias,Perfil,Attending) {
         
         $scope.maxPreMatchesDone = 10;
 
@@ -90,12 +90,21 @@ angular.module('matches.controllers', ['starter'])
 
 
                 var data = {};
-                data.fbid       = $lookingfor.fbid;
+                data.fbid       = $localStorage.fbid;
                 data.id_event   = $stateParams.id_event;
                 data.lookingfor = 1;
 
-                Attending.get(data,function(r){
-                  console.log(r);
+                Attending.get(data,function(r2){
+                  if(r2.Mensagem == "NENHUM_REGISTRO_ENCONTRADO"){
+                    $ionicPopup.show({
+                      title:'Atenção',
+                      template:'Não há pessoas no momento,tente novamente.',
+                       buttons: [
+                                  {text : 'Tentar novamente'},
+                                  {text : 'Voltar aos eventos'}
+                                ]
+                    });
+                  }
                 });
 
               }
