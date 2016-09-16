@@ -33,7 +33,7 @@ angular.module('starter', [	 'ionic',
 
   ])
   .value("HOST_API","http://127.0.0.1:8080")
-  .run(function($ionicPlatform,SQLService,UtilsService,$localStorage) {
+  .run(function($ionicPlatform,$state,$rootScope,SQLService,UtilsService,$localStorage) {
 
     $ionicPlatform.ready(function() {
       /*Inicia o DB*/
@@ -47,7 +47,27 @@ angular.module('starter', [	 'ionic',
           $localStorage.token = "";
           $localStorage.tipoDevice = "WEB";
       }
+
+     
     });
+
+    $rootScope.$on('$stateChangeStart', function(event, newUrl, oldUrl){
+      //console.log(oldUrl,newUrl);
+      
+        //console.log('$localStorage.Configurations_Mensagem',$localStorage.Configurations_Mensagem,oldUrl,newUrl);
+        
+        if($localStorage.hasOwnProperty('Configurations_Mensagem')){
+          if($localStorage.Configurations_Mensagem == 'NENHUM_REGISTRO_ENCONTRADO'){
+            
+            if(newUrl.url){
+              if(newUrl.url != "/configurations" && newUrl.url != "/login"){
+                event.preventDefault();  
+              }
+            }
+          }
+        }
+    });
+
   })
 
   .config(function($sceDelegateProvider,$stateProvider, $urlRouterProvider,$httpProvider) {
@@ -73,6 +93,7 @@ angular.module('starter', [	 'ionic',
     })
     
     .state('app.configurations', {
+      cache: false,
       url: "/configurations",
       views: {
         'menuContent': {

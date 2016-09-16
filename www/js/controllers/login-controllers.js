@@ -1,5 +1,5 @@
 angular.module('login.controllers', ['starter'])
-.controller('LoginFBCtrl', function($scope,$state,$localStorage,LoginService,GraphService,Perfil) {
+.controller('LoginFBCtrl', function($scope,$state,$localStorage,LoginService,GraphService,Perfil,Preferencias) {
   //fluxo login -> main
   $scope.showLoginSpinner = false;
 
@@ -18,8 +18,23 @@ angular.module('login.controllers', ['starter'])
         }
         
         Perfil.save(response, function(r) {
-          $scope.showLoginSpinner = false;
-          $state.go('app.events');
+          $scope.showLoginSpinner = false;  
+
+          var data_pref = {};
+          data_pref.id = $localStorage.fbid;
+
+          Preferencias.get(data_pref,function(r2){
+
+              $localStorage.Configurations_Mensagem = r2.Mensagem;
+              
+              if(r2.Mensagem == "NENHUM_REGISTRO_ENCONTRADO"){
+                $state.go('app.configurations');
+              }else{
+                $state.go('app.events');
+              }
+          });
+
+          
         });
 
         
@@ -27,5 +42,5 @@ angular.module('login.controllers', ['starter'])
     });
               
   };
-   
+  
 });
