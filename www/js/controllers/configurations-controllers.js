@@ -45,6 +45,8 @@ angular.module('configurations.controllers', ['ionic'])
 
   	Preferencias.update(data,function(r){
       $localStorage.Configurations_Mensagem = "";
+      $localStorage.iam = iam;
+      
   	  $ionicPopup.show({
                         title:'Sucesso',
                         template:'Suas Preferencias foram atualizadas.',

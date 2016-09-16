@@ -20,8 +20,11 @@ angular.module('matches.controllers', ['starter'])
           data.id_fb_attending = $localStorage.fbid;
           data.nome            = r.Perfil.name;
           data.pic             = r.Perfil.imgPIC1;
+          data.iam             = $localStorage.iam;
+          
+          console.log(data);
 
-          Attending.save(data);
+          Attending.update(data);
 
         });
        

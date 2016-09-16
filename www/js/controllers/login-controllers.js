@@ -9,6 +9,7 @@ angular.module('login.controllers', ['starter'])
     LoginService.autenticarFB().then(function(response){
 
       GraphService.getMeFB().then(function(response){
+        response.imgPIC1 = response.picture.data.url;
         LoginService.savePerfil(response);
         
         $localStorage.fbid = response.id;
