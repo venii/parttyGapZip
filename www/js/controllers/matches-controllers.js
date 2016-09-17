@@ -43,6 +43,7 @@ angular.module('matches.controllers', ['starter'])
         
         //função para carregar os matches do servidor do partty
         $scope.matches = function(){
+           
             $scope.showMatches = true;
             
             if($scope.eventinfoJSON.pre_matches_done == null){
@@ -129,6 +130,9 @@ angular.module('matches.controllers', ['starter'])
                                   {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
                                 ]
                     });
+                  }else{
+                    var attending = r2.Attending;
+                    $scope.startCards(attending);
                   }
                 });
 
@@ -155,9 +159,79 @@ angular.module('matches.controllers', ['starter'])
            $scope.matches();
         }
 
+        $scope.startCards = function(cards){
+          $scope.$broadcast("startCards",{cards:cards});
+          
+        }
+
         $scope.enterInInfo();
+        
+
   })
 
-  .controller('MatchesCardsCtrl', function ($scope,$state,$stateParams,MatchService) {
-      $scope.eventinfoJSON.pre_matches_done += 1;
+  .controller('MatchesCardsCtrl', function ($scope,$state,$ionicPopup,$stateParams,$localStorage,MatchService,Matches) {
+      //$scope.eventinfoJSON.pre_matches_done += 1;
+      $scope.$on('startCards', function(event, response) { 
+         $scope.init(response.cards);
+        
+      });
+      
+      $scope.init = function(cards){
+        $scope.cards = cards;
+    
+        $scope.cardCounter = cards.length;
+        $scope.cardDataArray = cards.slice(0);
+        $scope.swypedCard = null;
+      }
+
+      $scope.cardsControl = {};
+      $scope.exposeSwypedCard = function() {
+        $scope.cardCounter -= 1;
+        if ($scope.cardCounter === 0){
+          $scope.deckIsEmpty = true;
+          
+          $ionicPopup.show({
+            title:'Atenção',
+            template:'Não há pessoas no momento,tente novamente.',
+             buttons: [
+                        {text : 'Voltar a info', onTap: function(){$scope.enterInInfo();}},
+                        {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
+                      ]
+          });
+        }
+
+        $scope.swypedCard = $scope.cardDataArray[$scope.cardCounter];
+      }
+
+      $scope.cardDestroyed = function(index) {
+        $scope.cards.splice(index, 1);
+      };
+
+      $scope.yesClick = function() {
+        $scope.cardsControl.swipeRight();
+      };
+      
+      $scope.noClick = function() {
+        $scope.cardsControl.swipeLeft();
+      };
+      
+      $scope.cardSwipedLeft = function(index) {
+        $scope.exposeSwypedCard();  
+        $scope.addToMatches($scope.swypedCard);
+      };
+      
+      $scope.cardSwipedRight = function(index) {
+        
+        $scope.exposeSwypedCard();
+        $scope.addToMatches($scope.swypedCard);
+      };  
+    
+      $scope.addToMatches = function(obj){
+        var match = {};
+        match.id_match_1 = $localStorage.fbid;
+        match.id_match_2 = obj.id_fb_attending;
+        match.id_event   = $stateParams.id_event;
+        console.log(match);
+        //Matches
+      }
   });

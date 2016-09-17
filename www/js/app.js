@@ -8,6 +8,7 @@ angular.module('starter', [	 'ionic',
                              'ngStorage',
                              'ngResource',
                              'ngIOS9UIWebViewPatch',
+                             'ionic.contrib.ui.tinderCards',
                              /*CONTROLLERS*/                              
                              'app.menu',
                              'login.controllers',

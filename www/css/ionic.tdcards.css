@@ -77,3 +77,251 @@ td-card img {
   transition: 0.2s opacity linear;
   opacity: 0;
 }
+
+.card.list .list-item {
+  padding-right: 1px;
+  padding-left: 1px; }
+
+/**
+ * Cards and Inset Lists
+ * --------------------------------------------------
+ * A card and list-inset are close to the same thing, except a card as a box shadow.
+ */
+.card, .list-inset {
+  overflow: hidden;
+  margin: 20px 10px;
+  border-radius: 2px;
+  background-color: #fff; }
+
+.card {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+  .card .item {
+    border-left: 0;
+    border-right: 0; }
+  .card .item:first-child {
+    border-top: 0; }
+  .card .item:last-child {
+    border-bottom: 0; }
+
+.padding .card, .padding .list-inset {
+  margin-left: 0;
+  margin-right: 0; }
+
+.card .item:first-child, .list-inset .item:first-child, .padding > .list .item:first-child {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px; }
+  .card .item:first-child .item-content, .list-inset .item:first-child .item-content, .padding > .list .item:first-child .item-content {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px; }
+.card .item:last-child, .list-inset .item:last-child, .padding > .list .item:last-child {
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px; }
+  .card .item:last-child .item-content, .list-inset .item:last-child .item-content, .padding > .list .item:last-child .item-content {
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px; }
+
+.card .item:last-child, .list-inset .item:last-child {
+  margin-bottom: -1px; }
+
+.card .item, .list-inset .item, .padding > .list .item, .padding-horizontal > .list .item {
+  margin-right: 0;
+  margin-left: 0; }
+  .card .item.item-input input, .list-inset .item.item-input input, .padding > .list .item.item-input input, .padding-horizontal > .list .item.item-input input {
+    padding-right: 44px; }
+
+.padding-left > .list .item {
+  margin-left: 0; }
+
+.padding-right > .list .item {
+  margin-right: 0; }
+
+.tinder-premium-one .card-deck-message {
+  border: 1px solid #ddd; }
+  .tinder-premium-one .card-deck-message * {
+    color: #2E2E2E; }
+.tinder-premium-one .bar {
+  min-height: 50px;
+  background-color: #2E2E2E;
+  border: none; }
+  .tinder-premium-one .bar .title {
+    top: 3px; }
+    .tinder-premium-one .bar .title img {
+      height: 100%; }
+  .tinder-premium-one .bar button {
+    padding-left: 10px;
+    padding-right: 10px; }
+  .tinder-premium-one .bar .notification-bubble {
+    position: absolute;
+    top: 0px;
+    right: -5px;
+    background-color: red;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 10px;
+    font-size: 10px;
+    line-height: 1.5em;
+    color: white; }
+.tinder-premium-one td-cards.responsive {
+  display: block; }
+  .tinder-premium-one td-cards.responsive td-card {
+    left: 10%;
+    margin-left: 0;
+    width: 80%;
+    height: auto; }
+    .tinder-premium-one td-cards.responsive td-card .tinder-thumb {
+      height: auto !important; }
+  .tinder-premium-one td-cards.responsive .button-controls.row {
+    height: auto; }
+    .tinder-premium-one td-cards.responsive .button-controls.row .col {
+      margin-top: 0; }
+    .tinder-premium-one td-cards.responsive .button-controls.row .tinder-control, .tinder-premium-one td-cards.responsive .button-controls.row .tinder-accept, .tinder-premium-one td-cards.responsive .button-controls.row .tinder-reject, .tinder-premium-one td-cards.responsive .button-controls.row .tinder-info {
+      width: 75px;
+      height: 75px; }
+      .tinder-premium-one td-cards.responsive .button-controls.row .tinder-control i, .tinder-premium-one td-cards.responsive .button-controls.row .tinder-accept i, .tinder-premium-one td-cards.responsive .button-controls.row .tinder-reject i, .tinder-premium-one td-cards.responsive .button-controls.row .tinder-info i {
+        margin-top: 15px;
+        font-size: 40px; }
+.tinder-premium-one td-card {
+  position: absolute;
+  left: 50%;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  margin-left: -150px;
+  width: 300px;
+  height: 325px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 6px; }
+.tinder-premium-one td-card .image {
+  position: relative; }
+.tinder-premium-one td-card img {
+  max-width: 100%;
+  border-radius: 6px; }
+.tinder-premium-one .yes-text {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 14px;
+  color: #6ffa6f;
+  opacity: 0;
+  z-index: 2; }
+.tinder-premium-one .no-text {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 14px;
+  color: #ff7373;
+  opacity: 0;
+  z-index: 2; }
+.tinder-premium-one .fade {
+  -webkit-transition: 0.2s opacity linear;
+  transition: 0.2s opacity linear;
+  opacity: 0; }
+
+.card-deck-message {
+  animation-duration: 0.8s;
+  animation-name: fadeInFromTop;
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  text-align: center;
+  z-index: 1;
+  width: 70%;
+  border: 1px solid #fff;
+  height: 40%;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  border-radius: 15px;
+  padding: 10%; }
+
+td-card.ruby-tindercard .no-text {
+  padding: 5px 10px;
+  background-color: #e74c3c;
+  display: inline-block;
+  border-radius: 7px;
+  color: white;
+  border: 4px solid rgba(255, 255, 255, 0.5); }
+td-card.ruby-tindercard .yes-text {
+  padding: 5px 10px;
+  background-color: #2ecc71;
+  display: inline-block;
+  border-radius: 7px;
+  color: white;
+  border: 4px solid rgba(255, 255, 255, 0.5); }
+td-card.ruby-tindercard .vip-badge {
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+  -ms-border-radius: 500px;
+  border-radius: 500px;
+  border: 5px solid rgba(242, 243, 244, 0.38);
+  color: #fff;
+  font-size: 16px;
+  display: inline-block;
+  background-color: #F39C12;
+  padding: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: -1; }
+td-card.ruby-tindercard.tinder-style-two {
+  background-color: #fff; }
+  td-card.ruby-tindercard.tinder-style-two .vip-badge {
+    z-index: 0; }
+  td-card.ruby-tindercard.tinder-style-two h1, td-card.ruby-tindercard.tinder-style-two h2, td-card.ruby-tindercard.tinder-style-two h3, td-card.ruby-tindercard.tinder-style-two h4, td-card.ruby-tindercard.tinder-style-two h5, td-card.ruby-tindercard.tinder-style-two h6 {
+    margin: 4px 0; }
+  td-card.ruby-tindercard.tinder-style-two p {
+    font-size: 13px;
+    line-height: 1.4em;
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 5px; }
+  td-card.ruby-tindercard.tinder-style-two .tinder-thumb {
+    height: 245px;
+    overflow: hidden;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px; }
+  td-card.ruby-tindercard.tinder-style-two .tinder-thumb img {
+    display: block;
+    width: 100%;
+    margin-top: -25%; }
+  td-card.ruby-tindercard.tinder-style-two .small-info {
+    color: #95A5A6; }
+
+.button-controls.row > .col {
+  margin-top: 35em; }
+
+.button-controls.row {
+  position: absolute;
+  bottom: 0;
+  height: 100px; }
+  .button-controls.row .tinder-control, .button-controls.row .tinder-accept, .button-controls.row .tinder-reject, .button-controls.row .tinder-info {
+    -webkit-border-radius: 500px;
+    -moz-border-radius: 500px;
+    -ms-border-radius: 500px;
+    border-radius: 500px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 30px;
+    margin: 0 auto; }
+    .button-controls.row .tinder-control i, .button-controls.row .tinder-accept i, .button-controls.row .tinder-reject i, .button-controls.row .tinder-info i {
+      margin-top: 24px;
+      display: inline-block;
+      font-size: 50px; }
+  .button-controls.row .tinder-accept {
+    color: #2ECC71;
+    background-color: #fff;
+    border: 3px solid #2ECC71; }
+  .button-controls.row .tinder-reject {
+    color: #E74C3C;
+    background-color: #fff;
+    border: 3px solid #E74C3C; }
+  .button-controls.row .tinder-info {
+    color: white;
+    background-color: #95A5A6;
+    width: 70px;
+    height: 70px; }
+    .button-controls.row .tinder-info i {
+      font-size: 32px; }
