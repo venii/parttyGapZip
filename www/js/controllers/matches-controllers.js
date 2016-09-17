@@ -2,8 +2,7 @@ angular.module('matches.controllers', ['starter'])
 
 
 .controller('MatchesCtrl', function ($scope,$state,$stateParams,$ionicPopup,$localStorage,GraphService,SQLService,Preferencias,Perfil,Attending) {
-
-        
+       
         $scope.maxPreMatchesDone = 10;
 
         $scope.eventinfoJSON = null;
@@ -22,8 +21,6 @@ angular.module('matches.controllers', ['starter'])
           data.pic             = r.Perfil.imgPIC1;
           data.iam             = $localStorage.iam;
           
-          console.log(data);
-
           Attending.update(data);
 
         });
@@ -46,6 +43,7 @@ angular.module('matches.controllers', ['starter'])
         
         //função para carregar os matches do servidor do partty
         $scope.matches = function(){
+           
             $scope.showMatches = true;
             
             if($scope.eventinfoJSON.pre_matches_done == null){
@@ -98,22 +96,44 @@ angular.module('matches.controllers', ['starter'])
                   $scope.lookingfor = r.Preferencias.lookingfor;
                 }
 
-
                 var data = {};
+                //homen
+                data.lookingfor = new Array;
+                if($scope.lookingfor[0].checked){
+                  data.lookingfor.push("man");
+                }
+                //mulher
+                if($scope.lookingfor[1].checked){
+                  data.lookingfor.push("woman"); 
+                }
+
+                if(!$scope.lookingfor[0].checked && !$scope.lookingfor[1].checked){
+                  $ionicPopup.show({
+                      title:'Atenção',
+                      template:'Selecione um genero em configurações.',
+                       buttons: [
+                                  {text : 'Ok', onTap: function(){$state.go("app.configurations")}},
+                                ]
+                  });
+                }
+
                 data.fbid       = $localStorage.fbid;
                 data.id_event   = $stateParams.id_event;
-                data.lookingfor = 1;
-
+                
                 Attending.get(data,function(r2){
                   if(r2.Mensagem == "NENHUM_REGISTRO_ENCONTRADO"){
                     $ionicPopup.show({
                       title:'Atenção',
                       template:'Não há pessoas no momento,tente novamente.',
                        buttons: [
-                                  {text : 'Voltar a info', onTap: function(){$scope.info()}},
+                                  {text : 'Voltar a info', onTap: function(){$scope.enterInInfo();}},
                                   {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
                                 ]
                     });
+                  }else{
+
+                    var attending = r2.Attending;
+                    $scope.startCards(attending);
                   }
                 });
 
@@ -126,6 +146,104 @@ angular.module('matches.controllers', ['starter'])
         $scope.backtoevents = function(){
           $state.go("app.events");
         };
-  }).controller('MatchesCardsCtrl', function ($scope,$state,$stateParams,MatchService) {
-      $scope.eventinfoJSON.pre_matches_done += 1;
+
+
+        $scope.enterInInfo = function(){
+           $scope.info_index  = true;
+           $scope.match_index = false;
+           $scope.info();
+        }
+
+        $scope.enterInMatches = function(){
+           $scope.info_index  = false;
+           $scope.match_index = true;
+           $scope.matches();
+        }
+
+        $scope.startCards = function(cards){
+          $scope.$broadcast("startCards",{cards:cards});
+          
+        }
+
+        $scope.enterInInfo();
+        
+
+  })
+
+  .controller('MatchesCardsCtrl', function ($scope,$state,$ionicPopup,$stateParams,$localStorage,MatchService,Matches) {
+      //$scope.eventinfoJSON.pre_matches_done += 1;
+      $scope.$on('startCards', function(event, response) { 
+         $scope.init(response.cards);
+        
+      });
+      
+      $scope.init = function(cards){
+        $scope.cards = cards;
+    
+        $scope.cardCounter = cards.length;
+        $scope.cardDataArray = cards.slice(0);
+        $scope.swypedCard = null;
+      }
+
+      $scope.cardsControl = {};
+      $scope.exposeSwypedCard = function() {
+        $scope.cardCounter -= 1;
+        if ($scope.cardCounter === 0){
+          $scope.deckIsEmpty = true;
+
+          /*procura se tem novos matches*/
+          var dataNewMatches      = {};
+          dataNewMatches.fbid     = $localStorage.fbid;
+          dataNewMatches.id_event = $stateParams.id_event;;
+
+          MatchService.getNewMatches(dataNewMatches).then(function(r){
+            console.log("RETORNO getNewMatches",r);
+          });
+ 
+          /*
+          $ionicPopup.show({
+            title:'Atenção',
+            template:'Não há pessoas no momento,tente novamente.',
+             buttons: [
+                        {text : 'Voltar a info', onTap: function(){$scope.enterInInfo();}},
+                        {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
+                      ]
+          });*/
+        }
+
+        $scope.swypedCard = $scope.cardDataArray[$scope.cardCounter];
+      }
+
+      $scope.cardDestroyed = function(index) {
+        $scope.cards.splice(index, 1);
+      };
+
+      $scope.yesClick = function() {
+        $scope.cardsControl.swipeRight();
+      };
+      
+      $scope.noClick = function() {
+        $scope.cardsControl.swipeLeft();
+      };
+      
+      $scope.cardSwipedLeft = function(index) {
+        $scope.exposeSwypedCard();  
+        $scope.addToMatches($scope.swypedCard,false);
+      };
+      
+      $scope.cardSwipedRight = function(index) {
+        $scope.exposeSwypedCard();
+        $scope.addToMatches($scope.swypedCard,true);
+      };  
+    
+      $scope.addToMatches = function(obj,like){
+        var match = {};
+
+        match.id_match_1 = $localStorage.fbid;
+        match.id_match_2 = obj.id_fb_attending;
+        match.id_event   = $stateParams.id_event;
+        match.like       = like;
+
+        Matches.update(match);
+      }
   });

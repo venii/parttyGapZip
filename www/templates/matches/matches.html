@@ -1,8 +1,8 @@
 <ion-view view-title="Macthes" ng-controller="MatchesCtrl" cache-view="false">
   <ion-content overflow-scroll="false" scroll="false">
 
-  		<tabset class="tabsetoverride" id="navegation-subbar">
-		    <tab select="info()">
+  		<tabset class="tabsetoverride"  id="navegation-subbar" >
+		    <tab select="enterInInfo()" active="info_index">
 	    		<tab-heading>
 			        <center><i class="glyphicon glyphicon-info-sign"> </i>   </center>
 			    </tab-heading>
@@ -38,17 +38,58 @@
 		    	</div>
 		    </tab>
 
-		    <tab select="matches()" id="matches" >
+		    <tab select="enterInMatches()" id="matches" active="match_index">
 		    		<tab-heading>
 				        <center><i class="glyphicon glyphicon-glass"></i></center>
 				    </tab-heading>
-		   			
-		   			<div id="includeCards" style="width:100%; height:100%" ng-show="!showMatches"></div>
-				  	
-				  	<div id="includeCards" style="width:100%; height:100%;margin-top:200px" ng-show="showMatches" align="center">
-				  		<ion-spinner ></ion-spinner>
+		   			<div ng-controller="MatchesCardsCtrl" style="position:relative;heigth:100%;width:100%">
+			   			<td-cards control="cardsControl" class="responsive">
+						    <td-card class="ruby-tindercard tinder-style-two"
+						    ng-repeat="card in cards" 
+						    on-destroy="cardDestroyed($index)" 
+						    on-transition-left="cardSwipedLeft($index)" 
+						    on-transition-right="cardSwipedRight($index)" 
+						    on-partial-swipe="cardPartialSwipe(amt)" 
+						    class="card-{{$index}}"
+						    >
+						    <!-- ui-sref="premiumappOne.tinder-profile({profileID: 1})"
+							-->
+						      <div class="no-text">Dislike</div>
+						      <div class="yes-text">Like</div>
+
+							<div class="vip-badge" ng-show="card.vipStatus">vip</div>
+							<div class="tinder-thumb">
+								<img preload-image ng-src="{{card.pic}}" default-image="img/demo/loader.svg" fallback-image="img/demo/profile-default.jpg" />
+								<!-- <img ng-src="{{card.image}}" /> -->
+							</div>
+							<div class="padding">
+								<h4 class="text-left bold">{{card.nome}}</h4>
+							</div>
+
+						    </td-card>
+
+						     <div class="button-controls row">
+								<div class="reject col">
+									<div class="tinder-reject" ng-click="noClick()">
+										<i class="ion-close-round"></i>
+									</div>
+								</div>
+								<!-- <div class="info col">
+									<div class="tinder-info" ng-click="reload()">
+										<i class="ion-refresh"></i>
+									</div>
+								</div> -->
+								<div class="accept col">
+									<div class="tinder-accept" ng-click="yesClick()">
+										<i class="ion-heart"></i>
+									</div>
+								</div>
+							</div>
+
+						    
+
+						</td-cards>
 				  	</div>
-				  
 		    </tab>
 
 		    

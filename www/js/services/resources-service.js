@@ -102,7 +102,12 @@ angular.module('app.resources-service', ['starter'])
     /*Model de Perfil*/
     var Matches = $resource(HOST_API+'/matches',{ id: '@id' },
       
-      { update: {method: 'PUT'} });
+      { update: {method: 'PUT'},
+        get:{
+            method:'GET',
+            url: HOST_API+'/matches/:fbid/:id_event'
+        } 
+      });
 
     Matches.prototype.update = function(cb) {
      

@@ -8,16 +8,14 @@ angular.module('starter', [	 'ionic',
                              'ngStorage',
                              'ngResource',
                              'ngIOS9UIWebViewPatch',
+                             'ionic.contrib.ui.tinderCards',
                              /*CONTROLLERS*/                              
                              'app.menu',
                              'login.controllers',
-                             
                              'events.controllers',
-                             
                              'matches.controllers',
                              'configurations.controllers',
                              'matchesfound.controllers',
-                             
                              'profile.controllers',
                              'chat.controllers',
                              /*SERVICES*/
@@ -27,10 +25,8 @@ angular.module('starter', [	 'ionic',
                              'app.profile-service',
                              'app.match-service',
                              'app.graph-service',
-
                              'app.sql-service',
                              'app.resources-service'							              
-
   ])
   .value("HOST_API","http://127.0.0.1:8080")
   .run(function($ionicPlatform,$state,$rootScope,SQLService,UtilsService,$localStorage,$ionicPopup) {
@@ -52,10 +48,7 @@ angular.module('starter', [	 'ionic',
     });
 
     $rootScope.$on('$stateChangeStart', function(event, newUrl, oldUrl){
-      //console.log(oldUrl,newUrl);
-      
-        //console.log('$localStorage.Configurations_Mensagem',$localStorage.Configurations_Mensagem,oldUrl,newUrl);
-        
+
         if($localStorage.hasOwnProperty('Configurations_Mensagem')){
           if($localStorage.Configurations_Mensagem == 'NENHUM_REGISTRO_ENCONTRADO'){
             
@@ -172,4 +165,4 @@ angular.module('starter', [	 'ionic',
         }
       }
     };
-  }]);;
+  }]);
