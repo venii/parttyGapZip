@@ -221,17 +221,19 @@ angular.module('matches.controllers', ['starter'])
       };
       
       $scope.cardSwipedRight = function(index) {
-        
         $scope.exposeSwypedCard();
         $scope.addToMatches($scope.swypedCard);
       };  
     
       $scope.addToMatches = function(obj){
         var match = {};
+
         match.id_match_1 = $localStorage.fbid;
         match.id_match_2 = obj.id_fb_attending;
         match.id_event   = $stateParams.id_event;
-        console.log(match);
-        //Matches
+
+        Matches.save(match,function(r){
+          console.log(r);
+        });
       }
   });
