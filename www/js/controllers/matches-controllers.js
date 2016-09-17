@@ -203,6 +203,17 @@ angular.module('matches.controllers', ['starter'])
             if(r.Mensagem == "RETORNADO"){
                 alert("MATCHESFOUND");
             }
+            
+            $scope.showEndList();
+
+          });
+ 
+        }
+
+        $scope.swypedCard = $scope.cardDataArray[$scope.cardCounter];
+      }
+
+      $scope.showEndList = function(){
             $ionicPopup.show({
               title:'Atenção',
               template:'Não há pessoas no momento,tente novamente.',
@@ -211,12 +222,6 @@ angular.module('matches.controllers', ['starter'])
                           {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
                         ]
             });
-
-          });
- 
-        }
-
-        $scope.swypedCard = $scope.cardDataArray[$scope.cardCounter];
       }
 
       $scope.cardDestroyed = function(index) {
