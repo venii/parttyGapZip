@@ -190,7 +190,17 @@ angular.module('matches.controllers', ['starter'])
         $scope.cardCounter -= 1;
         if ($scope.cardCounter === 0){
           $scope.deckIsEmpty = true;
-          
+
+          /*procura se tem novos matches*/
+          var dataNewMatches      = {};
+          dataNewMatches.fbid     = $localStorage.fbid;
+          dataNewMatches.id_event = $stateParams.id_event;;
+
+          MatchService.getNewMatches(dataNewMatches).then(function(r){
+            console.log("RETORNO getNewMatches",r);
+          });
+
+          /*
           $ionicPopup.show({
             title:'Atenção',
             template:'Não há pessoas no momento,tente novamente.',
@@ -198,7 +208,7 @@ angular.module('matches.controllers', ['starter'])
                         {text : 'Voltar a info', onTap: function(){$scope.enterInInfo();}},
                         {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
                       ]
-          });
+          });*/
         }
 
         $scope.swypedCard = $scope.cardDataArray[$scope.cardCounter];
@@ -233,8 +243,7 @@ angular.module('matches.controllers', ['starter'])
         match.id_match_2 = obj.id_fb_attending;
         match.id_event   = $stateParams.id_event;
         match.like       = like;
-        Matches.update(match,function(r){
-          console.log(r);
-        });
+        
+        Matches.update(match);
       }
   });

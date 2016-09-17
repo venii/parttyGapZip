@@ -1,6 +1,15 @@
 angular.module('app.match-service', ['starter'])
-.service('MatchService',function() {
-          
+.service('MatchService',function($q,Matches) {
+      this.getNewMatches = function(data_newMatchs){
+          var defer = $q.defer();
+        
+          Matches.get(data_newMatchs,function(r){
+            defer.resolve(r);
+          });
+
+          return defer.promise;
+
+      }    
 })
 
 .service('SendMatchesToWS',function(
