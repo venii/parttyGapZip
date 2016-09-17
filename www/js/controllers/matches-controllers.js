@@ -199,7 +199,7 @@ angular.module('matches.controllers', ['starter'])
           MatchService.getNewMatches(dataNewMatches).then(function(r){
             console.log("RETORNO getNewMatches",r);
           });
-
+ 
           /*
           $ionicPopup.show({
             title:'Atenção',
@@ -243,7 +243,7 @@ angular.module('matches.controllers', ['starter'])
         match.id_match_2 = obj.id_fb_attending;
         match.id_event   = $stateParams.id_event;
         match.like       = like;
-        
+
         Matches.update(match);
       }
   });
