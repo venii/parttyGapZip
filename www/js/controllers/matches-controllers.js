@@ -131,6 +131,7 @@ angular.module('matches.controllers', ['starter'])
                                 ]
                     });
                   }else{
+                    
                     var attending = r2.Attending;
                     $scope.startCards(attending);
                   }
