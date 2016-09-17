@@ -33,7 +33,7 @@ angular.module('starter', [	 'ionic',
 
   ])
   .value("HOST_API","http://127.0.0.1:8080")
-  .run(function($ionicPlatform,$state,$rootScope,SQLService,UtilsService,$localStorage) {
+  .run(function($ionicPlatform,$state,$rootScope,SQLService,UtilsService,$localStorage,$ionicPopup) {
 
     $ionicPlatform.ready(function() {
       /*Inicia o DB*/
@@ -61,6 +61,13 @@ angular.module('starter', [	 'ionic',
             
             if(newUrl.url){
               if(newUrl.url != "/configurations" && newUrl.url != "/login"){
+                 $ionicPopup.show({
+                        title:'Atenção',
+                        template:'Atualize suas Preferencias.',
+                         buttons: [
+                                    {text : 'Fechar'}
+                                  ]
+                      });
                 event.preventDefault();  
               }
             }
