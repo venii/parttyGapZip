@@ -131,7 +131,7 @@ angular.module('matches.controllers', ['starter'])
                                 ]
                     });
                   }else{
-                    
+
                     var attending = r2.Attending;
                     $scope.startCards(attending);
                   }
@@ -218,21 +218,21 @@ angular.module('matches.controllers', ['starter'])
       
       $scope.cardSwipedLeft = function(index) {
         $scope.exposeSwypedCard();  
-        $scope.addToMatches($scope.swypedCard);
+        $scope.addToMatches($scope.swypedCard,false);
       };
       
       $scope.cardSwipedRight = function(index) {
         $scope.exposeSwypedCard();
-        $scope.addToMatches($scope.swypedCard);
+        $scope.addToMatches($scope.swypedCard,true);
       };  
     
-      $scope.addToMatches = function(obj){
+      $scope.addToMatches = function(obj,like){
         var match = {};
 
         match.id_match_1 = $localStorage.fbid;
         match.id_match_2 = obj.id_fb_attending;
         match.id_event   = $stateParams.id_event;
-
+        match.like       = like;
         Matches.update(match,function(r){
           console.log(r);
         });
