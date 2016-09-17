@@ -197,18 +197,23 @@ angular.module('matches.controllers', ['starter'])
           dataNewMatches.id_event = $stateParams.id_event;;
 
           MatchService.getNewMatches(dataNewMatches).then(function(r){
+            
             console.log("RETORNO getNewMatches",r);
+            
+            if(r.Mensagem == "RETORNADO"){
+                alert("MATCHESFOUND");
+            }
+            $ionicPopup.show({
+              title:'Atenção',
+              template:'Não há pessoas no momento,tente novamente.',
+               buttons: [
+                          {text : 'Voltar a info', onTap: function(){$scope.enterInInfo();}},
+                          {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
+                        ]
+            });
+
           });
  
-          /*
-          $ionicPopup.show({
-            title:'Atenção',
-            template:'Não há pessoas no momento,tente novamente.',
-             buttons: [
-                        {text : 'Voltar a info', onTap: function(){$scope.enterInInfo();}},
-                        {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
-                      ]
-          });*/
         }
 
         $scope.swypedCard = $scope.cardDataArray[$scope.cardCounter];
