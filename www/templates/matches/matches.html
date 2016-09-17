@@ -1,8 +1,8 @@
 <ion-view view-title="Macthes" ng-controller="MatchesCtrl" cache-view="false">
   <ion-content overflow-scroll="false" scroll="false">
 
-  		<tabset class="tabsetoverride" id="navegation-subbar">
-		    <tab select="info()">
+  		<tabset class="tabsetoverride"  id="navegation-subbar" >
+		    <tab select="enterInInfo()" active="info_index">
 	    		<tab-heading>
 			        <center><i class="glyphicon glyphicon-info-sign"> </i>   </center>
 			    </tab-heading>
@@ -38,7 +38,7 @@
 		    	</div>
 		    </tab>
 
-		    <tab select="matches()" id="matches" >
+		    <tab select="enterInMatches()" id="matches" active="match_index">
 		    		<tab-heading>
 				        <center><i class="glyphicon glyphicon-glass"></i></center>
 				    </tab-heading>

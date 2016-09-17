@@ -2,8 +2,7 @@ angular.module('matches.controllers', ['starter'])
 
 
 .controller('MatchesCtrl', function ($scope,$state,$stateParams,$ionicPopup,$localStorage,GraphService,SQLService,Preferencias,Perfil,Attending) {
-
-        
+       
         $scope.maxPreMatchesDone = 10;
 
         $scope.eventinfoJSON = null;
@@ -96,7 +95,6 @@ angular.module('matches.controllers', ['starter'])
                   $scope.lookingfor = r.Preferencias.lookingfor;
                 }
 
-                console.log('$scope.lookingfor',$scope.lookingfor);
                 var data = {};
                 //homen
                 data.lookingfor = new Array;
@@ -121,14 +119,13 @@ angular.module('matches.controllers', ['starter'])
                 data.fbid       = $localStorage.fbid;
                 data.id_event   = $stateParams.id_event;
                 
-
                 Attending.get(data,function(r2){
                   if(r2.Mensagem == "NENHUM_REGISTRO_ENCONTRADO"){
                     $ionicPopup.show({
                       title:'Atenção',
                       template:'Não há pessoas no momento,tente novamente.',
                        buttons: [
-                                  {text : 'Voltar a info', onTap: function(){$scope.info()}},
+                                  {text : 'Voltar a info', onTap: function(){$scope.enterInInfo();}},
                                   {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
                                 ]
                     });
@@ -144,6 +141,23 @@ angular.module('matches.controllers', ['starter'])
         $scope.backtoevents = function(){
           $state.go("app.events");
         };
-  }).controller('MatchesCardsCtrl', function ($scope,$state,$stateParams,MatchService) {
+
+
+        $scope.enterInInfo = function(){
+           $scope.info_index  = true;
+           $scope.match_index = false;
+           $scope.info();
+        }
+
+        $scope.enterInMatches = function(){
+           $scope.info_index  = false;
+           $scope.match_index = true;
+           $scope.matches();
+        }
+
+        $scope.enterInInfo();
+  })
+
+  .controller('MatchesCardsCtrl', function ($scope,$state,$stateParams,MatchService) {
       $scope.eventinfoJSON.pre_matches_done += 1;
   });
