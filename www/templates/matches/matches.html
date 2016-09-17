@@ -1,6 +1,38 @@
 <ion-view view-title="Macthes" ng-controller="MatchesCtrl" cache-view="false">
   <ion-content overflow-scroll="false" scroll="false">
-
+   <div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+    <div class="tabs">
+      <a class="tab-item active" href="#">
+        <i class="icon ion-home"></i>
+        Test
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-star"></i>
+        Favorites
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-gear-a"></i>
+        Settings
+      </a>
+    </div>
+  </div>
+  <div class="tabs-striped tabs-color-assertive">
+    <div class="tabs">
+      <a class="tab-item active" href="#">
+        <i class="icon ion-home"></i>
+        Test
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-star"></i>
+        Favorites
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-gear-a"></i>
+        Settings
+      </a>
+    </div>
+  </div>
+<!--
   		<tabset class="tabsetoverride"  id="navegation-subbar" >
 		    <tab select="enterInInfo()" active="info_index">
 	    		<tab-heading>
@@ -52,15 +84,14 @@
 						    on-partial-swipe="cardPartialSwipe(amt)" 
 						    class="card-{{$index}}"
 						    >
-						    <!-- ui-sref="premiumappOne.tinder-profile({profileID: 1})"
-							-->
+						   
 						      <div class="no-text">Dislike</div>
 						      <div class="yes-text">Like</div>
 
 							<div class="vip-badge" ng-show="card.vipStatus">vip</div>
 							<div class="tinder-thumb">
 								<img preload-image ng-src="{{card.pic}}" default-image="img/demo/loader.svg" fallback-image="img/demo/profile-default.jpg" />
-								<!-- <img ng-src="{{card.image}}" /> -->
+					
 							</div>
 							<div class="padding">
 								<h4 class="text-left bold">{{card.nome}}</h4>
@@ -74,11 +105,7 @@
 										<i class="ion-close-round"></i>
 									</div>
 								</div>
-								<!-- <div class="info col">
-									<div class="tinder-info" ng-click="reload()">
-										<i class="ion-refresh"></i>
-									</div>
-								</div> -->
+								
 								<div class="accept col">
 									<div class="tinder-accept" ng-click="yesClick()">
 										<i class="ion-heart"></i>
@@ -100,6 +127,6 @@
 		    </tab>	
 
 		</tabset>
-
+	-->
   </ion-content>
 </ion-view>
