@@ -22,8 +22,6 @@ angular.module('matches.controllers', ['starter'])
           data.pic             = r.Perfil.imgPIC1;
           data.iam             = $localStorage.iam;
           
-          console.log(data);
-
           Attending.update(data);
 
         });
@@ -98,11 +96,31 @@ angular.module('matches.controllers', ['starter'])
                   $scope.lookingfor = r.Preferencias.lookingfor;
                 }
 
-
+                console.log('$scope.lookingfor',$scope.lookingfor);
                 var data = {};
+                //homen
+                data.lookingfor = new Array;
+                if($scope.lookingfor[0].checked){
+                  data.lookingfor.push("man");
+                }
+                //mulher
+                if($scope.lookingfor[1].checked){
+                  data.lookingfor.push("woman"); 
+                }
+
+                if(!$scope.lookingfor[0].checked && !$scope.lookingfor[1].checked){
+                  $ionicPopup.show({
+                      title:'Atenção',
+                      template:'Selecione um genero em configurações.',
+                       buttons: [
+                                  {text : 'Ok', onTap: function(){$state.go("app.configurations")}},
+                                ]
+                  });
+                }
+
                 data.fbid       = $localStorage.fbid;
                 data.id_event   = $stateParams.id_event;
-                data.lookingfor = 1;
+                
 
                 Attending.get(data,function(r2){
                   if(r2.Mensagem == "NENHUM_REGISTRO_ENCONTRADO"){
