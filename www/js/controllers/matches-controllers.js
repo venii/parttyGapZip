@@ -232,7 +232,7 @@ angular.module('matches.controllers', ['starter'])
         match.id_match_2 = obj.id_fb_attending;
         match.id_event   = $stateParams.id_event;
 
-        Matches.save(match,function(r){
+        Matches.update(match,function(r){
           console.log(r);
         });
       }
