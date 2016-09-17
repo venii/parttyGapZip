@@ -1,12 +1,33 @@
- <ion-view view-title="You Got a Match" id="newmatchesfoundView" ng-controller="MatchesFoundCtrl" scroll="false">
-
-  <ion-content style="background-color:black;color:white">
-  		<div style="width:100%;font-size:24px;font-weight:bold"><center>{{msgmatch}}</center></div>
-  		<div style="width:100%">
-  			<div style="float:left;width:50%;text-align: right;"><img onerror="this.src='img/noimg.png'" src="{{urlMe}}" style="border-radius: 150px;  margin-right: 50px;border: 1px solid" width="128" height="128"><br/> <span style="margin-right: 60px;">{{nameMe}}</span></div>
-  			<div style="float:left;width:50%;"><img onerror="this.src='img/noimg.png'" src="{{urlInvited}}" style="border-radius: 150px;border: 1px solid" width="128" height="128"><br/>  {{nameInvited}}</div>
-  		</div>
-  		<div style="width:100%"><center>
-  		<button  style="width:300px;height:100px;margin-top:20px"  class="btn btn-primary-matches-yah" ng-click="returnToEvents()">Retornar</button></center></div>
+<ion-view view-title="You Got a Match" id="newmatchesfoundView" scroll="false">
+  <ion-content>
+        <div style="background-color: white; width: 100%">  
+			<div style="width:100%; height:10%;font-size:24px;font-weight:bold; color: black; border: solid 1px; border-color: white; marging-top: 5px"><center><h3>{{msgmatch}}</h3></center></div>
+			<div style="width:100%; height: 70%; background-color:#b3b2f3">
+				<div style="width:42.5%; margin-left:5%; margin-top:10px">
+					<div align="center" style="position: absolute; height:50%;">
+						<center><img onerror="this.src='img/noimg.png'" src="{{urlMe}}" style="display: black; margin: auto; border-radius: 150px; border: solid 1px; border-color: white" width="128" height="128"></center>
+						<span style="margin-top:20px;"><center>{{nameMe}}</center></span>
+					</div>
+					<div align="center" style="position: absolute; height:50%; left:50%">
+						<center><img onerror="this.src='img/noimg.png'" src="{{urlInvited}}" style="display: black; margin: auto; margin-right: auto; margin-left: auto; border-radius: 150px; border: solid 1px; border-color: white" width="128" height="128"><br/></center> 
+						<span style="margin-top:20px;"><center>{{nameInvited}}</center></span>
+					</div>
+				</div>
+				<div style="margin-top:40px">
+					<div>
+					<p style="text-align: center; color: white"><h4>Você e FULANINHO gostaram ou do outro!</h4></p>
+					</div>
+					<div>
+					<p style="text-align: center; color: white"><h4>Encontre FULANINHO no evento TALTALTAL.</h4></p>
+					</div>
+				</div>
+			</div>
+			<div style="width:100%; height: auto; position: absolute; bottom: 0px; background-color: white">
+				<div class="button-bar button-royal">
+				  <a style="font-size: 16px; color: white;" class="button">Retornar</a>
+				  <a style="font-size: 16px; color: white;" class="button">Conversar</a>
+				</div>
+			</div>
+		</div>	
   </ion-content>
 </ion-view>
