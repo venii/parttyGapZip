@@ -27,7 +27,7 @@ angular.module('starter', [	 'ionic',
                              'app.sql-service',
                              'app.resources-service'							              
   ])
-  .value("HOST_API","http://parttylocal.ddns.net")
+  .value("HOST_API","http://192.168.0.13")
   .run(function($ionicPlatform,$state,$rootScope,SQLService,UtilsService,$localStorage,$ionicPopup) {
 
     $ionicPlatform.ready(function() {
@@ -75,6 +75,7 @@ angular.module('starter', [	 'ionic',
       'http://*.facebook.*/**',
       'http://localhost.*/**',
       'http://127.0.0.1:8080/**',
+      'http://192.168.0.13/**',
     ]);
 
     $stateProvider
