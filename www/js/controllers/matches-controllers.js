@@ -27,6 +27,9 @@ angular.module('matches.controllers', ['starter'])
             $scope.showMatchesInfo = true;
           
             GraphService.getEvent($stateParams.id_event).then(function(r){
+              console.log(r);
+
+              
               if(r.length > 0){
                 $scope.eventinfoJSON = r[0];
                 $scope.ideventfb = r[0].id_fb_events;
