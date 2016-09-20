@@ -44,11 +44,14 @@
   <plugin name="cordova-plugin-device"  source="pgb" />
   <plugin name="io.litehelpers.cordova.sqlite"  source="pgb" />
   <plugin name="org.apache.cordova.network-information"  source="pgb" />
+  <plugin name="org.apache.cordova.splashscreen" spec="" source="pgb" />
+  <plugin name="cordova-plugin-whitelist" spec="1.0.0" source="npm" />
+  
   <plugin name="com.phonegap.plugins.facebookconnect"  source="pgb">
     <param name="APP_ID" value="574073299368611" />
     <param name="APP_NAME" value="partty" /> 
   </plugin>
 
- 
+   
   <icon src="resources\android\icon\drawable-hdpi-icon.png"/>
 </widget>
