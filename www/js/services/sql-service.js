@@ -222,15 +222,32 @@ angular.module('app.sql-service', ['starter'])
 
                   var rs = tx.executeSql(sql,[], function (tx, results) {
 
-                  var len = results.rows.length;
-                  console.log(results);
-                  if(len > 0){
 
-                    deferred.resolve(results.rows);
+                  if(UtilsService.isMob()){
+                    var len     = results.rows.length;
+                    var retorno = new Array;
+                    var i = 0;
+
+                    for (; i < len; i = i + 1) {
+                        retorno.push(results.rows.item(i));
+                    }
+                    if(len > 0){
+
+                      deferred.resolve(retorno);
+                    }else{
+                      deferred.reject(null);
+                    }
                   }else{
-                    deferred.reject(null);
-                  }
                     
+                    var len = results.rows.length;
+                    
+                    if(len > 0){
+
+                      deferred.resolve(results.rows);
+                    }else{
+                      deferred.reject(null);
+                    }
+                  }
                       
                  }, function(){deferred.reject(false);});
                
