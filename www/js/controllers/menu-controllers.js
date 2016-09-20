@@ -4,7 +4,7 @@ angular.module('app.menu', ['starter'])
     $scope,
     $state,
     MenuService,
-    FriendsService,
+    Friends,
     UtilsService,
     LoginService,
     ProfileService) {
@@ -19,7 +19,7 @@ angular.module('app.menu', ['starter'])
   $scope.toggleRightSideMenu = function() {
       //carrega lista de amigos
       MenuService.toggleSideMenu('right',function(){
-        FriendsService.loadFriendList($scope);        
+        //Friends CARREGAR O MENU COM o RESOURCE FRIENDS     
       });
   };
 
