@@ -221,13 +221,14 @@ angular.module('app.sql-service', ['starter'])
 
                 var rs = tx.executeSql(sql,[], function (tx, results) {
 
-                  var len = results.rows.length;
-                  
-                  if(len > 0){
-                      deferred.resolve(results.rows);
-                  }else{
-                      deferred.reject(null);
-                  }
+                var len = results.rows.length;
+                console.log(results);
+                if(len > 0){
+
+                  deferred.resolve(results.rows);
+                }else{
+                  deferred.reject(null);
+                }
                   
                     
                }, function(){deferred.reject(false);});
