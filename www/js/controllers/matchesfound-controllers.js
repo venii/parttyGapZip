@@ -23,12 +23,9 @@ angular.module('matchesfound.controllers', ['starter'])
         $scope.showSpinner = false;
         
         if(results[0] != null){
-            console.log(results[0][0]);
-            
+            //console.log(results[0][0]);
             $scope.nome_do_evento = results[0][0].nome;
-            
         }
-
 
         $scope.nameInvited = results[1].Perfil.name;
 

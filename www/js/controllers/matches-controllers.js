@@ -4,10 +4,8 @@ angular.module('matches.controllers', ['starter'])
 .controller('MatchesCtrl', function ($scope,$state,$stateParams,$ionicPopup,$localStorage,GraphService,SQLService,Preferencias,Perfil,Attending) {
        
         $scope.maxPreMatchesDone = 10;
-
         $scope.eventinfoJSON = null;
         $scope.ideventfb = 0;
-
 
         var data = {};
         data.id = $localStorage.fbid;
@@ -24,9 +22,6 @@ angular.module('matches.controllers', ['starter'])
           Attending.update(data);
 
         });
-       
-
-        
 
         $scope.info = function(){
             $scope.showMatchesInfo = true;
@@ -51,7 +46,6 @@ angular.module('matches.controllers', ['starter'])
               GraphService.updateEvent($scope.eventinfoJSON);
             }
 
-            
             if($scope.eventinfoJSON.pre_matches_done <= $scope.maxPreMatchesDone){
               /*Se for menor carrega os maxPreMatchesDone vindo do graph */
               
@@ -171,7 +165,7 @@ angular.module('matches.controllers', ['starter'])
 
   })
 
-  .controller('MatchesCardsCtrl', function ($scope,$state,$ionicPopup,$stateParams,$localStorage,MatchService,Matches) {
+  .controller('MatchesCardsCtrl', function ($q,$scope,$state,$ionicPopup,$stateParams,$localStorage,MatchService,Matches) {
       //$scope.eventinfoJSON.pre_matches_done += 1;
       $scope.$on('startCards', function(event, response) { 
          $scope.init(response.cards);
@@ -187,6 +181,7 @@ angular.module('matches.controllers', ['starter'])
       }
 
       $scope.cardsControl = {};
+
       $scope.exposeSwypedCard = function() {
         $scope.cardCounter -= 1;
         if ($scope.cardCounter === 0){
@@ -198,9 +193,7 @@ angular.module('matches.controllers', ['starter'])
           dataNewMatches.id_event = $stateParams.id_event;;
 
           MatchService.getNewMatches(dataNewMatches).then(function(r){
-            
-            //console.log("RETORNO getNewMatches",r);
-            
+            console.log('r',r);
             if(r.Mensagem == "RETORNADO"){
                 $localStorage.id_event   = dataNewMatches.id_event;
                 $localStorage.newMatches = r.Matches;
@@ -242,16 +235,20 @@ angular.module('matches.controllers', ['starter'])
       };
       
       $scope.cardSwipedLeft = function(index) {
-        $scope.exposeSwypedCard();  
-        $scope.addToMatches($scope.swypedCard,false);
+        $scope.addToMatches($scope.cards[index],false).then(function(){
+            $scope.exposeSwypedCard();
+        });
       };
       
       $scope.cardSwipedRight = function(index) {
-        $scope.exposeSwypedCard();
-        $scope.addToMatches($scope.swypedCard,true);
+        
+        $scope.addToMatches($scope.cards[index],true).then(function(){
+            $scope.exposeSwypedCard();
+        });
       };  
     
       $scope.addToMatches = function(obj,like){
+        var defer = $q.defer();
         var match = {};
 
         match.id_match_1 = $localStorage.fbid;
@@ -259,6 +256,6 @@ angular.module('matches.controllers', ['starter'])
         match.id_event   = $stateParams.id_event;
         match.like       = like;
 
-        Matches.update(match);
+        return Matches.update(match).$promise;
       }
   });
