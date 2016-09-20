@@ -1,5 +1,4 @@
 angular.module('events.controllers', ['starter'])
-
 .controller('EventsCtrl', function ($q,$scope,$state,GraphService,Evento) {
   
   $scope.itemsPartty = new Array();
@@ -11,7 +10,6 @@ angular.module('events.controllers', ['starter'])
   var meusEvtFbP = GraphService.getEventsFB();
   
   $q.all([eventoP,meusEvtFbP]).then(function(r){
-    console.log(r);
       for(var i in r[1].data){
           var evt = r[1].data[i];
 
