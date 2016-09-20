@@ -1,7 +1,7 @@
 angular.module('app.sql-service', ['starter'])
 /*PREFERENCIAS*/
 .service('SQLService',function($q,$localStorage,$ionicLoading,UtilsService,Perfil) {
-           this.debug = false;
+           this.debug = true;
 
 
            this.schema = [
