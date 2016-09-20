@@ -12,6 +12,7 @@ angular.module('app.graph-service', ['starter'])
                 $cordovaFacebook.api(grapCall, ["public_profile"])
                 .then(function(success) {
                   // success
+                  console.log(success);
                   deferred.resolve(success);
                 }, function (error) {
                   // error
@@ -47,6 +48,7 @@ angular.module('app.graph-service', ['starter'])
                    	$cordovaFacebook.api(grapCall, ["public_profile"])
       			    .then(function(success) {
       			      // success
+                  console.log(success);
       			      deferred.resolve(success);
       			    }, function (error) {
       			      // error
@@ -81,6 +83,7 @@ angular.module('app.graph-service', ['starter'])
                      	$cordovaFacebook.api(grapCall, ["public_profile"])
         			    .then(function(success) {
         			      // success
+                  console.log(success);
         			      deferred.resolve({attending: success, eventFb : eventFb});
         			    }, function (error) {
         			      // error
