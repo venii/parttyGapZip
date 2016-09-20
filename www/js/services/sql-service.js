@@ -36,9 +36,11 @@ angular.module('app.sql-service', ['starter'])
            this.getDB = function() {
            		var deferred = $q.defer();
            		try{
-                  
-           		  var db = window.openDatabase("dbapp_partty.db", "1.0", "parttyapp", 1000000);
-
+                if(UtilsService.isMob()){
+           		    var db = window.sqlitePlugin("dbapp_partty.db", "1.0", "parttyapp", 1000000);
+                }else{
+                  var db = window.openDatabase("dbapp_partty.db", "1.0", "parttyapp", 1000000);
+                }
 
                 deferred.resolve(db);
 
@@ -63,15 +65,7 @@ angular.module('app.sql-service', ['starter'])
                       var table = schema[i];
                       service.createTable(table.nome,table.campos);
                   }
-                  /* implementar outros metodos
-                    GraphService.getMeFB().then(function(r){
-                      Perfil.save(r, function(r) {
-                        console.log('save',r);
-                        //data saved. do something here.
-                      });
-                    });
-                	*/
-                	  	
+                  
                 });
               });
            }
@@ -106,7 +100,7 @@ angular.module('app.sql-service', ['starter'])
 
                   tx.executeSql(sql);
                 
-                  });
+                });
               });
              
 
