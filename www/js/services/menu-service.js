@@ -15,11 +15,4 @@ angular.module('app.menu-service', ['starter','app.utils-service','app.login-ser
          }						    
    }
 
-   this.blockSideMenu = function(){
-   		$ionicSideMenuDelegate.canDragContent(false);
-   }
-
-   this.unBlockSideMenu = function(){
-   		$ionicSideMenuDelegate.canDragContent(true);
-   }
 });

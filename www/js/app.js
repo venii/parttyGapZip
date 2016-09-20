@@ -21,7 +21,6 @@ angular.module('starter', [	 'ionic',
                              /*SERVICES*/
                              'app.menu-service',
                              'app.login-service',
-                             'app.chat-service',
                              'app.profile-service',
                              'app.match-service',
                              'app.graph-service',
@@ -125,12 +124,14 @@ angular.module('starter', [	 'ionic',
     })
 
     .state('matches', {
+      cache: false,
       url: "/matches/:id_event",   
       templateUrl: "templates/matches/matches.html",
       
     })
 
     .state('matchesfound', {
+      cache: false,
       url: "/matchesfound",
       templateUrl: "templates/matchesfound/matchesfound.html",
     })

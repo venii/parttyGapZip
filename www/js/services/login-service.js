@@ -1,12 +1,9 @@
 angular.module('app.login-service', ['app.utils-service','ngCordova'])
-.service('LoginService',  function(
-    $localStorage,$ionicViewService,$ionicSideMenuDelegate,
-    $http,$rootScope,$cordovaOauth,$cordovaFacebook,$q,SQLService,
-
-    
-    /*
-      Nosso servicos
-    */
+.service('LoginService', function(
+    $localStorage,
+    $cordovaFacebook,
+    $q,
+    SQLService,
     UtilsService) {
             
            var FBappId ='574073299368611';

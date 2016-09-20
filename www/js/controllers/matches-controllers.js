@@ -131,8 +131,9 @@ angular.module('matches.controllers', ['starter'])
                                 ]
                     });
                   }else{
-
+                    /*registra no graphsql*/
                     var attending = r2.Attending;
+              
                     $scope.startCards(attending);
                   }
                 });
@@ -198,10 +199,14 @@ angular.module('matches.controllers', ['starter'])
 
           MatchService.getNewMatches(dataNewMatches).then(function(r){
             
-            console.log("RETORNO getNewMatches",r);
+            //console.log("RETORNO getNewMatches",r);
             
             if(r.Mensagem == "RETORNADO"){
-                alert("MATCHESFOUND");
+                $localStorage.id_event   = dataNewMatches.id_event;
+                $localStorage.newMatches = r.Matches;
+                
+                $state.go("matchesfound");
+                return;
             }
             
             $scope.showEndList();
