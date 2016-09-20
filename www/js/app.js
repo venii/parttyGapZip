@@ -28,12 +28,12 @@ angular.module('starter', [	 'ionic',
                              'app.resources-service'							              
   ])
   .value("HOST_API","http://192.168.0.13")
-  .run(function($ionicPlatform,$state,$rootScope,SQLService,UtilsService,$localStorage,$ionicPopup) {
+  .run(function($ionicPlatform,$state,$rootScope,SQLService,$localStorage,$ionicPopup,UtilsService) {
 
     $ionicPlatform.ready(function() {
       /*Inicia o DB*/
       //SQLService.deleteSchema();
-      SQLService.createSchema();
+      
       if(UtilsService.isIOS()){
           $localStorage.tipoDevice = "IOS";
       }else if(UtilsService.isAndroid()){
@@ -43,6 +43,13 @@ angular.module('starter', [	 'ionic',
           $localStorage.tipoDevice = "WEB";
       }
 
+      if(UtilsService.isMob()){
+          $rootScope.db = window.openDatabase("dbapp_partty.db", "1.0", "parttyapp", 1000000);
+      }else{
+          $rootScope.db = window.openDatabase("dbapp_partty.db", "1.0", "parttyapp", 1000000);
+      }
+
+      SQLService.createSchema();
      
     });
 

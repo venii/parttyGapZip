@@ -1,6 +1,6 @@
 angular.module('app.sql-service', ['starter'])
 /*PREFERENCIAS*/
-.service('SQLService',function($q,$localStorage,$ionicLoading,UtilsService,Perfil) {
+.service('SQLService',function($q,$rootScope,$localStorage,$ionicLoading,UtilsService,Perfil) {
            this.debug = true;
 
 
@@ -36,16 +36,11 @@ angular.module('app.sql-service', ['starter'])
            this.getDB = function() {
            		var deferred = $q.defer();
            		try{
-                if(UtilsService.isMob()){
-           		    var db = window.sqlitePlugin("dbapp_partty.db", "1.0", "parttyapp", 1000000);
-                }else{
-                  var db = window.openDatabase("dbapp_partty.db", "1.0", "parttyapp", 1000000);
-                }
-
-                deferred.resolve(db);
+               
+                deferred.resolve($rootScope.db);
 
               }catch(err){
-                deferred.reject(db);
+                deferred.reject($rootScope.db);
               }
 
               return deferred.promise;
