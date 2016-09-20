@@ -9,37 +9,63 @@
 			<div style="position:relative;min-height:30px">
 				<div><img src="img/background-tittle.png" style="width:100%; max-height: 40px" /></div>
 	            <div style=" padding-top:40px; margin-bottom:4px; position: absolute; bottom:1%;width:95%;margin-left:3%;font-size:0.7em;">
-		            <div style="border-bottom: 1px solid black; margin-bottom: -4px"><p style="margin-bottom:-4px; font-weight: bold; font-size: 1.3em">Seus Eventos</p></div> 
+		            <div style="border-bottom: 1px solid black; margin-bottom: -4px"><p style="margin-bottom:-4px; font-weight: bold; font-size: 1.3em">Eventos Partty</p></div> 
 		            <div class="seta-cima"></div>
 	            </div>
-	        </div>
+        	</div>
 	  		
 	  		<ion-scroll direction="y" style="height:100vh;min-heigth:100vh">
-		  		<div ng-repeat="item in items track by $index" style="width:100%;heigth:80px; " >
-		  			<button ng-click="entraEvento(item,$index)" style="width:100%;background-color:black ;border:none; padding: 2px; ">
-			  			<div class="itempartty" style="width:100%;" >
-				  			<div style="width:100%;height:100%; border-radius: 5px">
-							    <img ng-src="{{item.cover.source}}" style="width:100%;height:100%;border-radius: 5px" no-img  />
+		  		
+
+
+		        	<div ng-repeat="item in itemsPartty track by $index" style="width:100%;heigth:80px; " >
+			  			<button ng-click="entraEvento(item,$index)" style="width:100%;background-color:black ;border:none; padding: 2px; ">
+				  			<div class="itempartty" style="width:100%;" >
+					  			<div style="width:100%;height:100%; border-radius: 5px">
+								    <img ng-src="{{item.cover.source}}" style="width:100%;height:100%;border-radius: 5px" no-img  />
+								</div>
+	                            <div style="font-size: 1.7em; margin-top:-70px;width:100%" style="">
+							    	<center>
+								    	<div style="font-size:16px; color: white; text-shadow: #000 1px -1px 2px, #000 -1px 1px 2px, #000 1px 1px 2px, #000 -1px -1px 2px;" >{{item.name}}</div>
+								    	
+								    	<div style="font-size:12px; color: white; text-shadow: #000 1px -1px 2px, #000 -1px 1px 2px, #000 1px 1px 2px, #000 -1px -1px 2px;" >{{item.start_time | date:'dd/MM/yyyy HH:mm:ss'}}</div>
+							    	</center>
+							    </div>
+							
 							</div>
-                            <div style="font-size: 1.7em; margin-top:-70px;width:100%" style="">
-						    	<center>
-							    	<div style="font-size:16px; color: white; text-shadow: #000 1px -1px 2px, #000 -1px 1px 2px, #000 1px 1px 2px, #000 -1px -1px 2px;" >{{item.name}}</div>
-							    	
-							    	<div style="font-size:12px; color: white; text-shadow: #000 1px -1px 2px, #000 -1px 1px 2px, #000 1px 1px 2px, #000 -1px -1px 2px;" >{{item.start_time | date:'dd/MM/yyyy HH:mm:ss'}}</div>
-						    	</center>
-						    </div>
+						</button>
 						
-						</div>
-					</button>
-					
-		  		</div>
-		  		<br/>
-		  		<br/>
-		  		<br/>
-		  		<br/>
-		  		<br/>
-		  		<br/>
-		  		<br/>
+			  		</div>
+
+			  		<div style="position:relative;min-height:30px">
+						<div><img src="img/background-tittle.png" style="width:100%; max-height: 40px" /></div>
+			            <div style=" padding-top:40px; margin-bottom:4px; position: absolute; bottom:1%;width:95%;margin-left:3%;font-size:0.7em;">
+				            <div style="border-bottom: 1px solid black; margin-bottom: -4px"><p style="margin-bottom:-4px; font-weight: bold; font-size: 1.3em">Seus Eventos</p></div> 
+				            <div class="seta-cima"></div>
+			            </div>
+			        </div>
+			  		<div ng-repeat="item in items track by $index" style="width:100%;heigth:80px; " >
+			  			<button ng-click="entraEvento(item,$index)" style="width:100%;background-color:black ;border:none; padding: 2px; ">
+				  			<div class="itempartty" style="width:100%;" >
+					  			<div style="width:100%;height:100%; border-radius: 5px">
+								    <img ng-src="{{item.cover.source}}" style="width:100%;height:100%;border-radius: 5px" no-img  />
+								</div>
+	                            <div style="font-size: 1.7em; margin-top:-70px;width:100%" style="">
+							    	<center>
+								    	<div style="font-size:16px; color: white; text-shadow: #000 1px -1px 2px, #000 -1px 1px 2px, #000 1px 1px 2px, #000 -1px -1px 2px;" >{{item.name}}</div>
+								    	
+								    	<div style="font-size:12px; color: white; text-shadow: #000 1px -1px 2px, #000 -1px 1px 2px, #000 1px 1px 2px, #000 -1px -1px 2px;" >{{item.start_time | date:'dd/MM/yyyy HH:mm:ss'}}</div>
+							    	</center>
+							    </div>
+							
+							</div>
+						</button>
+						
+			  		</div>
+		  		
+
+		  		
+
 	  		</ion-scroll>
 
 		</div>

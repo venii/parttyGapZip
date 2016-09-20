@@ -193,7 +193,7 @@ angular.module('matches.controllers', ['starter'])
           dataNewMatches.id_event = $stateParams.id_event;;
 
           MatchService.getNewMatches(dataNewMatches).then(function(r){
-            console.log('r',r);
+
             if(r.Mensagem == "RETORNADO"){
                 $localStorage.id_event   = dataNewMatches.id_event;
                 $localStorage.newMatches = r.Matches;
