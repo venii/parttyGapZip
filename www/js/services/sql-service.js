@@ -212,26 +212,31 @@ angular.module('app.sql-service', ['starter'])
 
             this.getDB().then(function(db){
               db.transaction(function(tx) {
-                
-                var sql = 'SELECT * FROM '+table.nome+' WHERE '+table.campos[0]+' = "'+id+'"';
-  
-                if(service.isDebug()){
-                  console.log(sql);  
-                }
-
-                var rs = tx.executeSql(sql,[], function (tx, results) {
-
-                var len = results.rows.length;
-                console.log(results);
-                if(len > 0){
-
-                  deferred.resolve(results.rows);
-                }else{
-                  deferred.reject(null);
-                }
+                try{
                   
+                  var sql = 'SELECT * FROM '+table.nome+' WHERE '+table.campos[0]+' = "'+id+'"';
+    
+                  if(service.isDebug()){
+                    console.log(sql);  
+                  }
+
+                  var rs = tx.executeSql(sql,[], function (tx, results) {
+
+                  var len = results.rows.length;
+                  console.log(results);
+                  if(len > 0){
+
+                    deferred.resolve(results.rows);
+                  }else{
+                    deferred.reject(null);
+                  }
                     
-               }, function(){deferred.reject(false);});
+                      
+                 }, function(){deferred.reject(false);});
+               
+               }catch(ex){
+                deferred.reject(false);
+               }
 
               });
             });
