@@ -1,10 +1,10 @@
 <ion-view view-title="Macthes" ng-controller="MatchesCtrl" cache-view="false">
   <ion-content overflow-scroll="false" scroll="false">
 
-  		<tabset class="tabsetoverride"  id="navegation-subbar" >
+  		 <tabset class="tabsetoverride"  id="navegation-subbar" >
 		    <tab select="enterInInfo()" active="info_index">
 	    		<tab-heading>
-			        <center><i class="glyphicon glyphicon-info-sign"> </i>   </center>
+			        <center><img src='img/its_match_image_boader.png' style=" padding-top: 0px; margin-top:2px; margin-bottom: 1px; width:38px; height: 38px;"/></center>
 			    </tab-heading>
 		    	<div align="center" style="margin-top:40px" ng-show="showMatchesInfo">
 			  		<ion-spinner ></ion-spinner>
@@ -25,7 +25,7 @@
 										</div>
 										<div style="margin-top: 5%; height:auto; width: 97.5%; margin-left:2.5%">
 										    <h3 style="font-family: Arial; color: #9344F5;">DATA E HORA<h3>
-											<h5 style="font-family: Arial; margin-top: 5px" >Dia 21/02/1989 às 16:00 horas</h5>
+											<h5 style="font-family: Arial; margin-top: 5px" >{{eventinfoJSON.data_evento | date:'dd/MM/yyyy HH:mm:ss'}}</h5>
 										</div>
 										<div style="margin-top: 5%; height:auto; width: 97.5%; margin-left:2.5%">
 			                            	<h3 style="font-family: Arial; color: #9344F5;">DESCRIÇÃO<h3>
@@ -40,62 +40,36 @@
 
 		    <tab select="enterInMatches()" id="matches" active="match_index">
 		    		<tab-heading>
-				        <center><i class="glyphicon glyphicon-glass"></i></center>
+				        <center><img src='img/event_button.png' style="padding-top: 0px; margin-top:2px; margin-bottom: 1px; width:38px; height: 38px;"/></center>
 				    </tab-heading>
-		   			<div ng-controller="MatchesCardsCtrl" style="position:relative;heigth:100%;width:100%">
+		   			<div ng-controller="MatchesCardsCtrl" style="position:relative; heigth:100%; width:100%">
 			   			<td-cards control="cardsControl" class="responsive">
-						    <td-card class="ruby-tindercard tinder-style-two"
-						    ng-repeat="card in cards" 
-						    on-destroy="cardDestroyed($index)" 
-						    on-transition-left="cardSwipedLeft($index)" 
-						    on-transition-right="cardSwipedRight($index)" 
-						    on-partial-swipe="cardPartialSwipe(amt)" 
-						    class="card-{{$index}}"
-						    >
-						    <!-- ui-sref="premiumappOne.tinder-profile({profileID: 1})"
-							-->
-						      <div class="no-text">Dislike</div>
-						      <div class="yes-text">Like</div>
-
-							<div class="vip-badge" ng-show="card.vipStatus">vip</div>
-							<div class="tinder-thumb">
-								<img preload-image ng-src="{{card.pic}}" default-image="img/demo/loader.svg" fallback-image="img/demo/profile-default.jpg" />
-								<!-- <img ng-src="{{card.image}}" /> -->
-							</div>
-							<div class="padding">
-								<h4 class="text-left bold">{{card.nome}}</h4>
-							</div>
-
-						    </td-card>
-
-						     <div class="button-controls row">
-								<div class="reject col">
-									<div class="tinder-reject" ng-click="noClick()">
-										<i class="ion-close-round"></i>
-									</div>
+			   			    <div id="picBackground" style="z-index:0; width: 100%; background-color: #ededeb; margin-bottom:0px; padding-bottom:0px">
+							    <td-card  id="cards" style="z-index:0; padding-top:0px" class="ruby-tindercard tinder-style-two" ng-repeat="card in cards" on-destroy="cardDestroyed($index)"    on-transition-left="cardSwipedLeft($index)" on-transition-right="cardSwipedRight($index)" 
+							    on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
+							    <!-- ui-sref="premiumappOne.tinder-profile({profileID: 1})"
+								-->
+								<div class="vip-badge" ng-show="card.vipStatus">vip</div>
+								<div style="" class="tinder-thumb">
+									<img preload-image ng-src="{{card.pic}}" default-image="img/demo/loader.svg" fallback-image="img/demo/profile-default.jpg" />
+									<!-- <img ng-src="{{card.image}}" /> -->
 								</div>
-								<!-- <div class="info col">
-									<div class="tinder-info" ng-click="reload()">
-										<i class="ion-refresh"></i>
-									</div>
-								</div> -->
-								<div class="accept col">
-									<div class="tinder-accept" ng-click="yesClick()">
-										<i class="ion-heart"></i>
-									</div>
+								<div style="" class="padding">
+									<h4 class="text-left bold">{{card.nome}}</h4>
 								</div>
+							    </td-card>
+                            </div>
+						    <div style="width:100%; margin-top:0px">
+								<button  class="btn btn-primary-matches-no" ng-click="clickRight()"></button>
+								<button  class="btn btn-primary-matches-yah"  ng-click="clickLeft()"></button>
+								<button  class="btn btn-primary-matches-inf"></button>
 							</div>
-
-						    
-
 						</td-cards>
 				  	</div>
 		    </tab>
-
-		    
 		    <tab select="backtoevents()">
 		     	<tab-heading>
-					<center><i class="glyphicon glyphicon-backward"></i></center> 
+					<center><img src='img/logout.png' style="padding-top: 0px; margin-top:2px; margin-bottom: 1px; width:38px; height: 38px;"/></center> 
 				</tab-heading>
 		    </tab>	
 

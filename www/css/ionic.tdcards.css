@@ -265,7 +265,7 @@ td-card.ruby-tindercard .vip-badge {
   top: 10px;
   right: 10px;
   z-index: -1; }
-td-card.ruby-tindercard.tinder-style-two {
+  td-card.ruby-tindercard.tinder-style-two {
   background-color: #fff; }
   td-card.ruby-tindercard.tinder-style-two .vip-badge {
     z-index: 0; }
@@ -289,39 +289,742 @@ td-card.ruby-tindercard.tinder-style-two {
   td-card.ruby-tindercard.tinder-style-two .small-info {
     color: #95A5A6; }
 
-.button-controls.row > .col {
-  margin-top: 35em; }
 
-.button-controls.row {
+ /*## Displays */
+ 
+@media (min-height:300px) and (max-height:499px) {    /*##Iphone 4*/
+#picBackground{
+  height: 320px;
+  margin-top:35px; 
+}
+#cards{
+  margin-top:10px;
+}
+.btn-primary-matches-yah {
+  margin-top: 3px;
   position: absolute;
-  bottom: 0;
-  height: 100px; }
-  .button-controls.row .tinder-control, .button-controls.row .tinder-accept, .button-controls.row .tinder-reject, .button-controls.row .tinder-info {
-    -webkit-border-radius: 500px;
-    -moz-border-radius: 500px;
-    -ms-border-radius: 500px;
-    border-radius: 500px;
-    width: 100px;
-    height: 100px;
-    text-align: center;
-    font-size: 30px;
-    margin: 0 auto; }
-    .button-controls.row .tinder-control i, .button-controls.row .tinder-accept i, .button-controls.row .tinder-reject i, .button-controls.row .tinder-info i {
-      margin-top: 24px;
-      display: inline-block;
-      font-size: 50px; }
-  .button-controls.row .tinder-accept {
-    color: #2ECC71;
-    background-color: #fff;
-    border: 3px solid #2ECC71; }
-  .button-controls.row .tinder-reject {
-    color: #E74C3C;
-    background-color: #fff;
-    border: 3px solid #E74C3C; }
-  .button-controls.row .tinder-info {
-    color: white;
-    background-color: #95A5A6;
-    width: 70px;
-    height: 70px; }
-    .button-controls.row .tinder-info i {
-      font-size: 32px; }
+  right: 15%;  
+  color: none;
+  background-image: url('../img/like_on.png');
+  width: 70px;
+  height: 70px;
+  background-repeat: no-repeat;
+  background-size: 70px 70px;  
+  background-color: white;
+}
+.btn-primary-matches-yah:focus,
+.btn-primary-matches-yah.focus {
+  color: none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 70px 70px;
+  background-color: white;
+}
+.btn-primary-matches-yah:hover {
+  color:none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 70px 70px;
+  background-color: white;
+}
+.btn-primary-matches-no {
+  margin-top: 3px;
+  position: absolute;
+  left: 15%;  
+  color: none;
+  background-image: url('../img/dislike_on.png');
+  width: 70px;
+  height: 70px;
+  background-repeat: no-repeat;
+  background-size: 70px 70px;
+  background-color: white;
+}
+.btn-primary-matches-no:focus,
+.btn-primary-matches-no.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/dislike_off.png');
+  background-size: 70px 70px;
+  background-color: white;
+}
+.btn-primary-matches-no:hover {
+  color: none;
+  background-image: url('../img/dislike_off.png');
+  background-repeat: no-repeat;
+  background-size: 70px 70px;
+  background-color: white;
+}
+
+.btn-primary-matches-inf{
+  margin-top: 2px;
+  position: absolute;
+  color: none;
+  left:50%;
+  margin-left:-22px;
+  background-image: url('../img/info_on.png');
+  width: 44px;
+  height: 44px;
+  background-repeat: no-repeat;
+  background-size: 44px 44px; 
+  background-color: white;
+}
+.btn-primary-matches-inf:focus,
+.btn-primary-matches-inf.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/info_on.png');
+  background-size: 44px 44px;
+  background-color: white;
+}
+.btn-primary-matches-inf:hover {
+  color: none;
+  background-image: url('../img/info_on.png');
+  background-repeat: no-repeat;
+  background-size: 44px 44px;
+  background-color: white;
+}
+}    
+@media (min-height:500px) and (max-height:569px) {  /*Iphone 5*/
+#picBackground{
+  height: 350px; 
+  margin-top:55px; 
+}
+#cards{
+  margin-top:20px;
+}
+.btn-primary-matches-yah {
+  margin-top: 3px;
+  position: absolute;
+  right: 10%;  
+  color: none;
+  background-image: url('../img/like_on.png');
+  width: 90px;
+  height: 90px;
+  background-repeat: no-repeat;
+  background-size: 90px 90px;  
+  background-color: white;
+}
+.btn-primary-matches-yah:focus,
+.btn-primary-matches-yah.focus {
+  color: none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 90px 90px;
+  background-color: white;
+}
+.btn-primary-matches-yah:hover {
+  color:none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 90px 90px;
+  background-color: white;
+}
+.btn-primary-matches-no {
+  margin-top: 3px;
+  position: absolute;
+  left: 10%;  
+  color: none;
+  background-image: url('../img/dislike_on.png');
+  width: 90px;
+  height: 90px;
+  background-repeat: no-repeat;
+  background-size: 90px 90px;
+  background-color: white;
+}
+.btn-primary-matches-no:focus,
+.btn-primary-matches-no.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/dislike_off.png');
+  background-size: 90px 90px;
+  background-color: white;
+}
+.btn-primary-matches-no:hover {
+  color: none;
+  background-image: url('../img/dislike_off.png');
+  background-repeat: no-repeat;
+  background-size: 90px 90px;
+  background-color: white;
+}
+
+.btn-primary-matches-inf{
+  margin-top: 2px;
+  position: absolute;
+  color: none;
+  left:50%;
+  margin-left:-27px;
+  background-image: url('../img/info_on.png');
+  width: 54px;
+  height: 54px;
+  background-repeat: no-repeat;
+  background-size: 54px 54px; 
+  background-color: white;
+}
+.btn-primary-matches-inf:focus,
+.btn-primary-matches-inf.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/info_on.png');
+  background-size: 54px 54px;
+  background-color: white;
+}
+.btn-primary-matches-inf:hover {
+  color: none;
+  background-image: url('../img/info_on.png');
+  background-repeat: no-repeat;
+  background-size: 54px 54px;
+  background-color: white;
+}
+}  
+@media (min-height:570px) and (max-height:649px) {  /*Galaxy S3*/
+#picBackground{
+  height: 370px; 
+  margin-top:70px;  
+}
+#cards{
+  margin-top:35px;
+}
+.btn-primary-matches-yah {
+  margin-top: 10px;
+  position: absolute;
+  right: 10%;  
+  color: none;
+  background-image: url('../img/like_on.png');
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: 100px 100px;  
+  background-color: white;
+}
+.btn-primary-matches-yah:focus,
+.btn-primary-matches-yah.focus {
+  color: none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  background-color: white;
+}
+.btn-primary-matches-yah:hover {
+  color:none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  background-color: white;
+}
+.btn-primary-matches-no {
+  margin-top: 10px;
+  position: absolute;
+  left: 10%;  
+  color: none;
+  background-image: url('../img/dislike_on.png');
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  background-color: white;
+}
+.btn-primary-matches-no:focus,
+.btn-primary-matches-no.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/dislike_off.png');
+  background-size: 100px 100px;
+  background-color: white;
+}
+.btn-primary-matches-no:hover {
+  color: none;
+  background-image: url('../img/dislike_off.png');
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  background-color: white;
+}
+
+.btn-primary-matches-inf{
+  margin-top: 5px;
+  position: absolute;
+  color: none;
+  left:50%;
+  margin-left:-32px;
+  background-image: url('../img/info_on.png');
+  width: 64px;
+  height: 64px;
+  background-repeat: no-repeat;
+  background-size: 64px 64px; 
+  background-color: white;
+}
+.btn-primary-matches-inf:focus,
+.btn-primary-matches-inf.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/info_on.png');
+  background-size: 64px 64px;
+  background-color: white;
+}
+.btn-primary-matches-inf:hover {
+  color: none;
+  background-image: url('../img/info_on.png');
+  background-repeat: no-repeat;
+  background-size: 64px 64px;
+  background-color: white;
+}
+}  
+@media (min-height:650px) and (max-height:667px) {  /*iphone 6*/
+#picBackground{
+  height: 370px; 
+  margin-top:90px;  
+}
+#cards{
+  margin-top:35px;
+}
+.btn-primary-matches-yah {
+  margin-top: 15px;
+  position: absolute;
+  right: 10%;  
+  color: none;
+  background-image: url('../img/like_on.png');
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 120px 120px;  
+  background-color: white;
+}
+.btn-primary-matches-yah:focus,
+.btn-primary-matches-yah.focus {
+  color: none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-yah:hover {
+  color:none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no {
+  margin-top: 15px;
+  position: absolute;
+  left: 10%;  
+  color: none;
+  background-image: url('../img/dislike_on.png');
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no:focus,
+.btn-primary-matches-no.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/dislike_off.png');
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no:hover {
+  color: none;
+  background-image: url('../img/dislike_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+
+.btn-primary-matches-inf{
+  margin-top: 10px;
+  position: absolute;
+  color: none;
+  left:50%;
+  margin-left:-30px;
+  background-image: url('../img/info_on.png');
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-size: 60px 60px; 
+  background-color: white;
+}
+.btn-primary-matches-inf:focus,
+.btn-primary-matches-inf.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/info_on.png');
+  background-size: 64px 64px;
+  background-color: white;
+}
+.btn-primary-matches-inf:hover {
+  color: none;
+  background-image: url('../img/info_on.png');
+  background-repeat: no-repeat;
+  background-size: 64px 64px;
+  background-color: white;
+}
+}
+@media (min-height:668px) and (max-height:739px) {  /*iphone 6 plus*/
+#picBackground{
+  height: 370px; 
+  margin-top:90px;  
+}
+#cards{
+  margin-top:35px;
+}
+.btn-primary-matches-yah {
+  margin-top: 35px;
+  position: absolute;
+  right: 10%;  
+  color: none;
+  background-image: url('../img/like_on.png');
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 120px 120px;  
+  background-color: white;
+}
+.btn-primary-matches-yah:focus,
+.btn-primary-matches-yah.focus {
+  color: none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-yah:hover {
+  color:none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no {
+  margin-top: 35px;
+  position: absolute;
+  left: 10%;  
+  color: none;
+  background-image: url('../img/dislike_on.png');
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no:focus,
+.btn-primary-matches-no.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/dislike_off.png');
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no:hover {
+  color: none;
+  background-image: url('../img/dislike_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+
+.btn-primary-matches-inf{
+  margin-top: 10px;
+  position: absolute;
+  color: none;
+  left:50%;
+  margin-left:-30px;
+  background-image: url('../img/info_on.png');
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-size: 60px 60px; 
+  background-color: white;
+}
+.btn-primary-matches-inf:focus,
+.btn-primary-matches-inf.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/info_on.png');
+  background-size: 64px 64px;
+  background-color: white;
+}
+.btn-primary-matches-inf:hover {
+  color: none;
+  background-image: url('../img/info_on.png');
+  background-repeat: no-repeat;
+  background-size: 64px 64px;
+  background-color: white;
+}
+}
+@media (min-height:740px) and (max-height:969px) and (max-width:800px){  /*Nexus 7*/
+#picBackground{
+  height: 500px; 
+  margin-top:90px;  
+}
+#cards{
+  margin-top:80px;
+}
+.btn-primary-matches-yah {
+  margin-top: 35px;
+  position: absolute;
+  right: 10%;  
+  color: none;
+  background-image: url('../img/like_on.png');
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 120px 120px;  
+  background-color: white;
+}
+.btn-primary-matches-yah:focus,
+.btn-primary-matches-yah.focus {
+  color: none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-yah:hover {
+  color:none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no {
+  margin-top: 35px;
+  position: absolute;
+  left: 10%;  
+  color: none;
+  background-image: url('../img/dislike_on.png');
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no:focus,
+.btn-primary-matches-no.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/dislike_off.png');
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no:hover {
+  color: none;
+  background-image: url('../img/dislike_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+
+.btn-primary-matches-inf{
+  margin-top: 10px;
+  position: absolute;
+  color: none;
+  left:50%;
+  margin-left:-30px;
+  background-image: url('../img/info_on.png');
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-size: 60px 60px; 
+  background-color: white;
+}
+.btn-primary-matches-inf:focus,
+.btn-primary-matches-inf.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/info_on.png');
+  background-size: 64px 64px;
+  background-color: white;
+}
+.btn-primary-matches-inf:hover {
+  color: none;
+  background-image: url('../img/info_on.png');
+  background-repeat: no-repeat;
+  background-size: 64px 64px;
+  background-color: white;
+}
+}
+@media (min-height:970px) and (max-height:1024px) and (max-width:800px){  /*Ipad*/
+#picBackground{
+  height: 500px; 
+  margin-top:90px;  
+}
+#cards{
+  margin-top:80px;
+}
+.btn-primary-matches-yah {
+  margin-top: 35px;
+  position: absolute;
+  right: 10%;  
+  color: none;
+  background-image: url('../img/like_on.png');
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 120px 120px;  
+  background-color: white;
+}
+.btn-primary-matches-yah:focus,
+.btn-primary-matches-yah.focus {
+  color: none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-yah:hover {
+  color:none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no {
+  margin-top: 35px;
+  position: absolute;
+  left: 10%;  
+  color: none;
+  background-image: url('../img/dislike_on.png');
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no:focus,
+.btn-primary-matches-no.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/dislike_off.png');
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no:hover {
+  color: none;
+  background-image: url('../img/dislike_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+
+.btn-primary-matches-inf{
+  margin-top: 10px;
+  position: absolute;
+  color: none;
+  left:50%;
+  margin-left:-30px;
+  background-image: url('../img/info_on.png');
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-size: 60px 60px; 
+  background-color: white;
+}
+.btn-primary-matches-inf:focus,
+.btn-primary-matches-inf.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/info_on.png');
+  background-size: 64px 64px;
+  background-color: white;
+}
+.btn-primary-matches-inf:hover {
+  color: none;
+  background-image: url('../img/info_on.png');
+  background-repeat: no-repeat;
+  background-size: 64px 64px;
+  background-color: white;
+}
+}
+@media (min-height:1030px) and (max-height:1289px) and (max-width:801px){  /*Nexus 10*/
+#picBackground{
+  height: 500px; 
+  margin-top:90px;  
+}
+#cards{
+  margin-top:80px;
+}
+.btn-primary-matches-yah {
+  margin-top: 35px;
+  position: absolute;
+  right: 10%;  
+  color: none;
+  background-image: url('../img/like_on.png');
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 120px 120px;  
+  background-color: white;
+}
+.btn-primary-matches-yah:focus,
+.btn-primary-matches-yah.focus {
+  color: none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-yah:hover {
+  color:none;
+  background-image: url('../img/like_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no {
+  margin-top: 35px;
+  position: absolute;
+  left: 10%;  
+  color: none;
+  background-image: url('../img/dislike_on.png');
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no:focus,
+.btn-primary-matches-no.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/dislike_off.png');
+  background-size: 120px 120px;
+  background-color: white;
+}
+.btn-primary-matches-no:hover {
+  color: none;
+  background-image: url('../img/dislike_off.png');
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+  background-color: white;
+}
+
+.btn-primary-matches-inf{
+  margin-top: 10px;
+  position: absolute;
+  color: none;
+  left:50%;
+  margin-left:-30px;
+  background-image: url('../img/info_on.png');
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-size: 60px 60px; 
+  background-color: white;
+}
+.btn-primary-matches-inf:focus,
+.btn-primary-matches-inf.focus {
+  color:none;
+  background-repeat: no-repeat;
+  background-image: url('../img/info_on.png');
+  background-size: 64px 64px;
+  background-color: white;
+}
+.btn-primary-matches-inf:hover {
+  color: none;
+  background-image: url('../img/info_on.png');
+  background-repeat: no-repeat;
+  background-size: 64px 64px;
+  background-color: white;
+}
+}
