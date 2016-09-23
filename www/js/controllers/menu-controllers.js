@@ -3,11 +3,15 @@ angular.module('app.menu', ['starter'])
 .controller('AppCtrl', function(
     $scope,
     $state,
+    $localStorage,
     MenuService,
     Friends,
-    UtilsService,
     LoginService,
     ProfileService) {
+  
+  $scope.spinnerChat = true;
+  $scope.friends = new Array;
+  $scope.buscaPerfilModel = "";
 
   //função para abrir menu esquerdo top  
   $scope.toggleLeftSideMenu = function() {
@@ -18,9 +22,31 @@ angular.module('app.menu', ['starter'])
   //função para abrir menu direito top
   $scope.toggleRightSideMenu = function() {
       //carrega lista de amigos
-      MenuService.toggleSideMenu('right',function(){
-        //Friends CARREGAR O MENU COM o RESOURCE FRIENDS     
-      });
+      var data = {};
+      data.fbid = $localStorage.fbid;
+      
+      $scope.spinnerChat = true;
+
+      MenuService.toggleSideMenu('right');
+
+      Friends.get(data,function(r){
+         $scope.spinnerChat = false;
+         
+         if(r.Friends.length > 0){
+          $scope.friends = r.Friends;
+         }
+      }); 
+
+  };
+  
+  //carrega o chat com a pessoa selecionada
+  $scope.loadChat = function(index){
+      var friend = $scope.friends[index];
+      
+      $state.go("app.chat",{"idfb" : friend.id,
+                            "nome" : friend.name, 
+                            "imgPIC1" : friend.imgPIC1});
+
   };
 
   //função de realizar loggout e enviar para login
@@ -44,13 +70,16 @@ angular.module('app.menu', ['starter'])
     $state.go("app.profile");
   };
 
-  //carrega o chat com a pessoa selecionada
-  $scope.loadchat = function(idfb,name,pic){
+  $scope.buscaPerfil = function(v){
+    if(v === undefined || v == ""){
       
-      delete $rootScope.chatUsrData;
-      $rootScope.chatUsrData = {"idfb" : idfb, "name" : name ,"pic" : pic};
-      $state.go("app.chat",{"idfb" : idfb});
+    }else{
 
-  };
-  
+    }
+  }
+
+  $scope.limpaBusca = function(){
+    console.log("#",$scope.buscaPerfilModel);
+  }
+
 });

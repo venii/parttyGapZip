@@ -1,16 +1,17 @@
 <ion-side-menus  enable-menu-with-back-views="false" hide-back-button="true" cache-view="false">
+
   <ion-side-menu-content>
     <ion-nav-bar class="bar-stable" id="menuAPP" >
       
       <!-- menu-toggle="left"  menu-toggle="right" -->
       <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" ng-controller="AppCtrl" ng-click="toggleLeftSideMenu()">
+        <button class="button button-icon button-clear ion-navicon"  ng-click="toggleLeftSideMenu()">
         </button>
       </ion-nav-buttons>
 
       <ion-nav-buttons side="right">
 
-	    <button class="button button-icon button-clear ion-ios-chatboxes-outline" ng-controller="AppCtrl" ng-click="toggleRightSideMenu()">
+	    <button class="button button-icon button-clear ion-ios-chatboxes-outline" ng-click="toggleRightSideMenu()">
 
         </button>
       </ion-nav-buttons>
@@ -69,12 +70,33 @@
     <ion-header-bar>
     <div class="bar bar-header item-input-inset" style="border-bottom: solid 3px; border-color: #43DBE1; height:44px; width:100%; position: absolute; top:0px;">
       <label class="item-input-wrapper" style="height:100%; width:100%; display: inline-block;">
-        <input type="search" placeholder="Procurar">
+        <input type="search" placeholder="Procurar" ng-model="busca" ng-keydown="buscaPerfil(busca)" />
       </label>
-      <button class="button button-clear" style="color: black; font-size:14px; padding-top: 10px">Cancel</button>
+      <button class="button button-clear" style="color: black; font-size:14px; padding-top: 10px" ng-click="limpaBusca()">Cancel</button>
       </div> 
     </ion-header-bar>
-    <ion-content id="friendlistload">
+
+    <ion-content >
+      <center><ion-spinner ng-show="spinnerChat"></ion-spinner></center>
+      <center><span ng-if="friends.length == 0">Voce não possui nenhum contato.</span></center>
+
+      <ion-list ng-if="friends.length > 0 && !spinnerChat">
+        
+        <ion-item ng-click="loadChat($index)" nav-clear menu-close ng-repeat="friend in friends track by $index" >
+            <div style="display:flex">
+              
+              <div style="width:40%">
+                <img src="{{friend.imgPIC1}}" style='border-radius: 40px / 20px ;' no-img width="64" heigth="64" />
+              </div> 
+              
+              <div style="line-height: 3;margin-left:-20px">{{friend.name}}</div>
+
+            </div>
+
+        </ion-item>
+        
+      </ion-list>
+      
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>
