@@ -21,11 +21,11 @@
 									<div style="margin-top:10px;" ng-show="!showMatchesInfo">
 			                        	<div style="margin-top: 10%; height:auto; width: 97.5%; margin-left:2.5%">
 								            <h3 style="font-family: Arial; color: #9344F5;">LOCAL<h3>
-				                            <h5 style="font-family: Arial; margin-top: 5px" >Rua Rio de Janeiro, 351. Sapucaia do Sul, Rio Grande do Sul- RS. Brasil. CEP:93224-290</h5>							
+				                            <h5 style="font-family: Arial; margin-top: 5px" >{{eventinfoJSON.lugar}}</h5>							
 										</div>
 										<div style="margin-top: 5%; height:auto; width: 97.5%; margin-left:2.5%">
 										    <h3 style="font-family: Arial; color: #9344F5;">DATA E HORA<h3>
-											<h5 style="font-family: Arial; margin-top: 5px" >Dia 21/02/1989 às 16:00 horas</h5>
+											<h5 style="font-family: Arial; margin-top: 5px" >{{eventinfoJSON.data_evento | date:'dd/MM/yyyy HH:mm:ss'}}</h5>
 										</div>
 										<div style="margin-top: 5%; height:auto; width: 97.5%; margin-left:2.5%">
 			                            	<h3 style="font-family: Arial; color: #9344F5;">DESCRIÇÃO<h3>
@@ -51,6 +51,7 @@
 						    on-transition-right="cardSwipedRight($index)" 
 						    on-partial-swipe="cardPartialSwipe(amt)" 
 						    class="card-{{$index}}"
+						    ng-click="showProfile($index)"
 						    >
 						   
 						      <div class="no-text">Dislike</div>
@@ -58,7 +59,7 @@
 
 							<div class="vip-badge" ng-show="card.vipStatus">vip</div>
 							<div class="tinder-thumb">
-								<img preload-image ng-src="{{card.pic}}" default-image="img/demo/loader.svg" fallback-image="img/demo/profile-default.jpg" />
+								<img preload-image ng-src="{{card.pic}}" default-image="img/demo/loader.svg" fallback-image="img/demo/profile-default.jpg"  />
 					
 							</div>
 							<div class="padding">
@@ -98,3 +99,4 @@
 
   </ion-content>
 </ion-view>
+

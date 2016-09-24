@@ -168,7 +168,7 @@ angular.module('matches.controllers', ['starter'])
 
   })
 
-  .controller('MatchesCardsCtrl', function ($q,$scope,$state,$ionicPopup,$stateParams,$localStorage,MatchService,Matches) {
+  .controller('MatchesCardsCtrl', function ($q,$scope,$state,$ionicPopup,$ionicModal,$stateParams,$localStorage,MatchService,Matches,Perfil) {
       //$scope.eventinfoJSON.pre_matches_done += 1;
       $scope.$on('startCards', function(event, response) { 
          $scope.init(response.cards);
@@ -260,5 +260,37 @@ angular.module('matches.controllers', ['starter'])
         match.like       = like;
 
         return Matches.update(match).$promise;
+      }
+
+      $scope.showProfile = function(index){
+        try{
+          var perfil = $scope.cards[index];
+
+          var data   = {};
+          data.id    = perfil.id_fb_attending;
+
+          Perfil.get(data,function(r){
+            if(r.Perfil){
+              $scope.retornoPerfil = r.Perfil;
+
+              var pop = $ionicPopup.show({
+                title: perfil.nome,
+                scope: $scope,
+                templateUrl:'templates/profile/profile_popup.html',
+                buttons: [
+                            {text : 'Fechar', onTap: function(){pop.close();}},
+                            
+                          ]
+              });
+
+
+              
+            }
+          });
+          
+
+        }catch(ex){
+
+        }
       }
   });

@@ -5,7 +5,7 @@ angular.module('app.sql-service', ['starter'])
 
 
            this.schema = [
-                            { nome: "fb_events", campos: ["id_fb_events", "nome","descricao","data_evento","image","pre_matches_done"] },
+                            { nome: "fb_events", campos: ["id_fb_events", "nome","descricao","data_evento","image","lugar","pre_matches_done"] },
                             { nome: "fb_events_attending", campos: ["id_fb_events_attending", "id_fb_events","id_fb_attending","nome","picture"] },
                             { nome: "pt_chat", campos: ["id_pt_chat", "id_fb_sender","id_fb_receiver","msg","data_envio"] },
                             { nome: "pt_profiles", campos: ["id_pt_profiles", "nome" , "gender" , "picture"] },
