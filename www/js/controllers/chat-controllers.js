@@ -1,5 +1,5 @@
 angular.module('chat.controllers', ['starter'])
-.controller('ChatCtrl', function($q,$scope,$stateParams,$localStorage,Perfil,Chat) {
+.controller('ChatCtrl', function($q,$scope,$stateParams,$localStorage,$ionicScrollDelegate,Perfil,Chat) {
     $scope.nomeAmigo   = "";
     $scope.imagemAmigo = "";
     $scope.imagemMinha = "";
@@ -42,6 +42,7 @@ angular.module('chat.controllers', ['starter'])
 		var chat = chat1.concat(chat2);
 		$scope.chat = chat;
 		$scope.carregaChat = true;
+		$ionicScrollDelegate.scrollBottom();
 	});
 
 	$scope.enviarMSG = function(m){
@@ -56,6 +57,7 @@ angular.module('chat.controllers', ['starter'])
 				$scope.chat.push(data);
 				$scope.busca = "";
 				document.querySelector("#textEnvia").value = "";
+				$ionicScrollDelegate.scrollBottom();
 			});
 		}
 	}
