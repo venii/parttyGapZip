@@ -289,11 +289,11 @@ td-card.ruby-tindercard.tinder-style-two {
     color: #95A5A6; }
 
 .button-controls.row > .col {
-  margin-top: 35em; }
+  margin-top: 26em; }
 
 .button-controls.row {
   position: absolute;
-  bottom: 0;
+  bottom: 20;
   height: 100px; }
   .button-controls.row .tinder-control, .button-controls.row .tinder-accept, .button-controls.row .tinder-reject, .button-controls.row .tinder-info {
     -webkit-border-radius: 500px;

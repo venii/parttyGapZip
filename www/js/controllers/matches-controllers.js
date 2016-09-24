@@ -1,7 +1,5 @@
 angular.module('matches.controllers', ['starter'])
-
-
-.controller('MatchesCtrl', function ($scope,$state,$stateParams,$ionicPopup,$localStorage,GraphService,SQLService,Preferencias,Perfil,Attending) {
+.controller('MatchesCtrl', function ($scope,$state,$stateParams,$timeout,$ionicPopup,$localStorage,GraphService,SQLService,Preferencias,Perfil,Attending) {
        
         $scope.maxPreMatchesDone = 10;
         $scope.eventinfoJSON = null;
@@ -23,9 +21,9 @@ angular.module('matches.controllers', ['starter'])
 
         });
 
-        $scope.info = function(){
+        $scope.information = function(){
             $scope.showMatchesInfo = true;
-          
+
             GraphService.getEvent($stateParams.id_event).then(function(r){
               console.log(r);
 
@@ -43,44 +41,45 @@ angular.module('matches.controllers', ['starter'])
         $scope.matches = function(){
            
             $scope.showMatches = true;
-            
+                
             if($scope.eventinfoJSON.pre_matches_done == null){
               $scope.eventinfoJSON.pre_matches_done = 0;
               GraphService.updateEvent($scope.eventinfoJSON);
             }
 
-            if($scope.eventinfoJSON.pre_matches_done <= $scope.maxPreMatchesDone){
+            if($scope.eventinfoJSON.pre_matches_done == 0){
               /*Se for menor carrega os maxPreMatchesDone vindo do graph */
+              $scope.getAttendingFromFb();
               
-
-              /*GraphService.getEventAttendingFB($scope.ideventfb).then(function(r){
-
-                  console.log(r);
-                  for(var i in r.attending.data){
-                    
-                    var attendingEvent = r.attending.data[i];
-                    attendingEvent.eventFb = r.eventFb;
-                    
-                    GraphService.addAttendingEvent(attendingEvent).then(function(rAttending){
-                      if(rAttending){
-                        GraphService.updateEvent($scope.eventinfoJSON);
-                      }
-                    });
-                  }
-                  
-              });
-
-              $scope.cards = r.attending.data;*/
-              $scope.getAttendingFromApi();
-
-
             }else{ 
               /*Se for maior carrega os attending da API (usuarios realmente ativos) */ 
-              //$scope.cards = r.attending;
+              $scope.getAttendingFromApi();
             }
-
+  
             $scope.showMatches = false;
         };
+
+        $scope.getAttendingFromFb = function(){
+          GraphService.getEventAttendingFB($scope.ideventfb).then(function(r){
+
+              console.log(r);
+              for(var i in r.attending.data){
+                
+                var attendingEvent = r.attending.data[i];
+                attendingEvent.eventFb = r.eventFb;
+                
+                GraphService.addAttendingEvent(attendingEvent);
+              }
+              
+              $scope.eventinfoJSON.pre_matches_done = 1;
+              GraphService.updateEvent($scope.eventinfoJSON);
+
+              console.log('fbmath',r.attending.data);
+
+              
+              $scope.startCards(r.attending.data);
+          });
+        }
 
         $scope.getAttendingFromApi = function(){
             var data = {};
@@ -118,19 +117,26 @@ angular.module('matches.controllers', ['starter'])
                 data.id_event   = $stateParams.id_event;
                 
                 Attending.get(data,function(r2){
+
                   if(r2.Mensagem == "NENHUM_REGISTRO_ENCONTRADO"){
                     $ionicPopup.show({
                       title:'Atenção',
                       template:'Não há pessoas no momento,tente novamente.',
                        buttons: [
-                                  {text : 'Voltar a info', onTap: function(){$scope.enterInInfo();}},
-                                  {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
+                                  {text : 'Re Matches', onTap: function(){
+                                    $timeout(function(){
+                                      $scope.matches();
+                                    });
+                                  }},
+                                  {text : 'Voltar aos eventos' , onTap: function(){
+                                    $state.go("app.events")
+                                  }}
                                 ]
                     });
                   }else{
                     /*registra no graphsql*/
                     var attending = r2.Attending;
-              
+                    
                     $scope.startCards(attending);
                   }
                 });
@@ -140,37 +146,23 @@ angular.module('matches.controllers', ['starter'])
             
         }
 
-
         $scope.backtoevents = function(){
           $state.go("app.events");
         };
 
 
-        $scope.enterInInfo = function(){
-           $scope.info_index  = true;
-           $scope.match_index = false;
-           $scope.info();
-        }
-
-        $scope.enterInMatches = function(){
-           $scope.info_index  = false;
-           $scope.match_index = true;
-           $scope.matches();
-        }
 
         $scope.startCards = function(cards){
           $scope.$broadcast("startCards",{cards:cards});
-          
         }
 
-        $scope.enterInInfo();
-        
-
+        $scope.information();
   })
-
   .controller('MatchesCardsCtrl', function ($q,$scope,$state,$ionicPopup,$ionicModal,$stateParams,$localStorage,MatchService,Matches,Perfil) {
-      //$scope.eventinfoJSON.pre_matches_done += 1;
+      
+
       $scope.$on('startCards', function(event, response) { 
+        console.log(event,response);
          $scope.init(response.cards);
         
       });
@@ -215,12 +207,19 @@ angular.module('matches.controllers', ['starter'])
       }
 
       $scope.showEndList = function(){
+
             $ionicPopup.show({
               title:'Atenção',
               template:'Não há pessoas no momento,tente novamente.',
                buttons: [
-                          {text : 'Voltar a info', onTap: function(){$scope.enterInInfo();}},
-                          {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
+                          {text : 'Re Matches', onTap: function(){
+
+                                                              $scope.matches();
+                                                          }},
+                          {text : 'Voltar aos eventos' , onTap: function(){
+                                                          
+                                                                $state.go("app.events")
+                                                                }}
                         ]
             });
       }
@@ -281,16 +280,13 @@ angular.module('matches.controllers', ['starter'])
                             {text : 'Fechar', onTap: function(){pop.close();}},
                             
                           ]
-              });
-
-
-              
+              });              
             }
           });
           
-
         }catch(ex){
-
+          console.log(ex);
         }
       }
+     
   });

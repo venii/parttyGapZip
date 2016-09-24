@@ -2,7 +2,7 @@
   <ion-content overflow-scroll="false" scroll="false">
 
   		<tabset class="tabsetoverride"  id="navegation-subbar" >
-		    <tab select="enterInInfo()" active="info_index">
+		    <tab ng-click="information()" id='infotab'>
 	    		<tab-heading>
 			        <center><i class="glyphicon glyphicon-info-sign"> </i>   </center>
 			    </tab-heading>
@@ -38,11 +38,12 @@
 		    	</div>
 		    </tab>
 
-		    <tab select="enterInMatches()" id="matches" active="match_index">
+		    <tab ng-click="matches()" id='matchestab'>
 		    		<tab-heading>
 				        <center><i class="glyphicon glyphicon-glass"></i></center>
 				    </tab-heading>
-		   			<div ng-controller="MatchesCardsCtrl" style="position:relative;heigth:100%;width:100%">
+
+		   			<div  ng-controller="MatchesCardsCtrl" style="position:relative;heigth:100%;width:100%">
 			   			<td-cards control="cardsControl" class="responsive">
 						    <td-card class="ruby-tindercard tinder-style-two"
 						    ng-repeat="card in cards" 
@@ -89,7 +90,7 @@
 		    </tab>
 
 		    
-		    <tab select="backtoevents()">
+		    <tab ng-click="backtoevents()">
 		     	<tab-heading>
 					<center><i class="glyphicon glyphicon-backward"></i></center> 
 				</tab-heading>
