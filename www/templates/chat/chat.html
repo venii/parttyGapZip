@@ -1,16 +1,44 @@
 <ion-view view-title="{{nomeAmigo}}">
-	<ion-content overflow-scroll="true">
+	<ion-content scroll="false">
 		<div style="width:100%;height: 100%;">
-			<div style="height:90%">
-				<ion-list >
-					<ion-item ng-repat="msg in chat">
-						{msg}
-					</ion-item>
-				</ion-list>
+			<div style="height:90%;padding-top:20px">
+				<ion-scroll direction="y" style="height:80vh;min-heigth:80vh">
+
+					<div style="width:100%;border:1px solid black; border-radius:5px;margin-top:10px" ng-if="carregaChat" ng-repeat="msg in chat | orderBy: 'data_envio'">
+						
+						<div ng-if="msg.eu">
+							<div style="width:100%;display:flex;position:relative" align="left">
+								<div style="line-height:5;margin-left:80px">
+									{{msg.data_envio | date:'dd/MM/yyyy HH:mm:ss'}} - {{msg.msg}}
+								</div>
+								<div style="position:absolute;left:0">
+									<img src="{{imagemMinha}}" width='64' height='64' no-img style="border-radius:20px;border:1px solid black" />
+								</div> 
+							</div>
+							
+							
+						</div>
+
+						<div ng-if="!msg.eu">
+							<div style="width:100%;display:flex;position:relative" align="right">
+								<div style="position:absolute;right:0" >
+									<img src="{{imagemAmigo}}" width='64' height='64' no-img style="border-radius:20px;border:1px solid black;" /> 
+								</div>
+								<div style="line-height:5;margin-left:80px">
+									{{msg.data_envio | date:'dd/MM/yyyy HH:mm:ss'}} - {{msg.msg}}
+								</div>
+							</div>
+							
+							
+						</div>
+
+					</div>
+				</ion-scroll>
+
 			</div>
 			<div style="display:flex">
 				<div style="width:85%;margin-left:5px">
-					<textarea style="width:100%;height:50px;border:1px solid black;border-radius:5px" ng-model="msgEnvio"></textarea>
+					<textarea id="textEnvia" style="width:100%;height:50px;border:1px solid black;border-radius:5px" ng-model="msgEnvio"></textarea>
 				</div>
 				<div style="margin-left:10px" align="right">
 					<button type="button" ng-click="enviarMSG(msgEnvio)" class="button">Enviar</button>
