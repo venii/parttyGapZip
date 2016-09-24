@@ -50,7 +50,7 @@ angular.module('matches.controllers', ['starter'])
             if($scope.eventinfoJSON.pre_matches_done == 0){
               /*Se for menor carrega os maxPreMatchesDone vindo do graph */
               $scope.getAttendingFromFb();
-              
+
             }else{ 
               /*Se for maior carrega os attending da API (usuarios realmente ativos) */ 
               $scope.getAttendingFromApi();
@@ -74,10 +74,20 @@ angular.module('matches.controllers', ['starter'])
               $scope.eventinfoJSON.pre_matches_done = 1;
               GraphService.updateEvent($scope.eventinfoJSON);
 
-              console.log('fbmath',r.attending.data);
+              var arrayProfileFb = new Array;
+              for(i in r.attending.data){
+                var atten = r.attending.data[i];
 
+                arrayProfileFb.push({
+                                      id_fb_events: atten.eventFb,
+                                      id_fb_attending: atten.id,
+                                      nome: atten.name,
+                                      pic: atten.picture.data.url,
+                                      iam: 'fb'
+                                    });
+              }
               
-              $scope.startCards(r.attending.data);
+              $scope.startCards(arrayProfileFb);
           });
         }
 
