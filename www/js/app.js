@@ -176,3 +176,4 @@ angular.module('starter', [	 'ionic',
       }
     };
   }]);
+

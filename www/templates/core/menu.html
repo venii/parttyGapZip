@@ -70,7 +70,7 @@
     <ion-header-bar>
     <div class="bar bar-header item-input-inset" style="border-bottom: solid 3px; border-color: #43DBE1; height:44px; width:100%; position: absolute; top:0px;">
       <label class="item-input-wrapper" style="height:100%; width:100%; display: inline-block;">
-        <input type="search" placeholder="Procurar" ng-model="busca" ng-keydown="buscaPerfil(busca)" />
+        <input type="search" placeholder="Procurar" ng-model="busca" ng-keyup="buscaPerfil(busca)" />
       </label>
       <button class="button button-clear" style="color: black; font-size:14px; padding-top: 10px" ng-click="limpaBusca()">Cancel</button>
       </div> 

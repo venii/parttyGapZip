@@ -11,6 +11,7 @@ angular.module('app.menu', ['starter'])
   
   $scope.spinnerChat = true;
   $scope.friends = new Array;
+  $scope.friendsSearch = null;
   $scope.buscaPerfilModel = "";
 
   //função para abrir menu esquerdo top  
@@ -34,6 +35,7 @@ angular.module('app.menu', ['starter'])
          
          if(r.Friends.length > 0){
           $scope.friends = r.Friends;
+          $scope.friendsSearch = $scope.friends;
          }
       }); 
 
@@ -72,14 +74,22 @@ angular.module('app.menu', ['starter'])
 
   $scope.buscaPerfil = function(v){
     if(v === undefined || v == ""){
-      
+      $scope.friends = $scope.friendsSearch;
     }else{
+      var result = $scope.friendsSearch.filter(function(filter) {
+                        if(filter.name.indexOf(v) != -1){
+                          return filter;
+                        }return;
+                    });
 
+      $scope.friends = result;
     }
   }
 
   $scope.limpaBusca = function(){
-    console.log("#",$scope.buscaPerfilModel);
+    $scope.busca = "";
+    document.querySelector("input").value = "";
+    $scope.friends = $scope.friendsSearch;
   }
 
 });
