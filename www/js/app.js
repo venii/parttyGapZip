@@ -88,18 +88,19 @@ angular.module('starter', [	 'ionic',
 
     $stateProvider
 
+
+    .state('login', {
+        url: "/login",
+        templateUrl: "templates/login/login.html",
+    })
+
     .state('app', {
       url: "/app",
       abstract: true,
       templateUrl: "templates/core/menu.html",
       controller: 'AppCtrl'
     })
-
-    .state('login', {
-        url: "/login",
-        templateUrl: "templates/login/loginfb.html",
-    })
-    
+     
     .state('app.configurations', {
       cache: false,
       url: "/configurations",
