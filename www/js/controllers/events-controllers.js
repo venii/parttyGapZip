@@ -41,18 +41,13 @@ angular.module('events.controllers', ['starter'])
   }
 
   $scope.checkScroll = function(){
-    //console.log($scope.nextEventPaging);
+    
     if($scope.nextEventPaging != null){
       //console.log($scope.nextEventPaging);
 
-      var pos = $ionicScrollDelegate.getScrollPosition();
-      $ionicScrollDelegate.scrollTo(pos.left, pos.top-5);
-
-      $timeout(function(){ 
         $http.get($scope.nextEventPaging+"&limit=5").then(function(r){
            
-           console.log(r.data);
-
+           
            if(r.data.paging.next !== undefined){
              for(var i in r.data.data){
               $scope.items.push(r.data.data[i]);
@@ -61,11 +56,12 @@ angular.module('events.controllers', ['starter'])
            }else{
              $scope.nextEventPaging = null;
            }
-
+           
            $scope.$broadcast('scroll.infiniteScrollComplete');
            
         });
-      },100,true);
+    }else{
+      $scope.$broadcast('scroll.infiniteScrollComplete');
     }
     
   }

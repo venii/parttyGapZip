@@ -55,7 +55,7 @@ angular.module('chat.controllers', ['starter'])
 		
 		$timeout(function(){
 			$scope.carregaUpdater = true;
-		},1000,true);
+		},2000,true);
 
 		
 	});
