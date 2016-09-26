@@ -21,20 +21,19 @@ angular.module('starter', [	 'ionic',
                              /*SERVICES*/
                              'app.menu-service',
                              'app.login-service',
-                             'app.chat-service',
                              'app.profile-service',
                              'app.match-service',
                              'app.graph-service',
                              'app.sql-service',
                              'app.resources-service'							              
   ])
-  .value("HOST_API","http://127.0.0.1:8080")
-  .run(function($ionicPlatform,$state,$rootScope,SQLService,UtilsService,$localStorage,$ionicPopup) {
+  .value("HOST_API","http://127.0.0.1")
+  .run(function($ionicPlatform,$state,$rootScope,SQLService,$localStorage,$ionicPopup,UtilsService) {
 
     $ionicPlatform.ready(function() {
       /*Inicia o DB*/
       //SQLService.deleteSchema();
-      SQLService.createSchema();
+      
       if(UtilsService.isIOS()){
           $localStorage.tipoDevice = "IOS";
       }else if(UtilsService.isAndroid()){
@@ -44,6 +43,13 @@ angular.module('starter', [	 'ionic',
           $localStorage.tipoDevice = "WEB";
       }
 
+      if(UtilsService.isMob()){
+          $rootScope.db = window.openDatabase("dbapp_partty.db", "1.0", "parttyapp", 1000000);
+      }else{
+          $rootScope.db = window.openDatabase("dbapp_partty.db", "1.0", "parttyapp", 1000000);
+      }
+
+      SQLService.createSchema();
      
     });
 
@@ -76,9 +82,17 @@ angular.module('starter', [	 'ionic',
       'http://*.facebook.*/**',
       'http://localhost.*/**',
       'http://127.0.0.1:8080/**',
+      'http://192.168.0.13/**',
+      'https://*.phonegap.com/**'
     ]);
 
     $stateProvider
+
+
+    .state('login', {
+        url: "/login",
+        templateUrl: "templates/login/login.html",
+    })
 
     .state('app', {
       url: "/app",
@@ -86,12 +100,7 @@ angular.module('starter', [	 'ionic',
       templateUrl: "templates/core/menu.html",
       controller: 'AppCtrl'
     })
-
-    .state('login', {
-        url: "/login",
-        templateUrl: "templates/login/loginfb.html",
-    })
-    
+     
     .state('app.configurations', {
       cache: false,
       url: "/configurations",
@@ -125,12 +134,14 @@ angular.module('starter', [	 'ionic',
     })
 
     .state('matches', {
+      cache: false,
       url: "/matches/:id_event",   
       templateUrl: "templates/matches/matches.html",
       
     })
 
     .state('matchesfound', {
+      cache: false,
       url: "/matchesfound",
       templateUrl: "templates/matchesfound/matchesfound.html",
     })
@@ -166,3 +177,4 @@ angular.module('starter', [	 'ionic',
       }
     };
   }]);
+

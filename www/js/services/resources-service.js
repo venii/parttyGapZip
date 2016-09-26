@@ -123,4 +123,54 @@ angular.module('app.resources-service', ['starter'])
     };
     
     return Matches;
+}).factory('Friends', function($resource,HOST_API) {
+    /*Model de Perfil*/
+    var Friends = $resource(HOST_API+'/friends',{ id: '@id' },
+      
+      { update: {method: 'PUT'},
+        get:{
+            method:'GET',
+            url: HOST_API+'/friends/:fbid'
+        } 
+      });
+
+    Friends.prototype.update = function(cb) {
+     
+      return Friends.update({
+      
+        id: this.id
+      
+        }, angular.extend({}, this, {
+      
+          _id: undefined
+        }), cb);
+   
+    };
+    
+    return Friends;
+}).factory('Chat', function($resource,HOST_API) {
+    /*Model de Perfil*/
+    var Chat = $resource(HOST_API+'/chat',{ id: '@id' },
+      
+      { update: {method: 'PUT'},
+        get:{
+            method:'GET',
+            url: HOST_API+'/chat/:fbid'
+        } 
+      });
+
+    Chat.prototype.update = function(cb) {
+     
+      return Chat.update({
+      
+        id: this.id
+      
+        }, angular.extend({}, this, {
+      
+          _id: undefined
+        }), cb);
+   
+    };
+    
+    return Chat;
 });

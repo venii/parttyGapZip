@@ -12,6 +12,7 @@ angular.module('app.graph-service', ['starter'])
                 $cordovaFacebook.api(grapCall, ["public_profile"])
                 .then(function(success) {
                   // success
+                  console.log(success);
                   deferred.resolve(success);
                 }, function (error) {
                   // error
@@ -47,6 +48,7 @@ angular.module('app.graph-service', ['starter'])
                    	$cordovaFacebook.api(grapCall, ["public_profile"])
       			    .then(function(success) {
       			      // success
+                  console.log(success);
       			      deferred.resolve(success);
       			    }, function (error) {
       			      // error
@@ -81,6 +83,7 @@ angular.module('app.graph-service', ['starter'])
                      	$cordovaFacebook.api(grapCall, ["public_profile"])
         			    .then(function(success) {
         			      // success
+                  console.log(success);
         			      deferred.resolve({attending: success, eventFb : eventFb});
         			    }, function (error) {
         			      // error
@@ -118,15 +121,22 @@ angular.module('app.graph-service', ['starter'])
                 descricao = eventFbObj.description;
                 data_evento = eventFbObj.start_time;
                 
-
+                image = "";
+                lugar = "";
+                
                 try{
                   image = eventFbObj.cover.source;
                 }catch(e){
 
                 }
+                
+                try{
+                  lugar = eventFbObj.location;
+                }catch(e){
 
-
-                SQLService.insertIntoTable('fb_events',[idfb,nome,descricao,data_evento,image,null]);
+                }
+                
+                SQLService.insertIntoTable('fb_events',[idfb,nome,descricao,data_evento,image,lugar,null]);
      	   }
 
            this.updateEvent = function(event_obj){

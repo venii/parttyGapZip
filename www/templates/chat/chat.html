@@ -1,23 +1,51 @@
-<ion-view view-title="{{chatNameUsr}}">
-  
+<ion-view view-title="{{nomeAmigo}}">
+	<ion-content scroll="false">
+		<div style="width:100%;height: 100%;">
+			<div style="height:90%;padding-top:20px">
+				<ion-scroll direction="y" style="height:80vh;min-heigth:80vh">
 
-  	<div id="msnBox" style="width:100%;position: absolute;z-index: 99999;bottom: 0px;" >
-      <input type="text" style="width: 100%;float: left;height:46px" id="sendmessageTxtID" ng-model="msnboxtext"  value="Digite aqui sua mensagem!" />
+					<div style="width:100%;border:1px solid black; border-radius:5px;margin-top:10px" ng-if="carregaChat" ng-repeat="msg in chat | orderBy: 'data_envio'">
+						
+						<div ng-if="msg.eu">
+							<div style="width:100%;display:flex;position:relative" align="left">
+								<div style="line-height:5;margin-left:80px">
+									{{msg.data_envio | date:'dd/MM/yyyy HH:mm:ss'}} - {{msg.msg}}
+								</div>
+								<div style="position:absolute;left:0">
+									<img src="{{imagemMinha}}" width='64' height='64' no-img style="border-radius:20px;border:1px solid black" />
+								</div> 
+							</div>
+							
+							
+						</div>
 
-      <button style="float:right;height:46px;width: 50px;    margin-top: -45px;"  ng-click="sendMessage()">Enviar</button>
-    	
-    </div>
-	
-	<ion-content id="chatView" overflow-scroll="true" delegate-handle="mainScroll" >
-	    
-		    <div id="logmessage"  style="background-color:{{log.side == 1 ? 'red' : 'green'}};float:{{log.side == 1 ? 'left' : 'right'}};border: 1px solid black;border-radius: 10px;min-width:250px;min-height:60px;margin-top:5px;color:white;width:100%" ng-repeat="log in $root.logset" >
-		     		<div ><span style="font-weight:bold;width:50px">{{log.data}} - {{chatNameUsr}} </span></br> {{log.msg}} </div>	
-		    </div>
-		    <div style="width:100%;min-height:200px;float:left"></div>
-		    
+						<div ng-if="!msg.eu">
+							<div style="width:100%;display:flex;position:relative" align="right">
+								<div style="position:absolute;right:0" >
+									<img src="{{imagemAmigo}}" width='64' height='64' no-img style="border-radius:20px;border:1px solid black;" /> 
+								</div>
+								<div style="line-height:5;margin-left:80px">
+									{{msg.data_envio | date:'dd/MM/yyyy HH:mm:ss'}} - {{msg.msg}}
+								</div>
+							</div>
+							
+							
+						</div>
+
+					</div>
+					
+				</ion-scroll>
+
+			</div>
+			<div style="display:flex">
+				<div style="width:85%;margin-left:5px">
+					<textarea id="textEnvia" style="width:100%;height:50px;border:1px solid black;border-radius:5px" ng-model="msgEnvio"></textarea>
+				</div>
+				<div style="margin-left:10px" align="right">
+					<button type="button" ng-click="enviarMSG(msgEnvio)" class="button">Enviar</button>
+				</div>
+			</div>
+		</div>
 	    
     </ion-content>
-    
-
-  	
 </ion-view>

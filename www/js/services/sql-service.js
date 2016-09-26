@@ -1,11 +1,11 @@
 angular.module('app.sql-service', ['starter'])
 /*PREFERENCIAS*/
-.service('SQLService',function($q,$localStorage,$ionicLoading,UtilsService,Perfil) {
+.service('SQLService',function($q,$rootScope,$localStorage,$ionicLoading,UtilsService,Perfil) {
            this.debug = false;
 
 
            this.schema = [
-                            { nome: "fb_events", campos: ["id_fb_events", "nome","descricao","data_evento","image","pre_matches_done"] },
+                            { nome: "fb_events", campos: ["id_fb_events", "nome","descricao","data_evento","image","lugar","pre_matches_done"] },
                             { nome: "fb_events_attending", campos: ["id_fb_events_attending", "id_fb_events","id_fb_attending","nome","picture"] },
                             { nome: "pt_chat", campos: ["id_pt_chat", "id_fb_sender","id_fb_receiver","msg","data_envio"] },
                             { nome: "pt_profiles", campos: ["id_pt_profiles", "nome" , "gender" , "picture"] },
@@ -36,14 +36,11 @@ angular.module('app.sql-service', ['starter'])
            this.getDB = function() {
            		var deferred = $q.defer();
            		try{
-                  
-           		  var db = window.openDatabase("dbapp_partty.db", "1.0", "parttyapp", 1000000);
-
-
-                deferred.resolve(db);
+               
+                deferred.resolve($rootScope.db);
 
               }catch(err){
-                deferred.reject(db);
+                deferred.reject($rootScope.db);
               }
 
               return deferred.promise;
@@ -63,15 +60,7 @@ angular.module('app.sql-service', ['starter'])
                       var table = schema[i];
                       service.createTable(table.nome,table.campos);
                   }
-                  /* implementar outros metodos
-                    GraphService.getMeFB().then(function(r){
-                      Perfil.save(r, function(r) {
-                        console.log('save',r);
-                        //data saved. do something here.
-                      });
-                    });
-                	*/
-                	  	
+                  
                 });
               });
            }
@@ -106,7 +95,7 @@ angular.module('app.sql-service', ['starter'])
 
                   tx.executeSql(sql);
                 
-                  });
+                });
               });
              
 
@@ -223,25 +212,48 @@ angular.module('app.sql-service', ['starter'])
 
             this.getDB().then(function(db){
               db.transaction(function(tx) {
-                
-                var sql = 'SELECT * FROM '+table.nome+' WHERE '+table.campos[0]+' = "'+id+'"';
-  
-                if(service.isDebug()){
-                  console.log(sql);  
-                }
-
-                var rs = tx.executeSql(sql,[], function (tx, results) {
-
-                  var len = results.rows.length;
+                try{
                   
-                  if(len > 0){
-                      deferred.resolve(results.rows);
-                  }else{
-                      deferred.reject(null);
+                  var sql = 'SELECT * FROM '+table.nome+' WHERE '+table.campos[0]+' = "'+id+'"';
+    
+                  if(service.isDebug()){
+                    console.log(sql);  
                   }
-                  
+
+                  var rs = tx.executeSql(sql,[], function (tx, results) {
+
+
+                  if(UtilsService.isMob()){
+                    var len     = results.rows.length;
+                    var retorno = new Array;
+                    var i = 0;
+
+                    for (; i < len; i = i + 1) {
+                        retorno.push(results.rows.item(i));
+                    }
+                    if(len > 0){
+
+                      deferred.resolve(retorno);
+                    }else{
+                      deferred.reject(null);
+                    }
+                  }else{
                     
-               }, function(){deferred.reject(false);});
+                    var len = results.rows.length;
+                    
+                    if(len > 0){
+
+                      deferred.resolve(results.rows);
+                    }else{
+                      deferred.reject(null);
+                    }
+                  }
+                      
+                 }, function(){deferred.reject(false);});
+               
+               }catch(ex){
+                deferred.reject(false);
+               }
 
               });
             });

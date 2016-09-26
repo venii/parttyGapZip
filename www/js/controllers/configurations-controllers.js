@@ -1,6 +1,6 @@
 angular.module('configurations.controllers', ['ionic'])
 
-.controller('ConfigurationsCtrl', function ($rootScope,$scope,$localStorage,$ionicPopup,$timeout,Preferencias) {
+.controller('ConfigurationsCtrl', function ($scope,$localStorage,$ionicPopup,$timeout,Preferencias) {
   
   $scope.init = function(){
 

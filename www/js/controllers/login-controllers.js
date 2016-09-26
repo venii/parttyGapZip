@@ -3,7 +3,7 @@ angular.module('login.controllers', ['starter'])
   //fluxo login -> main
   $scope.showLoginSpinner = false;
 
-  $scope.loginf = function(){
+  $scope.login = function(){
      //verifica se é mobile
     $scope.showLoginSpinner = true;
     LoginService.autenticarFB().then(function(response){

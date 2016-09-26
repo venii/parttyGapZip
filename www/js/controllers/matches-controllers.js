@@ -1,13 +1,9 @@
 angular.module('matches.controllers', ['starter'])
-
-
-.controller('MatchesCtrl', function ($scope,$state,$stateParams,$ionicPopup,$localStorage,GraphService,SQLService,Preferencias,Perfil,Attending) {
+.controller('MatchesCtrl', function ($scope,$state,$stateParams,$timeout,$ionicPopup,$localStorage,GraphService,SQLService,Preferencias,Perfil,Attending) {
        
         $scope.maxPreMatchesDone = 10;
-
         $scope.eventinfoJSON = null;
         $scope.ideventfb = 0;
-
 
         var data = {};
         data.id = $localStorage.fbid;
@@ -24,14 +20,12 @@ angular.module('matches.controllers', ['starter'])
           Attending.update(data);
 
         });
-       
 
-        
-
-        $scope.info = function(){
+        $scope.information = function(){
             $scope.showMatchesInfo = true;
-          
+
             GraphService.getEvent($stateParams.id_event).then(function(r){
+
               if(r.length > 0){
                 $scope.eventinfoJSON = r[0];
                 $scope.ideventfb = r[0].id_fb_events;
@@ -45,45 +39,55 @@ angular.module('matches.controllers', ['starter'])
         $scope.matches = function(){
            
             $scope.showMatches = true;
-            
+                
             if($scope.eventinfoJSON.pre_matches_done == null){
               $scope.eventinfoJSON.pre_matches_done = 0;
               GraphService.updateEvent($scope.eventinfoJSON);
             }
 
-            
-            if($scope.eventinfoJSON.pre_matches_done <= $scope.maxPreMatchesDone){
+            if($scope.eventinfoJSON.pre_matches_done == 0){
               /*Se for menor carrega os maxPreMatchesDone vindo do graph */
-              
-
-              /*GraphService.getEventAttendingFB($scope.ideventfb).then(function(r){
-
-                  console.log(r);
-                  for(var i in r.attending.data){
-                    
-                    var attendingEvent = r.attending.data[i];
-                    attendingEvent.eventFb = r.eventFb;
-                    
-                    GraphService.addAttendingEvent(attendingEvent).then(function(rAttending){
-                      if(rAttending){
-                        GraphService.updateEvent($scope.eventinfoJSON);
-                      }
-                    });
-                  }
-                  
-              });
-
-              $scope.cards = r.attending.data;*/
-              $scope.getAttendingFromApi();
-
+              $scope.getAttendingFromFb();
 
             }else{ 
               /*Se for maior carrega os attending da API (usuarios realmente ativos) */ 
-              //$scope.cards = r.attending;
+              $scope.getAttendingFromApi();
             }
-
+  
             $scope.showMatches = false;
         };
+
+        $scope.getAttendingFromFb = function(){
+          GraphService.getEventAttendingFB($scope.ideventfb).then(function(r){
+
+              console.log(r);
+              for(var i in r.attending.data){
+                
+                var attendingEvent = r.attending.data[i];
+                attendingEvent.eventFb = r.eventFb;
+                
+                GraphService.addAttendingEvent(attendingEvent);
+              }
+              
+              $scope.eventinfoJSON.pre_matches_done = 1;
+              GraphService.updateEvent($scope.eventinfoJSON);
+
+              var arrayProfileFb = new Array;
+              for(i in r.attending.data){
+                var atten = r.attending.data[i];
+
+                arrayProfileFb.push({
+                                      id_fb_events: atten.eventFb,
+                                      id_fb_attending: atten.id,
+                                      nome: atten.name,
+                                      pic: atten.picture.data.url,
+                                      iam: 'fb'
+                                    });
+              }
+              
+              $scope.startCards(arrayProfileFb);
+          });
+        }
 
         $scope.getAttendingFromApi = function(){
             var data = {};
@@ -121,18 +125,26 @@ angular.module('matches.controllers', ['starter'])
                 data.id_event   = $stateParams.id_event;
                 
                 Attending.get(data,function(r2){
+
                   if(r2.Mensagem == "NENHUM_REGISTRO_ENCONTRADO"){
                     $ionicPopup.show({
                       title:'Atenção',
                       template:'Não há pessoas no momento,tente novamente.',
                        buttons: [
-                                  {text : 'Voltar a info', onTap: function(){$scope.enterInInfo();}},
-                                  {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
+                                  {text : 'Re Matches', onTap: function(){
+                                    $timeout(function(){
+                                      $scope.matches();
+                                    });
+                                  }},
+                                  {text : 'Voltar aos eventos' , onTap: function(){
+                                    $state.go("app.events")
+                                  }}
                                 ]
                     });
                   }else{
-
+                    /*registra no graphsql*/
                     var attending = r2.Attending;
+                    
                     $scope.startCards(attending);
                   }
                 });
@@ -142,37 +154,23 @@ angular.module('matches.controllers', ['starter'])
             
         }
 
-
         $scope.backtoevents = function(){
           $state.go("app.events");
         };
 
 
-        $scope.enterInInfo = function(){
-           $scope.info_index  = true;
-           $scope.match_index = false;
-           $scope.info();
-        }
-
-        $scope.enterInMatches = function(){
-           $scope.info_index  = false;
-           $scope.match_index = true;
-           $scope.matches();
-        }
 
         $scope.startCards = function(cards){
           $scope.$broadcast("startCards",{cards:cards});
-          
         }
 
-        $scope.enterInInfo();
-        
-
+        $scope.information();
   })
+  .controller('MatchesCardsCtrl', function ($q,$scope,$state,$ionicPopup,$ionicModal,$stateParams,$localStorage,MatchService,Matches,Perfil) {
+      
 
-  .controller('MatchesCardsCtrl', function ($scope,$state,$ionicPopup,$stateParams,$localStorage,MatchService,Matches) {
-      //$scope.eventinfoJSON.pre_matches_done += 1;
       $scope.$on('startCards', function(event, response) { 
+        console.log(event,response);
          $scope.init(response.cards);
         
       });
@@ -186,6 +184,7 @@ angular.module('matches.controllers', ['starter'])
       }
 
       $scope.cardsControl = {};
+
       $scope.exposeSwypedCard = function() {
         $scope.cardCounter -= 1;
         if ($scope.cardCounter === 0){
@@ -197,11 +196,13 @@ angular.module('matches.controllers', ['starter'])
           dataNewMatches.id_event = $stateParams.id_event;;
 
           MatchService.getNewMatches(dataNewMatches).then(function(r){
-            
-            console.log("RETORNO getNewMatches",r);
-            
+
             if(r.Mensagem == "RETORNADO"){
-                alert("MATCHESFOUND");
+                $localStorage.id_event   = dataNewMatches.id_event;
+                $localStorage.newMatches = r.Matches;
+                
+                $state.go("matchesfound");
+                return;
             }
             
             $scope.showEndList();
@@ -214,12 +215,19 @@ angular.module('matches.controllers', ['starter'])
       }
 
       $scope.showEndList = function(){
+
             $ionicPopup.show({
               title:'Atenção',
               template:'Não há pessoas no momento,tente novamente.',
                buttons: [
-                          {text : 'Voltar a info', onTap: function(){$scope.enterInInfo();}},
-                          {text : 'Voltar aos eventos' , onTap: function(){$state.go("app.events")}}
+                          {text : 'Re Matches', onTap: function(){
+
+                                                              $scope.matches();
+                                                          }},
+                          {text : 'Voltar aos eventos' , onTap: function(){
+                                                          
+                                                                $state.go("app.events")
+                                                                }}
                         ]
             });
       }
@@ -237,16 +245,20 @@ angular.module('matches.controllers', ['starter'])
       };
       
       $scope.cardSwipedLeft = function(index) {
-        $scope.exposeSwypedCard();  
-        $scope.addToMatches($scope.swypedCard,false);
+        $scope.addToMatches($scope.cards[index],false).then(function(){
+            $scope.exposeSwypedCard();
+        });
       };
       
       $scope.cardSwipedRight = function(index) {
-        $scope.exposeSwypedCard();
-        $scope.addToMatches($scope.swypedCard,true);
+        
+        $scope.addToMatches($scope.cards[index],true).then(function(){
+            $scope.exposeSwypedCard();
+        });
       };  
     
       $scope.addToMatches = function(obj,like){
+        var defer = $q.defer();
         var match = {};
 
         match.id_match_1 = $localStorage.fbid;
@@ -254,6 +266,35 @@ angular.module('matches.controllers', ['starter'])
         match.id_event   = $stateParams.id_event;
         match.like       = like;
 
-        Matches.update(match);
+        return Matches.update(match).$promise;
       }
+
+      $scope.showProfile = function(index){
+        try{
+          var perfil = $scope.cards[index];
+
+          var data   = {};
+          data.id    = perfil.id_fb_attending;
+
+          Perfil.get(data,function(r){
+            if(r.Perfil){
+              $scope.retornoPerfil = r.Perfil;
+
+              var pop = $ionicPopup.show({
+                title: perfil.nome,
+                scope: $scope,
+                templateUrl:'templates/profile/profile_popup.html',
+                buttons: [
+                            {text : 'Fechar', onTap: function(){pop.close();}},
+                            
+                          ]
+              });              
+            }
+          });
+          
+        }catch(ex){
+          console.log(ex);
+        }
+      }
+     
   });
