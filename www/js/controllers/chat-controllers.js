@@ -45,6 +45,7 @@ angular.module('chat.controllers', ['starter'])
 		var id_view_msg = r[0].Chat.map(function(f){return f._id;});
 		var idfb 		= $localStorage.fbid;
 
+		//atualiza as msg vistas
 		Chat.update({id_view_msg: id_view_msg,idfb: idfb});
 
 		var chat = chat1.concat(chat2);
