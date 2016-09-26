@@ -50,11 +50,13 @@ angular.module('chat.controllers', ['starter'])
 			var data 	    = {};
 			data.fbid 	    = $localStorage.fbid;
 			data.amigoFB    = $stateParams.idfb;
-			data.data_envio = new Date();
+			data.data_envio = new Date().toISOString();
+			data.stats 		= 1; //NAO LIDO;
 			data.msg 		= m;
 
 			Chat.save(data,function(r){
 				$scope.chat.push(data);
+				
 				$scope.busca = "";
 				document.querySelector("#textEnvia").value = "";
 				$ionicScrollDelegate.scrollBottom();
