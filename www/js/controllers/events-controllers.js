@@ -1,5 +1,5 @@
 angular.module('events.controllers', ['starter'])
-.controller('EventsCtrl', function ($q,$scope,$state,$ionicScrollDelegate,GraphService,Evento) {
+.controller('EventsCtrl', function ($q,$scope,$state,$http,$ionicScrollDelegate,GraphService,Evento) {
   
   $scope.itemsPartty = new Array();
   $scope.items = new Array();
@@ -14,7 +14,7 @@ angular.module('events.controllers', ['starter'])
   $q.all([eventoP,meusEvtFbP]).then(function(r){
       
       if(r[1].paging){
-        $scope.nextEventPaging = r[1].paging;
+        $scope.nextEventPaging = r[1].paging.next;
       }
 
       for(var i in r[1].data){
@@ -40,26 +40,24 @@ angular.module('events.controllers', ['starter'])
 
   }
 
-
-  $scope.mostraSpinnerMaisEventos = false;
   $scope.checkScroll = function(){
    
+    if($scope.nextEventPaging != null){
+     // console.log($scope.nextEventPaging.next);
+      $http.get($scope.nextEventPaging).then(function(r){
+        
+         if(r.data.paging.next !== undefined){
+           $scope.items = $scope.items.concat(r.data.data);
+           $scope.nextEventPaging = r.data.paging.next;
+         }else{
+           $scope.nextEventPaging = null;
+         }
 
-    var currentTop = $ionicScrollDelegate.$getByHandle('scroller').getScrollPosition().top;
-    var maxScrollableDistanceFromTop = $ionicScrollDelegate.$getByHandle('scroller').getScrollView().__maxScrollTop;
-
-    if (currentTop >= maxScrollableDistanceFromTop)
-    {
-
-      $scope.mostraSpinnerMaisEventos = true;
-      GraphService.getEventsFB($scope.nextEventPaging).then(function(r){
-         console.log($scope.nextEventPaging)
-         console.log(r)
-
-         $scope.mostraSpinnerMaisEventos = false;
+         $scope.$broadcast('scroll.infiniteScrollComplete');
+         
       });
-
     }
+    
   }
   
 });
