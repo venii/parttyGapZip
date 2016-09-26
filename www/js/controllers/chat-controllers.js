@@ -1,5 +1,5 @@
 angular.module('chat.controllers', ['starter'])
-.controller('ChatCtrl', function($q,$scope,$stateParams,$localStorage,$ionicScrollDelegate,Perfil,Chat) {
+.controller('ChatCtrl', function($q,$scope,$stateParams,$timeout,$localStorage,$ionicScrollDelegate,Perfil,Chat) {
     $scope.nomeAmigo   = "";
     $scope.imagemAmigo = "";
     $scope.imagemMinha = "";
@@ -35,14 +35,23 @@ angular.module('chat.controllers', ['starter'])
 	data.fbid = $localStorage.fbid;
 	var teusChatP = Chat.get(data).$promise;
 
+
+
+	$scope.carregaUpdater = false;
 	$q.all([meusChatP,teusChatP]).then(function(r){
 		var chat1 = r[0].Chat.map(function(f){f.eu = false; return f;});
-		var chat2 = r[1].Chat.map(function(f){f.eu = true;  return f;});;
+		var chat2 = r[1].Chat.map(function(f){f.eu = true;  return f;});
 
 		var chat = chat1.concat(chat2);
 		$scope.chat = chat;
 		$scope.carregaChat = true;
 		$ionicScrollDelegate.scrollBottom();
+		
+		$timeout(function(){
+			$scope.carregaUpdater = true;
+		},1000,true);
+
+		
 	});
 
 	$scope.enviarMSG = function(m){
@@ -54,7 +63,7 @@ angular.module('chat.controllers', ['starter'])
 			data.stats 		= 1; //NAO LIDO;
 			data.msg 		= m;
 			data.eu 		= true;
-			
+
 			Chat.save(data,function(r){
 				$scope.chat.push(data);
 				
@@ -68,7 +77,11 @@ angular.module('chat.controllers', ['starter'])
 	$scope.checkScroll = function(){
    
     	console.log('load update');
-    
+    	$scope.$broadcast('scroll.infiniteScrollComplete');
+        var pos = $ionicScrollDelegate.$getByHandle('scroller').getScrollPosition();
+  		console.log(pos);
+  		$ionicScrollDelegate.scrollTo(pos.left, pos.top-5);
+
   	}
     
 });

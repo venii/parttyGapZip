@@ -2,7 +2,7 @@
 	<ion-content scroll="false">
 		<div style="width:100%;height: 100%;">
 			<div style="height:90%;padding-top:20px">
-				<ion-scroll direction="y" style="height:80vh;min-heigth:80vh">
+				<ion-scroll direction="y" style="height:80vh;min-heigth:80vh" delegate-handle="scroller">
 
 					<div style="width:100%;border:1px solid black; border-radius:5px;margin-top:10px" ng-if="carregaChat" ng-repeat="msg in chat | orderBy: 'data_envio'">
 						
@@ -31,9 +31,12 @@
 							
 							
 						</div>
-						
+
 					</div>
-					
+					<ion-infinite-scroll ng-if="carregaUpdater"
+						    on-infinite="checkScroll()"
+						    distance="1%">
+						  </ion-infinite-scroll>
 				</ion-scroll>
 
 			</div>
