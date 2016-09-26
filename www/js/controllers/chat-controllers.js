@@ -42,6 +42,11 @@ angular.module('chat.controllers', ['starter'])
 		var chat1 = r[0].Chat.map(function(f){f.eu = false; return f;});
 		var chat2 = r[1].Chat.map(function(f){f.eu = true;  return f;});
 
+		var id_view_msg = r[0].Chat.map(function(f){return f._id;});
+		var idfb 		= $localStorage.fbid;
+
+		Chat.update({id_view_msg: id_view_msg,idfb: idfb});
+
 		var chat = chat1.concat(chat2);
 		$scope.chat = chat;
 		$scope.carregaChat = true;
@@ -76,10 +81,10 @@ angular.module('chat.controllers', ['starter'])
 
 	$scope.checkScroll = function(){
    
-    	console.log('load update');
+    	
     	$scope.$broadcast('scroll.infiniteScrollComplete');
+        
         var pos = $ionicScrollDelegate.$getByHandle('scroller').getScrollPosition();
-  		console.log(pos);
   		$ionicScrollDelegate.scrollTo(pos.left, pos.top-5);
 
   	}
