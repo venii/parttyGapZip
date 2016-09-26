@@ -1,5 +1,5 @@
 angular.module('events.controllers', ['starter'])
-.controller('EventsCtrl', function ($q,$scope,$state,$http,$ionicScrollDelegate,GraphService,Evento) {
+.controller('EventsCtrl', function ($q,$scope,$state,$http,$timeout,$ionicScrollDelegate,GraphService,Evento) {
   
   $scope.itemsPartty = new Array();
   $scope.items = new Array();
@@ -41,21 +41,27 @@ angular.module('events.controllers', ['starter'])
   }
 
   $scope.checkScroll = function(){
-   
+    
     if($scope.nextEventPaging != null){
-     // console.log($scope.nextEventPaging.next);
-      $http.get($scope.nextEventPaging).then(function(r){
-        
-         if(r.data.paging.next !== undefined){
-           $scope.items = $scope.items.concat(r.data.data);
-           $scope.nextEventPaging = r.data.paging.next;
-         }else{
-           $scope.nextEventPaging = null;
-         }
+      //console.log($scope.nextEventPaging);
 
-         $scope.$broadcast('scroll.infiniteScrollComplete');
-         
-      });
+        $http.get($scope.nextEventPaging+"&limit=5").then(function(r){
+           
+           
+           if(r.data.paging.next !== undefined){
+             for(var i in r.data.data){
+              $scope.items.push(r.data.data[i]);
+             }
+             $scope.nextEventPaging = r.data.paging.next;
+           }else{
+             $scope.nextEventPaging = null;
+           }
+           
+           $scope.$broadcast('scroll.infiniteScrollComplete');
+           
+        });
+    }else{
+      $scope.$broadcast('scroll.infiniteScrollComplete');
     }
     
   }
