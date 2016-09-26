@@ -83,5 +83,4 @@ angular.module('chat.controllers', ['starter'])
   		$ionicScrollDelegate.scrollTo(pos.left, pos.top-5);
 
   	}
-    
 });
