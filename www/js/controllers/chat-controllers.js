@@ -53,7 +53,8 @@ angular.module('chat.controllers', ['starter'])
 			data.data_envio = new Date().toISOString();
 			data.stats 		= 1; //NAO LIDO;
 			data.msg 		= m;
-
+			data.eu 		= true;
+			
 			Chat.save(data,function(r){
 				$scope.chat.push(data);
 				
@@ -63,5 +64,11 @@ angular.module('chat.controllers', ['starter'])
 			});
 		}
 	}
+
+	$scope.checkScroll = function(){
+   
+    	console.log('load update');
+    
+  	}
     
 });
