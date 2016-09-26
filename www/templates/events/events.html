@@ -14,7 +14,7 @@
 	            </div>
         	</div>
 	  		
-	  		<ion-scroll direction="y" style="height:100vh;min-heigth:100vh">
+	  		<ion-scroll direction="y" style="height:100vh;min-heigth:100vh" on-scroll="checkScroll()" delegate-handle="scroller">
 		        	<div ng-repeat="item in itemsPartty track by $index" style="width:100%;heigth:80px; " >
 			  			<button ng-click="entraEvento(item,$index)" style="width:100%;background-color:black ;border:none; padding: 2px; ">
 				  			<div class="itempartty" style="width:100%;" >
@@ -59,7 +59,9 @@
 						</button>
 						
 			  		</div>
-		  		
+		  			<div align="center" ng-show="mostraSpinnerMaisEventos">
+		  				<ion-spinner></ion-spinner>
+		  			</div>
 
 		  		
 
