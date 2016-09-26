@@ -7743,3 +7743,7 @@ width:100%;
 .pop-perfil{
   width:1000px;
 }
+
+.slider-pager{
+  bottom: 1px;
+}
