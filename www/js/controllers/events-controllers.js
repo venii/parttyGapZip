@@ -50,7 +50,9 @@ angular.module('events.controllers', ['starter'])
            
            if(r.data.paging.next !== undefined){
              for(var i in r.data.data){
-              $scope.items.push(r.data.data[i]);
+              var evt = r.data.data[i];
+              GraphService.addEvent(evt);          
+              $scope.items.push(evt);
              }
              $scope.nextEventPaging = r.data.paging.next;
            }else{
