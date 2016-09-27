@@ -46,9 +46,11 @@
 			   			<td-cards control="cardsControl" class="responsive">
 			   			    <div id="picBackground" style="z-index:0; width: 100%; background-color: #ededeb; margin-bottom:0px; padding-bottom:0px">
 							    <td-card  id="cards" style="z-index:0; padding-top:0px" class="ruby-tindercard tinder-style-two" ng-repeat="card in cards" on-destroy="cardDestroyed($index)"    on-transition-left="cardSwipedLeft($index)" on-transition-right="cardSwipedRight($index)" 
-							    on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
+							    on-partial-swipe="cardPartialSwipe($index)" class="card-{{$index}}">
 							    <!-- ui-sref="premiumappOne.tinder-profile({profileID: 1})"
 								-->
+								<div class="no-text">Dislike</div>
+						      <div class="yes-text">Like</div>
 								<div class="vip-badge" ng-show="card.vipStatus">vip</div>
 								<div style="" class="tinder-thumb">
 									<img preload-image ng-src="{{card.pic}}" default-image="img/demo/loader.svg" fallback-image="img/demo/profile-default.jpg" />
@@ -57,12 +59,13 @@
 								<div style="" class="padding">
 									<h4 class="text-left bold">{{card.nome}}</h4>
 								</div>
+								<button  class="btn btn-primary-matches-inf" style='margin-top:50px' ng-click="showProfile($index)"></button>
 							    </td-card>
                             </div>
 						    <div style="width:100%; margin-top:0px">
-								<button  class="btn btn-primary-matches-no" ng-click="clickRight()"></button>
-								<button  class="btn btn-primary-matches-yah"  ng-click="clickLeft()"></button>
-								<button  class="btn btn-primary-matches-inf"></button>
+								<button  class="btn btn-primary-matches-no" ng-click="noClick()"></button>
+								<button  class="btn btn-primary-matches-yah"  ng-click="yesClick()"></button>
+								
 							</div>
 						</td-cards>
 				  	</div>
