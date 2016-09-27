@@ -4527,7 +4527,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
     border-radius: 10px;
   }
   .popup-container .popup {
-    /*width: 250px;*/
+    width: 250px;
     max-width: 100%;
     max-height: 90%;
     border-radius: 0px;
@@ -7738,12 +7738,4 @@ background-image: linear-gradient(to bottom, #8380ec , #dea2de);
 height: 44px;
 top:0px;
 width:100%; 
-}
-
-.pop-perfil{
-  width:1000px;
-}
-
-.slider-pager{
-  bottom: 1px;
 }

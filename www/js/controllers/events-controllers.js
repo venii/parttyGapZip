@@ -1,19 +1,25 @@
 angular.module('events.controllers', ['starter'])
-.controller('EventsCtrl', function ($q,$scope,$state,$ionicScrollDelegate,GraphService,Evento) {
+
+.controller('EventsCtrl', function ($q,$scope,$state,$http,$timeout,$ionicScrollDelegate,GraphService,Evento) {
   
   $scope.itemsPartty = new Array();
   $scope.items = new Array();
   
   $scope.showEvents = true;
-  $scope.pagingEventsFb = null;
+
+  $scope.nextEventPaging = null;
 
   var eventoP = Evento.get().$promise;
   var meusEvtFbP = GraphService.getEventsFB();
   
   $q.all([eventoP,meusEvtFbP]).then(function(r){
+
+
+      
       if(r[1].paging){
-        $scope.pagingEventsFb = r[1].paging.next;
+        $scope.nextEventPaging = r[1].paging.next;
       }
+
       for(var i in r[1].data){
           var evt = r[1].data[i];
 
@@ -37,20 +43,33 @@ angular.module('events.controllers', ['starter'])
 
   }
 
-  $scope.getPaging = function(){
-    console.log($scope.pagingEventsFb);
+
+  $scope.checkScroll = function(){
+    
+    if($scope.nextEventPaging != null){
+      //console.log($scope.nextEventPaging);
+
+        $http.get($scope.nextEventPaging+"&limit=5").then(function(r){
+           
+           
+           if(r.data.paging.next !== undefined){
+             for(var i in r.data.data){
+              var evt = r.data.data[i];
+              GraphService.addEvent(evt);          
+              $scope.items.push(evt);
+             }
+             $scope.nextEventPaging = r.data.paging.next;
+           }else{
+             $scope.nextEventPaging = null;
+           }
+           
+           $scope.$broadcast('scroll.infiniteScrollComplete');
+           
+        });
+    }else{
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    }
+    
   }
-
-  $scope.checkScroll = function () {
- 
-        var currentTop = $ionicScrollDelegate.$getByHandle('scroller').getScrollPosition().top;
-        var maxScrollableDistanceFromTop = $ionicScrollDelegate.$getByHandle('scroller').getScrollView().__maxScrollTop;
- 
-        if (currentTop >= maxScrollableDistanceFromTop)
-        {
-          alert("#");
-        }
-    };
-
   
 });

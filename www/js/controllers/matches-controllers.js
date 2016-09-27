@@ -271,6 +271,7 @@ angular.module('matches.controllers', ['starter'])
 
       $scope.showProfile = function(index){
         try{
+          console.log(index);
           var perfil = $scope.cards[index];
 
           var data   = {};

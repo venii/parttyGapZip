@@ -14,8 +14,13 @@
 	            </div>
         	</div>
 	  		
+<<<<<<< HEAD
 	  		<ion-scroll direction="y" style="height:100vh;min-heigth:100vh" on-scroll="checkScroll()" delegate-handle="scroller">
+=======
+	  		<ion-scroll direction="y" style="height:100vh;min-heigth:100vh" >
+>>>>>>> 75ede4eae2f2478156f798048e57dc4b4e2ca859
 		        	<div ng-repeat="item in itemsPartty track by $index" style="width:100%;heigth:80px; " >
+
 			  			<button ng-click="entraEvento(item,$index)" style="width:100%;background-color:black ;border:none; padding: 2px; ">
 				  			<div class="itempartty" style="width:100%;" >
 					  			<div style="width:100%;height:100%; border-radius: 5px">
@@ -30,9 +35,7 @@
 							    </div>
 							
 							</div>
-						</button>
-						
-			  		</div>
+		  		</div>
 
 			  		<div style="position:relative;min-height:30px">
 						<div><img src="img/background-tittle.png" style="width:100%; max-height: 40px" /></div>
@@ -45,6 +48,7 @@
 			  			<button ng-click="entraEvento(item,$index)" style="width:100%;background-color:black ;border:none; padding: 2px; ">
 				  			<div class="itempartty" style="width:100%;" >
 					  			<div style="width:100%;height:100%; border-radius: 5px">
+								   	
 								    <img ng-src="{{item.cover.source}}" style="width:100%;height:100%;border-radius: 5px" no-img  />
 								</div>
 	                            <div style="font-size: 1.7em; margin-top:-70px;width:100%" style="">
@@ -59,7 +63,15 @@
 						</button>
 						
 			  		</div>
+<<<<<<< HEAD
 			  		
+=======
+			  		<ion-infinite-scroll
+					    on-infinite="checkScroll()"
+					    distance="5%">
+					  </ion-infinite-scroll>
+					  
+>>>>>>> 75ede4eae2f2478156f798048e57dc4b4e2ca859
 
 	  		</ion-scroll>
 
