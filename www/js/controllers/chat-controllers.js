@@ -82,11 +82,14 @@ angular.module('chat.controllers', ['starter'])
 
 	$scope.checkScroll = function(){
    
-    	
-    	$scope.$broadcast('scroll.infiniteScrollComplete');
-        
-        var pos = $ionicScrollDelegate.$getByHandle('scroller').getScrollPosition();
-  		$ionicScrollDelegate.scrollTo(pos.left, pos.top-5);
+        var data  = {};
+		data.fbid = $localStorage.fbid;
+		data.naovisto = true;
 
+		Chat.get(data,function(r){
+			console.log(r);
+			$scope.$broadcast('scroll.infiniteScrollComplete');
+        
+		});
   	}
 });
