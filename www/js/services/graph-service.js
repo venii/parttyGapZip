@@ -26,6 +26,7 @@ angular.module('app.graph-service', ['starter'])
                     path: "/me",
                     params : {fields : "picture.width(320).height(280),name,gender,email,age_range"},
                     success: function(success){
+                        console.log(success);
                         deferred.resolve(success);
                     },
                     error: function(error){
@@ -62,6 +63,7 @@ angular.module('app.graph-service', ['starter'])
       			        path: "/me/events",
       			        params : {"fields":"id,name,picture.width(320).height(280),cover,description,start_time,location"},
       			 		success: function(success){
+                              console.log(success);
                               deferred.resolve(success);
                           },
       			        error: function(error){
