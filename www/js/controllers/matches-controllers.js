@@ -131,7 +131,7 @@ angular.module('matches.controllers', ['starter'])
                       title:'Atenção',
                       template:'Não há pessoas no momento,tente novamente.',
                        buttons: [
-                                  {text : 'Re Matches', onTap: function(){
+                                  {text : 'Matches', onTap: function(){
                                     $timeout(function(){
                                       $scope.matches();
                                     });
@@ -220,7 +220,7 @@ angular.module('matches.controllers', ['starter'])
               title:'Atenção',
               template:'Não há pessoas no momento,tente novamente.',
                buttons: [
-                          {text : 'Re Matches', onTap: function(){
+                          {text : 'Matches', onTap: function(){
 
                                                               $scope.matches();
                                                           }},

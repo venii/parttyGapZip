@@ -4,7 +4,8 @@ angular.module('app.graph-service', ['starter'])
         
            //função para verificar se é mobile (true - mobile / false - web)
            this.getMeFB = function() { 
-             var deferred = $q.defer();
+             var deferred  = $q.defer();
+
 
              if(UtilsService.isMob()){
                 grapCall = "me?fields=picture.width(320).height(280),name,gender,email,age_range";
@@ -43,8 +44,16 @@ angular.module('app.graph-service', ['starter'])
            this.getEventsFB = function() { 
            	 var deferred = $q.defer();
 
+             var dataSince = new Date();
+             var diasSubtrair = 1;
+
+             dataSince.setDate(dataSince.getDate()-diasSubtrair);
+
+             dataSince = dataSince.toISOString();
+             dataSince = dataSince.split("T")[0];
+             
            	 if(UtilsService.isMob()){
-                   	grapCall = "me/events?fields=id,name,picture.width(320).height(280),cover,description,start_time,location";
+                   	grapCall = "me/events?fields=id,name,picture.width(320).height(280),cover,description,start_time,location&since="+dataSince;
                  	
                    	$cordovaFacebook.api(grapCall, ["public_profile"])
       			    .then(function(success) {
@@ -61,7 +70,8 @@ angular.module('app.graph-service', ['starter'])
       			 	openFB.api(
       			    {
       			        path: "/me/events",
-      			        params : {"fields":"id,name,picture.width(320).height(280),cover,description,start_time,location"},
+      			        params : {"fields":"id,name,picture.width(320).height(280),cover,description,start_time,location",
+                              since  : dataSince},
       			 		success: function(success){
                               console.log(success);
                               deferred.resolve(success);
