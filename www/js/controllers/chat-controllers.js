@@ -1,5 +1,5 @@
 angular.module('chat.controllers', ['starter'])
-.controller('ChatCtrl', function($q,$scope,$stateParams,$timeout,$localStorage,$ionicScrollDelegate,Perfil,Chat) {
+.controller('ChatCtrl', function($q,$scope,$stateParams,$http,$timeout,$localStorage,$ionicScrollDelegate,Perfil,Chat,HOST_API) {
     $scope.nomeAmigo   = "";
     $scope.imagemAmigo = "";
     $scope.imagemMinha = "";
@@ -80,16 +80,24 @@ angular.module('chat.controllers', ['starter'])
 		}
 	}
 
+	
+	
 	$scope.checkScroll = function(){
    
-        var data  = {};
-		data.fbid = $localStorage.fbid;
-		data.naovisto = true;
+		var fbid = $localStorage.fbid;
 
-		Chat.get(data,function(r){
-			console.log(r);
+		$http.get(HOST_API+"/chat_update/"+$stateParams.idfb+"/1").then(function(r){
+
 			$scope.$broadcast('scroll.infiniteScrollComplete');
-        
-		});
+			if(r.data.Chat.length > 0){
+				
+				var id_view_msg = r.data.Chat.map(function(f){return f._id;});
+				Chat.update({id_view_msg: id_view_msg,idfb: fbid});
+
+				for(var i in r.data.Chat){
+					$scope.chat.push(r.data.Chat[i]);
+				}	
+			}
+      	});
   	}
 });
