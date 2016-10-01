@@ -1,0 +1,52 @@
+adb uninstall com.ionicframework.partty754126
+
+adb install -r platforms\android\build\outputs\apk\android-debug.apk
+adb -s <serial de adb devices> install -r platforms\android\build\outputs\apk\android-debug.apk
+		LGD2959a2b0de
+adb -s LGD2959a2b0de install -r platforms\android\build\outputs\apk\android-debug.apk
+
+adb -s 	LGD2959a2b0de shell -> prompt 
+
+		sqlite3 -> abredb										
+
+
+adb -d shell "run-as com.ionicframework.partty754126 ls /data/data/com.ionicframework.partty754126/databases/"
+
+adb -d shell "run-as com.ionicframework.partty754126 cat /data/data/com.ionicframework.partty754126/databases/dbapp_partty.db > /sdcard/dbapp_partty.db"
+
+
+//pega db
+adb pull /sdcard/dbapp_partty.db
+
+sempre instalar o play store e gcm services em .zip para platform que estiver no cabeçalho do geny
+
+
+
+angular----
+
+
+controller !!! se linkado a um elemento ele ira carregar o controller e os funcions para o elemento e bindar
+
+
+
+
+aple
+--uninstall
+ios-deploy --uninstall_only --bundle_id com.ionicframework.partty754126 -r
+-- kill debug cordova
+pkill lldb
+-- kill ios-deploy
+pkill ios-deploy
+
+
+
+
+utilizar
+
+
+pkill lldb 
+e dps ionic run ios --device
+
+
+
+-> Xcode -> preferences -> ios dev acount -> view details -> refrresh para pegar os provisioning profiles

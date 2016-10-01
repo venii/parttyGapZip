@@ -485,6 +485,7 @@ td-card.ruby-tindercard .vip-badge {
   margin-top:35px;
 }
 .btn-primary-matches-yah {
+
   margin-top: 35px;
   position: absolute;
   right: 7%;  
@@ -725,8 +726,7 @@ td-card.ruby-tindercard .vip-badge {
 
 .btn-primary-matches-inf{
   top:106%;
-  
-  position: absolute;
+    position: absolute;
   color: none;
   left:50%;
   margin-left:-45px;
