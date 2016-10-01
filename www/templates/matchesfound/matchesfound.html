@@ -1,0 +1,50 @@
+<ion-view view-title="Voce teve um match" ng-controller="MatchesFoundCtrl" >
+  <ion-content scroll="false" style="background-color: black; ">
+  		<div style="width: 100%;height: 100%;position:relative" align="center" ng-if="showSpinner"><ion-spinner ></ion-spinner></div>
+        <div style="width: 100%;height: 100%;position:relative" ng-if="!showSpinner">  
+			
+			<div style="width:100%;margin-top:20px" align="center">
+					<h3 style="width:70%;color:white;font-size:24px;font-weight:bold;">{{nome_do_evento}}</h3>
+			</div>
+			
+			<div style="width:100%;display:flex">
+				<div style="width:50%;" align="center">
+					
+					<div align="center" >
+						<img  src="{{urlMe}}" no-img style="border-radius: 150px; border: solid 1px white;" width="128" height="128"><br/> 
+						<span style="margin-top:20px;color:white"><center>{{nameMe}}</center></span>
+					</div>
+					
+					
+				</div>
+				
+				<div style="width:50%;" align="center">
+					<div align="center" >
+						<img  src="{{urlInvited}}" no-img style="border-radius: 150px; border: solid 1px white;" width="128" height="128"><br/> 
+						<span style="margin-top:20px;color:white"><center>{{nameInvited}}</center></span>
+					</div>
+					
+					
+				</div>
+			</div>
+
+			<div align="center" style="margin-top:50px">
+				<p>
+					<h4 style="color: white">Você e {{nameInvited}} gostaram ou do outro!</h4>
+				</p>
+					
+				<p >
+					<h4 style="color: white">Encontre {{nameInvited}} no evento {{nome_do_evento}}.</h4>
+				</p>
+					
+			</div>
+
+			<div style="width:100%; height: auto; position: absolute; bottom: 20px;background-color: white">
+				<div class="button-bar button-royal">
+				  <a style="font-size: 16px; color: black;" class="button" ng-click="voltaMatches()">Voltar Matches</a>
+				  <a style="font-size: 16px; color: black;" class="button" ng-click="conversar()">Conversar</a>
+				</div>
+			</div>
+		</div>	
+  </ion-content>
+</ion-view>

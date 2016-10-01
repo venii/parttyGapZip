@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<widget id="br.partty.gap" version="1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  
+
+  <name>Partty app</name>
+  <description>Relacionamentos</description>
+  <author email="parttyapp@gmail.com" href="http://ionicframework.com/">parttyapp@gmail.com
+    </author>
+  <content src="index.html"/>
+
+  <access origin="*" subdomains="true"/>
+  <allow-navigation href="*"/>
+
+  <allow-intent href="*://*/*"/>
+
+   <preference name="phonegap-version" value="cli-5.2.0" />
+    <preference name="android-build-tool" value="ant" />
+    <preference name="permissions" value="none" />
+    <preference name="orientation" value="default" />
+    <preference name="target-device" value="universal" />
+    <preference name="fullscreen" value="false" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="stay-in-webview" value="true" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+    <preference name="disable-cursor" value="false" />
+    <preference name="android-installLocation" value="auto" />
+
+  
+  <preference name="webviewbounce" value="false"/>
+  <preference name="UIWebViewBounce" value="false"/>
+  <preference name="DisallowOverscroll" value="true"/>
+  <preference name="BackupWebStorage" value="none"/>
+  <preference name="SplashScreen" value="screen"/>
+  <preference name="SplashScreenDelay" value="3000"/>
+  <feature name="StatusBar">
+    <param name="ios-package" value="CDVStatusBar" onload="true"/>
+  </feature>
+ 
+  <plugin name="com.phonegap.plugins.pushplugin"  source="pgb" />
+  <plugin name="com.synconset.imagepicker"  source="pgb" />
+  <plugin name="org.apache.cordova.inappbrowser"  source="pgb" />
+  <plugin name="cordova-plugin-device"  source="pgb" />
+  <plugin name="io.litehelpers.cordova.sqlite"  source="pgb" />
+  <plugin name="org.apache.cordova.network-information"  source="pgb" />
+  <plugin name="org.apache.cordova.splashscreen" spec="" source="pgb" />
+  <plugin name="cordova-plugin-whitelist" spec="1.0.0" source="npm" />
+  
+  <plugin name="com.phonegap.plugins.facebookconnect"  source="pgb">
+    <param name="APP_ID" value="574073299368611" />
+    <param name="APP_NAME" value="partty" /> 
+  </plugin>
+
+   
+  <icon src="resources\android\icon\drawable-hdpi-icon.png"/>
+</widget>

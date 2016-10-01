@@ -1,0 +1,103 @@
+<ion-side-menus  hide-back-button="true" cache-view="false">
+
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable" id="menuAPP" >
+      
+      <!-- menu-toggle="left"  menu-toggle="right" -->
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon"  ng-click="toggleLeftSideMenu()">
+        </button>
+      </ion-nav-buttons>
+
+      <ion-nav-buttons side="right" style="position:relative">
+
+	    <button class="button button-icon button-clear ion-ios-chatboxes-outline" ng-click="toggleRightSideMenu()">
+
+        </button>
+        <div id="msgBadge" style="position:absolute;left:-15px">0</div>
+      </ion-nav-buttons>
+
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    
+    <ion-content scroll="false">
+      <br/> <br/>
+      <ion-list >
+        <ion-item nav-clear menu-close ng-click="profile()" >
+         
+          <div class="flexcontainer">
+            <div id="profileCover">
+              <img src='' no-img style='border-radius: 40px;border: 1px solid white;' no-img width='64' heigth='64' />
+            </div>
+            <div class="tbtext">Profile</div>
+          </div>
+
+
+        </ion-item>
+        
+        <ion-item nav-clear menu-close ng-click="events()">
+                <div class="flexcontainer">
+                  <div>
+                      <img src='img/event_button.png' no-img style='border-radius: 40px;' width='64' heigth='64' />
+                  </div>
+                  <div class="tbtext">Eventos</div>
+                </div>
+
+        </ion-item>
+        <ion-item nav-clear menu-close ng-click="configurations()">
+              <div class="flexcontainer">
+                  <div>
+                      <img src='img/setting_icon.png' no-img style='border-radius: 40px;' width='64' heigth='64' />
+                  </div>
+                  <div class="tbtext">Config</div>
+                </div>
+        </ion-item>
+        <ion-item nav-clear menu-close ng-click="logout()">
+          <div class="flexcontainer">
+                  <div>
+                      <img src='img/logout.png' no-img style='border-radius: 40px;' width='64' heigth='64' />
+                  </div>
+                  <div class="tbtext">Loggout</div>
+                </div>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+
+  <ion-side-menu side="right">
+    <ion-header-bar>
+    <div class="bar bar-header item-input-inset" style="border-bottom: solid 3px; border-color: #43DBE1; height:44px; width:100%; position: absolute; top:0px;">
+      <label class="item-input-wrapper" style="height:100%; width:100%; display: inline-block;">
+        <input type="search" placeholder="Procurar" ng-model="busca" ng-keyup="buscaPerfil(busca)" />
+      </label>
+      <button class="button button-clear" style="color: black; font-size:14px; padding-top: 10px" ng-click="limpaBusca()">Cancel</button>
+      </div> 
+    </ion-header-bar>
+
+    <ion-content >
+      <center><ion-spinner ng-show="spinnerChat"></ion-spinner></center>
+      <center><span ng-if="friends.length == 0">Voce não possui nenhum contato.</span></center>
+
+      <ion-list ng-if="friends.length > 0 && !spinnerChat">
+        
+        <ion-item ng-click="loadChat($index)" nav-clear menu-close ng-repeat="friend in friends track by $index" >
+            <div style="display:flex">
+              
+              <div style="width:40%">
+                <img src="{{friend.imgPIC1}}" style='border-radius: 40px / 20px ;' no-img width="64" heigth="64" />
+              </div> 
+              
+              <div style="color: black; font-size: 0.9em; margin-top:10px; line-height: 3;margin-left:-20px">{{friend.name}}</div>
+
+            </div>
+
+        </ion-item>
+      
+      </ion-list>
+      
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

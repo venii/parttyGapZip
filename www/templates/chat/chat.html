@@ -1,0 +1,52 @@
+<ion-view view-title="{{nomeAmigo}}">
+	<ion-content scroll="false">
+		<div style="width:100%;height: 100%;">
+			<div style="height:100%;background-color:  #b3b2f3">
+				<ion-scroll direction="y" style="height:100vh;min-heigth:100vh" delegate-handle="scroller">
+
+					<div style="width:100%;border-radius:5px;margin-top:10px" ng-if="carregaChat" ng-repeat="msg in chat | orderBy: 'data_envio'">
+						
+						<div ng-if="msg.eu">
+							<div style="margin-right: 20%; box-shadow: -1px -1px 2px #325d6f; -webkit-box-shadow: -1px -1px 2px #325d6f; -moz-box-shadow: -1px -1px 2px #325d6f; border-radius: 20px; width:80%; position:relative; background-color: #9077D5" align="left">
+								<div style="position:absolute;left:0px">
+									<img src="{{imagemMinha}}" width='64' height='64' no-img style="border-radius:20px 5px 5px 20px" />
+								</div> 
+								<div style="min-height:64px; margin-left:75px; border-radius: 30px 0px 0px 30px; margin-top:10px">
+									<p style="color: black; margin-top:5px; line-height: 16px; margin-right:15px; margin-top:10px; font-size: 1em">{{msg.msg}}</p><p style="font-size:0.6em; color: #D2D2D2">{{msg.data_envio | date:'dd/MM/yyyy HH:mm:ss'}}</p>  
+								</div>
+							</div>
+							
+							
+						</div>
+
+						<div ng-if="!msg.eu">
+							<div style="margin-left:20%; box-shadow: -1px -1px 2px #325d6f; -webkit-box-shadow: -1px -1px 2px #325d6f; -moz-box-shadow: -1px -1px 2px #325d6f; border-radius: 20px; width:80%; position:relative; background-color: #AF74FC" align="right">
+								<div style="position:absolute; right:0px" >
+									<img src="{{imagemAmigo}}" width='64' height='64' no-img style="border-radius: 5px 20px 20px 5px;" /> 
+								</div>
+								<div style="min-height:64px; margin-right:75px; border-radius: 30px 0px 0px 30px;">
+									<p style="color: black; margin-top:5px; line-height: 16px; margin-left:15px; font-size: 1em">{{msg.msg}}</p><p style=" font-size:0.6em; color: #D2D2D2">{{msg.data_envio | date:'dd/MM/yyyy HH:mm:ss'}}</p> 
+								</div>
+							</div>
+							
+							
+						</div>
+
+					</div>
+					<ion-infinite-scroll ng-if="carregaUpdater"
+						    on-infinite="checkScroll()"
+						    distance="1%">
+						  </ion-infinite-scroll>
+				</ion-scroll>
+
+			</div>
+			<div style="display:flex; width:100%">
+				<div style="width:100%; height: 60px; position: absolute; bottom: 0px; background-color:#E9E6E6">
+					<textarea id="textEnvia" style="width: 70%; float: left; height:40px; margin-top: 10px; margin-left: 2px; border-radius: 10px; " ng-model="msgEnvio"></textarea>
+					<button style="width: 25%; margin-top: 5px; margin-left:10px; background-color: #8380ec; border-radius: 5px; color: white" type="button" ng-click="enviarMSG(msgEnvio)" class="button">Enviar</button>
+				</div>
+			</div>
+		</div>
+	    
+    </ion-content>
+</ion-view>
