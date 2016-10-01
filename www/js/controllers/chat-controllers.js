@@ -80,34 +80,24 @@ angular.module('chat.controllers', ['starter'])
 		}
 	}
 
+	
+	
 	$scope.checkScroll = function(){
    
 		var fbid = $localStorage.fbid;
 
-		$http.get(HOST_API+"/chat_update/"+fbid+"/1").then(function(r){
+		$http.get(HOST_API+"/chat_update/"+$stateParams.idfb+"/1").then(function(r){
 
 			$scope.$broadcast('scroll.infiniteScrollComplete');
+			if(r.data.Chat.length > 0){
+				
+				var id_view_msg = r.data.Chat.map(function(f){return f._id;});
+				Chat.update({id_view_msg: id_view_msg,idfb: fbid});
 
-			for(var i in r.data.Chat){
-
-				var chat = r.data.Chat[i];
-
-				var data 	    = {};
-				data.fbid 	    = chat.fbid;
-				data.amigoFB    = chat.amigoFB;
-				data.data_envio = chat.data_envio;
-				data.stats 		= 1; //NAO LIDO;
-				data.msg 		= chat.msg;
-				data.eu 		= false;
-
-				Chat.save(data,function(r){
-					$scope.chat.push(data);
-					
-					$scope.busca = "";
-					$ionicScrollDelegate.scrollBottom();
-				});
+				for(var i in r.data.Chat){
+					$scope.chat.push(r.data.Chat[i]);
+				}	
 			}
-			
       	});
   	}
 });
