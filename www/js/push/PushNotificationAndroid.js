@@ -9,11 +9,12 @@ function onNotificationGCM(e) {
             //Registra o push para android
             if (e.regid.length > 0){ 
                 //grava o token no localstorage
-                MainService = $injector.get("MainService");
-                MainService.saveDeviceToken(e.regid);
+                //MainService = $injector.get("MainService");
+                //MainService.saveDeviceToken(e.regid);
                 //envia para o controlador registration
-                $state = $injector.get("$state");
-                $state.go("app.registration");                          
+                //$state = $injector.get("$state");
+                ///$state.go("app.registration");
+                console.log(e.regid);                          
             } 
         break;  
 

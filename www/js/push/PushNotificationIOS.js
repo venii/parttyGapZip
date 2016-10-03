@@ -87,13 +87,14 @@ function onNotificationAPN (event) {
 
 //função para graver o token do ios
 function tokenHandler (result) {    
-    $scope = angular.element(document.body).scope();
-    $injector = angular.element(document.body).injector();
+    //$scope = angular.element(document.body).scope();
+    //$injector = angular.element(document.body).injector();
     
-    MainService = $injector.get("MainService");
-    MainService.saveDeviceToken(result);
+    //MainService = $injector.get("MainService");
+    //MainService.saveDeviceToken(result);
     
     //envia para registration
-    $state = $injector.get("$state");
-    $state.go("app.registration");
+    //$state = $injector.get("$state");
+    //$state.go("app.registration");
+    console.log(result);
 }
