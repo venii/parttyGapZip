@@ -79,8 +79,6 @@ angular.module('chat.controllers', ['starter'])
 			});
 		}
 	}
-
-	
 	
 	$scope.checkScroll = function(){
    

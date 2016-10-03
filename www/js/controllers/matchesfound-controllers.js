@@ -28,10 +28,13 @@ angular.module('matchesfound.controllers', ['starter'])
         }
 
         $scope.nameInvited = results[1].Perfil.name;
-
-
         $scope.nameMe      = results[2].Perfil.name;
-            
+
+        $scope.urlInvited      = results[1].Perfil.imgPIC1;
+        $scope.urlMe           = results[2].Perfil.imgPIC1;
+       
+
+                
     });
 
     $scope.voltaMatches = function(){
