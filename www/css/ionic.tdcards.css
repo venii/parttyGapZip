@@ -55,13 +55,13 @@ td-card img {
   border-radius: 6px;
 }
 
-.yes-text {
+.like {
   position: absolute;
   top: 10px;
   left: 10px;
-  font-size: 30px;
   color: rgb(111, 250, 111);
-  opacity: 0;
+  border:solid 2px rgb(111, 250, 111);
+  border-radius:5px;
 }
 .no-text {
   position: absolute;
