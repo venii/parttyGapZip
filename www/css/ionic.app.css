@@ -5669,7 +5669,10 @@ input, button, select, textarea {
 
   font-family: "Raleway", "Roboto", sans-serif; }
 
-
+input{
+  height:100%;
+  width: 100%;
+}
 .item-input {
   display: -webkit-box;
   display: -webkit-flex;
@@ -7738,4 +7741,8 @@ background-image: linear-gradient(to bottom, #8380ec , #dea2de);
 height: 44px;
 top:0px;
 width:100%; 
+}
+#faixaNewMatch{
+background-color: #b3b2f3;
+
 }

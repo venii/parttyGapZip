@@ -1,31 +1,29 @@
-<div align="center" style="width:300px">
-		<div style="padding-left:20px; padding-top: 3px;">
-          <h4  style="font-size: 1.3em">Descrição pessoal:</h4>
-          {{retornoPerfil.descricao}}
-        </div>
-		
-  		<div style="margin-top:10px;">
 
-			  <div>
-				  
-					<img id="imgPIC2" no-img width="128" heigh="128" ng-src="{{retornoPerfil.imgPIC2}}" />
-				  
-			  </div>
-			  <div >
-				 
-					<img id="imgPIC3" no-img width="128" heigh="128" ng-src="{{retornoPerfil.imgPIC3}}" />
-				 
-			  </div>
-			  <div >
-				  
-					<img id="imgPIC4" no-img width="128" heigh="128" ng-src="{{retornoPerfil.imgPIC4}}" />
-				 
-			  </div>
-			  <div >
-				  
-					<img id="imgPIC" no-img width="128" heigh="128" ng-src="{{retornoPerfil.imgPIC5}}" />
-				  
-			  </div>
+<div align="center" style="width:100%" >
+		<div style="padding-left:20px; padding-top: 3px; background-color: #b3b2f3; border-radius: 5px; width:100%;">
+          <p style="margin-left:-15px; margin-right:5px;text-align: justify; font-size: 0.8em">{{retornoPerfil.descricao}}</p></div>
+        <div style="margin-top:10px;">
+
+
+        <ion-slide-box show-pager="true" style="margin-top:0px">
+             
+              <ion-slide>
+                <img style="border-radius:5px" id="imgPIC2" no-img width="128" heigh="128" ng-src="{{retornoPerfil.imgPIC2}}" />
+              </ion-slide>
+              
+              <ion-slide>
+                <img style="border-radius:5px" id="imgPIC3" no-img width="128" heigh="128" ng-src="{{retornoPerfil.imgPIC3}}" />
+              </ion-slide>
+              
+              <ion-slide>
+               <img style="border-radius:5px" id="imgPIC4" no-img width="128" heigh="128" ng-src="{{retornoPerfil.imgPIC4}}" />
+              </ion-slide>
+
+              <ion-slide>
+               <img style="border-radius:5px" id="imgPIC" no-img width="128" heigh="128" ng-src="{{retornoPerfil.imgPIC5}}" />
+              </ion-slide>
+        </ion-slide-box>
+   
 		</div>
 </div>
 		
