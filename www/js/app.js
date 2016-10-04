@@ -28,7 +28,7 @@ angular.module('starter', [	 'ionic',
                              'app.resources-service'							              
   ])
   .value("HOST_API","http://127.0.0.1")
-  .run(function($ionicPlatform,$state,$rootScope,SQLService,$localStorage,$ionicPopup,UtilsService) {
+  .run(function($ionicPlatform,$state,$rootScope,$cordovaPush,$ionicPopup,SQLService,$localStorage,UtilsService) {
 
     $ionicPlatform.ready(function() {
       /*Inicia o DB*/
@@ -50,7 +50,62 @@ angular.module('starter', [	 'ionic',
       }
 
       SQLService.createSchema();
-     
+      
+
+      /*PUSH*/
+      if(UtilsService.isMob()){
+        //IOS
+        if(UtilsService.isIOS()){
+            var iosConfig = {
+              "badge": true,
+              "sound": true,
+              "alert": true,
+            };
+
+            $cordovaPush.register(iosConfig).then(function(deviceToken) {
+                $localStorage.token = deviceToken;
+            });
+
+        }
+        
+        //ANDROID
+        if(UtilsService.isAndroid()){
+            var androidConfig = {
+              "senderID": "709766240218",
+            };
+
+            $cordovaPush.register(androidConfig).then(function(result) {
+              $localStorage.token = result;
+              console.log()
+            }, function(err) {
+              // Error
+            })
+
+        }
+
+        $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+            /*PUSH*/
+            if(UtilsService.isIOS()){
+              console.log(event);
+              console.log(notification);
+            }
+            
+            //ANDROID
+            if(UtilsService.isAndroid()){
+              if(notification.event == "registered"){
+                $localStorage.token = notification.regid;
+              }
+
+              if(notification.event == "message"){
+                console.log(notification);
+              }
+              
+
+            }
+        });
+
+      }
+
     });
 
     $rootScope.$on('$stateChangeStart', function(event, newUrl, oldUrl){
