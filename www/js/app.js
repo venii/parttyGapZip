@@ -72,7 +72,7 @@ angular.module('starter', [	 'ionic',
         //ANDROID
         if(UtilsService.isAndroid()){
             var androidConfig = {
-              "senderID": "709766240218",
+              "senderID": "244606470402",
             };
 
             $cordovaPush.register(androidConfig).then(function(result) {
