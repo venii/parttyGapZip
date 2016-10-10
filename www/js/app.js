@@ -27,7 +27,8 @@ angular.module('starter', [	 'ionic',
                              'app.sql-service',
                              'app.resources-service'							              
   ])
-  .value("HOST_API","http://127.0.0.1")
+  //.value("HOST_API","http://127.0.0.1:8081")
+  .value("HOST_API","http://venizao.dlinkddns.com:8081")
   .run(function($ionicPlatform,$state,$rootScope,$cordovaPush,$ionicPopup,SQLService,$localStorage,UtilsService) {
 
     $ionicPlatform.ready(function() {
