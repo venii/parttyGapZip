@@ -52,7 +52,7 @@ angular.module('starter', [	 'ionic',
 
       SQLService.createSchema();
       
-
+ 
       /*PUSH*/
       if(UtilsService.isMob()){
         //IOS
